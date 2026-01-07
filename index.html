@@ -228,6 +228,31 @@
       gap: 14px;
     }
 
+    .description-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .description-card h4 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+
+    .description-card p {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .description-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
     .badge {
       display: inline-flex;
       padding: 4px 10px;
@@ -412,6 +437,44 @@
           <p>From idea validation to MVP and production-ready systems.</p>
           <p style="margin-top: 8px; color: var(--text); font-weight: 600;">コンサルティング・プロトタイピング</p>
           <p>アイデア検証からMVP、実運用レベルまで支援します。</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="codex-title">
+      <div class="section-header">
+        <h2 class="section-title" id="codex-title">Codex Descriptions</h2>
+        <span class="badge">Salesforce Chrome Extension</span>
+      </div>
+      <div class="description-grid">
+        <div class="card description-card">
+          <h4>Short Description (Chrome Web Store / tagline)</h4>
+          <p>Codex is a smart Chrome extension that securely connects to Salesforce, helping admins and developers query data, inspect records, and automate everyday tasks—directly from the browser.</p>
+        </div>
+        <div class="card description-card">
+          <h4>Standard Description (Product / Website)</h4>
+          <p>Codex is a Chrome extension designed for Salesforce admins, developers, and power users who want faster access to data and tools without leaving the browser.</p>
+          <p>By securely connecting to your Salesforce org, Codex lets you interact with records, run SOQL queries, inspect metadata, and streamline repetitive workflows—all while respecting your existing Salesforce login, SSO, and security policies.</p>
+          <p>No passwords stored. No risky automation. Just a smarter way to work with Salesforce.</p>
+        </div>
+        <div class="card description-card">
+          <h4>Detailed Description (Chrome Web Store – long form)</h4>
+          <p>Codex is a productivity-focused Chrome extension built for modern Salesforce teams.</p>
+          <p>Once logged in to Salesforce, Codex enhances your browser with powerful tools that help you understand data, debug issues, and work more efficiently—without switching tabs or opening multiple admin screens.</p>
+          <p style="margin-bottom: 6px; font-weight: 600; color: var(--text);">Key features</p>
+          <ul>
+            <li>🔐 Secure Salesforce connection (no password storage)</li>
+            <li>⚡ Run SOQL queries using your active session</li>
+            <li>🔍 Inspect records, IDs, and field values instantly</li>
+            <li>🛠️ Admin &amp; developer helper tools inside Salesforce UI</li>
+            <li>🚀 Faster workflows with fewer clicks</li>
+          </ul>
+          <p>Codex works seamlessly with Salesforce Lightning and My Domain environments, and fully supports SSO and MFA setups.</p>
+          <p>Whether you’re troubleshooting data, validating logic, or just trying to move faster, Codex brings clarity and speed to your Salesforce work.</p>
+        </div>
+        <div class="card description-card">
+          <h4>Ultra-Short (1-liner)</h4>
+          <p>Codex turns your browser into a powerful Salesforce assistant.</p>
         </div>
       </div>
     </section>

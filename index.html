@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI-Powered App Creation | Company Landing</title>
+  <title>日本語の読むを点数で表現アプリ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -78,6 +78,10 @@
       border: 1px solid var(--border);
     }
 
+    .pill strong {
+      color: var(--primary);
+    }
+
     .hero {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -87,6 +91,12 @@
       border-radius: 24px;
       background: linear-gradient(135deg, rgba(93, 212, 255, 0.08), rgba(159, 122, 234, 0.08));
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
     .eyebrow {
@@ -128,6 +138,12 @@
       gap: 12px;
       flex-wrap: wrap;
       align-items: center;
+    }
+
+    .hero-note {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0;
     }
 
     .btn-primary {
@@ -179,6 +195,33 @@
       font-size: 14px;
     }
 
+    .score-demo {
+      display: grid;
+      gap: 10px;
+    }
+
+    .score-demo .chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 13px;
+      color: var(--text);
+      width: fit-content;
+    }
+
+    .score-demo .result {
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(8, 18, 32, 0.7);
+    }
+
+    .score-demo .result strong {
+      color: var(--primary);
+      font-size: 22px;
+    }
+
     section {
       margin-top: 36px;
       padding: 24px;
@@ -220,6 +263,12 @@
 
     .values .card, .reasons .card {
       min-height: 120px;
+    }
+
+    .workflow {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
     .services {
@@ -293,6 +342,11 @@
       margin: 6px 0;
     }
 
+    .contact .meta {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
     a {
       color: inherit;
     }
@@ -315,156 +369,159 @@
       <div class="brand">
         <div class="brand-mark">AI</div>
         <div>
-          <div>AI-Powered Apps</div>
-          <small style="color: var(--muted);">Practical builds, bilingual team</small>
+          <div>Yomu Score</div>
+          <small style="color: var(--muted);">日本語の読むを点数で表現アプリ</small>
         </div>
       </div>
-      <span class="pill">English / 日本語</span>
+      <span class="pill"><strong>音声入力</strong>でスコア &amp; レビュー</span>
     </header>
 
     <section class="hero" aria-labelledby="hero-title">
-      <div>
-        <div class="eyebrow">AI-Powered App Creation Company</div>
-        <h1 id="hero-title">Build Smarter Apps with AI<br><span style="color: var(--primary);">AIで、もっと速く、もっと賢く。</span></h1>
-        <p class="jp-lead">AIで、アイデアを“使えるアプリ”へ</p>
-        <p>We help businesses design, build, and launch intelligent applications using AI. From concept to deployment, we turn ideas into practical, scalable AI-powered products.</p>
-        <p>AI技術を活用し、ビジネスに本当に使えるアプリケーションを企画・開発・運用まで一貫して支援します。アイデアを、実用的で拡張性のあるプロダクトへ。</p>
+      <div class="hero-copy">
+        <div class="eyebrow">Reading Score App / 日本語音読AI</div>
+        <h1 id="hero-title">日本語の読むを点数で表現アプリ<br><span style="color: var(--primary);">声を録音するだけで、点数とレビュー</span></h1>
+        <p class="jp-lead">Input: 音声でinput / Output: 点数とレビュー</p>
+        <p>録音ボタンを押して読むだけ。AIが発音・流暢さ・抑揚を分析して、スコアとフィードバックをすぐ返します。</p>
+        <p class="hero-note">学習者・教師・企業研修まで、読む力の可視化をシンプルに。</p>
         <div class="cta">
-          <a class="btn-primary" href="#contact">Contact Us / お問い合わせ</a>
-          <a class="btn-secondary" href="#services">See Our Services</a>
+          <a class="btn-primary" href="#contact">デモを試す</a>
+          <a class="btn-secondary" href="#features">機能を見る</a>
         </div>
       </div>
       <div class="hero-grid" aria-label="Highlights">
         <div class="card">
-          <h3>🚀 Fast Delivery</h3>
-          <p>From idea validation to launch with iterative sprints.</p>
+          <h3>🎙️ 音声入力に最適化</h3>
+          <p>ワンタップで録音、読み上げに集中できます。</p>
         </div>
         <div class="card">
-          <h3>🤝 Partnership</h3>
-          <p>Long-term collaboration to evolve your AI products.</p>
+          <h3>🧠 AI採点エンジン</h3>
+          <p>発音・抑揚・スピードを総合評価。</p>
         </div>
         <div class="card">
-          <h3>🔒 Secure & Scalable</h3>
-          <p>Architecture designed for safety and growth.</p>
+          <h3>📊 スコアとレビュー</h3>
+          <p>点数と改善ポイントが一目でわかる。</p>
         </div>
         <div class="card">
-          <h3>🌐 Bilingual Team</h3>
-          <p>Japan-quality with global standards.</p>
+          <h3>📚 学習履歴の可視化</h3>
+          <p>進捗を時系列で確認。</p>
+        </div>
+        <div class="card score-demo">
+          <span class="chip">サンプル結果</span>
+          <div class="result">
+            <p style="margin: 0 0 6px; font-weight: 600;">総合スコア</p>
+            <strong>86 / 100</strong>
+            <p style="margin: 6px 0 0; color: var(--muted);">「は・ひ・ふ」の発音が良いです。語尾の抑揚をもう少し意識しましょう。</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section aria-labelledby="about-title">
+    <section id="features" aria-labelledby="features-title">
       <div class="section-header">
-        <h2 class="section-title" id="about-title">About Us / 私たちについて</h2>
-        <span class="badge">Who We Are</span>
+        <h2 class="section-title" id="features-title">Features / 主な機能</h2>
+        <span class="badge">Highlights</span>
       </div>
       <div class="grid-2">
         <div class="card">
-          <h3>Who We Are</h3>
-          <p>We are an AI-focused development company specializing in custom application creation. Our team combines software engineering expertise with real-world business understanding.</p>
+          <h3>音声入力を即解析</h3>
+          <p>録音終了と同時に解析を開始。待ち時間を短縮し、テンポよく練習できます。</p>
         </div>
         <div class="card">
-          <h3>私たちの強み</h3>
-          <p>私たちは、AIアプリ開発に特化したテクノロジーカンパニーです。システム開発力とビジネス視点を融合し、現場で“使われるAI”を提供します。</p>
+          <h3>レビューは要点だけ</h3>
+          <p>改善ポイントを3つに絞って提示。次に意識すべきことが明確になります。</p>
         </div>
       </div>
 
       <div class="section-header" style="margin-top: 16px;">
-        <h3 class="section-title" style="font-size: 18px; margin: 0;">Our values / 大切にしていること</h3>
+        <h3 class="section-title" style="font-size: 18px; margin: 0;">出力内容 / Output</h3>
       </div>
       <div class="values">
         <div class="card">
-          <h3>Practical AI, not just experiments</h3>
-          <p>実用性重視のAI活用</p>
+          <h3>総合スコア</h3>
+          <p>100点満点で読みの総合力を可視化。</p>
         </div>
         <div class="card">
-          <h3>Clear communication & transparency</h3>
-          <p>分かりやすく誠実なコミュニケーション</p>
+          <h3>項目別スコア</h3>
+          <p>発音・流暢さ・抑揚を内訳で表示。</p>
         </div>
         <div class="card">
-          <h3>Long-term partnership</h3>
-          <p>長期的なパートナーシップ</p>
+          <h3>短いレビュー</h3>
+          <p>具体的な改善ポイントを箇条書きで提示。</p>
         </div>
       </div>
     </section>
 
-    <section id="services" aria-labelledby="services-title">
+    <section id="workflow" aria-labelledby="workflow-title">
       <div class="section-header">
-        <h2 class="section-title" id="services-title">What We Do / 事業内容</h2>
-        <span class="badge">Our Services</span>
+        <h2 class="section-title" id="workflow-title">How it works / 使い方</h2>
+        <span class="badge">3 Steps</span>
       </div>
-      <div class="services">
+      <div class="workflow">
         <div class="card">
-          <h3>AI App Development</h3>
-          <p>Custom AI-powered applications tailored to your business needs.</p>
-          <p style="margin-top: 8px; color: var(--text); font-weight: 600;">AIアプリ開発</p>
-          <p>業務やサービスに最適化したオーダーメイドAIアプリを開発します。</p>
+          <h3>1. 音声でinput</h3>
+          <p>台本を選んで録音ボタンを押すだけ。</p>
         </div>
         <div class="card">
-          <h3>AI Integration & Automation</h3>
-          <p>Integrating AI into existing systems to improve efficiency and decision-making.</p>
-          <p style="margin-top: 8px; color: var(--text); font-weight: 600;">AI導入・業務自動化</p>
-          <p>既存システムにAIを組み込み、業務効率と精度を向上させます。</p>
+          <h3>2. AIが分析</h3>
+          <p>発音・流暢さ・抑揚をリアルタイム評価。</p>
         </div>
         <div class="card">
-          <h3>Consulting & Prototyping</h3>
-          <p>From idea validation to MVP and production-ready systems.</p>
-          <p style="margin-top: 8px; color: var(--text); font-weight: 600;">コンサルティング・プロトタイピング</p>
-          <p>アイデア検証からMVP、実運用レベルまで支援します。</p>
+          <h3>3. 点数とレビュー</h3>
+          <p>結果と改善ポイントをその場で確認。</p>
         </div>
       </div>
     </section>
 
     <section aria-labelledby="reasons-title">
       <div class="section-header">
-        <h2 class="section-title" id="reasons-title">Why Choose Us / 選ばれる理由</h2>
-        <span class="badge">Strengths</span>
+        <h2 class="section-title" id="reasons-title">おすすめポイント</h2>
+        <span class="badge">Benefits</span>
       </div>
       <div class="reasons">
         <div class="card">
-          <h3>⚡ Fast & flexible development</h3>
-          <p>スピーディーで柔軟な開発</p>
+          <h3>⚡ すぐに結果がわかる</h3>
+          <p>練習のたびにスコアが出るから成長が見える。</p>
         </div>
         <div class="card">
-          <h3>🎯 Business-oriented AI solutions</h3>
-          <p>ビジネス成果を重視したAI設計</p>
+          <h3>🎯 目標設定が簡単</h3>
+          <p>80点到達など学習目標を明確化。</p>
         </div>
         <div class="card">
-          <h3>🛡️ Secure and scalable architecture</h3>
-          <p>安全性・拡張性を考慮した構成</p>
+          <h3>🛡️ 安心の音声管理</h3>
+          <p>学習用の音声は安全に保管。</p>
         </div>
         <div class="card">
-          <h3>🌏 Japan-quality × Global standards</h3>
-          <p>日本品質 × グローバル基準</p>
+          <h3>🌏 多様な学習シーン</h3>
+          <p>日本語学習、企業研修、教師用にも。</p>
         </div>
       </div>
     </section>
 
     <section aria-labelledby="mission-title">
       <div class="section-header">
-        <h2 class="section-title" id="mission-title">Mission / ミッション</h2>
-        <span class="badge">Purpose</span>
+        <h2 class="section-title" id="mission-title">評価基準 / Scoring</h2>
+        <span class="badge">Evaluation</span>
       </div>
       <div class="mission">
         <div class="card">
-          <h3>Creating AI that works in the real world</h3>
-          <p>We aim to make AI accessible, useful, and impactful for organizations of all sizes.</p>
-          <p style="margin-top: 10px; font-weight: 600; color: var(--text);">現場で活きるAIをつくる</p>
-          <p>AIを、誰にとっても身近で価値あるものにすることを目指します。</p>
+          <h3>点数の内訳</h3>
+          <p>Pronunciation 40% / Fluency 35% / Intonation 25%</p>
+          <p style="margin-top: 10px; font-weight: 600; color: var(--text);">学習ログ</p>
+          <p>過去のスコア推移とレビューを振り返り、弱点を効率よく改善します。</p>
         </div>
         <div class="mission-callout">
-          <h3>AIで、アイデアを“使えるアプリ”へ</h3>
-          <p>AIを活用したビルド・改善・運用を一体化し、ビジネス成果へ直結させます。</p>
+          <h3>点数とレビューで「読む」を可視化</h3>
+          <p>音声でinputし、点数とレビューをすぐ確認。日々の練習をスコアで見える化します。</p>
         </div>
       </div>
     </section>
 
     <section id="contact" class="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Let’s Build Your AI App / AIアプリ開発のご相談はこちら</h2>
-      <p>Have an idea or challenge? Let’s talk.</p>
-      <p>アイデアや課題がございましたら、お気軽にご相談ください。</p>
-      <a class="btn-primary" href="mailto:hello@example.com">👉 Contact Us / お問い合わせ</a>
+      <h2 id="contact-title">デモ申し込み / お問い合わせ</h2>
+      <p>日本語の読むを点数で表現するアプリを体験してみませんか？</p>
+      <p>音声inputと点数・レビューのデモをご案内します。</p>
+      <p class="meta">対応：教育機関・企業研修・個人学習</p>
+      <a class="btn-primary" href="mailto:hello@example.com">👉 デモを依頼する</a>
     </section>
   </div>
 </body>

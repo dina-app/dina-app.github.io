@@ -3,526 +3,338 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>日本語の読むを点数で表現アプリ</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>Anna Run And Catch The Ball</title>
   <style>
     :root {
-      --bg: #070b14;
-      --card: rgba(255, 255, 255, 0.04);
-      --panel: rgba(255, 255, 255, 0.06);
-      --primary: #5dd4ff;
-      --accent: #9f7aea;
-      --text: #e7ecf2;
-      --muted: #9aa8b8;
-      --border: rgba(255, 255, 255, 0.08);
+      --bg: #0f172a;
+      --panel: #111827;
+      --accent: #22d3ee;
+      --accent-2: #f472b6;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: 'Inter', 'Noto Sans JP', system-ui, -apple-system, sans-serif;
-      background: radial-gradient(circle at 20% 20%, rgba(93, 212, 255, 0.1), transparent 30%),
-                  radial-gradient(circle at 80% 0%, rgba(159, 122, 234, 0.18), transparent 32%),
-                  var(--bg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(circle at 20% 10%, #1e293b, #0f172a 60%);
       color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    .page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 32px 20px 64px;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #5dd4ff, #9f7aea);
+      min-height: 100vh;
       display: grid;
       place-items: center;
-      font-weight: 800;
-      color: #0b0f1a;
+      padding: 16px;
     }
 
-    .pill {
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(93, 212, 255, 0.12);
-      color: var(--text);
-      font-size: 14px;
-      border: 1px solid var(--border);
+    .game-shell {
+      width: min(900px, 100%);
+      background: rgba(17, 24, 39, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 18px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45);
+      padding: 18px;
     }
 
-    .pill strong {
-      color: var(--primary);
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.5rem, 3vw, 2rem);
     }
 
-    .hero {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 26px;
-      padding: 28px;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(93, 212, 255, 0.08), rgba(159, 122, 234, 0.08));
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-    }
-
-    .hero-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      font-size: 13px;
-      background: rgba(255, 255, 255, 0.06);
-      padding: 6px 10px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-    }
-
-    .hero h1 {
-      margin: 12px 0 10px;
-      font-size: clamp(32px, 5vw, 44px);
-      line-height: 1.15;
-    }
-
-    .hero .jp-lead {
-      margin: 0 0 14px;
-      font-weight: 600;
-      color: #c2d2e5;
-      font-size: 18px;
-    }
-
-    .hero p {
+    .subtitle {
       margin: 0 0 12px;
       color: var(--muted);
     }
 
-    .hero .cta {
-      margin-top: 12px;
+    .stats {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .hero-note {
-      font-size: 14px;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .btn-primary {
-      padding: 12px 18px;
-      background: linear-gradient(135deg, #5dd4ff, #45b8ff);
-      border: none;
-      color: #03101a;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(93, 212, 255, 0.3);
-      text-decoration: none;
-    }
-
-    .btn-secondary {
-      padding: 12px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text);
-      text-decoration: none;
+      gap: 12px;
+      margin-bottom: 12px;
       font-weight: 600;
     }
 
-    .hero-grid {
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 16px;
-    }
-
-    .card h3 {
-      margin: 0 0 6px;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .score-demo {
-      display: grid;
-      gap: 10px;
-    }
-
-    .score-demo .chip {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.05);
-      font-size: 13px;
-      color: var(--text);
-      width: fit-content;
-    }
-
-    .score-demo .result {
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(8, 18, 32, 0.7);
-    }
-
-    .score-demo .result strong {
-      color: var(--primary);
-      font-size: 22px;
-    }
-
-    section {
-      margin-top: 36px;
-      padding: 24px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: var(--panel);
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-
-    .section-title {
-      font-size: 22px;
-      margin: 0;
-    }
-
-    .grid-2 {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-
-    .list-title {
-      font-weight: 700;
-      margin: 0 0 8px;
-    }
-
-    .values, .reasons {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-    }
-
-    .values .card, .reasons .card {
-      min-height: 120px;
-    }
-
-    .workflow {
-      display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-    }
-
-    .badge {
-      display: inline-flex;
-      padding: 4px 10px;
+    .stat {
+      background: #1f2937;
+      border: 1px solid rgba(148, 163, 184, 0.35);
       border-radius: 10px;
-      background: rgba(93, 212, 255, 0.15);
-      color: var(--primary);
-      font-size: 12px;
+      padding: 6px 10px;
+    }
+
+    canvas {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: linear-gradient(#0ea5e9 0%, #7dd3fc 45%, #86efac 46%, #4ade80 100%);
+      display: block;
+    }
+
+    .controls {
+      margin-top: 12px;
+      color: var(--muted);
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #111827;
       font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: 0.4px;
-    }
-
-    .mission {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      align-items: center;
-    }
-
-    .mission-callout {
-      padding: 18px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(93, 212, 255, 0.08), rgba(159, 122, 234, 0.12));
-      color: #0b1625;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .mission-callout::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent 60%);
-      pointer-events: none;
-    }
-
-    .mission-callout h3 {
-      margin: 0 0 6px;
-      color: #0b1625;
-    }
-
-    .mission-callout p {
-      margin: 0;
-      color: #10233a;
-    }
-
-    .contact {
-      text-align: center;
-      border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(93, 212, 255, 0.08), rgba(159, 122, 234, 0.08));
-      padding: 26px;
-    }
-
-    .contact h2 {
-      margin-top: 0;
-      margin-bottom: 10px;
-      font-size: 24px;
-    }
-
-    .contact p {
-      color: var(--muted);
-      margin: 6px 0;
-    }
-
-    .contact .meta {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    a {
-      color: inherit;
-    }
-
-    @media (max-width: 720px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .hero {
-        padding: 20px;
-      }
+      padding: 9px 14px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div class="brand">
-        <div class="brand-mark">AI</div>
-        <div>
-          <div>Yomu Score</div>
-          <small style="color: var(--muted);">日本語の読むを点数で表現アプリ</small>
-        </div>
-      </div>
-      <span class="pill"><strong>音声入力</strong>でスコア &amp; レビュー</span>
-    </header>
+  <main class="game-shell">
+    <h1>Anna Run And Catch The Ball</h1>
+    <p class="subtitle">Help a small girl with a bag run left and right to catch falling balls.</p>
 
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <div class="eyebrow">Reading Score App / 日本語音読AI</div>
-        <h1 id="hero-title">日本語の読むを点数で表現アプリ<br><span style="color: var(--primary);">声を録音するだけで、点数とレビュー</span></h1>
-        <p class="jp-lead">Input: 音声でinput / Output: 点数とレビュー</p>
-        <p>録音ボタンを押して読むだけ。AIが発音・流暢さ・抑揚を分析して、スコアとフィードバックをすぐ返します。</p>
-        <p class="hero-note">学習者・教師・企業研修まで、読む力の可視化をシンプルに。</p>
-        <div class="cta">
-          <a class="btn-primary" href="#contact">デモを試す</a>
-          <a class="btn-secondary" href="#features">機能を見る</a>
-        </div>
-      </div>
-      <div class="hero-grid" aria-label="Highlights">
-        <div class="card">
-          <h3>🎙️ 音声入力に最適化</h3>
-          <p>ワンタップで録音、読み上げに集中できます。</p>
-        </div>
-        <div class="card">
-          <h3>🧠 AI採点エンジン</h3>
-          <p>発音・抑揚・スピードを総合評価。</p>
-        </div>
-        <div class="card">
-          <h3>📊 スコアとレビュー</h3>
-          <p>点数と改善ポイントが一目でわかる。</p>
-        </div>
-        <div class="card">
-          <h3>📚 学習履歴の可視化</h3>
-          <p>進捗を時系列で確認。</p>
-        </div>
-        <div class="card score-demo">
-          <span class="chip">サンプル結果</span>
-          <div class="result">
-            <p style="margin: 0 0 6px; font-weight: 600;">総合スコア</p>
-            <strong>86 / 100</strong>
-            <p style="margin: 6px 0 0; color: var(--muted);">「は・ひ・ふ」の発音が良いです。語尾の抑揚をもう少し意識しましょう。</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="stats">
+      <div class="stat">Score: <span id="score">0</span></div>
+      <div class="stat">Lives: <span id="lives">3</span></div>
+      <div class="stat">Level: <span id="level">1</span></div>
+    </div>
 
-    <section id="features" aria-labelledby="features-title">
-      <div class="section-header">
-        <h2 class="section-title" id="features-title">Features / 主な機能</h2>
-        <span class="badge">Highlights</span>
-      </div>
-      <div class="grid-2">
-        <div class="card">
-          <h3>音声入力を即解析</h3>
-          <p>録音終了と同時に解析を開始。待ち時間を短縮し、テンポよく練習できます。</p>
-        </div>
-        <div class="card">
-          <h3>レビューは要点だけ</h3>
-          <p>改善ポイントを3つに絞って提示。次に意識すべきことが明確になります。</p>
-        </div>
-      </div>
+    <canvas id="game" width="960" height="540" aria-label="Anna Run And Catch The Ball game"></canvas>
 
-      <div class="section-header" style="margin-top: 16px;">
-        <h3 class="section-title" style="font-size: 18px; margin: 0;">出力内容 / Output</h3>
-      </div>
-      <div class="values">
-        <div class="card">
-          <h3>総合スコア</h3>
-          <p>100点満点で読みの総合力を可視化。</p>
-        </div>
-        <div class="card">
-          <h3>項目別スコア</h3>
-          <p>発音・流暢さ・抑揚を内訳で表示。</p>
-        </div>
-        <div class="card">
-          <h3>短いレビュー</h3>
-          <p>具体的な改善ポイントを箇条書きで提示。</p>
-        </div>
-      </div>
-    </section>
+    <div class="controls">
+      <span>Controls: ⬅️ ➡️ Arrow keys or move your mouse/finger to run.</span>
+      <button id="restart">Restart</button>
+    </div>
+  </main>
 
-    <section id="workflow" aria-labelledby="workflow-title">
-      <div class="section-header">
-        <h2 class="section-title" id="workflow-title">How it works / 使い方</h2>
-        <span class="badge">3 Steps</span>
-      </div>
-      <div class="workflow">
-        <div class="card">
-          <h3>1. 音声でinput</h3>
-          <p>台本を選んで録音ボタンを押すだけ。</p>
-        </div>
-        <div class="card">
-          <h3>2. AIが分析</h3>
-          <p>発音・流暢さ・抑揚をリアルタイム評価。</p>
-        </div>
-        <div class="card">
-          <h3>3. 点数とレビュー</h3>
-          <p>結果と改善ポイントをその場で確認。</p>
-        </div>
-      </div>
-    </section>
+  <script>
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
 
-    <section aria-labelledby="reasons-title">
-      <div class="section-header">
-        <h2 class="section-title" id="reasons-title">おすすめポイント</h2>
-        <span class="badge">Benefits</span>
-      </div>
-      <div class="reasons">
-        <div class="card">
-          <h3>⚡ すぐに結果がわかる</h3>
-          <p>練習のたびにスコアが出るから成長が見える。</p>
-        </div>
-        <div class="card">
-          <h3>🎯 目標設定が簡単</h3>
-          <p>80点到達など学習目標を明確化。</p>
-        </div>
-        <div class="card">
-          <h3>🛡️ 安心の音声管理</h3>
-          <p>学習用の音声は安全に保管。</p>
-        </div>
-        <div class="card">
-          <h3>🌏 多様な学習シーン</h3>
-          <p>日本語学習、企業研修、教師用にも。</p>
-        </div>
-      </div>
-    </section>
+    const scoreEl = document.getElementById('score');
+    const livesEl = document.getElementById('lives');
+    const levelEl = document.getElementById('level');
+    const restartBtn = document.getElementById('restart');
 
-    <section aria-labelledby="mission-title">
-      <div class="section-header">
-        <h2 class="section-title" id="mission-title">評価基準 / Scoring</h2>
-        <span class="badge">Evaluation</span>
-      </div>
-      <div class="mission">
-        <div class="card">
-          <h3>点数の内訳</h3>
-          <p>Pronunciation 40% / Fluency 35% / Intonation 25%</p>
-          <p style="margin-top: 10px; font-weight: 600; color: var(--text);">学習ログ</p>
-          <p>過去のスコア推移とレビューを振り返り、弱点を効率よく改善します。</p>
-        </div>
-        <div class="mission-callout">
-          <h3>点数とレビューで「読む」を可視化</h3>
-          <p>音声でinputし、点数とレビューをすぐ確認。日々の練習をスコアで見える化します。</p>
-        </div>
-      </div>
-    </section>
+    const world = {
+      w: canvas.width,
+      h: canvas.height,
+      groundY: canvas.height - 70,
+      score: 0,
+      lives: 3,
+      level: 1,
+      ballSpeed: 2.6,
+      spawnEvery: 950,
+      lastSpawnAt: 0,
+      balls: [],
+      running: true,
+      lastTime: 0
+    };
 
-    <section id="contact" class="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">デモ申し込み / お問い合わせ</h2>
-      <p>日本語の読むを点数で表現するアプリを体験してみませんか？</p>
-      <p>音声inputと点数・レビューのデモをご案内します。</p>
-      <p class="meta">対応：教育機関・企業研修・個人学習</p>
-      <a class="btn-primary" href="mailto:hello@example.com">👉 デモを依頼する</a>
-    </section>
-  </div>
+    const player = {
+      x: world.w / 2,
+      y: world.groundY,
+      speed: 6,
+      width: 56,
+      bagWidth: 42,
+      movingLeft: false,
+      movingRight: false
+    };
+
+    function resetGame() {
+      world.score = 0;
+      world.lives = 3;
+      world.level = 1;
+      world.ballSpeed = 2.6;
+      world.spawnEvery = 950;
+      world.balls = [];
+      world.lastSpawnAt = 0;
+      world.running = true;
+      player.x = world.w / 2;
+      updateHud();
+    }
+
+    function updateHud() {
+      scoreEl.textContent = world.score;
+      livesEl.textContent = world.lives;
+      levelEl.textContent = world.level;
+    }
+
+    function spawnBall(now) {
+      if (now - world.lastSpawnAt < world.spawnEvery) return;
+      world.lastSpawnAt = now;
+      const radius = 10 + Math.random() * 12;
+      world.balls.push({
+        x: radius + Math.random() * (world.w - radius * 2),
+        y: -20,
+        vy: world.ballSpeed + Math.random() * 1.7,
+        radius
+      });
+    }
+
+    function drawPlayer() {
+      const x = player.x;
+      const y = player.y;
+
+      ctx.fillStyle = '#111827';
+      ctx.beginPath();
+      ctx.arc(x, y - 72, 16, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = '#ef4444';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(x, y - 56);
+      ctx.lineTo(x, y - 18);
+      ctx.stroke();
+
+      ctx.strokeStyle = '#fca5a5';
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(x, y - 48);
+      ctx.lineTo(x - 18, y - 30);
+      ctx.moveTo(x, y - 48);
+      ctx.lineTo(x + 20, y - 32);
+      ctx.stroke();
+
+      ctx.strokeStyle = '#111827';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.moveTo(x, y - 18);
+      ctx.lineTo(x - 14, y + 16);
+      ctx.moveTo(x, y - 18);
+      ctx.lineTo(x + 14, y + 16);
+      ctx.stroke();
+
+      ctx.fillStyle = '#8b5cf6';
+      ctx.fillRect(x + 16, y - 40, player.bagWidth, 34);
+      ctx.strokeStyle = '#c4b5fd';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(x + 16, y - 36);
+      ctx.quadraticCurveTo(x + 36, y - 52, x + 58, y - 36);
+      ctx.stroke();
+    }
+
+    function drawBall(ball) {
+      ctx.fillStyle = '#f97316';
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.beginPath();
+      ctx.arc(ball.x - ball.radius / 3, ball.y - ball.radius / 3, ball.radius / 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function updatePlayer() {
+      if (player.movingLeft) player.x -= player.speed;
+      if (player.movingRight) player.x += player.speed;
+      player.x = Math.max(25, Math.min(world.w - 65, player.x));
+    }
+
+    function updateBalls() {
+      const bagLeft = player.x + 14;
+      const bagRight = bagLeft + player.bagWidth + 8;
+      const bagTop = player.y - 42;
+      const bagBottom = player.y - 2;
+
+      world.balls = world.balls.filter((ball) => {
+        ball.y += ball.vy;
+
+        const caught =
+          ball.x + ball.radius > bagLeft &&
+          ball.x - ball.radius < bagRight &&
+          ball.y + ball.radius > bagTop &&
+          ball.y - ball.radius < bagBottom;
+
+        if (caught) {
+          world.score += 1;
+          if (world.score % 8 === 0) {
+            world.level += 1;
+            world.ballSpeed += 0.35;
+            world.spawnEvery = Math.max(320, world.spawnEvery - 70);
+          }
+          updateHud();
+          return false;
+        }
+
+        if (ball.y - ball.radius > world.groundY + 18) {
+          world.lives -= 1;
+          if (world.lives <= 0) {
+            world.running = false;
+          }
+          updateHud();
+          return false;
+        }
+
+        return true;
+      });
+    }
+
+    function drawScene() {
+      ctx.clearRect(0, 0, world.w, world.h);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.2)';
+      ctx.fillRect(0, world.groundY + 20, world.w, 6);
+
+      drawPlayer();
+      world.balls.forEach(drawBall);
+
+      if (!world.running) {
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.72)';
+        ctx.fillRect(0, 0, world.w, world.h);
+        ctx.fillStyle = '#fff';
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 56px Inter, sans-serif';
+        ctx.fillText('Game Over', world.w / 2, world.h / 2 - 20);
+        ctx.font = '28px Inter, sans-serif';
+        ctx.fillText(`Final score: ${world.score}`, world.w / 2, world.h / 2 + 32);
+      }
+    }
+
+    function frame(time) {
+      if (!world.lastTime) world.lastTime = time;
+      const now = time;
+
+      if (world.running) {
+        updatePlayer();
+        spawnBall(now);
+        updateBalls();
+      }
+
+      drawScene();
+      requestAnimationFrame(frame);
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') player.movingLeft = true;
+      if (e.key === 'ArrowRight') player.movingRight = true;
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'ArrowLeft') player.movingLeft = false;
+      if (e.key === 'ArrowRight') player.movingRight = false;
+    });
+
+    function pointerMove(clientX) {
+      const rect = canvas.getBoundingClientRect();
+      const x = (clientX - rect.left) * (world.w / rect.width);
+      player.x = x;
+    }
+
+    canvas.addEventListener('mousemove', (e) => pointerMove(e.clientX));
+    canvas.addEventListener('touchmove', (e) => {
+      if (e.touches[0]) pointerMove(e.touches[0].clientX);
+    }, { passive: true });
+
+    restartBtn.addEventListener('click', resetGame);
+
+    resetGame();
+    requestAnimationFrame(frame);
+  </script>
 </body>
 </html>

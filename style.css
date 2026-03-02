@@ -1,0 +1,50 @@
+:root {
+  color-scheme: light;
+  --bg-top: #ddf3ff;
+  --bg-bottom: #9ddfff;
+  --panel: rgba(255, 255, 255, 0.4);
+  --border: rgba(255, 255, 255, 0.8);
+  --text: #0f2b43;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--text);
+}
+
+.app {
+  width: min(980px, 100%);
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  display: block;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: linear-gradient(180deg, #b9ebff 0%, #8fd6ff 65%, #bde8ff 100%);
+  box-shadow: 0 18px 40px rgba(10, 63, 96, 0.25);
+  touch-action: none;
+}
+
+.hint {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: clamp(0.8rem, 2.4vw, 1rem);
+  color: rgba(15, 43, 67, 0.85);
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+  padding: 6px 12px;
+}

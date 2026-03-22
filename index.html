@@ -3,24 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Magic Drawing Pad</title>
+  <title>Favorite Games Hub</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="app">
-    <header class="topbar">
-      <h1>Magic Drawing Pad</h1>
-      <div class="actions">
-        <button id="pauseBtn" type="button">Pause</button>
-        <button id="restartBtn" type="button">Restart</button>
-      </div>
+  <main class="home">
+    <header class="hero">
+      <p class="eyebrow">Welcome to your new homepage</p>
+      <h1>Favorite Games Hub</h1>
+      <p>Play quick games right here: Rock Paper Scissors, Number Guess, and Memory Match.</p>
     </header>
 
-    <canvas id="gameCanvas" width="960" height="540" aria-label="Sky Runner endless runner game"></canvas>
+    <section class="games-grid">
+      <article class="game-card">
+        <h2>Rock • Paper • Scissors</h2>
+        <p>Pick your move and try to beat the computer.</p>
+        <div class="rps-controls">
+          <button class="rps-btn" data-move="rock">🪨 Rock</button>
+          <button class="rps-btn" data-move="paper">📄 Paper</button>
+          <button class="rps-btn" data-move="scissors">✂️ Scissors</button>
+        </div>
+        <p id="rpsResult" class="result">Choose a move to start.</p>
+      </article>
 
-    <section class="meta">
-      <p><strong>Introducing:</strong> Magic Drawing Pad by Anna Yoshie.</p>
-      <p><strong>Welcome:</strong> Sketch, imagine, and bring colorful ideas to life.</p>
+      <article class="game-card">
+        <h2>Number Guess</h2>
+        <p>Guess the secret number between 1 and 100.</p>
+        <div class="guess-row">
+          <input id="guessInput" type="number" min="1" max="100" placeholder="Enter guess" />
+          <button id="guessBtn">Guess</button>
+          <button id="guessReset">Reset</button>
+        </div>
+        <p id="guessResult" class="result">You have 10 attempts.</p>
+      </article>
+
+      <article class="game-card">
+        <h2>Memory Match</h2>
+        <p>Find all matching emoji pairs.</p>
+        <div id="memoryBoard" class="memory-board" aria-label="Memory game board"></div>
+        <p id="memoryResult" class="result">Match all cards to win.</p>
+      </article>
     </section>
   </main>
 

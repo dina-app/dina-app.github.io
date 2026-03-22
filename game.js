@@ -11,14 +11,16 @@ function decideRps(player, cpu) {
   return wins ? 'You win! 🎉' : 'Computer wins! 🤖';
 }
 
-rpsButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const playerMove = button.dataset.move;
-    const cpuMove = moves[Math.floor(Math.random() * moves.length)];
-    const outcome = decideRps(playerMove, cpuMove);
-    rpsResult.textContent = `You: ${playerMove} | CPU: ${cpuMove} — ${outcome}`;
+if (rpsButtons.length && rpsResult) {
+  rpsButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const playerMove = button.dataset.move;
+      const cpuMove = moves[Math.floor(Math.random() * moves.length)];
+      const outcome = decideRps(playerMove, cpuMove);
+      rpsResult.textContent = `You: ${playerMove} | CPU: ${cpuMove} — ${outcome}`;
+    });
   });
-});
+}
 
 // Number Guess
 const guessInput = document.getElementById('guessInput');
@@ -36,31 +38,33 @@ function resetGuessGame() {
   guessResult.textContent = 'You have 10 attempts.';
 }
 
-guessBtn.addEventListener('click', () => {
-  const guess = Number(guessInput.value);
-  if (!guess || guess < 1 || guess > 100) {
-    guessResult.textContent = 'Enter a valid number from 1 to 100.';
-    return;
-  }
+if (guessInput && guessBtn && guessReset && guessResult) {
+  guessBtn.addEventListener('click', () => {
+    const guess = Number(guessInput.value);
+    if (!guess || guess < 1 || guess > 100) {
+      guessResult.textContent = 'Enter a valid number from 1 to 100.';
+      return;
+    }
 
-  attemptsLeft -= 1;
+    attemptsLeft -= 1;
 
-  if (guess === secret) {
-    guessResult.textContent = `Correct! The number was ${secret}. Press Reset to play again.`;
-    return;
-  }
+    if (guess === secret) {
+      guessResult.textContent = `Correct! The number was ${secret}. Press Reset to play again.`;
+      return;
+    }
 
-  if (attemptsLeft <= 0) {
-    guessResult.textContent = `Out of attempts! It was ${secret}. Press Reset to retry.`;
-    return;
-  }
+    if (attemptsLeft <= 0) {
+      guessResult.textContent = `Out of attempts! It was ${secret}. Press Reset to retry.`;
+      return;
+    }
 
-  guessResult.textContent = guess < secret
-    ? `Too low. Attempts left: ${attemptsLeft}`
-    : `Too high. Attempts left: ${attemptsLeft}`;
-});
+    guessResult.textContent = guess < secret
+      ? `Too low. Attempts left: ${attemptsLeft}`
+      : `Too high. Attempts left: ${attemptsLeft}`;
+  });
 
-guessReset.addEventListener('click', resetGuessGame);
+  guessReset.addEventListener('click', resetGuessGame);
+}
 
 // Memory Match
 const memoryBoard = document.getElementById('memoryBoard');
@@ -135,4 +139,110 @@ function onCardClick(event) {
   }, 700);
 }
 
-setupMemory();
+if (memoryBoard && memoryResult) {
+  setupMemory();
+}
+
+// Princess Color Match
+const colorButtons = document.querySelectorAll('.color-btn');
+const dressPreview = document.getElementById('dressPreview');
+const dressResult = document.getElementById('dressResult');
+
+const dressThemes = {
+  pink: { emoji: '👗', text: 'Pretty pink princess style selected!' },
+  purple: { emoji: '🪻👗', text: 'Royal purple sparkle selected!' },
+  gold: { emoji: '✨👗', text: 'Golden glam look selected!' },
+};
+
+if (colorButtons.length && dressPreview && dressResult) {
+  colorButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const theme = dressThemes[button.dataset.theme];
+      dressPreview.textContent = theme.emoji;
+      dressResult.textContent = theme.text;
+    });
+  });
+}
+
+// Pet Name Sparkle
+const petNameBtn = document.getElementById('petNameBtn');
+const petNameResult = document.getElementById('petNameResult');
+const petNames = ['Starry Puff', 'Luna Sprinkles', 'Candy Blossom', 'Twinkle Paws', 'Peachy Fluff'];
+
+if (petNameBtn && petNameResult) {
+  petNameBtn.addEventListener('click', () => {
+    const randomName = petNames[Math.floor(Math.random() * petNames.length)];
+    petNameResult.textContent = `Your magical pet name is: ${randomName} ✨`;
+  });
+}
+
+// Space Reaction Dash
+const reactionBtn = document.getElementById('reactionBtn');
+const reactionResult = document.getElementById('reactionResult');
+let reactionStart = 0;
+let reactionTimeout;
+
+if (reactionBtn && reactionResult) {
+  reactionBtn.textContent = 'Start Round';
+  reactionBtn.classList.remove('waiting');
+
+  reactionBtn.addEventListener('click', () => {
+    if (reactionBtn.classList.contains('ready')) {
+      const reactionMs = Date.now() - reactionStart;
+      reactionResult.textContent = `Reaction time: ${reactionMs} ms. Click to play again.`;
+      reactionBtn.textContent = 'Start Round';
+      reactionBtn.classList.remove('ready');
+      return;
+    }
+
+    if (reactionBtn.classList.contains('waiting')) {
+      clearTimeout(reactionTimeout);
+      reactionBtn.classList.remove('waiting');
+      reactionBtn.textContent = 'Start Round';
+      reactionResult.textContent = 'Too early! Wait for green signal.';
+      return;
+    }
+
+    reactionBtn.classList.add('waiting');
+    reactionBtn.textContent = 'Wait for green...';
+    reactionResult.textContent = 'Get ready...';
+
+    reactionTimeout = setTimeout(() => {
+      reactionBtn.classList.remove('waiting');
+      reactionBtn.classList.add('ready');
+      reactionBtn.textContent = 'CLICK NOW!';
+      reactionStart = Date.now();
+    }, 1000 + Math.random() * 2500);
+  });
+}
+
+// Power Click Challenge
+const clickStartBtn = document.getElementById('clickStartBtn');
+const clickTapBtn = document.getElementById('clickTapBtn');
+const clickResult = document.getElementById('clickResult');
+
+if (clickStartBtn && clickTapBtn && clickResult) {
+  let clickCount = 0;
+  let active = false;
+
+  clickStartBtn.addEventListener('click', () => {
+    if (active) return;
+
+    active = true;
+    clickCount = 0;
+    clickTapBtn.disabled = false;
+    clickResult.textContent = 'Go! Tap as fast as you can!';
+
+    setTimeout(() => {
+      active = false;
+      clickTapBtn.disabled = true;
+      clickResult.textContent = `Time! You scored ${clickCount} taps in 5 seconds.`;
+    }, 5000);
+  });
+
+  clickTapBtn.addEventListener('click', () => {
+    if (!active) return;
+    clickCount += 1;
+    clickResult.textContent = `Taps: ${clickCount}`;
+  });
+}

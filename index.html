@@ -11,41 +11,71 @@
     <header class="hero">
       <p class="eyebrow">Welcome to your new homepage</p>
       <h1>Favorite Games Hub</h1>
-      <p>Play quick games right here: Rock Paper Scissors, Number Guess, and Memory Match.</p>
+      <p>Pick a game category and jump to any game page from the <code>games/</code> folder.</p>
     </header>
 
-    <section class="games-grid">
-      <article class="game-card">
-        <h2>Rock • Paper • Scissors</h2>
-        <p>Pick your move and try to beat the computer.</p>
-        <div class="rps-controls">
-          <button class="rps-btn" data-move="rock">🪨 Rock</button>
-          <button class="rps-btn" data-move="paper">📄 Paper</button>
-          <button class="rps-btn" data-move="scissors">✂️ Scissors</button>
-        </div>
-        <p id="rpsResult" class="result">Choose a move to start.</p>
-      </article>
+    <nav class="game-nav" aria-label="Game categories">
+      <a class="chip" href="#classic-games">Classic Games</a>
+      <a class="chip chip-girls" href="#girls-games">Cute Games for Girls</a>
+      <a class="chip chip-boys" href="#boys-games">Cool Games for Boys</a>
+    </nav>
 
-      <article class="game-card">
-        <h2>Number Guess</h2>
-        <p>Guess the secret number between 1 and 100.</p>
-        <div class="guess-row">
-          <input id="guessInput" type="number" min="1" max="100" placeholder="Enter guess" />
-          <button id="guessBtn">Guess</button>
-          <button id="guessReset">Reset</button>
-        </div>
-        <p id="guessResult" class="result">You have 10 attempts.</p>
-      </article>
+    <section id="classic-games" class="category-section">
+      <h2>Classic Games</h2>
+      <div class="games-grid">
+        <article class="game-card">
+          <h3>Rock • Paper • Scissors</h3>
+          <p>Pick your move and try to beat the computer.</p>
+          <a class="play-link" href="games/rock-paper-scissors.html">Play now</a>
+        </article>
 
-      <article class="game-card">
-        <h2>Memory Match</h2>
-        <p>Find all matching emoji pairs.</p>
-        <div id="memoryBoard" class="memory-board" aria-label="Memory game board"></div>
-        <p id="memoryResult" class="result">Match all cards to win.</p>
-      </article>
+        <article class="game-card">
+          <h3>Number Guess</h3>
+          <p>Guess the secret number between 1 and 100.</p>
+          <a class="play-link" href="games/number-guess.html">Play now</a>
+        </article>
+
+        <article class="game-card">
+          <h3>Memory Match</h3>
+          <p>Find all matching emoji pairs as fast as you can.</p>
+          <a class="play-link" href="games/memory-match.html">Play now</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="girls-games" class="category-section">
+      <h2>Cute Games for Girls</h2>
+      <div class="games-grid">
+        <article class="game-card game-card-girls">
+          <h3>Princess Color Match</h3>
+          <p>Choose a color theme to style the princess dress.</p>
+          <a class="play-link" href="games/princess-color-match.html">Play now</a>
+        </article>
+
+        <article class="game-card game-card-girls">
+          <h3>Pet Name Sparkle</h3>
+          <p>Generate adorable names for your fantasy pet.</p>
+          <a class="play-link" href="games/pet-name-sparkle.html">Play now</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="boys-games" class="category-section">
+      <h2>Cool Games for Boys</h2>
+      <div class="games-grid">
+        <article class="game-card game-card-boys">
+          <h3>Space Reaction Dash</h3>
+          <p>Tap as soon as the signal turns green and beat your best time.</p>
+          <a class="play-link" href="games/space-reaction-dash.html">Play now</a>
+        </article>
+
+        <article class="game-card game-card-boys">
+          <h3>Power Click Challenge</h3>
+          <p>Click as many times as you can before the timer runs out.</p>
+          <a class="play-link" href="games/power-click-challenge.html">Play now</a>
+        </article>
+      </div>
     </section>
   </main>
-
-  <script src="game.js"></script>
 </body>
 </html>

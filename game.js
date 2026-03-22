@@ -246,3 +246,291 @@ if (clickStartBtn && clickTapBtn && clickResult) {
     clickResult.textContent = `Taps: ${clickCount}`;
   });
 }
+
+// Neon 3D Arena Strike (raycast mini FPS)
+const arenaCanvas = document.getElementById('arenaCanvas');
+const arenaHud = document.getElementById('arenaHud');
+
+if (arenaCanvas && arenaHud) {
+  const ctx = arenaCanvas.getContext('2d');
+  const map = [
+    '1111111111111111',
+    '1000000000100001',
+    '1011110110101101',
+    '1000010000000101',
+    '1011011110110101',
+    '1001000010000001',
+    '1101011011111101',
+    '1000010000000001',
+    '1011110111111101',
+    '1000000000000001',
+    '1111111111111111',
+  ];
+
+  const FOV = Math.PI / 3;
+  const MOVE_SPEED = 2.7;
+  const ROTATE_SPEED = 0.0024;
+  const MAX_DEPTH = 18;
+
+  const player = {
+    x: 2.5,
+    y: 2.5,
+    angle: 0,
+    hp: 100,
+    score: 0,
+  };
+
+  const enemies = [
+    { x: 12.5, y: 2.5, alive: true, cooldown: 0 },
+    { x: 8.5, y: 8.5, alive: true, cooldown: 0 },
+    { x: 3.5, y: 9.2, alive: true, cooldown: 0 },
+    { x: 13.2, y: 7.6, alive: true, cooldown: 0 },
+  ];
+
+  const keys = { w: false, a: false, s: false, d: false };
+  const bullets = [];
+  let lastTime = performance.now();
+  let gameOver = false;
+
+  function isWall(x, y) {
+    const mx = Math.floor(x);
+    const my = Math.floor(y);
+    if (my < 0 || my >= map.length || mx < 0 || mx >= map[0].length) return true;
+    return map[my][mx] === '1';
+  }
+
+  function castRay(rayAngle) {
+    const sin = Math.sin(rayAngle);
+    const cos = Math.cos(rayAngle);
+    let depth = 0;
+    while (depth < MAX_DEPTH) {
+      const x = player.x + cos * depth;
+      const y = player.y + sin * depth;
+      if (isWall(x, y)) {
+        return { depth, x, y };
+      }
+      depth += 0.02;
+    }
+    return { depth: MAX_DEPTH, x: player.x + cos * MAX_DEPTH, y: player.y + sin * MAX_DEPTH };
+  }
+
+  function canSee(a, b) {
+    const dx = b.x - a.x;
+    const dy = b.y - a.y;
+    const distance = Math.hypot(dx, dy);
+    const steps = Math.ceil(distance * 8);
+    for (let i = 1; i < steps; i += 1) {
+      const t = i / steps;
+      const x = a.x + dx * t;
+      const y = a.y + dy * t;
+      if (isWall(x, y)) return false;
+    }
+    return true;
+  }
+
+  function movePlayer(dt) {
+    const dirX = Math.cos(player.angle);
+    const dirY = Math.sin(player.angle);
+    const sideX = Math.cos(player.angle + Math.PI / 2);
+    const sideY = Math.sin(player.angle + Math.PI / 2);
+
+    let vx = 0;
+    let vy = 0;
+    if (keys.w) { vx += dirX; vy += dirY; }
+    if (keys.s) { vx -= dirX; vy -= dirY; }
+    if (keys.a) { vx -= sideX; vy -= sideY; }
+    if (keys.d) { vx += sideX; vy += sideY; }
+
+    const len = Math.hypot(vx, vy) || 1;
+    vx = (vx / len) * MOVE_SPEED * dt;
+    vy = (vy / len) * MOVE_SPEED * dt;
+
+    const nx = player.x + vx;
+    const ny = player.y + vy;
+    if (!isWall(nx, player.y)) player.x = nx;
+    if (!isWall(player.x, ny)) player.y = ny;
+  }
+
+  function updateEnemies(dt) {
+    enemies.forEach((enemy) => {
+      if (!enemy.alive || gameOver) return;
+      const dx = player.x - enemy.x;
+      const dy = player.y - enemy.y;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist > 2.2) {
+        const speed = 1.1 * dt;
+        const nx = enemy.x + (dx / dist) * speed;
+        const ny = enemy.y + (dy / dist) * speed;
+        if (!isWall(nx, enemy.y)) enemy.x = nx;
+        if (!isWall(enemy.x, ny)) enemy.y = ny;
+      }
+
+      enemy.cooldown -= dt;
+      if (enemy.cooldown <= 0 && canSee(enemy, player) && dist < 9) {
+        player.hp -= 6;
+        enemy.cooldown = 1.2 + Math.random() * 1.1;
+      }
+    });
+  }
+
+  function updateBullets(dt) {
+    for (let i = bullets.length - 1; i >= 0; i -= 1) {
+      const b = bullets[i];
+      b.x += Math.cos(b.angle) * b.speed * dt;
+      b.y += Math.sin(b.angle) * b.speed * dt;
+      b.life -= dt;
+
+      if (b.life <= 0 || isWall(b.x, b.y)) {
+        bullets.splice(i, 1);
+        continue;
+      }
+
+      for (let j = 0; j < enemies.length; j += 1) {
+        const enemy = enemies[j];
+        if (!enemy.alive) continue;
+        if (Math.hypot(enemy.x - b.x, enemy.y - b.y) < 0.35) {
+          enemy.alive = false;
+          bullets.splice(i, 1);
+          player.score += 100;
+          break;
+        }
+      }
+    }
+  }
+
+  function drawScene() {
+    const w = arenaCanvas.width;
+    const h = arenaCanvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    const sky = ctx.createLinearGradient(0, 0, 0, h * 0.55);
+    sky.addColorStop(0, '#121a42');
+    sky.addColorStop(1, '#1f2f74');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, w, h * 0.55);
+
+    const floor = ctx.createLinearGradient(0, h * 0.55, 0, h);
+    floor.addColorStop(0, '#121212');
+    floor.addColorStop(1, '#020202');
+    ctx.fillStyle = floor;
+    ctx.fillRect(0, h * 0.55, w, h * 0.45);
+
+    for (let x = 0; x < w; x += 1) {
+      const rayAngle = player.angle - FOV / 2 + (x / w) * FOV;
+      const hit = castRay(rayAngle);
+      const correctedDepth = hit.depth * Math.cos(rayAngle - player.angle);
+      const wallHeight = Math.min(h, (h * 0.9) / Math.max(0.001, correctedDepth));
+      const y = (h - wallHeight) / 2;
+
+      const shade = Math.max(15, 240 - correctedDepth * 16);
+      ctx.fillStyle = `rgb(${shade * 0.36}, ${shade * 0.7}, ${shade})`;
+      ctx.fillRect(x, y, 1, wallHeight);
+    }
+
+    const sprites = [];
+    enemies.forEach((enemy) => {
+      if (!enemy.alive) return;
+      const dx = enemy.x - player.x;
+      const dy = enemy.y - player.y;
+      const dist = Math.hypot(dx, dy);
+      const angleToEnemy = Math.atan2(dy, dx) - player.angle;
+      let normalizedAngle = angleToEnemy;
+      while (normalizedAngle < -Math.PI) normalizedAngle += Math.PI * 2;
+      while (normalizedAngle > Math.PI) normalizedAngle -= Math.PI * 2;
+      if (Math.abs(normalizedAngle) < FOV / 2 + 0.15) {
+        sprites.push({ enemy, dist, angle: normalizedAngle });
+      }
+    });
+
+    sprites.sort((a, b) => b.dist - a.dist);
+    sprites.forEach((sprite) => {
+      const size = Math.min(h * 0.9, (h * 0.6) / Math.max(0.2, sprite.dist));
+      const sx = (0.5 + sprite.angle / FOV) * w;
+      const sy = h / 2 - size / 2;
+
+      ctx.fillStyle = 'rgba(255, 70, 70, 0.9)';
+      ctx.fillRect(sx - size / 2, sy, size, size);
+      ctx.fillStyle = '#ffefef';
+      ctx.fillRect(sx - size * 0.16, sy + size * 0.22, size * 0.1, size * 0.1);
+      ctx.fillRect(sx + size * 0.06, sy + size * 0.22, size * 0.1, size * 0.1);
+    });
+
+    bullets.forEach((b) => {
+      const dx = b.x - player.x;
+      const dy = b.y - player.y;
+      const dist = Math.hypot(dx, dy);
+      const angle = Math.atan2(dy, dx) - player.angle;
+      if (Math.abs(angle) > FOV / 2 || dist <= 0.1) return;
+      const size = Math.max(2, 60 / dist);
+      const sx = (0.5 + angle / FOV) * w;
+      const sy = h / 2;
+      ctx.fillStyle = '#7cfffd';
+      ctx.fillRect(sx - size / 2, sy - size / 2, size, size);
+    });
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(w / 2 - 10, h / 2);
+    ctx.lineTo(w / 2 + 10, h / 2);
+    ctx.moveTo(w / 2, h / 2 - 10);
+    ctx.lineTo(w / 2, h / 2 + 10);
+    ctx.stroke();
+
+    const aliveCount = enemies.filter((e) => e.alive).length;
+    if (player.hp <= 0) {
+      gameOver = true;
+      arenaHud.textContent = `Mission failed. Score: ${player.score}. Refresh to restart.`;
+    } else if (aliveCount === 0) {
+      gameOver = true;
+      arenaHud.textContent = `Arena cleared! Score: ${player.score}. Refresh to play again.`;
+    } else {
+      arenaHud.textContent = `HP: ${Math.max(0, Math.round(player.hp))} | Enemies: ${aliveCount} | Score: ${player.score}`;
+    }
+  }
+
+  function loop(now) {
+    const dt = Math.min(0.05, (now - lastTime) / 1000);
+    lastTime = now;
+
+    if (!gameOver) {
+      movePlayer(dt);
+      updateEnemies(dt);
+      updateBullets(dt);
+    }
+    drawScene();
+    requestAnimationFrame(loop);
+  }
+
+  document.addEventListener('keydown', (event) => {
+    const key = event.key.toLowerCase();
+    if (key in keys) keys[key] = true;
+  });
+
+  document.addEventListener('keyup', (event) => {
+    const key = event.key.toLowerCase();
+    if (key in keys) keys[key] = false;
+  });
+
+  arenaCanvas.addEventListener('click', () => {
+    if (document.pointerLockElement !== arenaCanvas) {
+      arenaCanvas.requestPointerLock();
+    } else if (!gameOver) {
+      bullets.push({
+        x: player.x,
+        y: player.y,
+        angle: player.angle,
+        speed: 11,
+        life: 1.2,
+      });
+    }
+  });
+
+  document.addEventListener('mousemove', (event) => {
+    if (document.pointerLockElement !== arenaCanvas || gameOver) return;
+    player.angle += event.movementX * ROTATE_SPEED;
+  });
+
+  requestAnimationFrame(loop);
+}

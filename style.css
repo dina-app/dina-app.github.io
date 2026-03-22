@@ -200,3 +200,18 @@ button:hover {
 .reaction-btn.ready {
   background: #1f9d58;
 }
+
+.arena-wrap {
+  margin-top: 0.8rem;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #2f6789;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35);
+}
+
+#arenaCanvas {
+  width: 100%;
+  display: block;
+  background: #05070f;
+  cursor: crosshair;
+}

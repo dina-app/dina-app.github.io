@@ -290,3 +290,81 @@ button:hover {
   border-left: 3px solid var(--accent);
   padding-left: 0.75rem;
 }
+
+.host-card {
+  display: grid;
+  grid-template-columns: 1.3fr minmax(180px, 260px);
+  gap: 1rem;
+  align-items: center;
+}
+
+.host-avatar {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #5b4ca6;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.3);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.mood-grid {
+  margin-top: 0.75rem;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.mood-card {
+  margin: 0;
+  border: 1px solid #4857a6;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #171e42;
+}
+
+.mood-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.mood-card figcaption {
+  padding: 0.55rem 0.65rem;
+  color: var(--text);
+  font-size: 0.92rem;
+}
+
+.float-animation {
+  animation: floatY 4.5s ease-in-out infinite;
+}
+
+.pulse-animation {
+  animation: pulseGlow 2.6s ease-in-out infinite;
+}
+
+@keyframes floatY {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(124, 139, 255, 0);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(124, 139, 255, 0.3);
+  }
+}
+
+@media (max-width: 760px) {
+  .host-card {
+    grid-template-columns: 1fr;
+  }
+}

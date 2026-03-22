@@ -249,3 +249,44 @@ button:hover {
 #stackRestartBtn {
   margin-top: 0.7rem;
 }
+
+.chip-guide {
+  border-color: #5b4ca6;
+  background: #322a68;
+}
+
+.game-card-guide {
+  border-color: #5b4ca6;
+}
+
+.guide-page {
+  display: grid;
+  gap: 1rem;
+}
+
+.guide-hero {
+  margin-bottom: 0.2rem;
+}
+
+.guide-card {
+  background: linear-gradient(160deg, var(--panel), var(--panel-2));
+  border: 1px solid #3e4b8f;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+}
+
+.guide-card h2 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+.guide-card p,
+.guide-card li {
+  color: var(--muted);
+}
+
+.guide-tip {
+  border-left: 3px solid var(--accent);
+  padding-left: 0.75rem;
+}

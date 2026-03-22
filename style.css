@@ -215,3 +215,37 @@ button:hover {
   background: #05070f;
   cursor: crosshair;
 }
+
+.stack-scoreboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.5rem;
+  margin: 0.9rem 0;
+}
+
+.stack-scoreboard p {
+  margin: 0;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #3d4788;
+  border-radius: 10px;
+  background: #10183b;
+}
+
+.stack-question h2 {
+  font-size: 1.1rem;
+  margin: 0.2rem 0 0.65rem;
+}
+
+.stack-options {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.stack-option-btn {
+  text-align: left;
+}
+
+#stackRestartBtn {
+  margin-top: 0.7rem;
+}

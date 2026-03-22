@@ -534,3 +534,126 @@ if (arenaCanvas && arenaHud) {
 
   requestAnimationFrame(loop);
 }
+
+// Unity 3D vs HTML5 Showdown
+const stackOptionsHost = document.getElementById('stackOptions');
+const stackQuestionTitle = document.getElementById('stackQuestionTitle');
+const stackProgress = document.getElementById('stackProgress');
+const stackResult = document.getElementById('stackResult');
+const stackRestartBtn = document.getElementById('stackRestartBtn');
+const unityScoreEl = document.getElementById('unityScore');
+const html5ScoreEl = document.getElementById('html5Score');
+
+if (
+  stackOptionsHost
+  && stackQuestionTitle
+  && stackProgress
+  && stackResult
+  && stackRestartBtn
+  && unityScoreEl
+  && html5ScoreEl
+) {
+  const stackQuestions = [
+    {
+      prompt: 'What platform matters most for launch?',
+      options: [
+        { text: 'Mobile + desktop app stores', unity: 2, html5: 0 },
+        { text: 'Instant browser play with no install', unity: 0, html5: 2 },
+      ],
+    },
+    {
+      prompt: 'How advanced is your 3D requirement?',
+      options: [
+        { text: 'High-end 3D, dynamic lighting, heavy scenes', unity: 2, html5: 0 },
+        { text: 'Mostly 2D or lightweight 3D', unity: 0, html5: 2 },
+      ],
+    },
+    {
+      prompt: 'What is your dev team strongest in?',
+      options: [
+        { text: 'C# and game-engine workflows', unity: 2, html5: 0 },
+        { text: 'JavaScript/TypeScript and web stacks', unity: 0, html5: 2 },
+      ],
+    },
+    {
+      prompt: 'How important is rapid web iteration?',
+      options: [
+        { text: 'Very important: push updates quickly via web', unity: 0, html5: 2 },
+        { text: 'Less important: app store release cadence is okay', unity: 2, html5: 0 },
+      ],
+    },
+    {
+      prompt: 'What monetization model fits best?',
+      options: [
+        { text: 'Premium app / in-app purchases in stores', unity: 2, html5: 0 },
+        { text: 'Ad-supported web game / instant reach', unity: 0, html5: 2 },
+      ],
+    },
+  ];
+
+  let currentQuestion = 0;
+  let unityScore = 0;
+  let html5Score = 0;
+
+  function updateScores() {
+    unityScoreEl.textContent = String(unityScore);
+    html5ScoreEl.textContent = String(html5Score);
+  }
+
+  function renderFinal() {
+    stackOptionsHost.innerHTML = '';
+    stackQuestionTitle.textContent = 'Recommendation ready!';
+    stackProgress.textContent = 'Completed 5 of 5 questions.';
+
+    if (unityScore === html5Score) {
+      stackResult.textContent = 'Tie! Pick based on team skills: Unity for deeper 3D, HTML5 for faster web shipping.';
+      return;
+    }
+
+    if (unityScore > html5Score) {
+      stackResult.textContent = 'Winner: Unity 3D 🏆 Best for advanced 3D, multi-platform exports, and engine tooling.';
+      return;
+    }
+
+    stackResult.textContent = 'Winner: HTML5 🏆 Best for instant play, quick updates, and browser-first distribution.';
+  }
+
+  function nextQuestion() {
+    if (currentQuestion >= stackQuestions.length) {
+      renderFinal();
+      return;
+    }
+
+    const q = stackQuestions[currentQuestion];
+    stackQuestionTitle.textContent = q.prompt;
+    stackProgress.textContent = `Question ${currentQuestion + 1} of ${stackQuestions.length}`;
+    stackResult.textContent = 'Choose the option that fits your game plan.';
+    stackOptionsHost.innerHTML = '';
+
+    q.options.forEach((option) => {
+      const button = document.createElement('button');
+      button.className = 'stack-option-btn';
+      button.type = 'button';
+      button.textContent = option.text;
+      button.addEventListener('click', () => {
+        unityScore += option.unity;
+        html5Score += option.html5;
+        currentQuestion += 1;
+        updateScores();
+        nextQuestion();
+      });
+      stackOptionsHost.appendChild(button);
+    });
+  }
+
+  stackRestartBtn.addEventListener('click', () => {
+    currentQuestion = 0;
+    unityScore = 0;
+    html5Score = 0;
+    updateScores();
+    nextQuestion();
+  });
+
+  updateScores();
+  nextQuestion();
+}

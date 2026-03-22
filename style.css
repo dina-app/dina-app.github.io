@@ -215,3 +215,59 @@ button:hover {
   background: #05070f;
   cursor: crosshair;
 }
+
+.blog-page {
+  width: min(900px, 95%);
+}
+
+.blog-card {
+  background: linear-gradient(160deg, var(--panel), var(--panel-2));
+  border: 1px solid #343f77;
+  border-radius: 18px;
+  padding: 1.2rem 1.2rem 1.5rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.blog-hero {
+  margin-bottom: 1rem;
+}
+
+.blog-card h2 {
+  margin-top: 1.2rem;
+  margin-bottom: 0.45rem;
+  font-size: 1.3rem;
+}
+
+.blog-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.blog-card p,
+.blog-card li {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.blog-card ul,
+.blog-card ol {
+  padding-left: 1.2rem;
+}
+
+.blog-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.blog-grid article {
+  border: 1px solid #384487;
+  border-radius: 12px;
+  padding: 0.8rem;
+  background: rgba(10, 15, 36, 0.45);
+}
+
+.source-list a {
+  color: #c9d2ff;
+}

@@ -247,6 +247,121 @@ if (clickStartBtn && clickTapBtn && clickResult) {
   });
 }
 
+// Sky Runner
+const skyStartBtn = document.getElementById('skyStartBtn');
+const skyJumpBtn = document.getElementById('skyJumpBtn');
+const skyStatus = document.getElementById('skyStatus');
+const skyScore = document.getElementById('skyScore');
+
+if (skyStartBtn && skyJumpBtn && skyStatus && skyScore) {
+  let skyRunning = false;
+  let obstacleActive = false;
+  let skyPoints = 0;
+  let skyBest = 0;
+  let obstacleTimer;
+
+  function updateSkyScore() {
+    skyScore.textContent = `Score: ${skyPoints} | Best: ${skyBest}`;
+  }
+
+  function finishSkyRun(message) {
+    skyRunning = false;
+    obstacleActive = false;
+    skyJumpBtn.disabled = true;
+    skyStartBtn.disabled = false;
+    clearTimeout(obstacleTimer);
+    skyStatus.textContent = `${message} Final score: ${skyPoints}.`;
+    skyBest = Math.max(skyBest, skyPoints);
+    updateSkyScore();
+  }
+
+  function nextObstacle() {
+    if (!skyRunning) return;
+    obstacleActive = true;
+    skyStatus.textContent = 'Obstacle incoming! Jump now!';
+
+    obstacleTimer = setTimeout(() => {
+      if (obstacleActive) {
+        finishSkyRun('You hit an obstacle!');
+      }
+    }, 900);
+  }
+
+  function scheduleObstacle() {
+    const delay = 1000 + Math.random() * 1400;
+    obstacleTimer = setTimeout(nextObstacle, delay);
+  }
+
+  skyStartBtn.addEventListener('click', () => {
+    skyRunning = true;
+    skyPoints = 0;
+    obstacleActive = false;
+    skyStartBtn.disabled = true;
+    skyJumpBtn.disabled = false;
+    skyStatus.textContent = 'Run started. Stay ready!';
+    updateSkyScore();
+    scheduleObstacle();
+  });
+
+  skyJumpBtn.addEventListener('click', () => {
+    if (!skyRunning) return;
+    if (!obstacleActive) {
+      finishSkyRun('Too soon! You jumped at the wrong time.');
+      return;
+    }
+
+    obstacleActive = false;
+    clearTimeout(obstacleTimer);
+    skyPoints += 1;
+    skyStatus.textContent = 'Nice jump! Keep going...';
+    updateSkyScore();
+    scheduleObstacle();
+  });
+}
+
+// Mini Craft
+const craftItemA = document.getElementById('craftItemA');
+const craftItemB = document.getElementById('craftItemB');
+const craftBtn = document.getElementById('craftBtn');
+const craftResult = document.getElementById('craftResult');
+const craftCollection = document.getElementById('craftCollection');
+
+if (craftItemA && craftItemB && craftBtn && craftResult && craftCollection) {
+  const recipes = {
+    'wood+stone': 'Stone Axe 🪓',
+    'wood+fiber': 'Bow 🏹',
+    'stone+iron': 'Forge Hammer 🔨',
+    'iron+coal': 'Steel Ingot ⚙️',
+    'wood+iron': 'Iron Pickaxe ⛏️',
+  };
+
+  const unlocked = new Set();
+
+  function recipeKey(a, b) {
+    return [a, b].sort().join('+');
+  }
+
+  function updateCollection() {
+    craftCollection.textContent = unlocked.size
+      ? `Collection: ${Array.from(unlocked).join(', ')}`
+      : 'Collection: none yet';
+  }
+
+  craftBtn.addEventListener('click', () => {
+    const key = recipeKey(craftItemA.value, craftItemB.value);
+    const item = recipes[key];
+
+    if (!item) {
+      craftResult.textContent = 'No recipe found. Try a different combo.';
+      return;
+    }
+
+    unlocked.add(item);
+    craftResult.textContent = `Crafted: ${item}`;
+    updateCollection();
+  });
+}
+
 // Neon 3D Arena Strike (raycast mini FPS)
 const arenaCanvas = document.getElementById('arenaCanvas');
 const arenaHud = document.getElementById('arenaHud');

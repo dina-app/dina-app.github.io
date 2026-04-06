@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sky Runner</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <main class="home game-page">
+    <a class="back-link" href="../index.html">← Back to game hub</a>
+    <article class="game-card game-card-boys">
+      <h1>Sky Runner</h1>
+      <p>Press <strong>Start</strong>, then hit <strong>Jump</strong> when obstacles appear.</p>
+      <div class="rps-controls">
+        <button id="skyStartBtn" type="button">Start Run</button>
+        <button id="skyJumpBtn" type="button" disabled>Jump</button>
+      </div>
+      <p id="skyStatus" class="result">Start a run to begin.</p>
+      <p id="skyScore" class="result">Score: 0 | Best: 0</p>
+    </article>
+  </main>
+  <script src="../game.js"></script>
+</body>
+</html>

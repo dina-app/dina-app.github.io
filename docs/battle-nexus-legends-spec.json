@@ -1,0 +1,102 @@
+{
+  "project": {
+    "name": "Battle Nexus Legends",
+    "genre": "Team Battle Arena",
+    "inspiration": "Pokemon Unite-style",
+    "platformTargets": ["desktop", "mobile"],
+    "matchDurationSeconds": 600,
+    "finalStretchSeconds": 120
+  },
+  "modes": [
+    { "id": "ranked_5v5", "teamSize": 5, "ranked": true },
+    { "id": "casual_5v5", "teamSize": 5, "ranked": false },
+    { "id": "quick_3v3", "teamSize": 3, "ranked": false },
+    { "id": "bot_training", "teamSize": 5, "ranked": false, "bots": true },
+    { "id": "custom_lobby", "teamSize": 5, "private": true }
+  ],
+  "roles": ["attacker", "defender", "speedster", "supporter", "all_rounder"],
+  "characterStats": [
+    "hp",
+    "attack",
+    "defense",
+    "specialAttack",
+    "specialDefense",
+    "moveSpeed",
+    "critChance",
+    "attackSpeed",
+    "cooldownReduction",
+    "levelScaling",
+    "scoringSpeedModifier"
+  ],
+  "abilityTypes": ["passive", "basic", "enhanced_basic", "skill_1", "skill_2", "ultimate", "battle_item"],
+  "targetingTypes": ["single", "line", "cone", "circle", "self_buff", "dash", "teleport", "channel", "lock_on"],
+  "statusEffects": [
+    "stun",
+    "slow",
+    "knock_up",
+    "knockback",
+    "root",
+    "silence",
+    "blind",
+    "dot",
+    "shield",
+    "hot",
+    "move_speed_modifier",
+    "attack_speed_modifier",
+    "defense_reduction",
+    "stealth"
+  ],
+  "damageTypes": ["physical", "special", "true", "dot", "execute", "percent_max_hp", "missing_hp"],
+  "systems": {
+    "match": {
+      "scoring": true,
+      "respawnScaling": ["matchTime", "playerLevel", "streakRules"],
+      "winnerRule": "highest_team_score"
+    },
+    "goals": {
+      "interruptOnDamage": true,
+      "interruptOnCC": true,
+      "channelScalesWithPoints": true,
+      "friendlyAura": ["healing", "shield", "speed"]
+    },
+    "wildMonsters": {
+      "spawnRules": "timed",
+      "respawnRules": "timed",
+      "ai": ["idle", "aggro", "leash", "reset"]
+    },
+    "majorObjectives": {
+      "contestable": true,
+      "announcementUI": true,
+      "rewardDistribution": ["last_hit", "team_contribution"],
+      "rewardExamples": ["team_shield", "team_score_bonus", "stat_boost", "goal_weaken"]
+    },
+    "networking": {
+      "authoritativeModel": "server_authoritative",
+      "reconnectSupport": true,
+      "latencyCompensation": true,
+      "antiCheatValidation": ["movement", "combat", "scoring"]
+    }
+  },
+  "mvp": {
+    "mapCount": 1,
+    "playableCharacters": [
+      "Flareclaw",
+      "Mosshorn",
+      "Voltshade",
+      "Tidelia",
+      "Ironfang",
+      "Frostmoth"
+    ],
+    "majorObjectives": 1,
+    "minorWildMonsters": 3,
+    "requiredFeatures": [
+      "5v5_match",
+      "bots",
+      "scoring_system",
+      "level_and_skill_upgrades",
+      "lobby_and_character_select",
+      "end_game_results",
+      "simple_profile_save"
+    ]
+  }
+}

@@ -25,7 +25,7 @@
 <body>
   <main class="wrap">
     <h1>Dance Level Live Scorer (1–100)</h1>
-    <p class="tips">Use your camera for a live preview. When you hit score, the app captures 3 frames and asks the OpenAI API to grade dance energy, rhythm, and movement quality.</p>
+    <p class="tips">Use your camera for a live preview. When you hit score, the app captures up to 30 frames over 30 seconds and asks the OpenAI API to grade dance energy, rhythm, and movement quality.</p>
 
     <section class="panel">
       <label for="apiKey">OpenAI API Key</label>
@@ -91,7 +91,7 @@
     function captureFrame() {
       const sourceWidth = video.videoWidth || 640;
       const sourceHeight = video.videoHeight || 480;
-      const maxEdge = 512;
+      const maxEdge = 384;
       const scale = Math.min(1, maxEdge / Math.max(sourceWidth, sourceHeight));
       const width = Math.max(1, Math.round(sourceWidth * scale));
       const height = Math.max(1, Math.round(sourceHeight * scale));
@@ -99,7 +99,7 @@
       canvas.height = height;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(video, 0, 0, width, height);
-      return canvas.toDataURL('image/jpeg', 0.55);
+      return canvas.toDataURL('image/jpeg', 0.45);
     }
 
     function sleep(ms) {
@@ -123,10 +123,14 @@
       reasonEl.textContent = '';
 
       try {
+        const frameCount = 30;
+        const frameIntervalMs = 1000;
         const frames = [];
-        for (let i = 0; i < 2; i += 1) {
+        for (let i = 0; i < frameCount; i += 1) {
           frames.push(captureFrame());
-          await sleep(700);
+          if (i < frameCount - 1) {
+            await sleep(frameIntervalMs);
+          }
         }
 
         setStatus('sending to OpenAI...');

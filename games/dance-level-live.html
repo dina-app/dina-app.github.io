@@ -54,7 +54,7 @@
       <div id="resultsCard" class="results-card hidden">
         <div id="starBadge" class="star-badge">☆☆☆☆☆</div>
         <table>
-          <thead><tr><th>Judge Key</th><th>Score</th></tr></thead>
+          <thead><tr><th>Judge Key</th><th>Score (1–10 + stars)</th></tr></thead>
           <tbody id="scoreTableBody"></tbody>
         </table>
       </div>
@@ -133,7 +133,15 @@
       }
 
       scoreTableBodyEl.innerHTML = entries
-        .map(([key, value]) => `<tr><td>${key.replace(/_/g, ' ')}</td><td>${Number(value) || '--'}</td></tr>`)
+        .map(([key, value]) => {
+          const numericScore = Number(value);
+          if (!Number.isFinite(numericScore)) {
+            return `<tr><td>${key.replace(/_/g, ' ')}</td><td>--</td></tr>`;
+          }
+          const bounded = Math.max(1, Math.min(10, Math.round(numericScore)));
+          const stars = `${'★'.repeat(bounded)}${'☆'.repeat(10 - bounded)}`;
+          return `<tr><td>${key.replace(/_/g, ' ')}</td><td>${bounded}/10 <span aria-label="${bounded} out of 10 stars">${stars}</span></td></tr>`;
+        })
         .join('');
 
       const bounded = Number.isFinite(totalScore) ? Math.max(10, Math.min(100, totalScore)) : 10;

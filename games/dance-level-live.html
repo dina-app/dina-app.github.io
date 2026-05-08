@@ -24,8 +24,8 @@
 </head>
 <body>
   <main class="wrap">
-    <h1>Dance Level Live Scorer (1–100)</h1>
-    <p class="tips">Use your camera for a live preview. When you hit score, the app captures up to 30 frames over 30 seconds and asks the OpenAI API to grade dance energy, rhythm, and movement quality.</p>
+    <h1>Dance Level Live Scorer (10 Keys)</h1>
+    <p class="tips">Use your camera for a live preview. When you hit score, the app captures up to 30 frames over 30 seconds and asks the OpenAI API to grade 10 dance judge score keys (each 1–10) and return a total out of 100.</p>
 
     <section class="panel">
       <label for="apiKey">OpenAI API Key</label>
@@ -147,7 +147,7 @@
               {
                 role: 'user',
                 content: [
-                  { type: 'input_text', text: 'You are a dance judge. Score dance level from 1 to 100 based on movement energy, rhythm, and pose quality. Return JSON only: {"score": number, "reason": "short text"}.' },
+                  { type: 'input_text', text: 'You are a dance judge. Use exactly 10 scoring keys, each scored from 1 to 10 (integers). Keys: energy, rhythm, timing, musicality, footwork, balance, control, creativity, expression, stage_presence. Compute total_score as the sum of all 10 keys (range 10-100). Return JSON only: {"scores":{"energy":number,"rhythm":number,"timing":number,"musicality":number,"footwork":number,"balance":number,"control":number,"creativity":number,"expression":number,"stage_presence":number},"total_score":number,"reason":"short text"}.' },
                   ...frames.map((dataUrl) => ({ type: 'input_image', image_url: dataUrl, detail: 'low' }))
                 ]
               }
@@ -176,9 +176,14 @@
           parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : { score: '--', reason: raw };
         }
 
-        const score = Number(parsed.score);
-        scoreEl.textContent = Number.isFinite(score) ? Math.max(1, Math.min(100, Math.round(score))) : '--';
-        reasonEl.textContent = parsed.reason || 'No reason returned.';
+        const score = Number(parsed.total_score ?? parsed.score);
+        scoreEl.textContent = Number.isFinite(score) ? Math.max(10, Math.min(100, Math.round(score))) : '--';
+        const keyScores = parsed.scores && typeof parsed.scores === 'object'
+          ? Object.entries(parsed.scores).map(([k, v]) => `${k}: ${v}`).join(', ')
+          : '';
+        const reason = parsed.reason || 'No reason returned.';
+        reasonEl.textContent = keyScores ? `${reason}
+${keyScores}` : reason;
         setStatus('done');
       } catch (error) {
         setStatus(`failed (${error.message})`);

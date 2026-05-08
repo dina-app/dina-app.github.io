@@ -25,7 +25,7 @@
     table { width: 100%; border-collapse: collapse; margin-top: 8px; overflow: hidden; border-radius: 10px; }
     th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #2a346d; }
     th { color: #9eb1ff; font-size: .85rem; text-transform: uppercase; letter-spacing: .04em; }
-    td:last-child { text-align: right; font-weight: 700; color: #9ef6c8; }
+    td:last-child { text-align: right; font-weight: 700; color: #ffe27a; }
     tr:last-child td { border-bottom: none; }
   </style>
 </head>
@@ -54,7 +54,7 @@
       <div id="resultsCard" class="results-card hidden">
         <div id="starBadge" class="star-badge">☆☆☆☆☆</div>
         <table>
-          <thead><tr><th>Judge Key</th><th>Score (1–10 + stars)</th></tr></thead>
+          <thead><tr><th>Judge Key</th><th>Result</th></tr></thead>
           <tbody id="scoreTableBody"></tbody>
         </table>
       </div>
@@ -140,7 +140,7 @@
           }
           const bounded = Math.max(1, Math.min(10, Math.round(numericScore)));
           const stars = `${'★'.repeat(bounded)}${'☆'.repeat(10 - bounded)}`;
-          return `<tr><td>${key.replace(/_/g, ' ')}</td><td>${bounded}/10 <span aria-label="${bounded} out of 10 stars">${stars}</span></td></tr>`;
+          return `<tr><td>${key.replace(/_/g, ' ')}</td><td><span aria-label="${bounded} out of 10 stars">${stars}</span></td></tr>`;
         })
         .join('');
 

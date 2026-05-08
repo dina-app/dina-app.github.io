@@ -20,6 +20,13 @@
     .tips { color: #b8c2ff; }
     .hidden { display:none; }
     .small { font-size: .9rem; color: #a8b2ef; }
+    .results-card { background: linear-gradient(145deg, #151d45, #10183a); border: 1px solid #3b4ba8; border-radius: 12px; padding: 14px; margin-top: 12px; }
+    .star-badge { font-size: 1.2rem; color: #ffe27a; letter-spacing: 2px; margin-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; overflow: hidden; border-radius: 10px; }
+    th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid #2a346d; }
+    th { color: #9eb1ff; font-size: .85rem; text-transform: uppercase; letter-spacing: .04em; }
+    td:last-child { text-align: right; font-weight: 700; color: #9ef6c8; }
+    tr:last-child td { border-bottom: none; }
   </style>
 </head>
 <body>
@@ -44,6 +51,13 @@
       <button id="scoreBtn" disabled>Score Dance Level</button>
       <p id="status">Status: idle</p>
       <div id="score" class="score">--</div>
+      <div id="resultsCard" class="results-card hidden">
+        <div id="starBadge" class="star-badge">☆☆☆☆☆</div>
+        <table>
+          <thead><tr><th>Judge Key</th><th>Score</th></tr></thead>
+          <tbody id="scoreTableBody"></tbody>
+        </table>
+      </div>
       <pre id="reason" class="small"></pre>
     </section>
 
@@ -59,6 +73,9 @@
     const statusEl = document.getElementById('status');
     const scoreEl = document.getElementById('score');
     const reasonEl = document.getElementById('reason');
+    const resultsCardEl = document.getElementById('resultsCard');
+    const starBadgeEl = document.getElementById('starBadge');
+    const scoreTableBodyEl = document.getElementById('scoreTableBody');
     let stream;
 
     function setStatus(text) { statusEl.textContent = `Status: ${text}`; }
@@ -106,6 +123,26 @@
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    function renderScoreBreakdown(scores, totalScore) {
+      const entries = scores && typeof scores === 'object' ? Object.entries(scores) : [];
+      if (!entries.length) {
+        resultsCardEl.classList.add('hidden');
+        scoreTableBodyEl.innerHTML = '';
+        starBadgeEl.textContent = '☆☆☆☆☆';
+        return;
+      }
+
+      scoreTableBodyEl.innerHTML = entries
+        .map(([key, value]) => `<tr><td>${key.replace(/_/g, ' ')}</td><td>${Number(value) || '--'}</td></tr>`)
+        .join('');
+
+      const bounded = Number.isFinite(totalScore) ? Math.max(10, Math.min(100, totalScore)) : 10;
+      const starCount = Math.max(1, Math.min(5, Math.round(bounded / 20)));
+      starBadgeEl.textContent = `${'★'.repeat(starCount)}${'☆'.repeat(5 - starCount)}`;
+      resultsCardEl.classList.remove('hidden');
+    }
+
+
     async function scoreDance() {
       const apiKey = document.getElementById('apiKey').value.trim();
       if (!apiKey) {
@@ -121,6 +158,9 @@
       setStatus('capturing frames...');
       scoreEl.textContent = '--';
       reasonEl.textContent = '';
+      resultsCardEl.classList.add('hidden');
+      scoreTableBodyEl.innerHTML = '';
+      starBadgeEl.textContent = '☆☆☆☆☆';
 
       try {
         const frameCount = 30;
@@ -178,12 +218,9 @@
 
         const score = Number(parsed.total_score ?? parsed.score);
         scoreEl.textContent = Number.isFinite(score) ? Math.max(10, Math.min(100, Math.round(score))) : '--';
-        const keyScores = parsed.scores && typeof parsed.scores === 'object'
-          ? Object.entries(parsed.scores).map(([k, v]) => `${k}: ${v}`).join(', ')
-          : '';
+        renderScoreBreakdown(parsed.scores, score);
         const reason = parsed.reason || 'No reason returned.';
-        reasonEl.textContent = keyScores ? `${reason}
-${keyScores}` : reason;
+        reasonEl.textContent = reason;
         setStatus('done');
       } catch (error) {
         setStatus(`failed (${error.message})`);

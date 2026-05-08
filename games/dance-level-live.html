@@ -49,14 +49,6 @@
     </section>
 
     <section class="panel">
-      <label for="modelSelect">API Model</label>
-      <select id="modelSelect">
-        <option value="gpt-5.4-mini" selected>gpt-5.4-mini (fast)</option>
-        <option value="gpt-5.4">gpt-5.4 (best quality)</option>
-        <option value="gpt-5-mini">gpt-5-mini (fast fallback)</option>
-        <option value="gpt-5">gpt-5 (higher quality fallback)</option>
-        <option value="gpt-4.1-mini">gpt-4.1-mini (budget)</option>
-      </select>
       <label for="judgeLevelSelect">Judge Difficulty Level</label>
       <select id="judgeLevelSelect">
         <option value="beginner" selected>Beginner (more generous)</option>
@@ -171,7 +163,7 @@
 
     async function scoreDance() {
       const apiKey = document.getElementById('apiKey').value.trim();
-      const model = document.getElementById('modelSelect').value;
+      const model = 'gpt-5-mini';
       const judgeLevel = document.getElementById('judgeLevelSelect').value;
       if (!apiKey) {
         setStatus('enter your API key first');

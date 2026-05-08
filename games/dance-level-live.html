@@ -50,8 +50,10 @@
     <section class="panel">
       <label for="modelSelect">API Model</label>
       <select id="modelSelect">
-        <option value="gpt-5-mini" selected>gpt-5-mini (fast)</option>
-        <option value="gpt-5">gpt-5 (higher quality)</option>
+        <option value="gpt-5.4-mini" selected>gpt-5.4-mini (fast)</option>
+        <option value="gpt-5.4">gpt-5.4 (best quality)</option>
+        <option value="gpt-5-mini">gpt-5-mini (fast fallback)</option>
+        <option value="gpt-5">gpt-5 (higher quality fallback)</option>
         <option value="gpt-4.1-mini">gpt-4.1-mini (budget)</option>
       </select>
       <button id="scoreBtn" disabled>Score Dance Level</button>
@@ -64,6 +66,7 @@
           <tbody id="scoreTableBody"></tbody>
         </table>
       </div>
+      <div class="small"><strong>Professional Judge Total Description</strong></div>
       <pre id="reason" class="small"></pre>
     </section>
 
@@ -203,7 +206,7 @@
               {
                 role: 'user',
                 content: [
-                  { type: 'input_text', text: 'You are a dance judge. Use exactly 10 scoring keys, each scored from 1 to 10 (integers). Keys: energy, rhythm, timing, musicality, footwork, balance, control, creativity, expression, stage_presence. Compute total_score as the sum of all 10 keys (range 10-100). Return strict JSON only: {"scores":{"energy":number,"rhythm":number,"timing":number,"musicality":number,"footwork":number,"balance":number,"control":number,"creativity":number,"expression":number,"stage_presence":number},"notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"improve_notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"total_score":number,"reason":"4-8 sentence overall judging summary including strengths, weaknesses, and 2 concrete improvement tips"}.' },
+                  { type: 'input_text', text: 'You are a dance judge. Use exactly 10 scoring keys, each scored from 1 to 10 (integers). Keys: energy, rhythm, timing, musicality, footwork, balance, control, creativity, expression, stage_presence. Compute total_score as the sum of all 10 keys (range 10-100). Return strict JSON only: {"scores":{"energy":number,"rhythm":number,"timing":number,"musicality":number,"footwork":number,"balance":number,"control":number,"creativity":number,"expression":number,"stage_presence":number},"notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"improve_notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"total_score":number,"reason":"4-8 sentence professional judge total description including strengths, weaknesses, stage impression, and 2 concrete improvement tips"}.' },
                   ...frames.map((dataUrl) => ({ type: 'input_image', image_url: dataUrl, detail: 'low' }))
                 ]
               }

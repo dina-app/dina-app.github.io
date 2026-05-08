@@ -60,7 +60,7 @@
       <div id="resultsCard" class="results-card hidden">
         <div id="starBadge" class="star-badge">☆☆☆☆☆</div>
         <table>
-          <thead><tr><th>Judge Key</th><th>Result</th><th>Judge Note</th></tr></thead>
+          <thead><tr><th>Judge Key</th><th>Result (Points)</th><th>Good Points</th><th>Need Improve</th></tr></thead>
           <tbody id="scoreTableBody"></tbody>
         </table>
       </div>
@@ -129,7 +129,7 @@
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    function renderScoreBreakdown(scores, notes, totalScore) {
+    function renderScoreBreakdown(scores, notes, improveNotes, totalScore) {
       const entries = scores && typeof scores === 'object' ? Object.entries(scores) : [];
       if (!entries.length) {
         resultsCardEl.classList.add('hidden');
@@ -142,12 +142,12 @@
         .map(([key, value]) => {
           const numericScore = Number(value);
           const noteText = notes && typeof notes[key] === 'string' ? notes[key] : 'No note.';
+          const improveText = improveNotes && typeof improveNotes[key] === 'string' ? improveNotes[key] : `Improve ${key.replace(/_/g, ' ')} with focused drills.`;
           if (!Number.isFinite(numericScore)) {
-            return `<tr><td>${key.replace(/_/g, ' ')}</td><td>--</td><td>${noteText}</td></tr>`;
+            return `<tr><td>${key.replace(/_/g, ' ')}</td><td>--</td><td>${noteText}</td><td>${improveText}</td></tr>`;
           }
           const bounded = Math.max(1, Math.min(10, Math.round(numericScore)));
-          const stars = `${'★'.repeat(bounded)}${'☆'.repeat(10 - bounded)}`;
-          return `<tr><td>${key.replace(/_/g, ' ')}</td><td><span aria-label="${bounded} out of 10 stars">${stars}</span></td><td>${noteText}</td></tr>`;
+          return `<tr><td>${key.replace(/_/g, ' ')}</td><td>${bounded}</td><td>${noteText}</td><td>${improveText}</td></tr>`;
         })
         .join('');
 
@@ -203,7 +203,7 @@
               {
                 role: 'user',
                 content: [
-                  { type: 'input_text', text: 'You are a dance judge. Use exactly 10 scoring keys, each scored from 1 to 10 (integers). Keys: energy, rhythm, timing, musicality, footwork, balance, control, creativity, expression, stage_presence. Compute total_score as the sum of all 10 keys (range 10-100). Return strict JSON only: {"scores":{"energy":number,"rhythm":number,"timing":number,"musicality":number,"footwork":number,"balance":number,"control":number,"creativity":number,"expression":number,"stage_presence":number},"notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"total_score":number,"reason":"4-8 sentence overall judging summary including strengths, weaknesses, and 2 concrete improvement tips"}.' },
+                  { type: 'input_text', text: 'You are a dance judge. Use exactly 10 scoring keys, each scored from 1 to 10 (integers). Keys: energy, rhythm, timing, musicality, footwork, balance, control, creativity, expression, stage_presence. Compute total_score as the sum of all 10 keys (range 10-100). Return strict JSON only: {"scores":{"energy":number,"rhythm":number,"timing":number,"musicality":number,"footwork":number,"balance":number,"control":number,"creativity":number,"expression":number,"stage_presence":number},"notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"improve_notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"total_score":number,"reason":"4-8 sentence overall judging summary including strengths, weaknesses, and 2 concrete improvement tips"}.' },
                   ...frames.map((dataUrl) => ({ type: 'input_image', image_url: dataUrl, detail: 'low' }))
                 ]
               }
@@ -234,7 +234,7 @@
 
         const score = Number(parsed.total_score ?? parsed.score);
         scoreEl.textContent = Number.isFinite(score) ? Math.max(10, Math.min(100, Math.round(score))) : '--';
-        renderScoreBreakdown(parsed.scores, parsed.notes, score);
+        renderScoreBreakdown(parsed.scores, parsed.notes, parsed.improve_notes, score);
         const reason = parsed.reason || 'No reason returned.';
         reasonEl.textContent = reason;
         setStatus('done');

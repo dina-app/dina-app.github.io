@@ -45,6 +45,7 @@
     <section class="panel">
       <video id="video" autoplay playsinline muted></video>
       <canvas id="canvas" class="hidden"></canvas>
+      <p id="mlStatus" class="small">MediaPipe: not initialized</p>
     </section>
 
     <section class="panel">
@@ -79,6 +80,7 @@
     <p><a href="../index.html">← Back to Home</a></p>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js"></script>
   <script>
     const video = document.getElementById('video');
     const canvas = document.getElementById('canvas');
@@ -91,7 +93,26 @@
     const resultsCardEl = document.getElementById('resultsCard');
     const starBadgeEl = document.getElementById('starBadge');
     const scoreTableBodyEl = document.getElementById('scoreTableBody');
+    const mlStatusEl = document.getElementById('mlStatus');
     let stream;
+    let poseEstimator;
+
+    async function initMediaPipePose() {
+      if (poseEstimator) return poseEstimator;
+      if (!window.Pose) throw new Error('MediaPipe Pose script not available');
+      poseEstimator = new window.Pose({
+        locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`
+      });
+      poseEstimator.setOptions({
+        modelComplexity: 2,
+        smoothLandmarks: true,
+        enableSegmentation: false,
+        minDetectionConfidence: 0.5,
+        minTrackingConfidence: 0.5
+      });
+      mlStatusEl.textContent = 'MediaPipe: ready';
+      return poseEstimator;
+    }
 
     function setStatus(text) { statusEl.textContent = `Status: ${text}`; }
 
@@ -136,6 +157,48 @@
 
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function estimatePoseFromFrames(dataUrls) {
+      const pose = await initMediaPipePose();
+      const summaries = [];
+
+      for (const url of dataUrls) {
+        const image = await new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = url;
+        });
+        const result = await new Promise((resolve) => {
+          pose.onResults((res) => resolve(res));
+          pose.send({ image });
+        });
+        const landmarks = result.poseLandmarks || [];
+        if (!landmarks.length) continue;
+        const leftWrist = landmarks[15];
+        const rightWrist = landmarks[16];
+        const leftAnkle = landmarks[27];
+        const rightAnkle = landmarks[28];
+        const shoulderMidY = (landmarks[11].y + landmarks[12].y) / 2;
+        const wristHeight = shoulderMidY - ((leftWrist.y + rightWrist.y) / 2);
+        const ankleSpread = Math.abs(leftAnkle.x - rightAnkle.x);
+        const visibility = landmarks.reduce((acc, point) => acc + (point.visibility || 0), 0) / landmarks.length;
+        summaries.push({ wristHeight, ankleSpread, visibility });
+      }
+
+      if (!summaries.length) return { framesWithPose: 0, visibility: 0, movementScore: 0 };
+      let movement = 0;
+      for (let i = 1; i < summaries.length; i += 1) {
+        movement += Math.abs(summaries[i].wristHeight - summaries[i - 1].wristHeight);
+        movement += Math.abs(summaries[i].ankleSpread - summaries[i - 1].ankleSpread);
+      }
+      const avgVis = summaries.reduce((a, s) => a + s.visibility, 0) / summaries.length;
+      return {
+        framesWithPose: summaries.length,
+        visibility: Number(avgVis.toFixed(3)),
+        movementScore: Number((movement / Math.max(1, summaries.length - 1)).toFixed(3))
+      };
     }
 
     function renderScoreBreakdown(scores, notes, improveNotes, totalScore) {
@@ -199,7 +262,12 @@
           }
         }
 
+        setStatus('running MediaPipe pose analysis...');
+        mlStatusEl.textContent = 'MediaPipe: analyzing captured frames';
+        const poseSummary = await estimatePoseFromFrames(frames);
+
         setStatus('sending to OpenAI...');
+        mlStatusEl.textContent = `MediaPipe: analyzed ${poseSummary.framesWithPose}/${frames.length} frames`;
         const judgeInstructionByLevel = {
           beginner: 'Difficulty level: beginner. Be generous and encouraging for casual dancers. Only give very low scores for clearly missing basics.',
           standard: 'Difficulty level: standard. Judge with balanced strictness and fairness for an average competition setting.',
@@ -219,7 +287,7 @@
               {
                 role: 'user',
                 content: [
-                  { type: 'input_text', text: `You are a dance judge. ${judgeDifficultyInstruction} Use exactly 10 scoring keys, each scored from 1 to 10 (integers). Keys: energy, rhythm, timing, musicality, footwork, balance, control, creativity, expression, stage_presence. Compute total_score as the sum of all 10 keys (range 10-100). Return strict JSON only: {"scores":{"energy":number,"rhythm":number,"timing":number,"musicality":number,"footwork":number,"balance":number,"control":number,"creativity":number,"expression":number,"stage_presence":number},"notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"improve_notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"total_score":number,"reason":"4-8 sentence professional judge total description including strengths, weaknesses, stage impression, and 2 concrete improvement tips"}.` },
+                  { type: 'input_text', text: `You are a dance judge. ${judgeDifficultyInstruction} Use exactly 10 scoring keys, each scored from 1 to 10 (integers). Keys: energy, rhythm, timing, musicality, footwork, balance, control, creativity, expression, stage_presence. Compute total_score as the sum of all 10 keys (range 10-100). Use this MediaPipe pose summary as extra signal (do not mention it explicitly unless useful): ${JSON.stringify(poseSummary)}. Return strict JSON only: {"scores":{"energy":number,"rhythm":number,"timing":number,"musicality":number,"footwork":number,"balance":number,"control":number,"creativity":number,"expression":number,"stage_presence":number},"notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"improve_notes":{"energy":"1 short sentence","rhythm":"1 short sentence","timing":"1 short sentence","musicality":"1 short sentence","footwork":"1 short sentence","balance":"1 short sentence","control":"1 short sentence","creativity":"1 short sentence","expression":"1 short sentence","stage_presence":"1 short sentence"},"total_score":number,"reason":"4-8 sentence professional judge total description including strengths, weaknesses, stage impression, and 2 concrete improvement tips"}.` },
                   ...frames.map((dataUrl) => ({ type: 'input_image', image_url: dataUrl, detail: 'low' }))
                 ]
               }

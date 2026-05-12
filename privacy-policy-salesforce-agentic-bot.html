@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy for Salesforce Agentic Bot</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      background: #f7f8fa;
+      color: #1f2937;
+    }
+    main {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+    }
+    h1, h2 { line-height: 1.25; }
+    h1 { margin-top: 0; }
+    code { background: #f3f4f6; padding: 0.1rem 0.3rem; border-radius: 4px; }
+    @media (max-width: 640px) {
+      body { padding: 1rem 0.5rem; }
+      main { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Privacy Policy for Salesforce Agentic Bot</h1>
+    <p><strong>Effective date:</strong> May 12, 2026</p>
+
+    <p>Salesforce Agentic Bot is a Chrome extension that provides a side-panel assistant for Salesforce admins and developers. It helps users inspect the active Salesforce org, view schema and metadata, open Salesforce API tools, and chat with OpenAI using a user-provided OpenAI API key.</p>
+
+    <h2>Data the extension handles</h2>
+    <p>Salesforce Agentic Bot may handle the following data to provide its features:</p>
+    <ul>
+      <li>Salesforce session cookie: used locally to authenticate Salesforce API requests for the currently signed-in Salesforce user.</li>
+      <li>Salesforce org and user information: such as org ID, org name, username, user name, email address, user ID, and related Salesforce profile fields returned by Salesforce APIs.</li>
+      <li>Salesforce website and API content: such as the active Salesforce tab URL and title, schema, metadata, REST API responses, Tooling API responses, and Metadata API responses.</li>
+      <li>OpenAI API key: entered by the user and stored in Chrome extension storage.</li>
+      <li>Chat data: messages typed by the user, assistant responses, saved responses, token usage, and previous OpenAI response IDs.</li>
+    </ul>
+
+    <p>The extension is not designed to collect health information, financial/payment information, GPS location, nearby-device location, full browser history, mouse tracking, scroll tracking, or keystroke logging.</p>
+
+    <h2>How data is used</h2>
+    <p>The extension uses data only to provide its Salesforce assistant features:</p>
+    <ul>
+      <li>To authenticate Salesforce API calls for the active Salesforce org.</li>
+      <li>To display org, user, schema, metadata, REST, Tooling, and Metadata API information inside the extension.</li>
+      <li>To show the current Salesforce tab context in the side panel.</li>
+      <li>To send chat messages, selected Salesforce context, and current Salesforce tab URL/title to OpenAI only when the user sends a chat message.</li>
+      <li>To store chat history, saved responses, schema metadata, and the user-entered OpenAI API key locally for convenience.</li>
+    </ul>
+
+    <h2>Data sharing</h2>
+    <p>Salesforce Agentic Bot does not sell user data and does not use user data for advertising, tracking, or profiling.</p>
+
+    <p>Data is shared only as needed for user-facing functionality:</p>
+    <ul>
+      <li>Salesforce data is requested from Salesforce domains for the currently signed-in Salesforce user.</li>
+      <li>Chat messages and related Salesforce context are sent to OpenAI at <code>https://api.openai.com</code> only when the user sends a chat message.</li>
+    </ul>
+
+    <p>No extension data is sent to a separate developer-operated server.</p>
+
+    <h2>Storage and retention</h2>
+    <p>The extension stores settings and feature data in Chrome extension storage and browser local storage, including:</p>
+    <ul>
+      <li>User-entered OpenAI API key.</li>
+      <li>Chat history and saved assistant responses.</li>
+      <li>Previous OpenAI response IDs used to continue chat context.</li>
+      <li>Retrieved Salesforce schema and metadata used for local browsing and search.</li>
+    </ul>
+
+    <p>Users can clear the OpenAI API key from the Chat tab and clear retrieved schema metadata from the Schema tools. Users can also remove extension data by uninstalling the extension or clearing extension storage in Chrome.</p>
+
+    <h2>Security</h2>
+    <p>Network requests use HTTPS. The extension does not execute remote code. All JavaScript, HTML, and CSS are packaged with the extension.</p>
+
+    <h2>Contact</h2>
+    <p>For privacy questions, contact the publisher using the contact email listed on the Chrome Web Store listing.</p>
+  </main>
+</body>
+</html>

@@ -3,129 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Favorite Games Hub</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>GitHub Pages Entry Point</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 820px;
+    }
+    code {
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      background: rgba(127,127,127,0.2);
+    }
+  </style>
 </head>
 <body>
-  <main class="home">
-    <header class="hero">
-      <p class="eyebrow">Welcome to your new homepage</p>
-      <h1>Favorite Games Hub</h1>
-      <p>Pick a game category and jump to any game page from the <code>games/</code> folder.</p>
-    </header>
+  <h1>GitHub Pages Entry Point</h1>
 
-    <nav class="game-nav" aria-label="Game categories">
-      <a class="chip" href="#classic-games">Classic Games</a>
-      <a class="chip chip-girls" href="#girls-games">Cute Games for Girls</a>
-      <a class="chip chip-boys" href="#boys-games">Cool Games for Boys</a>
-      <a class="chip chip-guide" href="introduce-manga-magic-drawing-pad.html">Manga Guide</a>
-    </nav>
+  <p>This site is configured for GitHub Pages and uses <code>index.html</code> as the main landing page.</p>
 
-    <section id="classic-games" class="category-section">
-      <h2>Classic Games</h2>
-      <div class="games-grid">
-        <article class="game-card">
-          <h3>Rock • Paper • Scissors</h3>
-          <p>Pick your move and try to beat the computer.</p>
-          <a class="play-link" href="games/rock-paper-scissors.html">Play now</a>
-        </article>
+  <h2>How to use</h2>
+  <ul>
+    <li>Put your homepage content in <code>index.html</code>.</li>
+    <li>Keep supporting assets (CSS/JS/images) in this repository and reference them from <code>index.html</code>.</li>
+    <li>After pushing to the default branch, GitHub Pages will publish the site automatically.</li>
+  </ul>
 
-        <article class="game-card">
-          <h3>Number Guess</h3>
-          <p>Guess the secret number between 1 and 100.</p>
-          <a class="play-link" href="games/number-guess.html">Play now</a>
-        </article>
-
-        <article class="game-card">
-          <h3>Memory Match</h3>
-          <p>Find all matching emoji pairs as fast as you can.</p>
-          <a class="play-link" href="games/memory-match.html">Play now</a>
-        </article>
-
-
-        <article class="game-card">
-          <h3>Unity 3D vs HTML5 Showdown</h3>
-          <p>A quick decision game to choose the best tech stack for your next project.</p>
-          <a class="play-link" href="games/unity-vs-html5-showdown.html">Play now</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="girls-games" class="category-section">
-      <h2>Cute Games for Girls</h2>
-      <div class="games-grid">
-        <article class="game-card game-card-girls">
-          <h3>Princess Color Match</h3>
-          <p>Choose a color theme to style the princess dress.</p>
-          <a class="play-link" href="games/princess-color-match.html">Play now</a>
-        </article>
-
-        <article class="game-card game-card-girls">
-          <h3>Pet Name Sparkle</h3>
-          <p>Generate adorable names for your fantasy pet.</p>
-          <a class="play-link" href="games/pet-name-sparkle.html">Play now</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="boys-games" class="category-section">
-      <h2>Cool Games for Boys</h2>
-      <div class="games-grid">
-        <article class="game-card game-card-boys">
-          <h3>Space Reaction Dash</h3>
-          <p>Tap as soon as the signal turns green and beat your best time.</p>
-          <a class="play-link" href="games/space-reaction-dash.html">Play now</a>
-        </article>
-
-        <article class="game-card game-card-boys">
-          <h3>Power Click Challenge</h3>
-          <p>Click as many times as you can before the timer runs out.</p>
-          <a class="play-link" href="games/power-click-challenge.html">Play now</a>
-        </article>
-
-        <article class="game-card game-card-boys">
-          <h3>Neon 3D Arena Strike</h3>
-          <p>A fast mini 3D shooter with raycast graphics, movement, and enemy bots.</p>
-          <a class="play-link" href="games/neon-3d-arena-strike.html">Play now</a>
-        </article>
-
-        <article class="game-card game-card-boys">
-          <h3>Sky Runner</h3>
-          <p>Jump over incoming obstacles and survive as long as you can.</p>
-          <a class="play-link" href="games/sky-runner.html">Play now</a>
-        </article>
-
-
-        <article class="game-card game-card-boys">
-          <h3>Dance Level Live Scorer</h3>
-          <p>Use your camera and OpenAI API key to score dance level from 1 to 100.</p>
-          <a class="play-link" href="games/dance-level-live.html">Play now</a>
-        </article>
-        <article class="game-card game-card-boys">
-          <h3>Mini Craft</h3>
-          <p>Collect resources and craft tools by choosing the right recipe.</p>
-          <a class="play-link" href="games/mini-craft.html">Play now</a>
-        </article>
-
-
-        <article class="game-card game-card-boys">
-          <h3>Battle Nexus Legends (Prototype)</h3>
-          <p>A fast 5v5-inspired arena prototype with leveling, bots, wild monsters, and goal scoring.</p>
-          <a class="play-link" href="games/battle-nexus-legends.html">Play now</a>
-        </article>
-      </div>
-    </section>
-    <section class="category-section">
-      <h2>Blog & Guides</h2>
-      <div class="games-grid">
-        <article class="game-card game-card-guide">
-          <h3>How to Draw Manga on a Magic Drawing Pad</h3>
-          <p>A practical beginner workflow from storyboard to final export, hosted by Anna Y.</p>
-          <a class="play-link" href="introduce-manga-magic-drawing-pad.html">Read guide</a>
-        </article>
-      </div>
-    </section>
-
-  </main>
+  <h2>Preview URL format</h2>
+  <p>Your published site URL will be:</p>
+  <p><code>https://&lt;your-username&gt;.github.io/&lt;repository-name&gt;/</code></p>
+  <p>GitHub Pages serves <code>index.html</code> by default at that URL.</p>
 </body>
 </html>

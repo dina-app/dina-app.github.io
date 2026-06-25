@@ -49,7 +49,7 @@ The extension does not sell user data, does not use data for advertising, does n
 
 Workspace preferences, search data, selected folders, UI settings, and pending local edits may be stored locally in Chrome browser storage on the user's device.
 
-Read the full policy: [Privacy Policy](PRIVACY_POLICY.md)
+Read the full policy: [Privacy Policy](salesforce-metadata-adminitrator/PRIVACY_POLICY.md)
 
 ## Permissions
 

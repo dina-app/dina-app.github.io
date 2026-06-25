@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Common Tools | Rondina</title>
+  <meta name="description" content="Browser-only common tools for developers and admins.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="../">
+        <span class="brand-mark">R</span>
+        <span>Rondina</span>
+      </a>
+      <div class="topbar-title">
+        <h1>Common Tools</h1>
+        <p>Developer and admin workbench</p>
+      </div>
+      <a class="home-link" href="../">Home</a>
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar" aria-label="Tool launcher">
+        <label class="search-label" for="toolSearch">Search tools</label>
+        <input id="toolSearch" class="search-input" type="search" placeholder="JSON, CSV, diff, date">
+        <div id="toolNav" class="tool-nav"></div>
+      </aside>
+
+      <main class="tool-area" aria-live="polite">
+        <section class="tool-head" aria-labelledby="toolTitle">
+          <div>
+            <p id="toolGroup" class="eyebrow"></p>
+            <h2 id="toolTitle"></h2>
+            <p id="toolSummary" class="tool-summary"></p>
+          </div>
+          <div id="exampleBar" class="example-bar" aria-label="Examples"></div>
+        </section>
+
+        <section id="toolContent" class="tool-content"></section>
+        <p id="statusLine" class="status-line" role="status"></p>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

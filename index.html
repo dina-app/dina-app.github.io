@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rondina | Salesforce Apps And Internal Systems</title>
-  <meta name="description" content="Rondina builds Salesforce DX internal systems, Salesforce packages, financial systems, hotel booking systems, payment systems, and MCP-based tools.">
+  <meta name="description" content="Rondina builds Salesforce DX, Salesforce packages, financial systems, booking systems, payment systems, and MCP-based tools.">
   <style>
     :root {
       color-scheme: light;
@@ -466,6 +466,7 @@
       display: grid;
       min-height: 120px;
       align-content: space-between;
+      gap: 20px;
       margin: 0;
       padding: 16px;
       border: 1px solid var(--line);
@@ -476,11 +477,43 @@
       box-shadow: 0 10px 24px rgba(24, 32, 38, 0.06);
     }
 
-    .build-list span {
-      width: 32px;
-      height: 4px;
+    .build-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
       border-radius: 8px;
-      background: var(--rust);
+      background: var(--rust-soft);
+      color: var(--rust);
+    }
+
+    .build-icon svg {
+      width: 23px;
+      height: 23px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2;
+    }
+
+    .build-label {
+      display: block;
+    }
+
+    .build-list li:nth-child(1) .build-icon {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .build-list li:nth-child(2) .build-icon {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .build-list li:nth-child(4) .build-icon {
+      background: var(--blue-soft);
+      color: var(--blue);
     }
 
     .mcp {
@@ -626,7 +659,7 @@
           <p class="eyebrow">Engineer | AWS | GCP | Salesforce</p>
           <h1>Rondina builds practical systems for Salesforce teams.</h1>
           <p class="lead">
-            I design and ship Salesforce DX internal systems, Salesforce package development tools, financial systems, hotel booking systems, and payment systems.
+            I design and ship Salesforce DX, Salesforce package tools, financial systems, booking systems, and payment systems.
           </p>
           <div class="actions">
             <a class="button" href="#apps">View Current Apps</a>
@@ -762,11 +795,62 @@
         </div>
 
         <ul class="build-list">
-          <li><span aria-hidden="true"></span>Salesforce DX Internal Systems</li>
-          <li><span aria-hidden="true"></span>Salesforce Package Development</li>
-          <li><span aria-hidden="true"></span>Financial Systems</li>
-          <li><span aria-hidden="true"></span>Hotel Booking Systems</li>
-          <li><span aria-hidden="true"></span>Payment Systems</li>
+          <li>
+            <span class="build-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 7h16"></path>
+                <path d="M7 4v6"></path>
+                <path d="M17 4v6"></path>
+                <path d="M7 17h10"></path>
+                <path d="M12 10v7"></path>
+                <path d="M4 17h3"></path>
+                <path d="M17 17h3"></path>
+              </svg>
+            </span>
+            <span class="build-label">Salesforce DX</span>
+          </li>
+          <li>
+            <span class="build-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 3 4 7l8 4 8-4-8-4Z"></path>
+                <path d="m4 7 8 4v10l-8-4V7Z"></path>
+                <path d="m20 7-8 4v10l8-4V7Z"></path>
+              </svg>
+            </span>
+            <span class="build-label">Salesforce Package</span>
+          </li>
+          <li>
+            <span class="build-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 19h16"></path>
+                <path d="M6 16V9"></path>
+                <path d="M12 16V5"></path>
+                <path d="M18 16v-4"></path>
+              </svg>
+            </span>
+            <span class="build-label">Financial Systems</span>
+          </li>
+          <li>
+            <span class="build-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 11V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5"></path>
+                <path d="M4 11h16v8"></path>
+                <path d="M4 19v-8"></path>
+                <path d="M8 11V8h8v3"></path>
+              </svg>
+            </span>
+            <span class="build-label">Booking System</span>
+          </li>
+          <li>
+            <span class="build-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 7h16a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z"></path>
+                <path d="M3 10h18"></path>
+                <path d="M7 15h4"></path>
+              </svg>
+            </span>
+            <span class="build-label">Payment Systems</span>
+          </li>
         </ul>
       </div>
     </section>

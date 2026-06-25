@@ -65,6 +65,6 @@ The extension does not store an OpenAI API key in the browser and does not call 
 
 Read the full policy: [Privacy Policy](../privacy-policy-salesforce-agentic-bot.html)
 
-## Current Page
+## Status
 
-The current public app page is [salesforce-agentic-bot.md](../salesforce-agentic-bot.md).
+Salesforce Agentic Bot is currently draft app work.

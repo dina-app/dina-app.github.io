@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Redirect | Rondina</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #182026;
+      background: #f6f4ee;
+    }
+
+    body {
+      display: grid;
+      min-height: 100vh;
+      margin: 0;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(620px, 100%);
+      padding: 28px;
+      border: 1px solid #d8d5cc;
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: 0 18px 45px rgba(24, 32, 38, 0.12);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      line-height: 1.15;
+    }
+
+    p {
+      margin: 0 0 18px;
+      color: #5c6670;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #1d5f8f;
+      font-weight: 800;
+    }
+  </style>
+  <script>
+    const legacyRoutes = new Map([
+      ["/Salesforce%20Metadata%20Adminitrator/", "/salesforce-metadata-adminitrator.md"],
+      ["/Salesforce Metadata Adminitrator/", "/salesforce-metadata-adminitrator.md"],
+      ["/Salesforce%20Agentic%20Bot/README.md", "/salesforce-agentic-bot.md"],
+      ["/Salesforce Agentic Bot/README.md", "/salesforce-agentic-bot.md"],
+      ["/Salesforce%20Agentic%20Bot/", "/salesforce-agentic-bot.md"],
+      ["/Salesforce Agentic Bot/", "/salesforce-agentic-bot.md"]
+    ]);
+
+    const rawPath = window.location.pathname;
+    let decodedPath = rawPath;
+
+    try {
+      decodedPath = decodeURIComponent(rawPath);
+    } catch (error) {
+      decodedPath = rawPath;
+    }
+
+    const target = legacyRoutes.get(rawPath) || legacyRoutes.get(decodedPath);
+
+    if (target) {
+      window.location.replace(target);
+    }
+  </script>
+</head>
+<body>
+  <main>
+    <h1>Page Not Found</h1>
+    <p>The app pages have moved to simpler public markdown links.</p>
+    <p>
+      <a href="/salesforce-metadata-adminitrator.md">Salesforce Metadata Adminitrator</a>
+      <br>
+      <a href="/salesforce-agentic-bot.md">Salesforce Agentic Bot</a>
+    </p>
+  </main>
+</body>
+</html>

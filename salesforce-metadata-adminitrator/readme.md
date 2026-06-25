@@ -1,8 +1,3 @@
----
-title: Salesforce Metadata Adminitrator
-description: Independent Chrome side-panel workspace for Salesforce metadata administration.
----
-
 # Salesforce Metadata Adminitrator
 
 Salesforce Metadata Adminitrator is an independent Chrome extension for Salesforce administrators and developers. It opens as a Chrome side panel and uses the Salesforce session you are already signed in with, so you can browse, search, inspect, edit, deploy, export, and monitor Salesforce metadata without sending your org data to an external service.

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy for Salesforce Agentic Bot | Rondina</title>
+  <meta name="description" content="Privacy policy for the Salesforce Agentic Bot Chrome extension.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7f4;
+      --ink: #172027;
+      --muted: #5b6770;
+      --panel: #ffffff;
+      --line: #d6ded8;
+      --blue: #235f82;
+      --rust: #a24d32;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .shell {
+      width: min(900px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 26px 0 64px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 42px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--rust);
+    }
+
+    article {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 12px 26px rgba(23, 32, 39, 0.07);
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+      font-size: clamp(36px, 7vw, 58px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 24px;
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+
+    .updated {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: #edf3ef;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 28px, 900px);
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      article {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="../../">
+        <span class="brand-mark">R</span>
+        <span>Rondina</span>
+      </a>
+      <a href="./">Back to app page</a>
+    </nav>
+
+    <article>
+      <h1>Privacy Policy for Salesforce Agentic Bot</h1>
+      <p class="updated">Last updated: June 26, 2026</p>
+      <p>Salesforce Agentic Bot is an in-development Chrome extension for Salesforce admins and developers. It adds a Chrome side panel assistant that can use active Salesforce org context and route chat requests through a Google Cloud Function backend.</p>
+      <p>This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+
+      <h2>Data the Extension Handles</h2>
+      <p>The extension may handle:</p>
+      <ul>
+        <li>Salesforce session cookies for Salesforce domains, used only to connect to the Salesforce org where the user is already signed in.</li>
+        <li>Salesforce org and user information returned by Salesforce APIs, such as org ID, org name, username, user name, email address, user ID, and profile fields.</li>
+        <li>Salesforce page and API content such as the active tab URL and title, selected Salesforce context, schema, metadata, REST API responses, Tooling API responses, and Metadata API responses.</li>
+        <li>Chat data such as messages typed by the user, assistant responses, chat history, selected context, and previous response IDs.</li>
+        <li>Local extension preferences, UI settings, saved chat state, and retrieved Salesforce metadata used by the extension workspace.</li>
+      </ul>
+
+      <p>The extension is not designed to collect health information, financial or payment information, GPS location, nearby device location, full browser history, mouse tracking, scroll tracking, or keystroke logging.</p>
+
+      <h2>How Data Is Used</h2>
+      <p>The extension uses data only to provide user-facing Salesforce assistant features:</p>
+      <ul>
+        <li>Authenticate Salesforce API calls for the active Salesforce org.</li>
+        <li>Display org, user, schema, metadata, REST, Tooling, and Metadata API information inside the extension.</li>
+        <li>Show the current Salesforce tab context in the side panel.</li>
+        <li>Send chat messages, selected Salesforce context, current tab context, and Salesforce session data to the configured Google Cloud Function endpoint only when the user sends a chat message.</li>
+        <li>Store chat history, previous response IDs, retrieved metadata, and UI settings locally for convenience.</li>
+      </ul>
+
+      <h2>OpenAI Transport</h2>
+      <p>The extension does not store an OpenAI API key in the browser and does not call OpenAI directly from the extension.</p>
+      <p>OpenAI requests are handled by the configured Google Cloud Function endpoint. The function uses its server-side <code>OPENAI_API_KEY</code> to call OpenAI and return the assistant's response to the extension.</p>
+
+      <h2>Data Sharing and Transfers</h2>
+      <p>Salesforce Agentic Bot does not sell user data and does not use user data for advertising, tracking, profiling, creditworthiness, or lending purposes.</p>
+      <p>Data is shared only as needed for user-facing functionality:</p>
+      <ul>
+        <li>Salesforce data is requested from Salesforce domains for the currently signed-in Salesforce user.</li>
+        <li>Chat messages, selected Salesforce context, current tab context, and Salesforce session data are sent to the configured Google Cloud Function endpoint when the user sends a chat message.</li>
+        <li>The Google Cloud Function sends chat input and selected context to OpenAI to produce the assistant's response.</li>
+      </ul>
+
+      <h2>Storage and Retention</h2>
+      <p>The extension may store settings and feature data in Chrome extension storage and browser local storage, including chat history, previous response IDs, retrieved Salesforce schema, retrieved metadata, selected context, and UI preferences.</p>
+      <p>Users can clear saved extension data from the extension UI where supported, uninstall the extension, or clear extension storage in Chrome.</p>
+
+      <h2>Remote Code</h2>
+      <p>The extension does not load or execute remotely hosted code. Extension code is packaged with the Chrome extension.</p>
+
+      <h2>Human Access</h2>
+      <p>The developer does not have access to data handled locally by the extension unless the user separately shares it for support. Data sent through the configured Google Cloud Function is processed only to provide the requested response.</p>
+
+      <h2>Chrome Web Store Limited Use Disclosure</h2>
+      <p>The use of information received from Google APIs will adhere to the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
+
+      <h2>Contact</h2>
+      <p>For privacy questions or support, use the support contact provided on the Chrome Web Store listing.</p>
+    </article>
+  </main>
+</body>
+</html>

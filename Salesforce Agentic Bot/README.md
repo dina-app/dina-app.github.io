@@ -63,7 +63,7 @@ The extension stores UI settings, chat history, previous response IDs, and retri
 
 The extension does not store an OpenAI API key in the browser and does not call OpenAI directly from the extension.
 
-Read the full policy: [Privacy Policy](../privacy-policy-salesforce-agentic-bot.html)
+Read the full policy: [Privacy Policy](../salesforce-agentic-bot/PRIVACY_POLICY.html)
 
 ## Status
 

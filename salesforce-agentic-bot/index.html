@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salesforce Agentic Bot | Rondina</title>
+  <meta name="description" content="Salesforce Agentic Bot is a draft Chrome extension for Salesforce admins and developers with a Google Cloud Function-backed assistant.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7f4;
+      --ink: #172027;
+      --muted: #5b6770;
+      --panel: #ffffff;
+      --line: #d6ded8;
+      --green: #1f6b54;
+      --rust: #a24d32;
+      --blue: #235f82;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .shell {
+      width: min(980px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 26px 0 64px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 54px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--rust);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 152px;
+      gap: 34px;
+      align-items: center;
+      margin-bottom: 44px;
+    }
+
+    .logo {
+      width: 152px;
+      height: 152px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      object-fit: cover;
+      box-shadow: 0 16px 34px rgba(23, 32, 39, 0.11);
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: 28px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin-bottom: 12px;
+      color: #3a464f;
+      font-size: 19px;
+    }
+
+    .notice {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .content {
+      display: grid;
+      gap: 18px;
+    }
+
+    section {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 12px 26px rgba(23, 32, 39, 0.07);
+    }
+
+    ul,
+    ol {
+      margin-bottom: 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    code,
+    pre {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: #edf3ef;
+    }
+
+    pre {
+      overflow: auto;
+      margin: 0;
+      padding: 14px;
+      border-radius: 8px;
+      background: #0e1720;
+      color: #edf7f3;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 700px) {
+      .shell {
+        width: min(100% - 28px, 980px);
+        padding-top: 18px;
+      }
+
+      .nav,
+      .hero {
+        align-items: flex-start;
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="../">
+        <span class="brand-mark">R</span>
+        <span>Rondina</span>
+      </a>
+      <a href="../">Back to home</a>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <h1>Salesforce Agentic Bot</h1>
+        <p class="lead">
+          Salesforce Agentic Bot is a draft Chrome extension for Salesforce admins and developers. It provides a Salesforce side-panel assistant that can use the active Salesforce org context and send chat requests through a Google Cloud Function backend.
+        </p>
+        <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+      </div>
+      <img class="logo" src="logo-512.png" alt="Salesforce Agentic Bot icon">
+    </header>
+
+    <div class="content">
+      <section aria-labelledby="features-title">
+        <h2 id="features-title">What You Can Do</h2>
+        <ul>
+          <li>Open a right-side Chrome side panel on Salesforce pages.</li>
+          <li>Detect the active Salesforce tab title and URL context.</li>
+          <li>Read org and user summary information for the signed-in Salesforce org.</li>
+          <li>Chat with a Google Cloud Function-backed assistant.</li>
+          <li>Attach selected Salesforce context to chat requests.</li>
+          <li>Keep the OpenAI API key hidden on the server-side Google Cloud Function.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="architecture-title">
+        <h2 id="architecture-title">Architecture</h2>
+        <p>Salesforce Agentic Bot separates the browser extension from the OpenAI transport.</p>
+        <ol>
+          <li>The extension reads the active Salesforce org session from the browser.</li>
+          <li>The side-panel ChatBot sends chat history, selected Salesforce context, current tab context, and the Salesforce session to the configured Google Cloud Function endpoint.</li>
+          <li>The Google Cloud Function calls OpenAI with the function-level <code>OPENAI_API_KEY</code>.</li>
+          <li>The Google Cloud Function returns the assistant response to the extension.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="configuration-title">
+        <h2 id="configuration-title">Configuration</h2>
+        <p>Set the Google Cloud Function URL in <code>Salesforce Agentic Bot/api.js</code>:</p>
+        <pre><code>export const GCF_ENDPOINT_URL = "https://YOUR_REGION-YOUR_PROJECT.cloudfunctions.net/agenticBot";</code></pre>
+        <p>Then load the extension locally:</p>
+        <ol>
+          <li>Open <code>chrome://extensions</code>.</li>
+          <li>Enable Developer mode.</li>
+          <li>Choose Load unpacked.</li>
+          <li>Select the <code>Salesforce Agentic Bot</code> folder.</li>
+          <li>Open a Salesforce page and launch the extension.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="gcf-title">
+        <h2 id="gcf-title">Google Cloud Function</h2>
+        <p>Deploy the Cloud Function broker from:</p>
+        <pre><code>gcf/agentic-bot/index.js</code></pre>
+        <p>Required environment variable: <code>OPENAI_API_KEY</code>.</p>
+        <p>Optional runtime settings: <code>OPENAI_MODEL</code>, default <code>gpt-5-mini</code>; <code>OPENAI_MAX_OUTPUT_TOKENS</code>, default <code>1600</code>.</p>
+      </section>
+
+      <section aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Privacy</h2>
+        <p>
+          The extension stores UI settings, chat history, previous response IDs, and retrieved Salesforce metadata locally in the browser. It sends Salesforce session data, selected Salesforce context, current tab context, and chat messages only to the configured Google Cloud Function endpoint.
+        </p>
+        <p>The extension does not store an OpenAI API key in the browser and does not call OpenAI directly from the extension.</p>
+        <p>Read the full policy: <a href="PRIVACY_POLICY.html">Privacy Policy</a></p>
+      </section>
+
+      <section aria-labelledby="status-title">
+        <h2 id="status-title">Status</h2>
+        <p>Salesforce Agentic Bot is currently draft app work.</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

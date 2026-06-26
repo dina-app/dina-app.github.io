@@ -150,7 +150,7 @@
     <article>
       <h1>Privacy Policy for Salesforce Agentic Bot</h1>
       <p class="updated">Last updated: June 26, 2026</p>
-      <p>Salesforce Agentic Bot is a draft Chrome extension for Salesforce admins and developers. It provides a Salesforce side-panel assistant that can use the active Salesforce org context and send chat requests through a Google Cloud Function backend.</p>
+      <p>Salesforce Agentic Bot is an in-development Chrome extension for Salesforce admins and developers. It adds a Chrome side panel assistant that can use active Salesforce org context and route chat requests through a Google Cloud Function backend.</p>
       <p>This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
 
       <h2>Data the Extension Handles</h2>
@@ -158,12 +158,12 @@
       <ul>
         <li>Salesforce session cookies for Salesforce domains, used only to connect to the Salesforce org where the user is already signed in.</li>
         <li>Salesforce org and user information returned by Salesforce APIs, such as org ID, org name, username, user name, email address, user ID, and profile fields.</li>
-        <li>Salesforce website and API content such as the active tab URL and title, selected Salesforce context, schema, metadata, REST API responses, Tooling API responses, and Metadata API responses.</li>
+        <li>Salesforce page and API content such as the active tab URL and title, selected Salesforce context, schema, metadata, REST API responses, Tooling API responses, and Metadata API responses.</li>
         <li>Chat data such as messages typed by the user, assistant responses, chat history, selected context, and previous response IDs.</li>
         <li>Local extension preferences, UI settings, saved chat state, and retrieved Salesforce metadata used by the extension workspace.</li>
       </ul>
 
-      <p>The extension is not designed to collect health information, financial or payment information, GPS location, nearby-device location, full browser history, mouse tracking, scroll tracking, or keystroke logging.</p>
+      <p>The extension is not designed to collect health information, financial or payment information, GPS location, nearby device location, full browser history, mouse tracking, scroll tracking, or keystroke logging.</p>
 
       <h2>How Data Is Used</h2>
       <p>The extension uses data only to provide user-facing Salesforce assistant features:</p>
@@ -177,15 +177,15 @@
 
       <h2>OpenAI Transport</h2>
       <p>The extension does not store an OpenAI API key in the browser and does not call OpenAI directly from the extension.</p>
-      <p>OpenAI requests are handled by the configured Google Cloud Function endpoint. The function uses its server-side <code>OPENAI_API_KEY</code> to call OpenAI and return the assistant response to the extension.</p>
+      <p>OpenAI requests are handled by the configured Google Cloud Function endpoint. The function uses its server-side <code>OPENAI_API_KEY</code> to call OpenAI and return the assistant's response to the extension.</p>
 
       <h2>Data Sharing and Transfers</h2>
-      <p>Salesforce Agentic Bot does not sell user data and does not use user data for advertising, tracking, profiling, credit-worthiness, or lending purposes.</p>
+      <p>Salesforce Agentic Bot does not sell user data and does not use user data for advertising, tracking, profiling, creditworthiness, or lending purposes.</p>
       <p>Data is shared only as needed for user-facing functionality:</p>
       <ul>
         <li>Salesforce data is requested from Salesforce domains for the currently signed-in Salesforce user.</li>
         <li>Chat messages, selected Salesforce context, current tab context, and Salesforce session data are sent to the configured Google Cloud Function endpoint when the user sends a chat message.</li>
-        <li>The Google Cloud Function sends chat input and selected context to OpenAI to produce the assistant response.</li>
+        <li>The Google Cloud Function sends chat input and selected context to OpenAI to produce the assistant's response.</li>
       </ul>
 
       <h2>Storage and Retention</h2>
@@ -196,7 +196,7 @@
       <p>The extension does not load or execute remotely hosted code. Extension code is packaged with the Chrome extension.</p>
 
       <h2>Human Access</h2>
-      <p>The developer does not have access to data handled locally by the extension unless the user separately shares it for support. Data sent through the configured Google Cloud Function is processed only to provide the requested assistant response.</p>
+      <p>The developer does not have access to data handled locally by the extension unless the user separately shares it for support. Data sent through the configured Google Cloud Function is processed only to provide the requested response.</p>
 
       <h2>Chrome Web Store Limited Use Disclosure</h2>
       <p>The use of information received from Google APIs will adhere to the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>

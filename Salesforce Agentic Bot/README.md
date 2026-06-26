@@ -1,28 +1,28 @@
 # Salesforce Agentic Bot
 
-Salesforce Agentic Bot is a draft Chrome extension for Salesforce admins and developers. It provides a Salesforce side-panel assistant that can use the active Salesforce org context and send chat requests through a Google Cloud Function backend.
+Salesforce Agentic Bot is an in-development Chrome extension for Salesforce admins and developers. It adds a Chrome side panel assistant that can use active Salesforce org context and route chat requests through a Google Cloud Function backend.
 
 This extension is not affiliated with, endorsed by, or sponsored by Salesforce.
 
 ## What You Can Do
 
-- Open a right-side Chrome side panel on Salesforce pages.
-- Detect the active Salesforce tab title and URL context.
-- Read org and user summary information for the signed-in Salesforce org.
-- Chat with a Google Cloud Function-backed assistant.
-- Attach selected Salesforce context to chat requests.
-- Keep the OpenAI API key hidden on the server-side Google Cloud Function.
+- Open a Chrome side panel on Salesforce pages.
+- Detect the active Salesforce tab title and URL.
+- Read org and user summary information from the signed-in Salesforce org.
+- Chat with an assistant backed by a Google Cloud Function.
+- Send selected Salesforce context with chat requests.
+- Keep the OpenAI API key out of the browser by storing it in the Google Cloud Function environment.
 
 ## Architecture
 
-Salesforce Agentic Bot separates the browser extension from the OpenAI transport.
+Salesforce Agentic Bot separates the browser extension from the OpenAI transport layer.
 
 Request path:
 
-1. The extension reads the active Salesforce org session from the browser.
-2. The side-panel ChatBot sends chat history, selected Salesforce context, current tab context, and the Salesforce session to the configured Google Cloud Function endpoint.
-3. The Google Cloud Function calls OpenAI with the function-level `OPENAI_API_KEY`.
-4. The Google Cloud Function returns the assistant response to the extension.
+1. The extension reads the active Salesforce org session in the browser.
+2. The side panel ChatBot sends chat history, selected Salesforce context, current tab context, and the Salesforce session to the configured Google Cloud Function endpoint.
+3. The Google Cloud Function calls OpenAI with its function-level `OPENAI_API_KEY`.
+4. The Google Cloud Function returns the assistant's response to the extension.
 
 ## Configuration
 
@@ -36,9 +36,9 @@ Then load the extension locally:
 
 1. Open `chrome://extensions`.
 2. Enable Developer mode.
-3. Choose Load unpacked.
+3. Choose `Load unpacked`.
 4. Select the `Salesforce Agentic Bot` folder.
-5. Open a Salesforce page and launch the extension.
+5. Open a Salesforce tab and launch the extension.
 
 ## Google Cloud Function
 
@@ -54,8 +54,8 @@ Required environment variable:
 
 Optional runtime settings:
 
-- `OPENAI_MODEL`, default `gpt-5-mini`
-- `OPENAI_MAX_OUTPUT_TOKENS`, default `1600`
+- `OPENAI_MODEL`, defaults to `gpt-5-mini`
+- `OPENAI_MAX_OUTPUT_TOKENS`, defaults to `1600`
 
 ## Privacy
 
@@ -67,4 +67,4 @@ Read the full policy: [Privacy Policy](../salesforce-agentic-bot/PRIVACY_POLICY.
 
 ## Status
 
-Salesforce Agentic Bot is currently draft app work.
+Salesforce Agentic Bot is currently a draft extension.

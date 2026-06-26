@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Salesforce Agentic Bot | Rondina</title>
-  <meta name="description" content="Salesforce Agentic Bot is a draft Chrome extension for Salesforce admins and developers with a Google Cloud Function-backed assistant.">
+  <meta name="description" content="Salesforce Agentic Bot is an in-development Chrome extension for Salesforce admins and developers with an assistant backed by a Google Cloud Function.">
   <style>
     :root {
       color-scheme: light;
@@ -199,7 +199,7 @@
       <div>
         <h1>Salesforce Agentic Bot</h1>
         <p class="lead">
-          Salesforce Agentic Bot is a draft Chrome extension for Salesforce admins and developers. It provides a Salesforce side-panel assistant that can use the active Salesforce org context and send chat requests through a Google Cloud Function backend.
+          Salesforce Agentic Bot is an in-development Chrome extension for Salesforce admins and developers. It adds a Chrome side panel assistant that can use active Salesforce org context and route chat requests through a Google Cloud Function backend.
         </p>
         <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
       </div>
@@ -210,23 +210,23 @@
       <section aria-labelledby="features-title">
         <h2 id="features-title">What You Can Do</h2>
         <ul>
-          <li>Open a right-side Chrome side panel on Salesforce pages.</li>
-          <li>Detect the active Salesforce tab title and URL context.</li>
-          <li>Read org and user summary information for the signed-in Salesforce org.</li>
-          <li>Chat with a Google Cloud Function-backed assistant.</li>
-          <li>Attach selected Salesforce context to chat requests.</li>
-          <li>Keep the OpenAI API key hidden on the server-side Google Cloud Function.</li>
+          <li>Open a Chrome side panel on Salesforce pages.</li>
+          <li>Detect the active Salesforce tab title and URL.</li>
+          <li>Read org and user summary information from the signed-in Salesforce org.</li>
+          <li>Chat with an assistant backed by a Google Cloud Function.</li>
+          <li>Send selected Salesforce context with chat requests.</li>
+          <li>Keep the OpenAI API key out of the browser by storing it in the Google Cloud Function environment.</li>
         </ul>
       </section>
 
       <section aria-labelledby="architecture-title">
         <h2 id="architecture-title">Architecture</h2>
-        <p>Salesforce Agentic Bot separates the browser extension from the OpenAI transport.</p>
+        <p>Salesforce Agentic Bot separates the browser extension from the OpenAI transport layer.</p>
         <ol>
-          <li>The extension reads the active Salesforce org session from the browser.</li>
-          <li>The side-panel ChatBot sends chat history, selected Salesforce context, current tab context, and the Salesforce session to the configured Google Cloud Function endpoint.</li>
-          <li>The Google Cloud Function calls OpenAI with the function-level <code>OPENAI_API_KEY</code>.</li>
-          <li>The Google Cloud Function returns the assistant response to the extension.</li>
+          <li>The extension reads the active Salesforce org session in the browser.</li>
+          <li>The side panel ChatBot sends chat history, selected Salesforce context, current tab context, and the Salesforce session to the configured Google Cloud Function endpoint.</li>
+          <li>The Google Cloud Function calls OpenAI with its function-level <code>OPENAI_API_KEY</code>.</li>
+          <li>The Google Cloud Function returns the assistant's response to the extension.</li>
         </ol>
       </section>
 
@@ -238,9 +238,9 @@
         <ol>
           <li>Open <code>chrome://extensions</code>.</li>
           <li>Enable Developer mode.</li>
-          <li>Choose Load unpacked.</li>
+          <li>Choose <code>Load unpacked</code>.</li>
           <li>Select the <code>Salesforce Agentic Bot</code> folder.</li>
-          <li>Open a Salesforce page and launch the extension.</li>
+          <li>Open a Salesforce tab and launch the extension.</li>
         </ol>
       </section>
 
@@ -249,7 +249,7 @@
         <p>Deploy the Cloud Function broker from:</p>
         <pre><code>gcf/agentic-bot/index.js</code></pre>
         <p>Required environment variable: <code>OPENAI_API_KEY</code>.</p>
-        <p>Optional runtime settings: <code>OPENAI_MODEL</code>, default <code>gpt-5-mini</code>; <code>OPENAI_MAX_OUTPUT_TOKENS</code>, default <code>1600</code>.</p>
+        <p>Optional runtime settings: <code>OPENAI_MODEL</code> defaults to <code>gpt-5-mini</code>; <code>OPENAI_MAX_OUTPUT_TOKENS</code> defaults to <code>1600</code>.</p>
       </section>
 
       <section aria-labelledby="privacy-title">
@@ -263,7 +263,7 @@
 
       <section aria-labelledby="status-title">
         <h2 id="status-title">Status</h2>
-        <p>Salesforce Agentic Bot is currently draft app work.</p>
+        <p>Salesforce Agentic Bot is currently a draft extension.</p>
       </section>
     </div>
   </main>

@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Manual | Admin Toolkit for Salesforce | DinaLab</title>
+  <meta name="description" content="Step-by-step user manual for Admin Toolkit for Salesforce: popup apps, Metadata Admin, Force Sheet, Org Review, Object Schema, document folders, REST, Apex, exports, and monitoring.">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7f4;
+      --ink: #172027;
+      --muted: #5b6770;
+      --panel: #ffffff;
+      --line: #d6ded8;
+      --green: #1f6b54;
+      --green-soft: #e7f4ed;
+      --rust: #a24d32;
+      --blue: #235f82;
+      --blue-soft: #e7f1f7;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .shell {
+      width: min(1040px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 26px 0 64px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 44px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--rust);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 14px;
+      font-size: clamp(34px, 6vw, 56px);
+      line-height: 1.05;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: 26px;
+      line-height: 1.15;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .lead {
+      margin-bottom: 10px;
+      color: #3a464f;
+      font-size: 18px;
+    }
+
+    .release-pill {
+      display: inline-flex;
+      margin-bottom: 14px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .content { display: grid; gap: 18px; }
+
+    section {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 12px 26px rgba(23, 32, 39, 0.07);
+    }
+
+    .toc ol {
+      columns: 2;
+      column-gap: 32px;
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .toc li { break-inside: avoid; }
+
+    figure {
+      margin: 18px 0 0;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 10px 22px rgba(23, 32, 39, 0.09);
+    }
+
+    figure.narrow img {
+      width: min(430px, 100%);
+      margin: 0 auto;
+    }
+
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    ul, ol {
+      margin-bottom: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: #edf3ef;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    .notice {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    @media (max-width: 700px) {
+      .shell {
+        width: min(100% - 28px, 1040px);
+        padding-top: 18px;
+      }
+
+      .nav { flex-direction: column; align-items: flex-start; }
+      .toc ol { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="../../../">
+        <span class="brand-mark">D</span>
+        <span>DinaLab</span>
+      </a>
+      <a href="../">Back to Admin Toolkit for Salesforce</a>
+    </nav>
+
+    <header>
+      <span class="release-pill">Manual for release 0.6.2</span>
+      <h1>Admin Toolkit for Salesforce — User Manual</h1>
+      <p class="lead">
+        How to install the toolkit, launch its apps from the popup, and use each workspace and tool.
+        All screenshots were taken against a Salesforce Developer Edition org.
+      </p>
+      <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+    </header>
+
+    <div class="content" style="margin-top: 28px;">
+      <section class="toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">Contents</h2>
+        <ol>
+          <li><a href="#getting-started">Getting started</a></li>
+          <li><a href="#metadata-admin">Metadata Admin for Salesforce</a></li>
+          <li><a href="#force-sheet">Force Sheet</a></li>
+          <li><a href="#org-review">Org Review</a></li>
+          <li><a href="#object-schema">Object Schema</a></li>
+          <li><a href="#document-folders">Document Folders</a></li>
+          <li><a href="#rest-explorer">REST Explorer</a></li>
+          <li><a href="#run-apex">Run Apex</a></li>
+          <li><a href="#data-export">Data Export</a></li>
+          <li><a href="#monitoring">API usage &amp; monitoring</a></li>
+          <li><a href="#builtin-manual">Built-in manual (EN/JP)</a></li>
+        </ol>
+      </section>
+
+      <section id="getting-started" aria-labelledby="getting-started-title">
+        <h2 id="getting-started-title">1. Getting started</h2>
+        <ol>
+          <li>Install <a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Admin Toolkit for Salesforce from the Chrome Web Store</a>.</li>
+          <li>Open any Salesforce tab and sign in as usual. The toolkit reuses the session you are already signed in with.</li>
+          <li>Click the extension icon. The popup opens with the <strong>Apps</strong> tab — the main entry point to Metadata Admin, Force Sheet, Org Review, and Object Schema — plus metadata search across the org.</li>
+        </ol>
+        <figure class="narrow">
+          <img src="img/01-popup-apps.png" alt="The extension popup with the Apps tab listing the toolkit's Salesforce workspaces" loading="lazy">
+          <figcaption>The popup Apps tab launches every workspace against the active Salesforce org.</figcaption>
+        </figure>
+      </section>
+
+      <section id="metadata-admin" aria-labelledby="metadata-admin-title">
+        <h2 id="metadata-admin-title">2. Metadata Admin for Salesforce</h2>
+        <p>Browse the org's metadata in a source-style tree, search the loaded workspace by label, name, API name, object, or snippet, edit files locally, track changes, build <code>package.xml</code> selections, and deploy or discard your edits.</p>
+        <figure>
+          <img src="img/02-metadata-admin.png" alt="Metadata Admin workspace with the source-style metadata tree" loading="lazy">
+          <figcaption>The Metadata Admin workspace after loading the org's metadata tree.</figcaption>
+        </figure>
+      </section>
+
+      <section id="force-sheet" aria-labelledby="force-sheet-title">
+        <h2 id="force-sheet-title">3. Force Sheet</h2>
+        <p>Type a SOQL query and run it with the <strong>Run</strong> button or <code>Ctrl+Enter</code>. Results stream into a multi-tab spreadsheet grid with pagination. You can also open Salesforce reports and list views, import CSV/XLSX data, and start Salesforce CRUD workflows from grid selections — every write asks for confirmation first.</p>
+        <figure>
+          <img src="img/03-force-sheet-query.png" alt="Force Sheet showing SOQL query results in the spreadsheet grid" loading="lazy">
+          <figcaption>SOQL results in the Force Sheet grid.</figcaption>
+        </figure>
+        <p style="margin-top: 18px;">The workspace panel keeps your files: the <strong>Objects</strong> tree lists objects with list views, <strong>Reports</strong> opens org reports, and <strong>Workspace</strong> holds your auto-saved spreadsheet files organized in folders, exportable as CSV or Excel.</p>
+        <figure>
+          <img src="img/04-force-sheet-workspace.png" alt="Force Sheet workspace panel with the Objects, Reports, and Workspace trees" loading="lazy">
+          <figcaption>The Force Sheet workspace tree with auto-saved files.</figcaption>
+        </figure>
+      </section>
+
+      <section id="org-review" aria-labelledby="org-review-title">
+        <h2 id="org-review-title">4. Org Review</h2>
+        <p>Org Review starts automatically when opened and runs a read-only assessment of org health, recent activity, features, data model, security, coverage, limits, and automation. Each section carries evidence and remediation guidance, and the report exports as PDF, Markdown, summary JSON, or evidence JSON.</p>
+        <figure>
+          <img src="img/05-org-review.png" alt="A completed Org Review report with scorecards and evidence sections" loading="lazy">
+          <figcaption>A completed Org Review with the health scorecard and section evidence.</figcaption>
+        </figure>
+      </section>
+
+      <section id="object-schema" aria-labelledby="object-schema-title">
+        <h2 id="object-schema-title">5. Object Schema</h2>
+        <p>Pick an object name (with suggestions), choose parent and child depth, and press <strong>Build Schema View</strong>. The interactive map supports search with a highlighted path from the root, zoom, horizontal and vertical layouts, and a visible-objects filter. <strong>Packaged Objects</strong> and <strong>Show all standard objects</strong> control which objects are pickable, and your packaged-namespace choice is remembered per org.</p>
+        <p>Below the map, the <strong>Fields</strong> spreadsheet lists every field of every selectable object. Filter it to one object, use native header filters, or run a global search — matching cells are highlighted. The sheet supports CSV download and full-screen mode.</p>
+        <figure>
+          <img src="img/06-object-schema-map-fields.png" alt="Object Schema relationship map with the Fields spreadsheet below it" loading="lazy">
+          <figcaption>The relationship map with the Fields spreadsheet below.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/07-object-schema-fields-search.png" alt="Object Schema global fields search with matching cells highlighted" loading="lazy">
+          <figcaption>Global fields search highlights every matching cell.</figcaption>
+        </figure>
+      </section>
+
+      <section id="document-folders" aria-labelledby="document-folders-title">
+        <h2 id="document-folders-title">6. Document Folders</h2>
+        <p>Browse Salesforce document libraries and folders, preview supported files, and use the tree checkboxes to select folders and files — folder selection is recursive and keeps duplicate document occurrences independent. Review everything in the <strong>Selected Items</strong> panel and download it as a ZIP that preserves folder paths. Downloads are limited to 500 files and 250&nbsp;MB of known content, and an in-progress ZIP can be canceled.</p>
+        <figure>
+          <img src="img/08-document-folders.png" alt="Document Folders tree with checkbox selection" loading="lazy">
+          <figcaption>The Document Folders tree with checkbox selection.</figcaption>
+        </figure>
+      </section>
+
+      <section id="rest-explorer" aria-labelledby="rest-explorer-title">
+        <h2 id="rest-explorer-title">7. REST Explorer</h2>
+        <p>Send Salesforce REST API requests against the connected org and inspect the JSON responses. Requests run only when you send them, using your existing Salesforce session.</p>
+        <figure>
+          <img src="img/09-rest-explorer.png" alt="REST Explorer request and response view" loading="lazy">
+          <figcaption>The REST Explorer request builder.</figcaption>
+        </figure>
+      </section>
+
+      <section id="run-apex" aria-labelledby="run-apex-title">
+        <h2 id="run-apex-title">8. Run Apex</h2>
+        <p>Execute anonymous Apex and review the compile result, execution status, and debug output.</p>
+        <figure>
+          <img src="img/10-run-apex.png" alt="Run Apex editor with compile and debug output areas" loading="lazy">
+          <figcaption>The anonymous Apex editor.</figcaption>
+        </figure>
+      </section>
+
+      <section id="data-export" aria-labelledby="data-export-title">
+        <h2 id="data-export-title">9. Data Export</h2>
+        <p>Run SOQL, SOSL, and GraphQL queries or report exports and download the results as CSV or JSON.</p>
+        <figure>
+          <img src="img/11-data-export.png" alt="Data Export query and download options" loading="lazy">
+          <figcaption>The Data Export tool.</figcaption>
+        </figure>
+      </section>
+
+      <section id="monitoring" aria-labelledby="monitoring-title">
+        <h2 id="monitoring-title">10. API usage &amp; monitoring</h2>
+        <p>Inspect the org's latest API usage and limits. Companion monitoring pages cover the setup audit trail, login history, event log files, and org and user summaries.</p>
+        <figure>
+          <img src="img/12-api-usage.png" alt="Latest API usage and limits view" loading="lazy">
+          <figcaption>Latest API usage against org limits.</figcaption>
+        </figure>
+      </section>
+
+      <section id="builtin-manual" aria-labelledby="builtin-manual-title">
+        <h2 id="builtin-manual-title">11. Built-in manual (EN/JP)</h2>
+        <p>The extension ships with a built-in manual in English and Japanese. Every toolkit page also has a language picker in its header, so the whole UI can switch between English and 日本語 at any time.</p>
+        <figure>
+          <img src="img/13-builtin-manual.png" alt="The built-in English and Japanese manual page" loading="lazy">
+          <figcaption>The built-in manual inside the extension.</figcaption>
+        </figure>
+      </section>
+
+      <section aria-labelledby="more-title">
+        <h2 id="more-title">More</h2>
+        <ul>
+          <li><a href="../">Admin Toolkit for Salesforce overview</a></li>
+          <li><a href="../PRIVACY_POLICY.html">Privacy Policy</a></li>
+          <li><a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Chrome Web Store listing</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

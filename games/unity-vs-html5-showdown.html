@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unity 3D vs HTML5 Showdown</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <main class="home game-page">
+    <a class="back-link" href="../index.html">← Back to game hub</a>
+    <article class="game-card">
+      <h1>Unity 3D vs HTML5 Showdown</h1>
+      <p>Answer 5 quick prompts and get a recommendation for your next game build stack.</p>
+
+      <div class="stack-scoreboard" aria-live="polite">
+        <p><strong>Unity 3D:</strong> <span id="unityScore">0</span></p>
+        <p><strong>HTML5:</strong> <span id="html5Score">0</span></p>
+      </div>
+
+      <section class="stack-question" data-question>
+        <h2 id="stackQuestionTitle">What platform matters most for launch?</h2>
+        <div class="stack-options" id="stackOptions"></div>
+      </section>
+
+      <p id="stackProgress" class="result">Question 1 of 5</p>
+      <p id="stackResult" class="result">Pick an option to begin.</p>
+      <button id="stackRestartBtn" type="button">Play Again</button>
+    </article>
+  </main>
+  <script src="../game.js"></script>
+</body>
+</html>

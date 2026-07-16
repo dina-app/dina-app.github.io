@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Craft</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <main class="home game-page">
+    <a class="back-link" href="../index.html">← Back to game hub</a>
+    <article class="game-card game-card-boys">
+      <h1>Mini Craft</h1>
+      <p>Pick two resources and craft a useful item.</p>
+      <div class="guess-row">
+        <select id="craftItemA">
+          <option value="wood">Wood</option>
+          <option value="stone">Stone</option>
+          <option value="iron">Iron</option>
+          <option value="coal">Coal</option>
+          <option value="fiber">Fiber</option>
+        </select>
+        <select id="craftItemB">
+          <option value="wood">Wood</option>
+          <option value="stone">Stone</option>
+          <option value="iron">Iron</option>
+          <option value="coal">Coal</option>
+          <option value="fiber">Fiber</option>
+        </select>
+      </div>
+      <div class="guess-row">
+        <button id="craftBtn" type="button">Craft</button>
+      </div>
+      <p id="craftResult" class="result">Try a recipe to discover items.</p>
+      <p id="craftCollection" class="result">Collection: none yet</p>
+    </article>
+  </main>
+  <script src="../game.js"></script>
+</body>
+</html>

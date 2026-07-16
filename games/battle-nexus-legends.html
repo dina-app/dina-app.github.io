@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battle Nexus Legends (HTML Prototype)</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .nexus-wrap { margin-top: .75rem; border: 1px solid #35508e; border-radius: 14px; overflow: hidden; }
+    #nexusCanvas { width: 100%; display: block; background: #091022; }
+    .nexus-hud { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap:.5rem; margin:.75rem 0; }
+    .nexus-hud p { margin:0; padding:.5rem .65rem; background:#111a3b; border:1px solid #3d4d8f; border-radius:10px; }
+    .nexus-controls { color: var(--muted); font-size: .95rem; margin-top: .6rem; }
+    .nexus-controls kbd { background:#0d1330; border:1px solid #4153a7; padding:.1rem .35rem; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <main class="home game-page">
+    <a class="back-link" href="../index.html">← Back to game hub</a>
+    <article class="game-card game-card-boys">
+      <h1>Battle Nexus Legends — HTML Arena Prototype</h1>
+      <p>A lightweight 5v5-inspired MOBA scoring prototype: fight bots and wild monsters, level up, collect energy, and score in enemy goals before time expires.</p>
+
+      <div class="nexus-hud" aria-live="polite">
+        <p id="hudTimer">Time: 03:00</p>
+        <p id="hudPhase">Phase: Normal</p>
+        <p id="hudScore">Blue 0 — 0 Red</p>
+        <p id="hudPlayer">Lv 1 | HP 1000 | Energy 0</p>
+      </div>
+
+      <div class="nexus-wrap">
+        <canvas id="nexusCanvas" width="960" height="540" aria-label="Battle Nexus Legends prototype arena"></canvas>
+      </div>
+      <p id="nexusStatus" class="result">Press Start Match to begin.</p>
+      <div class="rps-controls">
+        <button id="startNexusBtn" type="button">Start Match</button>
+        <button id="restartNexusBtn" type="button">Restart</button>
+      </div>
+      <p class="nexus-controls">
+        Controls: <kbd>WASD</kbd> move, <kbd>J</kbd> basic attack, <kbd>K</kbd> Skill 1 (dash hit), <kbd>L</kbd> Skill 2 (burst), hold <kbd>E</kbd> to score in enemy goal.
+      </p>
+    </article>
+  </main>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById('nexusCanvas');
+      const ctx = canvas.getContext('2d');
+      const startBtn = document.getElementById('startNexusBtn');
+      const restartBtn = document.getElementById('restartNexusBtn');
+      const statusEl = document.getElementById('nexusStatus');
+      const hudTimer = document.getElementById('hudTimer');
+      const hudPhase = document.getElementById('hudPhase');
+      const hudScore = document.getElementById('hudScore');
+      const hudPlayer = document.getElementById('hudPlayer');
+      if (!canvas || !ctx || !startBtn || !restartBtn) return;
+
+      const W = canvas.width;
+      const H = canvas.height;
+      const TEAM_BLUE = 'blue';
+      const TEAM_RED = 'red';
+      const keys = new Set();
+      const levelThresholds = [0, 120, 280, 480, 740, 1060, 1450, 1910, 2440, 3040];
+      const state = {
+        running: false,
+        ended: false,
+        timeLeft: 180,
+        score: { blue: 0, red: 0 },
+        entities: [],
+        monsters: [],
+        player: null,
+        lastMs: 0,
+        announcement: 'Press Start Match to begin.',
+      };
+
+      const goals = {
+        blue: { x: W / 2, y: H - 40, r: 54, owner: TEAM_BLUE },
+        red: { x: W / 2, y: 40, r: 54, owner: TEAM_RED },
+      };
+
+      function makeUnit({ id, name, team, x, y, isPlayer = false }) {
+        return {
+          id, name, team, x, y, vx: 0, vy: 0,
+          isPlayer, isBot: !isPlayer,
+          hp: 1000, maxHp: 1000,
+          atk: 80, speed: 128,
+          level: 1, exp: 0, energy: 0,
+          attackCd: 0, skill1Cd: 0, skill2Cd: 0,
+          respawn: 0, scoreProgress: 0, lastDamagedAt: -999,
+        };
+      }
+
+      function makeMonster(i) {
+        const spots = [
+          [W * 0.25, H * 0.52], [W * 0.5, H * 0.5], [W * 0.75, H * 0.48],
+          [W * 0.35, H * 0.35], [W * 0.65, H * 0.65], [W * 0.45, H * 0.7],
+        ];
+        const [x, y] = spots[i % spots.length];
+        return {
+          id: `m-${i}`,
+          x, y, spawnX: x, spawnY: y,
+          hp: 650, maxHp: 650, atk: 35,
+          leash: 90, respawn: 0, aggro: null, atkCd: 0,
+        };
+      }
+
+      function resetMatch() {
+        state.running = false;
+        state.ended = false;
+        state.timeLeft = 180;
+        state.score = { blue: 0, red: 0 };
+        state.entities = [];
+        state.monsters = [];
+        state.lastMs = 0;
+        state.announcement = 'Press Start Match to begin.';
+
+        state.player = makeUnit({ id: 'p0', name: 'Flareclaw', team: TEAM_BLUE, x: W * 0.5, y: H - 90, isPlayer: true });
+        state.entities.push(state.player);
+
+        for (let i = 1; i <= 4; i += 1) {
+          state.entities.push(makeUnit({ id: `b${i}`, name: `Ally ${i}`, team: TEAM_BLUE, x: W * (0.14 + i * 0.13), y: H - 120 }));
+        }
+        for (let i = 1; i <= 5; i += 1) {
+          const enemy = makeUnit({ id: `e${i}`, name: `Enemy ${i}`, team: TEAM_RED, x: W * (0.14 + i * 0.13), y: 120 });
+          enemy.atk = 74;
+          enemy.speed = 124;
+          state.entities.push(enemy);
+        }
+        for (let i = 0; i < 6; i += 1) state.monsters.push(makeMonster(i));
+        updateHud();
+        draw();
+      }
+
+      function isFinalStretch() {
+        return state.timeLeft <= 60;
+      }
+
+      function enemyGoal(team) {
+        return team === TEAM_BLUE ? goals.red : goals.blue;
+      }
+
+      function allyBase(team) {
+        return team === TEAM_BLUE ? goals.blue : goals.red;
+      }
+
+      function gainExp(unit, amount) {
+        unit.exp += amount;
+        while (unit.level < 10 && unit.exp >= levelThresholds[unit.level]) {
+          unit.level += 1;
+          unit.maxHp += 90;
+          unit.hp = Math.min(unit.maxHp, unit.hp + 110);
+          unit.atk += 14;
+          unit.speed += 3;
+          if (unit.isPlayer) state.announcement = `Level up! ${unit.name} reached Lv ${unit.level}.`;
+        }
+      }
+
+      function dist(a, b) {
+        return Math.hypot(a.x - b.x, a.y - b.y);
+      }
+
+      function dealDamage(attacker, target, amount) {
+        if (target.respawn > 0) return;
+        target.hp -= amount;
+        target.lastDamagedAt = performance.now() / 1000;
+        if (target.hp <= 0) onUnitDefeated(attacker, target);
+      }
+
+      function onUnitDefeated(killer, victim) {
+        victim.hp = 0;
+        victim.respawn = 3 + victim.level * 0.65 + (180 - state.timeLeft) * 0.02;
+        const dropped = Math.floor(victim.energy * 0.45);
+        victim.energy -= dropped;
+        killer.energy = Math.min(50, killer.energy + (10 + dropped));
+        gainExp(killer, 80);
+      }
+
+      function defeatMonster(killer, monster) {
+        monster.hp = 0;
+        monster.respawn = 14;
+        gainExp(killer, 44);
+        killer.energy = Math.min(50, killer.energy + 5);
+      }
+
+      function nearestEnemy(unit, max = 220) {
+        let best = null;
+        let bestD = max;
+        for (const other of state.entities) {
+          if (other.team === unit.team || other.respawn > 0) continue;
+          const d = dist(unit, other);
+          if (d < bestD) {
+            best = other;
+            bestD = d;
+          }
+        }
+        return best;
+      }
+
+      function nearestMonster(unit, max = 240) {
+        let best = null;
+        let bestD = max;
+        for (const m of state.monsters) {
+          if (m.respawn > 0 || m.hp <= 0) continue;
+          const d = dist(unit, m);
+          if (d < bestD) {
+            best = m;
+            bestD = d;
+          }
+        }
+        return best;
+      }
+
+      function moveToward(unit, tx, ty, dt, mult = 1) {
+        const dx = tx - unit.x;
+        const dy = ty - unit.y;
+        const len = Math.hypot(dx, dy) || 1;
+        unit.x += (dx / len) * unit.speed * mult * dt;
+        unit.y += (dy / len) * unit.speed * mult * dt;
+        unit.x = Math.max(24, Math.min(W - 24, unit.x));
+        unit.y = Math.max(24, Math.min(H - 24, unit.y));
+      }
+
+      function updatePlayer(dt, now) {
+        const p = state.player;
+        if (p.respawn > 0) return;
+        let mx = 0; let my = 0;
+        if (keys.has('w')) my -= 1;
+        if (keys.has('s')) my += 1;
+        if (keys.has('a')) mx -= 1;
+        if (keys.has('d')) mx += 1;
+        if (mx || my) {
+          const len = Math.hypot(mx, my);
+          p.x += (mx / len) * p.speed * dt;
+          p.y += (my / len) * p.speed * dt;
+        }
+
+        p.x = Math.max(24, Math.min(W - 24, p.x));
+        p.y = Math.max(24, Math.min(H - 24, p.y));
+
+        if (keys.has('j') && p.attackCd <= 0) {
+          p.attackCd = 0.7;
+          const target = nearestEnemy(p, 95);
+          const wild = nearestMonster(p, 78);
+          if (target) dealDamage(p, target, p.atk);
+          else if (wild) {
+            wild.hp -= p.atk;
+            if (wild.hp <= 0) defeatMonster(p, wild);
+          }
+        }
+
+        if (keys.has('k') && p.skill1Cd <= 0) {
+          p.skill1Cd = 7;
+          p.x = Math.min(W - 24, p.x + (keys.has('d') ? 82 : keys.has('a') ? -82 : 0));
+          p.y = Math.min(H - 24, Math.max(24, p.y + (keys.has('s') ? 82 : keys.has('w') ? -82 : 0)));
+          const target = nearestEnemy(p, 90);
+          if (target) dealDamage(p, target, p.atk * 1.35);
+        }
+
+        if (keys.has('l') && p.skill2Cd <= 0) {
+          p.skill2Cd = 12;
+          for (const enemy of state.entities) {
+            if (enemy.team !== p.team && enemy.respawn <= 0 && dist(p, enemy) < 110) {
+              dealDamage(p, enemy, p.atk * 1.1);
+            }
+          }
+        }
+
+        const goal = enemyGoal(p.team);
+        const inGoal = Math.hypot(p.x - goal.x, p.y - goal.y) <= goal.r;
+        const interrupted = (now - p.lastDamagedAt) < 0.8;
+        if (inGoal && keys.has('e') && p.energy > 0 && !interrupted) {
+          p.scoreProgress += dt;
+          const needed = 0.9 + p.energy * 0.045;
+          if (p.scoreProgress >= needed) {
+            const raw = p.energy;
+            const points = isFinalStretch() ? raw * 2 : raw;
+            state.score[p.team] += points;
+            state.announcement = `${p.name} scored ${points} points!`;
+            p.energy = 0;
+            p.scoreProgress = 0;
+          }
+        } else {
+          p.scoreProgress = 0;
+        }
+      }
+
+      function updateBots(dt, now) {
+        for (const bot of state.entities) {
+          if (!bot.isBot || bot.respawn > 0) continue;
+
+          const targetEnemy = nearestEnemy(bot, 130);
+          const targetMonster = nearestMonster(bot, 140);
+          const goal = enemyGoal(bot.team);
+          const shouldScore = bot.energy >= 22 || (isFinalStretch() && bot.energy >= 10);
+
+          if (bot.hp < bot.maxHp * 0.25 && !shouldScore) {
+            const base = allyBase(bot.team);
+            moveToward(bot, base.x, base.y, dt, 1.1);
+            if (dist(bot, base) < 55) bot.hp = Math.min(bot.maxHp, bot.hp + 70 * dt);
+          } else if (shouldScore) {
+            moveToward(bot, goal.x, goal.y, dt, 1.05);
+            if (dist(bot, goal) < goal.r && now - bot.lastDamagedAt > 1) {
+              bot.scoreProgress += dt;
+              const need = 0.95 + bot.energy * 0.05;
+              if (bot.scoreProgress >= need) {
+                const pts = isFinalStretch() ? bot.energy * 2 : bot.energy;
+                state.score[bot.team] += pts;
+                bot.energy = 0;
+                bot.scoreProgress = 0;
+              }
+            } else {
+              bot.scoreProgress = 0;
+            }
+          } else if (targetEnemy) {
+            moveToward(bot, targetEnemy.x, targetEnemy.y, dt, 1.02);
+            if (dist(bot, targetEnemy) < 38 && bot.attackCd <= 0) {
+              bot.attackCd = 0.85;
+              dealDamage(bot, targetEnemy, bot.atk * (0.9 + bot.level * 0.02));
+            }
+          } else if (targetMonster) {
+            moveToward(bot, targetMonster.x, targetMonster.y, dt);
+            if (dist(bot, targetMonster) < 34 && bot.attackCd <= 0) {
+              bot.attackCd = 0.8;
+              targetMonster.hp -= bot.atk * 0.9;
+              if (targetMonster.hp <= 0) defeatMonster(bot, targetMonster);
+            }
+          } else {
+            const laneY = bot.team === TEAM_BLUE ? H * 0.6 : H * 0.4;
+            moveToward(bot, W * 0.5 + Math.sin(now + Number(bot.id.replace(/\D/g, '')) * 2) * 120, laneY, dt, 0.7);
+          }
+        }
+      }
+
+      function updateMonsters(dt) {
+        for (const m of state.monsters) {
+          if (m.respawn > 0) {
+            m.respawn -= dt;
+            if (m.respawn <= 0) {
+              m.hp = m.maxHp;
+              m.x = m.spawnX;
+              m.y = m.spawnY;
+            }
+            continue;
+          }
+          const aggroUnit = state.entities.find(u => u.respawn <= 0 && dist(u, m) < 70);
+          if (aggroUnit) {
+            const d = dist(aggroUnit, m);
+            if (d < 28 && m.atkCd <= 0) {
+              m.atkCd = 1;
+              dealDamage({ team: 'wild', energy: 0, exp: 0, level: 1, atk: 0 }, aggroUnit, m.atk);
+            }
+          }
+          m.atkCd = Math.max(0, m.atkCd - dt);
+        }
+      }
+
+      function tickRespawns(dt) {
+        for (const u of state.entities) {
+          u.attackCd = Math.max(0, u.attackCd - dt);
+          u.skill1Cd = Math.max(0, u.skill1Cd - dt);
+          u.skill2Cd = Math.max(0, u.skill2Cd - dt);
+          if (u.respawn > 0) {
+            u.respawn -= dt;
+            if (u.respawn <= 0) {
+              const base = allyBase(u.team);
+              u.x = base.x + (Math.random() * 80 - 40);
+              u.y = base.y + (u.team === TEAM_BLUE ? -70 : 70);
+              u.hp = u.maxHp;
+              u.energy = Math.floor(u.energy * 0.3);
+            }
+          }
+        }
+      }
+
+      function updateHud() {
+        const m = Math.floor(state.timeLeft / 60).toString().padStart(2, '0');
+        const s = Math.floor(state.timeLeft % 60).toString().padStart(2, '0');
+        hudTimer.textContent = `Time: ${m}:${s}`;
+        hudPhase.textContent = `Phase: ${isFinalStretch() ? 'Final Stretch (2x scoring)' : 'Normal'}`;
+        hudScore.textContent = `Blue ${Math.round(state.score.blue)} — ${Math.round(state.score.red)} Red`;
+        const p = state.player;
+        const hp = p.respawn > 0 ? `Respawn ${p.respawn.toFixed(1)}s` : `HP ${Math.max(0, Math.round(p.hp))}`;
+        hudPlayer.textContent = `Lv ${p.level} | ${hp} | Energy ${Math.round(p.energy)} | CDs J:${p.attackCd.toFixed(1)} K:${p.skill1Cd.toFixed(1)} L:${p.skill2Cd.toFixed(1)}`;
+        statusEl.textContent = state.announcement;
+      }
+
+      function drawGoal(g, color) {
+        ctx.beginPath();
+        ctx.arc(g.x, g.y, g.r, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.globalAlpha = 0.2;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = '#0e1838';
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.strokeStyle = '#24376f';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2);
+        ctx.stroke();
+
+        drawGoal(goals.blue, '#4da8ff');
+        drawGoal(goals.red, '#ff6d72');
+
+        for (const m of state.monsters) {
+          if (m.respawn > 0) continue;
+          ctx.beginPath();
+          ctx.arc(m.x, m.y, 14, 0, Math.PI * 2);
+          ctx.fillStyle = '#f6d56e';
+          ctx.fill();
+          ctx.fillStyle = '#1e243f';
+          ctx.fillRect(m.x - 14, m.y - 22, 28, 4);
+          ctx.fillStyle = '#66e6a4';
+          ctx.fillRect(m.x - 14, m.y - 22, 28 * (m.hp / m.maxHp), 4);
+        }
+
+        for (const u of state.entities) {
+          if (u.respawn > 0) continue;
+          ctx.beginPath();
+          ctx.arc(u.x, u.y, u.isPlayer ? 14 : 11, 0, Math.PI * 2);
+          ctx.fillStyle = u.team === TEAM_BLUE ? '#66b5ff' : '#ff8d92';
+          ctx.fill();
+          if (u.isPlayer) {
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+          }
+          ctx.fillStyle = '#0a1028';
+          ctx.fillRect(u.x - 16, u.y - 20, 32, 4);
+          ctx.fillStyle = '#66e6a4';
+          ctx.fillRect(u.x - 16, u.y - 20, 32 * (u.hp / u.maxHp), 4);
+          ctx.fillStyle = '#dbe7ff';
+          ctx.font = '11px sans-serif';
+          ctx.fillText(`Lv${u.level} • ${Math.round(u.energy)}`, u.x - 18, u.y + 27);
+        }
+
+        if (state.ended) {
+          ctx.fillStyle = 'rgba(5,8,20,0.76)';
+          ctx.fillRect(0, 0, W, H);
+          ctx.fillStyle = '#fff';
+          ctx.font = 'bold 44px Inter, sans-serif';
+          const winner = state.score.blue === state.score.red ? 'Draw!' : state.score.blue > state.score.red ? 'Blue Team Wins!' : 'Red Team Wins!';
+          ctx.fillText(winner, W / 2 - 185, H / 2 - 18);
+          ctx.font = '26px Inter, sans-serif';
+          ctx.fillText(`${Math.round(state.score.blue)} - ${Math.round(state.score.red)}`, W / 2 - 58, H / 2 + 26);
+        }
+      }
+
+      function gameLoop(ms) {
+        if (!state.running) return;
+        if (!state.lastMs) state.lastMs = ms;
+        const dt = Math.min(0.05, (ms - state.lastMs) / 1000);
+        const now = ms / 1000;
+        state.lastMs = ms;
+
+        if (!state.ended) {
+          state.timeLeft -= dt;
+          if (state.timeLeft <= 0) {
+            state.timeLeft = 0;
+            state.ended = true;
+            state.running = false;
+            state.announcement = 'Match finished. Press Restart to play again.';
+          }
+          tickRespawns(dt);
+          updatePlayer(dt, now);
+          updateBots(dt, now);
+          updateMonsters(dt);
+        }
+
+        updateHud();
+        draw();
+        if (state.running) requestAnimationFrame(gameLoop);
+      }
+
+      window.addEventListener('keydown', (e) => {
+        const key = e.key.toLowerCase();
+        if (['w', 'a', 's', 'd', 'j', 'k', 'l', 'e'].includes(key)) {
+          keys.add(key);
+          e.preventDefault();
+        }
+      });
+      window.addEventListener('keyup', (e) => keys.delete(e.key.toLowerCase()));
+
+      startBtn.addEventListener('click', () => {
+        if (state.ended) return;
+        if (!state.running) {
+          state.running = true;
+          state.announcement = 'Match started! Farm monsters, fight, then score in enemy goal.';
+          requestAnimationFrame(gameLoop);
+        }
+      });
+
+      restartBtn.addEventListener('click', () => {
+        resetMatch();
+      });
+
+      resetMatch();
+    })();
+  </script>
+</body>
+</html>

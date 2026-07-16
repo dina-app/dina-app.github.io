@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon 3D Arena Strike</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <main class="home game-page">
+    <a class="back-link" href="../index.html">← Back to game hub</a>
+    <article class="game-card game-card-boys">
+      <h1>Neon 3D Arena Strike</h1>
+      <p>Move through a maze in a 3D raycast arena. Use <strong>WASD</strong>, move mouse to aim, and click to fire energy shots.</p>
+      <div class="arena-wrap">
+        <canvas id="arenaCanvas" width="960" height="540" aria-label="3D arena game"></canvas>
+      </div>
+      <p id="arenaHud" class="result">Click the arena to lock mouse and start.</p>
+      <p class="result">Tip: This is a lightweight browser mini-FPS inspired by classic arena shooters.</p>
+    </article>
+  </main>
+  <script src="../game.js"></script>
+</body>
+</html>

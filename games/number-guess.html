@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Number Guess</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <main class="home game-page">
+    <a class="back-link" href="../index.html">← Back to game hub</a>
+    <article class="game-card">
+      <h1>Number Guess</h1>
+      <p>Guess the secret number between 1 and 100.</p>
+      <div class="guess-row">
+        <input id="guessInput" type="number" min="1" max="100" placeholder="Enter guess" />
+        <button id="guessBtn">Guess</button>
+        <button id="guessReset">Reset</button>
+      </div>
+      <p id="guessResult" class="result">You have 10 attempts.</p>
+    </article>
+  </main>
+  <script src="../game.js"></script>
+</body>
+</html>

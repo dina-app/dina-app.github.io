@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>User Manual | Admin Toolkit for Salesforce | DinaLab</title>
-  <meta name="description" content="Step-by-step user manual for Admin Toolkit for Salesforce: popup apps, Metadata Admin, Force Sheet, Org Review, Object Schema, document folders, REST, Apex, exports, and monitoring.">
+  <meta name="description" content="Step-by-step user manual for Admin Toolkit for Salesforce with screenshots: popup apps, Metadata Admin, Force Sheet, Org Review, Object Schema, document folders, REST, Apex, exports, and monitoring.">
   <style>
     :root {
       color-scheme: light;
@@ -30,12 +30,7 @@
       line-height: 1.65;
     }
 
-    a {
-      color: var(--blue);
-      font-weight: 800;
-      text-decoration: none;
-    }
-
+    a { color: var(--blue); font-weight: 800; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     .shell {
@@ -52,13 +47,9 @@
       margin-bottom: 44px;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--ink);
-      font-weight: 900;
-    }
+    .nav-links { display: flex; gap: 18px; }
+
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 900; }
 
     .brand-mark {
       display: grid;
@@ -72,30 +63,11 @@
     }
 
     h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 14px; font-size: clamp(34px, 6vw, 56px); line-height: 1.05; }
+    h2 { margin-bottom: 12px; font-size: 26px; line-height: 1.15; }
+    h3 { margin: 18px 0 8px; font-size: 19px; line-height: 1.25; }
 
-    h1 {
-      margin-bottom: 14px;
-      font-size: clamp(34px, 6vw, 56px);
-      line-height: 1.05;
-    }
-
-    h2 {
-      margin-bottom: 12px;
-      font-size: 26px;
-      line-height: 1.15;
-    }
-
-    h3 {
-      margin-bottom: 8px;
-      font-size: 20px;
-      line-height: 1.25;
-    }
-
-    .lead {
-      margin-bottom: 10px;
-      color: #3a464f;
-      font-size: 18px;
-    }
+    .lead { margin-bottom: 10px; color: #3a464f; font-size: 18px; }
 
     .release-pill {
       display: inline-flex;
@@ -118,18 +90,10 @@
       box-shadow: 0 12px 26px rgba(23, 32, 39, 0.07);
     }
 
-    .toc ol {
-      columns: 2;
-      column-gap: 32px;
-      margin: 0;
-      padding-left: 22px;
-    }
-
+    .toc ol { columns: 2; column-gap: 32px; margin: 0; padding-left: 22px; }
     .toc li { break-inside: avoid; }
 
-    figure {
-      margin: 18px 0 0;
-    }
+    figure { margin: 16px 0 0; }
 
     figure img {
       display: block;
@@ -140,10 +104,7 @@
       box-shadow: 0 10px 22px rgba(23, 32, 39, 0.09);
     }
 
-    figure.narrow img {
-      width: min(430px, 100%);
-      margin: 0 auto;
-    }
+    figure.narrow img { width: min(430px, 100%); margin: 0 auto; }
 
     figcaption {
       margin-top: 8px;
@@ -153,11 +114,7 @@
       text-align: center;
     }
 
-    ul, ol {
-      margin-bottom: 0;
-      padding-left: 22px;
-    }
-
+    ul, ol { margin-bottom: 0; padding-left: 22px; }
     li + li { margin-top: 8px; }
 
     code {
@@ -167,17 +124,10 @@
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     }
 
-    .notice {
-      color: var(--muted);
-      font-weight: 700;
-    }
+    .notice { color: var(--muted); font-weight: 700; }
 
     @media (max-width: 700px) {
-      .shell {
-        width: min(100% - 28px, 1040px);
-        padding-top: 18px;
-      }
-
+      .shell { width: min(100% - 28px, 1040px); padding-top: 18px; }
       .nav { flex-direction: column; align-items: flex-start; }
       .toc ol { columns: 1; }
     }
@@ -190,7 +140,10 @@
         <span class="brand-mark">D</span>
         <span>DinaLab</span>
       </a>
-      <a href="../">Back to Admin Toolkit for Salesforce</a>
+      <span class="nav-links">
+        <a href="jp/" lang="ja">日本語版</a>
+        <a href="../">Back to Admin Toolkit for Salesforce</a>
+      </span>
     </nav>
 
     <header>
@@ -198,145 +151,372 @@
       <h1>Admin Toolkit for Salesforce — User Manual</h1>
       <p class="lead">
         How to install the toolkit, launch its apps from the popup, and use each workspace and tool.
-        All screenshots were taken against a Salesforce Developer Edition org.
       </p>
-      <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+      <p class="notice">Screenshots were taken against a Salesforce Developer Edition org; org-identifying values (host, org and user names, IDs, addresses) are replaced with sample values. This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
     </header>
 
     <div class="content" style="margin-top: 28px;">
       <section class="toc" aria-labelledby="toc-title">
         <h2 id="toc-title">Contents</h2>
         <ol>
-          <li><a href="#getting-started">Getting started</a></li>
+          <li><a href="#getting-started">Getting started &amp; popup</a></li>
           <li><a href="#metadata-admin">Metadata Admin for Salesforce</a></li>
           <li><a href="#force-sheet">Force Sheet</a></li>
           <li><a href="#org-review">Org Review</a></li>
           <li><a href="#object-schema">Object Schema</a></li>
           <li><a href="#document-folders">Document Folders</a></li>
           <li><a href="#rest-explorer">REST Explorer</a></li>
-          <li><a href="#run-apex">Run Apex</a></li>
           <li><a href="#data-export">Data Export</a></li>
-          <li><a href="#monitoring">API usage &amp; monitoring</a></li>
+          <li><a href="#run-apex">Run Apex</a></li>
+          <li><a href="#monitoring">Limits &amp; monitoring</a></li>
           <li><a href="#builtin-manual">Built-in manual (EN/JP)</a></li>
+          <li><a href="#release-notes">Release notes</a></li>
         </ol>
       </section>
 
       <section id="getting-started" aria-labelledby="getting-started-title">
-        <h2 id="getting-started-title">1. Getting started</h2>
+        <h2 id="getting-started-title">1. Getting started &amp; popup</h2>
         <ol>
           <li>Install <a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Admin Toolkit for Salesforce from the Chrome Web Store</a>.</li>
-          <li>Open any Salesforce tab and sign in as usual. The toolkit reuses the session you are already signed in with.</li>
-          <li>Click the extension icon. The popup opens with the <strong>Apps</strong> tab — the main entry point to Metadata Admin, Force Sheet, Org Review, and Object Schema — plus metadata search across the org.</li>
+          <li>Open any Salesforce tab and sign in as usual. The toolkit reuses the session you are already signed in with — no separate login.</li>
+          <li>Click the extension icon to open the popup.</li>
         </ol>
+
+        <h3>Apps tab</h3>
+        <p>The <strong>Apps</strong> tab is the main entry point. It launches the four primary workspaces — Metadata Admin, Force Sheet, Org Review, and Object Schema — against the connected org.</p>
         <figure class="narrow">
-          <img src="img/01-popup-apps.png" alt="The extension popup with the Apps tab listing the toolkit's Salesforce workspaces" loading="lazy">
-          <figcaption>The popup Apps tab launches every workspace against the active Salesforce org.</figcaption>
+          <img src="img/en/popup-apps.png" alt="Popup Apps tab listing the four workspaces" loading="lazy">
+          <figcaption>The popup Apps tab.</figcaption>
+        </figure>
+
+        <h3>Tools tab</h3>
+        <p>The <strong>Tools</strong> tab lists the single-purpose pages: REST API, Data Export, Document Folders, Run Apex, Setup Audit Trail, Limits, Login History, Event Log Files, and the built-in Manual.</p>
+        <figure class="narrow">
+          <img src="img/en/popup-tools.png" alt="Popup Tools tab listing single-purpose tools" loading="lazy">
+          <figcaption>The popup Tools tab.</figcaption>
+        </figure>
+
+        <h3>Org tab</h3>
+        <p>The <strong>Org</strong> tab summarizes the connected org and the signed-in user.</p>
+        <figure class="narrow">
+          <img src="img/en/popup-org.png" alt="Popup Org tab with the org summary" loading="lazy">
+          <figcaption>The popup Org tab.</figcaption>
+        </figure>
+
+        <h3>Metadata search</h3>
+        <p>The search box above the tabs finds metadata across the org by API name, label, or text, with results grouped and ranked.</p>
+        <figure class="narrow">
+          <img src="img/en/popup-search.png" alt="Popup metadata search results" loading="lazy">
+          <figcaption>Metadata search from the popup.</figcaption>
         </figure>
       </section>
 
       <section id="metadata-admin" aria-labelledby="metadata-admin-title">
         <h2 id="metadata-admin-title">2. Metadata Admin for Salesforce</h2>
-        <p>Browse the org's metadata in a source-style tree, search the loaded workspace by label, name, API name, object, or snippet, edit files locally, track changes, build <code>package.xml</code> selections, and deploy or discard your edits.</p>
+        <p>Browse the org's metadata in a source-style tree, inspect folders and files, search the loaded workspace, track local edits, and build <code>package.xml</code> selections.</p>
+
+        <h3>Workspace tree</h3>
+        <p>Select workspace folders and namespaces in the header, then click <strong>Reload Workspace</strong>. The tree mirrors a source-format project: Apex classes, triggers, flows, Lightning Web Components, objects, and more.</p>
         <figure>
-          <img src="img/02-metadata-admin.png" alt="Metadata Admin workspace with the source-style metadata tree" loading="lazy">
-          <figcaption>The Metadata Admin workspace after loading the org's metadata tree.</figcaption>
+          <img src="img/en/metadata-tree.png" alt="Metadata Admin workspace tree" loading="lazy">
+          <figcaption>The loaded metadata workspace.</figcaption>
+        </figure>
+
+        <h3>Folders and files</h3>
+        <p>Clicking a folder lists its records in a sortable table; clicking a row opens the file for inspection and local editing.</p>
+        <figure>
+          <img src="img/en/metadata-folder-table.png" alt="A metadata folder listed as a table" loading="lazy">
+          <figcaption>A folder's records in the table view.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-file.png" alt="A metadata file opened for inspection" loading="lazy">
+          <figcaption>A file opened from the table.</figcaption>
+        </figure>
+
+        <h3>Search</h3>
+        <p>The search box matches file and folder API names, labels, and content snippets within the loaded workspace.</p>
+        <figure>
+          <img src="img/en/metadata-search.png" alt="Metadata workspace search results" loading="lazy">
+          <figcaption>Workspace search results.</figcaption>
+        </figure>
+
+        <h3>Namespaces</h3>
+        <p>The <strong>Workspace Namespaces</strong> dropdown scopes the workspace to unmanaged metadata or the managed namespaces you pick.</p>
+        <figure>
+          <img src="img/en/metadata-namespaces.png" alt="Workspace namespaces dropdown" loading="lazy">
+          <figcaption>Choosing workspace namespaces.</figcaption>
+        </figure>
+
+        <h3>Changed files and package.xml</h3>
+        <p>The <strong>Changed</strong> tab tracks your local edits so you can review, deploy, or discard them. The <strong>Package</strong> tab assembles a <code>package.xml</code> from tree selections.</p>
+        <figure>
+          <img src="img/en/metadata-changed-files.png" alt="Changed files panel" loading="lazy">
+          <figcaption>Locally changed files.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-package-xml.png" alt="Package.xml builder panel" loading="lazy">
+          <figcaption>The package.xml builder.</figcaption>
         </figure>
       </section>
 
       <section id="force-sheet" aria-labelledby="force-sheet-title">
         <h2 id="force-sheet-title">3. Force Sheet</h2>
-        <p>Type a SOQL query and run it with the <strong>Run</strong> button or <code>Ctrl+Enter</code>. Results stream into a multi-tab spreadsheet grid with pagination. You can also open Salesforce reports and list views, import CSV/XLSX data, and start Salesforce CRUD workflows from grid selections — every write asks for confirmation first.</p>
+        <p>A multi-tab spreadsheet for Salesforce data: run SOQL, open reports and list views, import CSV/XLSX, and start CRUD workflows from grid selections — every write asks for confirmation first.</p>
+
+        <h3>Query</h3>
+        <p>Open the <strong>Query</strong> panel, type SOQL, and press <strong>Run</strong> (or <code>Ctrl+Enter</code>). Results stream into the grid with pagination.</p>
         <figure>
-          <img src="img/03-force-sheet-query.png" alt="Force Sheet showing SOQL query results in the spreadsheet grid" loading="lazy">
-          <figcaption>SOQL results in the Force Sheet grid.</figcaption>
+          <img src="img/en/force-sheet-query-editor.png" alt="Force Sheet SOQL query editor" loading="lazy">
+          <figcaption>The SOQL editor.</figcaption>
         </figure>
-        <p style="margin-top: 18px;">The workspace panel keeps your files: the <strong>Objects</strong> tree lists objects with list views, <strong>Reports</strong> opens org reports, and <strong>Workspace</strong> holds your auto-saved spreadsheet files organized in folders, exportable as CSV or Excel.</p>
         <figure>
-          <img src="img/04-force-sheet-workspace.png" alt="Force Sheet workspace panel with the Objects, Reports, and Workspace trees" loading="lazy">
-          <figcaption>The Force Sheet workspace tree with auto-saved files.</figcaption>
+          <img src="img/en/force-sheet-query-results.png" alt="SOQL results in the Force Sheet grid" loading="lazy">
+          <figcaption>Query results in the grid.</figcaption>
+        </figure>
+
+        <h3>Reports and uploads</h3>
+        <p>The <strong>Report</strong> tab opens org reports (including joined reports) into the sheet. The <strong>Upload</strong> tab imports CSV or XLSX files.</p>
+        <figure>
+          <img src="img/en/force-sheet-report-tab.png" alt="Force Sheet report tab" loading="lazy">
+          <figcaption>Opening a Salesforce report.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/force-sheet-upload-tab.png" alt="Force Sheet upload tab" loading="lazy">
+          <figcaption>Importing CSV/XLSX data.</figcaption>
+        </figure>
+
+        <h3>CRUD workflows</h3>
+        <p>The <strong>CRUD</strong> panel turns grid selections into insert, update, or delete requests. Every operation shows a confirmation with the exact records before anything is sent.</p>
+        <figure>
+          <img src="img/en/force-sheet-crud-panel.png" alt="Force Sheet CRUD panel" loading="lazy">
+          <figcaption>The CRUD panel.</figcaption>
+        </figure>
+
+        <h3>Workspace</h3>
+        <p>The <strong>Workspace</strong> panel holds your files: auto-saved spreadsheet files in folders, the <strong>Objects</strong> tree (objects with list views), and the <strong>Reports</strong> tree. Files and folders export as CSV or Excel.</p>
+        <figure>
+          <img src="img/en/force-sheet-workspace.png" alt="Force Sheet workspace tree" loading="lazy">
+          <figcaption>The workspace tree with auto-saved files.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/force-sheet-objects-tree.png" alt="Objects tree with list views" loading="lazy">
+          <figcaption>The Objects tree lists objects that have list views.</figcaption>
         </figure>
       </section>
 
       <section id="org-review" aria-labelledby="org-review-title">
         <h2 id="org-review-title">4. Org Review</h2>
-        <p>Org Review starts automatically when opened and runs a read-only assessment of org health, recent activity, features, data model, security, coverage, limits, and automation. Each section carries evidence and remediation guidance, and the report exports as PDF, Markdown, summary JSON, or evidence JSON.</p>
+        <p>A read-only assessment of org health that runs automatically when opened. Each section carries evidence and remediation guidance; the report exports as PDF, Markdown, summary JSON, or evidence JSON.</p>
+
         <figure>
-          <img src="img/05-org-review.png" alt="A completed Org Review report with scorecards and evidence sections" loading="lazy">
-          <figcaption>A completed Org Review with the health scorecard and section evidence.</figcaption>
+          <img src="img/en/org-review-summary.png" alt="Org Review executive summary" loading="lazy">
+          <figcaption>The completed review with the health scorecard.</figcaption>
+        </figure>
+
+        <h3>Collectors</h3>
+        <p><strong>Collector progress</strong> shows every read-only collector that contributed to the report.</p>
+        <figure>
+          <img src="img/en/org-review-collectors.png" alt="Collector progress detail" loading="lazy">
+          <figcaption>Collector progress.</figcaption>
+        </figure>
+
+        <h3>Report sections</h3>
+        <figure>
+          <img src="img/en/org-review-health-check.png" alt="Health Check risk detail section" loading="lazy">
+          <figcaption>Health Check risk detail.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/org-review-object-limits.png" alt="Object capacity and limits section" loading="lazy">
+          <figcaption>Object capacity and per-object limits with live record counts.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/org-review-sharing.png" alt="Organization-wide sharing defaults section" loading="lazy">
+          <figcaption>Organization-wide sharing defaults.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/org-review-login-policy.png" alt="Login, session and authentication policy section" loading="lazy">
+          <figcaption>Login, session &amp; authentication policy.</figcaption>
         </figure>
       </section>
 
       <section id="object-schema" aria-labelledby="object-schema-title">
         <h2 id="object-schema-title">5. Object Schema</h2>
-        <p>Pick an object name (with suggestions), choose parent and child depth, and press <strong>Build Schema View</strong>. The interactive map supports search with a highlighted path from the root, zoom, horizontal and vertical layouts, and a visible-objects filter. <strong>Packaged Objects</strong> and <strong>Show all standard objects</strong> control which objects are pickable, and your packaged-namespace choice is remembered per org.</p>
-        <p>Below the map, the <strong>Fields</strong> spreadsheet lists every field of every selectable object. Filter it to one object, use native header filters, or run a global search — matching cells are highlighted. The sheet supports CSV download and full-screen mode.</p>
+        <p>Build an interactive relationship map for any pickable object, then explore every field of every selectable object in the Fields spreadsheet below it.</p>
+
+        <h3>Build controls</h3>
+        <p>When the page opens, the Fields sheet already lists all fields of the pickable catalog. <strong>Packaged Objects</strong> and <strong>Show all standard objects</strong> control which objects are pickable; the packaged-namespace choice is remembered per org.</p>
         <figure>
-          <img src="img/06-object-schema-map-fields.png" alt="Object Schema relationship map with the Fields spreadsheet below it" loading="lazy">
-          <figcaption>The relationship map with the Fields spreadsheet below.</figcaption>
+          <img src="img/en/object-schema-start.png" alt="Object Schema before building, with the all-objects fields sheet" loading="lazy">
+          <figcaption>The page after opening: controls plus the all-objects Fields sheet.</figcaption>
         </figure>
         <figure>
-          <img src="img/07-object-schema-fields-search.png" alt="Object Schema global fields search with matching cells highlighted" loading="lazy">
-          <figcaption>Global fields search highlights every matching cell.</figcaption>
+          <img src="img/en/object-schema-suggestions.png" alt="Object name suggestions" loading="lazy">
+          <figcaption>Object Name suggests matching API names and labels.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-packaged-menu.png" alt="Packaged Objects namespace menu" loading="lazy">
+          <figcaption>Scoping packaged namespaces.</figcaption>
+        </figure>
+
+        <h3>The relationship map</h3>
+        <p>Press <strong>Build Schema View</strong>. Parents render on one side, children on the other; master-detail and lookup edges are distinguished. Click any node to see its relationships and focus the Fields sheet on it.</p>
+        <figure>
+          <img src="img/en/object-schema-map-fields.png" alt="Relationship map with the Fields sheet below" loading="lazy">
+          <figcaption>The built map with relationship details and the Fields sheet.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-find-path.png" alt="Find object highlighting the path from the root" loading="lazy">
+          <figcaption>Find object highlights the connecting path from the root.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-node-fields.png" alt="A selected node focusing the fields sheet" loading="lazy">
+          <figcaption>Clicking a node filters the Fields sheet to that object.</figcaption>
+        </figure>
+
+        <h3>The Fields sheet</h3>
+        <p>Filter to one object with <strong>Object filter</strong>, use native header filters, or run <strong>Global search</strong> — matching cells are highlighted. Download the current view as CSV or expand to full screen.</p>
+        <figure>
+          <img src="img/en/object-schema-fields-search.png" alt="Global fields search with highlighted matches" loading="lazy">
+          <figcaption>Global search highlights every matching cell.</figcaption>
+        </figure>
+
+        <h3>Layouts and alternative views</h3>
+        <figure>
+          <img src="img/en/object-schema-vertical.png" alt="Vertical map layout" loading="lazy">
+          <figcaption>The vertical layout: parents above, children below.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-relationship-table.png" alt="Accessible relationship table" loading="lazy">
+          <figcaption>The relationship table (accessible view).</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-visible-filter.png" alt="Visible objects filter menu" loading="lazy">
+          <figcaption>Hiding objects from the map with the visible-objects filter.</figcaption>
         </figure>
       </section>
 
       <section id="document-folders" aria-labelledby="document-folders-title">
         <h2 id="document-folders-title">6. Document Folders</h2>
-        <p>Browse Salesforce document libraries and folders, preview supported files, and use the tree checkboxes to select folders and files — folder selection is recursive and keeps duplicate document occurrences independent. Review everything in the <strong>Selected Items</strong> panel and download it as a ZIP that preserves folder paths. Downloads are limited to 500 files and 250&nbsp;MB of known content, and an in-progress ZIP can be canceled.</p>
+        <p>Browse Salesforce libraries and folders, preview supported files, and download selections as a ZIP that preserves folder paths. Folder selection is recursive; duplicate document occurrences stay independent. Downloads are limited to 500 files and 250&nbsp;MB of known content and can be canceled mid-run.</p>
         <figure>
-          <img src="img/08-document-folders.png" alt="Document Folders tree with checkbox selection" loading="lazy">
-          <figcaption>The Document Folders tree with checkbox selection.</figcaption>
+          <img src="img/en/document-folders-tree.png" alt="Document folders tree" loading="lazy">
+          <figcaption>Browsing workspaces and folders.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/document-folders-selection.png" alt="Checkbox selection with the Selected Items panel" loading="lazy">
+          <figcaption>Checking a folder selects its whole subtree; the Selected Items panel reviews and downloads it.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/document-folders-context-menu.png" alt="Folder context menu" loading="lazy">
+          <figcaption>Folder actions from the context menu.</figcaption>
         </figure>
       </section>
 
       <section id="rest-explorer" aria-labelledby="rest-explorer-title">
         <h2 id="rest-explorer-title">7. REST Explorer</h2>
-        <p>Send Salesforce REST API requests against the connected org and inspect the JSON responses. Requests run only when you send them, using your existing Salesforce session.</p>
+        <p>Compose Salesforce REST API requests with endpoint templates, send them against the connected org, and inspect the JSON response. Requests run only when you send them.</p>
         <figure>
-          <img src="img/09-rest-explorer.png" alt="REST Explorer request and response view" loading="lazy">
-          <figcaption>The REST Explorer request builder.</figcaption>
+          <img src="img/en/rest-api.png" alt="REST Explorer request builder" loading="lazy">
+          <figcaption>The request builder with endpoint templates.</figcaption>
         </figure>
-      </section>
-
-      <section id="run-apex" aria-labelledby="run-apex-title">
-        <h2 id="run-apex-title">8. Run Apex</h2>
-        <p>Execute anonymous Apex and review the compile result, execution status, and debug output.</p>
         <figure>
-          <img src="img/10-run-apex.png" alt="Run Apex editor with compile and debug output areas" loading="lazy">
-          <figcaption>The anonymous Apex editor.</figcaption>
+          <img src="img/en/rest-api-response.png" alt="REST Explorer JSON response" loading="lazy">
+          <figcaption>Inspecting a JSON response.</figcaption>
         </figure>
       </section>
 
       <section id="data-export" aria-labelledby="data-export-title">
-        <h2 id="data-export-title">9. Data Export</h2>
-        <p>Run SOQL, SOSL, and GraphQL queries or report exports and download the results as CSV or JSON.</p>
+        <h2 id="data-export-title">8. Data Export</h2>
+        <p>Run SOQL, SOSL, and GraphQL queries or report exports, preview the result as a CSV grid or JSON, and download it.</p>
         <figure>
-          <img src="img/11-data-export.png" alt="Data Export query and download options" loading="lazy">
-          <figcaption>The Data Export tool.</figcaption>
+          <img src="img/en/data-export.png" alt="Data Export source and query steps" loading="lazy">
+          <figcaption>Choosing the export source and query.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/data-export-results.png" alt="Data Export results grid" loading="lazy">
+          <figcaption>Export results ready to download.</figcaption>
+        </figure>
+      </section>
+
+      <section id="run-apex" aria-labelledby="run-apex-title">
+        <h2 id="run-apex-title">9. Run Apex</h2>
+        <p>Execute anonymous Apex and review the compile result, execution status, and debug output.</p>
+        <figure>
+          <img src="img/en/run-apex.png" alt="Run Apex editor" loading="lazy">
+          <figcaption>The anonymous Apex editor.</figcaption>
         </figure>
       </section>
 
       <section id="monitoring" aria-labelledby="monitoring-title">
-        <h2 id="monitoring-title">10. API usage &amp; monitoring</h2>
-        <p>Inspect the org's latest API usage and limits. Companion monitoring pages cover the setup audit trail, login history, event log files, and org and user summaries.</p>
+        <h2 id="monitoring-title">10. Limits &amp; monitoring</h2>
+        <p>Read-only monitoring pages for the org: API limits with live usage bars, the setup audit trail, login history, and event log files.</p>
         <figure>
-          <img src="img/12-api-usage.png" alt="Latest API usage and limits view" loading="lazy">
-          <figcaption>Latest API usage against org limits.</figcaption>
+          <img src="img/en/limits.png" alt="Limits page with usage bars" loading="lazy">
+          <figcaption>Org limits with live usage.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/setup-audit-trail.png" alt="Setup audit trail table" loading="lazy">
+          <figcaption>Setup audit trail.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/login-history.png" alt="Login history table" loading="lazy">
+          <figcaption>Login history.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/event-logs.png" alt="Event log files table" loading="lazy">
+          <figcaption>Event log files.</figcaption>
         </figure>
       </section>
 
       <section id="builtin-manual" aria-labelledby="builtin-manual-title">
         <h2 id="builtin-manual-title">11. Built-in manual (EN/JP)</h2>
-        <p>The extension ships with a built-in manual in English and Japanese. Every toolkit page also has a language picker in its header, so the whole UI can switch between English and 日本語 at any time.</p>
+        <p>The extension ships with its own manual in English and Japanese, including per-version release notes. Every page has a language picker in its header, so the whole UI switches between English and 日本語 at any time.</p>
         <figure>
-          <img src="img/13-builtin-manual.png" alt="The built-in English and Japanese manual page" loading="lazy">
-          <figcaption>The built-in manual inside the extension.</figcaption>
+          <img src="img/en/builtin-manual.png" alt="Built-in manual overview" loading="lazy">
+          <figcaption>The built-in manual.</figcaption>
         </figure>
+        <figure>
+          <img src="img/en/builtin-manual-apps.png" alt="Built-in manual Apps chapter" loading="lazy">
+          <figcaption>The Apps chapter of the built-in manual.</figcaption>
+        </figure>
+      </section>
+
+      <section id="release-notes" aria-labelledby="release-notes-title">
+        <h2 id="release-notes-title">12. Release notes</h2>
+        <p>Recent releases. No release has added new Chrome permissions, host permissions, remote code, telemetry, ads, or third-party data services. The full per-version history ships inside the extension's built-in manual.</p>
+
+        <h3>0.6.2 (2026-07-15)</h3>
+        <ul>
+          <li>Document Folders: folder selection is now recursive and atomic across lazily loaded subtrees, and duplicate document occurrences stay independent with folder-preserving ZIP paths.</li>
+          <li>Document Folders: added 500-file and 250&nbsp;MB known-size ZIP limits, cancelable downloads, and one-time fetching of shared document content.</li>
+          <li>Object Schema: rebuilt the fields experience as a spreadsheet view with native header filters, global search highlights, CSV export, and full screen; Packaged Objects defaults to none and is remembered per org.</li>
+          <li>Object Schema became a popup Apps-only page with the flat compact header; the same 40px app-session header now also applies to Metadata Admin and Org Review.</li>
+          <li>The browser action and side panel stay available on every top-level toolkit page.</li>
+        </ul>
+
+        <h3>0.6.1 (2026-07-14)</h3>
+        <ul>
+          <li>Rebuilt Document Folders downloads around tree checkbox selection with a Selected Items panel; folder actions moved to the tree context menu.</li>
+          <li>Added Object Schema to the popup Apps tab: object suggestions, packaged-namespace and visible-object controls, synchronized map search with red relationship-path labels, zoom, horizontal/vertical layouts, and a field Value column.</li>
+          <li>Removed Org Review from the tools-page navigation (it opens from the popup Apps tab).</li>
+          <li>Refined English and Japanese interface terminology; removed all external status-service requests from Org Review.</li>
+          <li>Added <code>THIRD-PARTY-NOTICES.txt</code> with license attributions for the bundled spreadsheet engine.</li>
+        </ul>
+
+        <h3>0.6.0 (2026-07-11)</h3>
+        <ul>
+          <li>Added the read-only Org Review covering org health, limits, setup changes, login failures, and event-log availability.</li>
+          <li>Added a per-org read-only lock and consistent risk confirmation for Apex, data mutation, and metadata deployment.</li>
+          <li>Added metadata Validate Only and sanitized local operation receipts.</li>
+          <li>Fixed Force Sheet workspace files sharing the last active grid; values and formulas now stay isolated per file and org.</li>
+          <li>Improved Document Folders preview, large-file gating, named downloads, ZIP structure, and partial-failure handling.</li>
+        </ul>
       </section>
 
       <section aria-labelledby="more-title">
         <h2 id="more-title">More</h2>
         <ul>
+          <li><a href="jp/" lang="ja">このマニュアルの日本語版</a></li>
           <li><a href="../">Admin Toolkit for Salesforce overview</a></li>
           <li><a href="../PRIVACY_POLICY.html">Privacy Policy</a></li>
           <li><a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Chrome Web Store listing</a></li>

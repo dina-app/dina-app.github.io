@@ -1,10 +1,10 @@
-# DinaLab Agent Assistant
+# Dina Agent for Salesforce
 
 This directory is retained for legacy links. The current public product page is
-[DinaLab Agent Assistant](../apps/salesforce-agentic-bot/index.html), and the
+[Dina Agent for Salesforce](../apps/salesforce-agentic-bot/index.html), and the
 current privacy policy is available beside that page.
 
-DinaLab Agent Assistant is an independent Chrome side-panel assistant in
+Dina Agent for Salesforce is an independent Chrome side-panel assistant in
 development for Salesforce workflows. It sends user-initiated chat requests and
 selected context through a configured Cloud Run function to OpenAI. It is not
 publicly released.

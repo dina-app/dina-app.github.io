@@ -9,7 +9,7 @@
     "Admin Toolkit for Salesforce is an independent Chrome right-side panel suite compatible with Salesforce. It uses the Salesforce session you are already signed in with to provide metadata administration, SOQL workspaces, object schema exploration, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.": "Admin Toolkit for Salesforce は Salesforce と互換性のある独立した Chrome 右サイドパネルスイートです。現在ログイン中の Salesforce セッションを利用し、開発者運営のメタデータサービスを介さずに、メタデータ管理、SOQL ワークスペース、オブジェクトスキーマ探索、API ツール、Apex 実行、エクスポート、モニタリングを提供します。",
     "This extension is not affiliated with, endorsed by, or sponsored by Salesforce.": "この拡張機能は Salesforce と提携しておらず、Salesforce による承認または後援を受けていません。",
     "Salesforce is a trademark of Salesforce, Inc. Admin Toolkit for Salesforce is not affiliated with, endorsed by, or sponsored by Salesforce.": "Salesforce は Salesforce, Inc. の商標です。Admin Toolkit for Salesforce は Salesforce と提携しておらず、Salesforce による承認または後援を受けていません。",
-    "Salesforce is a trademark of Salesforce, Inc. DinaLab Agent Assistant is not affiliated with, endorsed by, or sponsored by Salesforce. The OpenAI name identifies the configured AI service; no affiliation with or endorsement by OpenAI is implied.": "Salesforce は Salesforce, Inc. の商標です。DinaLab Agent Assistant は Salesforce と提携しておらず、Salesforce による承認または後援を受けていません。OpenAI の名称は設定された AI サービスを示すために使用しており、OpenAI との提携または OpenAI による承認を意味するものではありません。",
+    "Salesforce is a trademark of Salesforce, Inc. Dina Agent for Salesforce is not affiliated with, endorsed by, or sponsored by Salesforce. The OpenAI name identifies the configured AI service; no affiliation with or endorsement by OpenAI is implied.": "Salesforce は Salesforce, Inc. の商標です。Dina Agent for Salesforce は Salesforce と提携しておらず、Salesforce による承認または後援を受けていません。OpenAI の名称は設定された AI サービスを示すために使用しており、OpenAI との提携または OpenAI による承認を意味するものではありません。",
     "Install from Chrome Web Store": "Chrome ウェブストアから入手",
     "User Manual": "ユーザーマニュアル",
     "One Toolkit, Focused Workspaces": "1つのツールキット、目的別ワークスペース",
@@ -61,7 +61,7 @@
     "user manual with screenshots": "スクリーンショット付きユーザーマニュアル",
     "Report a problem or ask a product question through the": "不具合の報告や製品に関する質問は、次のページからお送りください:",
     "DinaLab support page": "DinaLab サポートページ",
-    "DinaLab Agent Assistant is an independent Chrome extension in development for Salesforce administrators and developers. It adds a side-panel assistant that can use selected Salesforce org context and route chat requests through a Cloud Run function backend.": "DinaLab Agent Assistant は、Salesforce の管理者と開発者向けに開発中の独立した Chrome 拡張機能です。選択した Salesforce 組織コンテキストを利用し、Cloud Run function バックエンドを経由してチャットリクエストを処理するサイドパネルアシスタントを追加します。",
+    "Dina Agent for Salesforce is an independent Chrome extension in development for Salesforce administrators and developers. It adds a side-panel assistant that can use selected Salesforce org context and route chat requests through a Cloud Run function backend.": "Dina Agent for Salesforce は、Salesforce の管理者と開発者向けに開発中の独立した Chrome 拡張機能です。選択した Salesforce 組織コンテキストを利用し、Cloud Run function バックエンドを経由してチャットリクエストを処理するサイドパネルアシスタントを追加します。",
     "What You Can Do": "できること",
     "Open a Chrome side panel on Salesforce pages.": "Salesforce ページで Chrome サイドパネルを開きます。",
     "Detect the active Salesforce tab title and URL.": "現在の Salesforce タブのタイトルと URL を検出します。",
@@ -70,7 +70,7 @@
     "Send selected Salesforce context with chat requests.": "選択した Salesforce コンテキストをチャットリクエストとともに送信します。",
     "Keep the OpenAI API key out of the browser by storing it in the Cloud Run function environment.": "OpenAI API キーを Cloud Run function 環境に保存し、ブラウザー内に保持しません。",
     "Architecture": "アーキテクチャ",
-    "DinaLab Agent Assistant separates the browser extension from the OpenAI transport layer.": "DinaLab Agent Assistant はブラウザー拡張機能と OpenAI 通信レイヤーを分離しています。",
+    "Dina Agent for Salesforce separates the browser extension from the OpenAI transport layer.": "Dina Agent for Salesforce はブラウザー拡張機能と OpenAI 通信レイヤーを分離しています。",
     "The extension reads the active Salesforce org session in the browser.": "拡張機能がブラウザー内の現在の Salesforce 組織セッションを読み取ります。",
     "The side-panel chat sends chat history, selected Salesforce context, current tab context, and extension tool results to the configured Cloud Run function endpoint.": "サイドパネルのチャットは、チャット履歴、選択した Salesforce コンテキスト、現在のタブ情報、拡張機能ツールの結果を、設定済みの Cloud Run function エンドポイントへ送信します。",
     "Salesforce session IDs and authentication credentials are not included in AI chat requests. Salesforce API tools run inside the extension.": "Salesforce セッション ID と認証情報は AI チャットリクエストに含まれません。Salesforce API ツールは拡張機能内で実行されます。",
@@ -79,7 +79,6 @@
     "Configuration": "設定",
     "Set the Cloud Run function URL in the extension's api.js:": "拡張機能の api.js に Cloud Run function の URL を設定します:",
     "Then load the extension locally:": "次に拡張機能をローカルで読み込みます:",
-    "Select the DinaLab Agent Assistant extension folder.": "DinaLab Agent Assistant の拡張機能フォルダーを選択します。",
     "Cloud Run Function": "Cloud Run Function",
     "Deploy the Cloud Run function broker from:": "Cloud Run function ブローカーを次の場所からデプロイします:",
     "Required environment variable:": "必須の環境変数:",
@@ -89,7 +88,7 @@
     "The extension does not store an OpenAI API key in the browser and does not call OpenAI directly from the extension.": "拡張機能は OpenAI API キーをブラウザーに保存せず、拡張機能から OpenAI を直接呼び出しません。",
     "Read the full policy:": "ポリシー全文:",
     "Status": "ステータス",
-    "DinaLab Agent Assistant is currently in development and is not publicly released.": "DinaLab Agent Assistant は現在開発中で、一般公開されていません。",
+    "Dina Agent for Salesforce is currently in development and is not publicly released.": "Dina Agent for Salesforce は現在開発中で、一般公開されていません。",
     "Common Tools": "共通ツール",
     "Developer and admin workbench": "開発者・管理者向けワークベンチ",
     "Search tools": "ツールを検索",
@@ -220,7 +219,7 @@
 
   var titleTranslations = {
     "Admin Toolkit for Salesforce | Compatible with Salesforce": "Admin Toolkit for Salesforce | Salesforce 対応",
-    "DinaLab Agent Assistant | Compatible with Salesforce": "DinaLab Agent Assistant | Salesforce 対応",
+    "Dina Agent for Salesforce | Compatible with Salesforce": "Dina Agent for Salesforce | Salesforce 対応",
     "Common Tools | DinaLab": "共通ツール | DinaLab"
   };
   var originals = new WeakMap();

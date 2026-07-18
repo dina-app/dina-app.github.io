@@ -6,9 +6,9 @@
     "Back to home": "ホームに戻る",
     "Home": "ホーム",
     "Current release: 0.6.2": "現在のリリース: 0.6.2",
-    "DinaLab Admin Toolkit is an independent Chrome right-side panel suite compatible with Salesforce. It uses the Salesforce session you are already signed in with to provide metadata administration, SOQL workspaces, object schema exploration, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.": "DinaLab Admin Toolkit は Salesforce と互換性のある独立した Chrome 右サイドパネルスイートです。現在ログイン中の Salesforce セッションを利用し、開発者運営のメタデータサービスを介さずに、メタデータ管理、SOQL ワークスペース、オブジェクトスキーマ探索、API ツール、Apex 実行、エクスポート、モニタリングを提供します。",
+    "Admin Toolkit for Salesforce is an independent Chrome right-side panel suite compatible with Salesforce. It uses the Salesforce session you are already signed in with to provide metadata administration, SOQL workspaces, object schema exploration, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.": "Admin Toolkit for Salesforce は Salesforce と互換性のある独立した Chrome 右サイドパネルスイートです。現在ログイン中の Salesforce セッションを利用し、開発者運営のメタデータサービスを介さずに、メタデータ管理、SOQL ワークスペース、オブジェクトスキーマ探索、API ツール、Apex 実行、エクスポート、モニタリングを提供します。",
     "This extension is not affiliated with, endorsed by, or sponsored by Salesforce.": "この拡張機能は Salesforce と提携しておらず、Salesforce による承認または後援を受けていません。",
-    "Salesforce is a trademark of Salesforce, Inc. DinaLab Admin Toolkit is not affiliated with, endorsed by, or sponsored by Salesforce.": "Salesforce は Salesforce, Inc. の商標です。DinaLab Admin Toolkit は Salesforce と提携しておらず、Salesforce による承認または後援を受けていません。",
+    "Salesforce is a trademark of Salesforce, Inc. Admin Toolkit for Salesforce is not affiliated with, endorsed by, or sponsored by Salesforce.": "Salesforce は Salesforce, Inc. の商標です。Admin Toolkit for Salesforce は Salesforce と提携しておらず、Salesforce による承認または後援を受けていません。",
     "Salesforce is a trademark of Salesforce, Inc. DinaLab Agent Assistant is not affiliated with, endorsed by, or sponsored by Salesforce. The OpenAI name identifies the configured AI service; no affiliation with or endorsement by OpenAI is implied.": "Salesforce は Salesforce, Inc. の商標です。DinaLab Agent Assistant は Salesforce と提携しておらず、Salesforce による承認または後援を受けていません。OpenAI の名称は設定された AI サービスを示すために使用しており、OpenAI との提携または OpenAI による承認を意味するものではありません。",
     "Install from Chrome Web Store": "Chrome ウェブストアから入手",
     "User Manual": "ユーザーマニュアル",
@@ -47,7 +47,7 @@
     ": saves local workspace preferences, data, UI settings, and pending edits.": ": ローカルのワークスペース設定、データ、UI 設定、保留中の編集を保存します。",
     "Salesforce host access: permits requests to Salesforce org, Setup, Experience Cloud, Visualforce, and Salesforce Sites domains used by the active org.": "Salesforce ホストアクセス: 現在の組織が使用する Salesforce 組織、設定、Experience Cloud、Visualforce、Salesforce Sites の各ドメインへのリクエストを許可します。",
     "Install": "インストール",
-    "DinaLab Admin Toolkit from the Chrome Web Store": "Chrome ウェブストアの DinaLab Admin Toolkit",
+    "Admin Toolkit for Salesforce from the Chrome Web Store": "Chrome ウェブストアの Admin Toolkit for Salesforce",
     "For local development:": "ローカル開発の場合:",
     ". For local development:": "。ローカル開発の場合:",
     "Open chrome://extensions.": "chrome://extensions を開きます。",
@@ -219,7 +219,7 @@
   };
 
   var titleTranslations = {
-    "DinaLab Admin Toolkit | Compatible with Salesforce": "DinaLab Admin Toolkit | Salesforce 対応",
+    "Admin Toolkit for Salesforce | Compatible with Salesforce": "Admin Toolkit for Salesforce | Salesforce 対応",
     "DinaLab Agent Assistant | Compatible with Salesforce": "DinaLab Agent Assistant | Salesforce 対応",
     "Common Tools | DinaLab": "共通ツール | DinaLab"
   };

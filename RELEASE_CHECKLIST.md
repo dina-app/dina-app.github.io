@@ -5,15 +5,15 @@ Prepared: July 18, 2026
 ## Release scope
 
 - DinaLab homepage
-- DinaLab Admin Toolkit product page, privacy policy, and EN/JP manual
+- Admin Toolkit for Salesforce product page, privacy policy, and EN/JP manual
 - DinaLab Agent Assistant product page and privacy policy
 - Common Tools
 - Legacy URL redirects
 
 ## Completed in this release
 
-- [x] Use DinaLab-owned product names instead of incorporating the Salesforce trademark into app names.
-- [x] Use Salesforce only as a descriptive compatibility or workflow reference.
+- [x] Keep the requested `Admin Toolkit for Salesforce` product name consistent across the extension, website, manual, privacy policy, and Store materials.
+- [x] Use Salesforce in the product name as a compatibility reference and retain clear independence language.
 - [x] Add Salesforce trademark attribution and independence language to primary product surfaces.
 - [x] Rename Google Cloud Functions copy to the current Cloud Run functions product name.
 - [x] Replace personal/portfolio wording with consistent studio and business-facing language.
@@ -23,10 +23,10 @@ Prepared: July 18, 2026
 - [x] Make the EN/JP manual reproducible from its generator without losing the stored language preference.
 - [x] Add canonical metadata to primary public pages.
 
-## Required external actions before publishing the renamed product
+## Required external actions before publishing
 
-- [x] Rename the extension manifest and user-visible extension UI to `DinaLab Admin Toolkit` in the extension source repository.
-- [ ] Rename the Chrome Web Store item to `DinaLab Admin Toolkit` and update its description, screenshots, and promotional images so they match this site. The extension source manifest and UI now use the release name.
+- [x] Keep the extension manifest and user-visible extension UI named `Admin Toolkit for Salesforce` in the extension source repository.
+- [ ] Confirm the Chrome Web Store item remains named `Admin Toolkit for Salesforce` and update its description and screenshots for version 0.7.0.
 - [ ] Confirm the Chrome Web Store privacy declarations exactly match the current extension behavior and the published privacy policy.
 - [ ] Confirm the Store single-purpose statement describes one narrow focus area: Salesforce administration and development workflows.
 - [ ] Verify the developer support email and privacy-policy URL in the Chrome Web Store dashboard. The public site now provides a direct GitHub Issues support route.

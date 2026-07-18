@@ -98,7 +98,7 @@ function buildPage(lang) {
   const rn = RELEASE_NOTES[lang];
   const rnHtml = `      <section id="release-notes" aria-labelledby="release-notes-title">\n        <h2 id="release-notes-title">${esc(rn.title)}</h2>\n        <p>${rn.intro}</p>\n${rn.versions.map(([ver, items]) => `        <h3>${esc(ver)}</h3>\n        <ul>\n${items.map((i) => `          <li>${i}</li>`).join("\n")}\n        </ul>`).join("\n")}\n      </section>`;
 
-  const moreHtml = `      <section aria-labelledby="more-title">\n        <h2 id="more-title">${t("More", "関連リンク")}</h2>\n        <ul>\n          <li><a href="${otherHref}" hreflang="${otherLangCode}">${t("日本語版のマニュアル", "English version of this manual")}</a></li>\n          <li><a href="${overviewHref}">${t("DinaLab Admin Toolkit overview", "DinaLab Admin Toolkit の概要")}</a></li>\n          <li><a href="${privacyHref}">${t("Privacy Policy", "プライバシーポリシー")}</a></li>\n          <li><a href="${STORE_URL}" target="_blank" rel="noopener">${t("Chrome Web Store listing", "Chrome ウェブストアの掲載ページ")}</a></li>\n        </ul>\n      </section>`;
+  const moreHtml = `      <section aria-labelledby="more-title">\n        <h2 id="more-title">${t("More", "関連リンク")}</h2>\n        <ul>\n          <li><a href="${otherHref}" hreflang="${otherLangCode}">${t("日本語版のマニュアル", "English version of this manual")}</a></li>\n          <li><a href="${overviewHref}">${t("Admin Toolkit for Salesforce overview", "Admin Toolkit for Salesforce の概要")}</a></li>\n          <li><a href="${privacyHref}">${t("Privacy Policy", "プライバシーポリシー")}</a></li>\n          <li><a href="${STORE_URL}" target="_blank" rel="noopener">${t("Chrome Web Store listing", "Chrome ウェブストアの掲載ページ")}</a></li>\n        </ul>\n      </section>`;
 
   const total = Object.keys(SCENES).filter((slug) => fs.existsSync(path.join(imgDirAbs, `${slug}.png`))).length;
 
@@ -107,8 +107,8 @@ function buildPage(lang) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${t("User Manual", "ユーザーマニュアル")} | DinaLab Admin Toolkit</title>
-  <meta name="description" content="${t("Step-by-step user manual for DinaLab Admin Toolkit with screenshots.", "DinaLab Admin Toolkit のスクリーンショット付きユーザーマニュアル。")}">
+  <title>${t("User Manual", "ユーザーマニュアル")} | Admin Toolkit for Salesforce</title>
+  <meta name="description" content="${t("Step-by-step user manual for Admin Toolkit for Salesforce with screenshots.", "Admin Toolkit for Salesforce のスクリーンショット付きユーザーマニュアル。")}">
   <link rel="canonical" href="${canonicalUrl}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>${CSS}</style>
@@ -127,13 +127,13 @@ function buildPage(lang) {
       </a>
       <span class="nav-links">
         <a class="lang-toggle" href="${otherHref}" hreflang="${otherLangCode}" lang="${otherLangCode}" aria-label="${otherLangAria}" title="${otherLangAria}">${GLOBE}<span>${otherLangLabel}</span></a>
-        <a href="${overviewHref}">${t("Back to DinaLab Admin Toolkit", "DinaLab Admin Toolkit に戻る")}</a>
+        <a href="${overviewHref}">${t("Back to Admin Toolkit for Salesforce", "Admin Toolkit for Salesforce に戻る")}</a>
       </span>
     </nav>
 
     <header>
       <span class="release-pill">${t("Manual for release 0.6.2", "リリース 0.6.2 対応マニュアル")}</span>
-      <h1>${t("DinaLab Admin Toolkit — User Manual", "DinaLab Admin Toolkit ユーザーマニュアル")}</h1>
+      <h1>${t("Admin Toolkit for Salesforce — User Manual", "Admin Toolkit for Salesforce ユーザーマニュアル")}</h1>
       <p class="lead">${t("How to install the toolkit, launch its apps from the popup, and use each workspace and tool — with " + total + " screenshots.", "インストールから、ポップアップでのアプリ起動、各ワークスペース・ツールの使い方まで、" + total + " 枚のスクリーンショットで解説します。")}</p>
       <p class="notice">${t("Screenshots were taken against a Salesforce Developer Edition org; org-identifying values (host, org and user names, IDs, addresses) are replaced with sample values. Salesforce is a trademark of Salesforce, Inc. This extension is not affiliated with, endorsed by, or sponsored by Salesforce.", "スクリーンショットは Salesforce Developer Edition 組織で撮影し、組織を特定できる情報（ホスト名、組織名・ユーザー名、ID、アドレス）はサンプル値に置き換えています。Salesforce は Salesforce, Inc. の商標です。本拡張機能は Salesforce の提携・承認・後援を受けていません。")}</p>
     </header>

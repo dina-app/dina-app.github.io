@@ -8,8 +8,8 @@ export const SECTIONS = [
     en: { title: "1. Getting started & popup", intro: "Install the toolkit, then open the popup from any Salesforce tab — it reuses the session you are already signed in with." },
     jp: { title: "1. はじめに・ポップアップ", intro: "拡張機能をインストールし、任意の Salesforce タブからポップアップを開きます。サインイン済みのセッションをそのまま利用します。" },
     steps: {
-      en: ["Install <a href=\"https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc\" target=\"_blank\" rel=\"noopener\">DinaLab Admin Toolkit from the Chrome Web Store</a>.", "Open any Salesforce tab and sign in as usual — no separate login.", "Click the extension icon to open the popup."],
-      jp: ["<a href=\"https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc\" target=\"_blank\" rel=\"noopener\">Chrome ウェブストアから DinaLab Admin Toolkit をインストール</a>します。", "任意の Salesforce タブを開いていつもどおりサインインします（別途ログインは不要）。", "拡張機能のアイコンをクリックしてポップアップを開きます。"]
+      en: ["Install <a href=\"https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc\" target=\"_blank\" rel=\"noopener\">Admin Toolkit for Salesforce from the Chrome Web Store</a>.", "Open any Salesforce tab and sign in as usual — no separate login.", "Click the extension icon to open the popup."],
+      jp: ["<a href=\"https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc\" target=\"_blank\" rel=\"noopener\">Chrome ウェブストアから Admin Toolkit for Salesforce をインストール</a>します。", "任意の Salesforce タブを開いていつもどおりサインインします（別途ログインは不要）。", "拡張機能のアイコンをクリックしてポップアップを開きます。"]
     }
   },
   {

@@ -71,7 +71,7 @@ for (const file of staleNameFiles) {
   if (path.basename(file) === "404.html") continue;
   if (file === import.meta.filename) continue;
   const text = fs.readFileSync(file, "utf8");
-  if (/Admin Toolkit for Salesforce|Salesforce Agentic Bot|Salesforce Metadata Adminitrator/.test(text)) {
+  if (/DinaLab Admin Toolkit|Salesforce Agentic Bot|Salesforce Metadata Adminitrator/.test(text)) {
     errors.push(`${path.relative(root, file)}: stale product name`);
   }
 }

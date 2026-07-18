@@ -3,8 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DinaLab | Salesforce Apps And Internal Systems</title>
-  <meta name="description" content="DinaLab builds Salesforce DX, Salesforce packages, financial systems, booking systems, payment systems, and MCP-based tools.">
+  <title>DinaLab | Business Systems and Independent Salesforce-Compatible Tools</title>
+  <meta name="description" content="DinaLab builds practical business systems, cloud services, and independent tools compatible with Salesforce.">
+  <link rel="canonical" href="https://dina.jp/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DinaLab | Practical Business Systems">
+  <meta property="og:description" content="Independent business systems, cloud services, and tools compatible with Salesforce.">
+  <meta property="og:url" content="https://dina.jp/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>
     :root {
       color-scheme: light;
@@ -21,7 +27,7 @@
       --rust-soft: #f8ece6;
       --dark: #182026;
       --shadow: 0 18px 45px rgba(24, 32, 38, 0.12);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * {
@@ -131,6 +137,36 @@
 
     .nav-links a:hover {
       color: var(--ink);
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .lang-toggle:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .lang-toggle svg {
+      width: 16px;
+      height: 16px;
+      flex: none;
+    }
+
+    :lang(ja) h1 {
+      line-height: 1.14;
     }
 
     .hero-content {
@@ -650,22 +686,30 @@
           <span>DinaLab</span>
         </a>
         <div class="nav-links">
-          <a href="#apps">Apps</a>
-          <a href="#builds">Builds</a>
-          <a href="#mcp">MCP</a>
+          <a href="#apps" data-en="Apps" data-ja="アプリ">Apps</a>
+          <a href="#builds" data-en="Builds" data-ja="制作領域">Builds</a>
+          <a href="#mcp" data-en="MCP" data-ja="MCP">MCP</a>
+          <button type="button" id="langToggle" class="lang-toggle" aria-label="View in Japanese">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M3.5 9h17M3.5 15h17"></path>
+              <path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path>
+            </svg>
+            <span id="langLabel">日本語</span>
+          </button>
         </div>
       </nav>
 
       <div class="hero-content">
         <div>
-          <p class="eyebrow">Engineer | AWS | GCP | Salesforce</p>
-          <h1>DinaLab builds practical systems for Salesforce teams.</h1>
-          <p class="lead">
-            I design and ship Salesforce DX, Salesforce package tools, financial systems, booking systems, and payment systems.
+          <p class="eyebrow" data-en="Product studio · AWS · Google Cloud · Salesforce" data-ja="プロダクトスタジオ · AWS · Google Cloud · Salesforce">Product studio · AWS · Google Cloud · Salesforce</p>
+          <h1 data-en="Practical systems for teams that run on Salesforce and the cloud." data-ja="Salesforce とクラウドを活用するチームのための実用的なシステム。">Practical systems for teams that run on Salesforce and the cloud.</h1>
+          <p class="lead" data-en="DinaLab designs and delivers independent Salesforce-compatible tools, cloud services, financial systems, booking systems, and payment workflows." data-ja="DinaLab は、Salesforce 互換の独立ツール、クラウドサービス、財務システム、予約システム、決済ワークフローを設計・提供します。">
+            DinaLab designs and delivers independent Salesforce-compatible tools, cloud services, financial systems, booking systems, and payment workflows.
           </p>
           <div class="actions">
-            <a class="button" href="#apps">View Current Apps</a>
-            <a class="button secondary" href="#mcp">Model Context Protocol</a>
+            <a class="button" href="#apps" data-en="View current apps" data-ja="現在のアプリを見る">View current apps</a>
+            <a class="button secondary" href="#mcp" data-en="Model Context Protocol" data-ja="Model Context Protocol">Model Context Protocol</a>
           </div>
         </div>
 
@@ -673,8 +717,8 @@
           <div class="signal">
             <div class="signal-top">
               <div>
-                <p class="eyebrow">Current Apps</p>
-                <strong>Chrome extensions for Salesforce work</strong>
+                <p class="eyebrow" data-en="Current apps" data-ja="現在のアプリ">Current apps</p>
+                <strong data-en="Independent Chrome extensions for Salesforce workflows" data-ja="Salesforce 業務向けの独立した Chrome 拡張機能">Independent Chrome extensions for Salesforce workflows</strong>
               </div>
               <div class="signal-icons" aria-hidden="true">
                 <img src="assets/salesforce-agentic-bot-icon.jpg" alt="">
@@ -683,12 +727,12 @@
             </div>
             <div class="status-stack">
               <div class="status-row">
-                <strong>Admin Toolkit for Salesforce</strong>
-                <span class="pill release">Release</span>
+                <strong>DinaLab Admin Toolkit</strong>
+                <span class="pill release" data-en="Release" data-ja="リリース済">Release</span>
               </div>
               <div class="status-row">
-                <strong>Salesforce Agentic Bot</strong>
-                <span class="pill draft">Draft</span>
+                <strong>DinaLab Agent Assistant</strong>
+                <span class="pill draft" data-en="Draft" data-ja="開発中">Draft</span>
               </div>
             </div>
           </div>
@@ -696,15 +740,15 @@
       </div>
     </header>
 
-    <section aria-labelledby="author-title">
+    <section aria-labelledby="team-title">
       <div class="section-inner">
         <div class="section-head">
           <div>
-            <p class="eyebrow">About The Author</p>
-            <h2 id="author-title">Engineer focused on useful business systems.</h2>
+            <p class="eyebrow" data-en="About DinaLab" data-ja="DinaLab について">About DinaLab</p>
+            <h2 id="team-title" data-en="Focused on dependable business systems." data-ja="信頼できる業務システムに注力。">Focused on dependable business systems.</h2>
           </div>
-          <p>
-            DinaLab works across cloud platforms and Salesforce architecture, turning operational pain points into reliable internal tools and packaged applications.
+          <p data-en="DinaLab turns operational requirements into maintainable internal tools, integrations, and packaged applications across cloud and Salesforce environments." data-ja="DinaLab は、クラウドと Salesforce 環境における運用要件を、保守可能な社内ツール、連携機能、パッケージアプリケーションへと形にします。">
+            DinaLab turns operational requirements into maintainable internal tools, integrations, and packaged applications across cloud and Salesforce environments.
           </p>
         </div>
 
@@ -712,17 +756,17 @@
           <article class="tool">
             <div class="tool-mark">SF</div>
             <h3>Salesforce</h3>
-            <p>Metadata workspaces, Salesforce DX workflows, package development, admin tools, and org-aware Chrome extensions.</p>
+            <p data-en="Metadata workspaces, Salesforce DX workflows, package development, admin tools, and org-aware Chrome extensions." data-ja="メタデータワークスペース、Salesforce DX ワークフロー、パッケージ開発、管理ツール、組織対応の Chrome 拡張機能。">Metadata workspaces, Salesforce DX workflows, package development, admin tools, and org-aware Chrome extensions.</p>
           </article>
           <article class="tool">
             <div class="tool-mark">G</div>
             <h3>Google Cloud</h3>
-            <p>Cloud Function backends, server-side AI transport, secret isolation, and lightweight API services for browser tools.</p>
+            <p data-en="Cloud Run function backends, server-side AI transport, secret isolation, and lightweight API services for browser tools." data-ja="Cloud Run functions バックエンド、サーバーサイド AI 通信、シークレット分離、ブラウザツール向けの軽量 API サービス。">Cloud Run function backends, server-side AI transport, secret isolation, and lightweight API services for browser tools.</p>
           </article>
           <article class="tool">
             <div class="tool-mark">A</div>
             <h3>AWS</h3>
-            <p>Cloud infrastructure for internal systems, data flows, and business applications that need stable operations.</p>
+            <p data-en="Cloud infrastructure for internal systems, data flows, and business applications that need stable operations." data-ja="社内システム、データフロー、安定した運用を要する業務アプリケーションのためのクラウドインフラ。">Cloud infrastructure for internal systems, data flows, and business applications that need stable operations.</p>
           </article>
         </div>
       </div>
@@ -732,53 +776,53 @@
       <div class="section-inner">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Apps</p>
-            <h2 id="apps-title">Current public app work.</h2>
+            <p class="eyebrow" data-en="Apps" data-ja="アプリ">Apps</p>
+            <h2 id="apps-title" data-en="Products for Salesforce workflows." data-ja="Salesforce 業務向けのプロダクト。">Products for Salesforce workflows.</h2>
           </div>
-          <p>
-            The current app set targets Salesforce administrators and developers who need faster metadata inspection, internal automation, and Salesforce-aware AI support.
+          <p data-en="These independent tools support administrators and developers who need focused metadata workflows, internal automation, and context-aware assistance." data-ja="これらの独立ツールは、メタデータ業務、社内自動化、コンテキストを活用した支援を必要とする管理者と開発者をサポートします。">
+            These independent tools support administrators and developers who need focused metadata workflows, internal automation, and context-aware assistance.
           </p>
         </div>
 
         <div class="app-grid">
           <article class="app-card">
             <div class="app-media">
-              <img class="app-logo" src="apps/salesforce-admin-toolkit/logo-512.png" alt="Admin Toolkit for Salesforce logo">
-              <span class="pill release app-status">Release</span>
+              <img class="app-logo" src="apps/salesforce-admin-toolkit/logo-512.png" alt="DinaLab Admin Toolkit logo">
+              <span class="pill release app-status" data-en="Release" data-ja="リリース済">Release</span>
             </div>
             <div class="app-body">
-              <h3>Admin Toolkit for Salesforce</h3>
-              <p>
-                A Chrome side-panel suite for metadata administration, SOQL spreadsheets, org reviews, object schemas, REST testing, Apex execution, exports, and monitoring.
+              <h3>DinaLab Admin Toolkit</h3>
+              <p data-en="An independent Chrome side-panel suite compatible with Salesforce for metadata administration, SOQL workspaces, org reviews, object schemas, REST testing, Apex execution, exports, and monitoring." data-ja="Salesforce と互換性のある独立した Chrome サイドパネルスイート。メタデータ管理、SOQL ワークスペース、組織レビュー、オブジェクトスキーマ、REST テスト、Apex 実行、エクスポート、モニタリングを提供します。">
+                An independent Chrome side-panel suite compatible with Salesforce for metadata administration, SOQL workspaces, org reviews, object schemas, REST testing, Apex execution, exports, and monitoring.
               </p>
-              <ul class="meta-list" aria-label="Admin Toolkit for Salesforce highlights">
-                <li>Metadata Admin</li>
+              <ul class="meta-list" aria-label="DinaLab Admin Toolkit highlights">
+                <li data-en="Metadata Admin" data-ja="メタデータ管理">Metadata Admin</li>
                 <li>Force Sheet</li>
-                <li>Org Review</li>
-                <li>Object Schema</li>
+                <li data-en="Org Review" data-ja="組織レビュー">Org Review</li>
+                <li data-en="Object Schema" data-ja="オブジェクトスキーマ">Object Schema</li>
               </ul>
-              <a class="text-link" href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Install from Chrome Web Store</a>
-              <a class="text-link" href="apps/salesforce-admin-toolkit/">Open app page</a>
+              <a class="text-link" href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener" data-en="Install from Chrome Web Store" data-ja="Chrome ウェブストアから入手">Install from Chrome Web Store</a>
+              <a class="text-link" href="apps/salesforce-admin-toolkit/" data-en="Open app page" data-ja="アプリページを開く">Open app page</a>
             </div>
           </article>
 
           <article class="app-card">
             <div class="app-media">
-              <img class="app-logo" src="assets/salesforce-agentic-bot-icon.jpg" alt="Salesforce Agentic Bot icon">
-              <span class="pill draft app-status">Draft</span>
+              <img class="app-logo" src="assets/salesforce-agentic-bot-icon.jpg" alt="DinaLab Agent Assistant icon">
+              <span class="pill draft app-status" data-en="Draft" data-ja="開発中">Draft</span>
             </div>
             <div class="app-body">
-              <h3>Salesforce Agentic Bot</h3>
-              <p>
-                An in-development Salesforce side panel assistant that connects active org context with a chat transport backed by a Google Cloud Function.
+              <h3>DinaLab Agent Assistant</h3>
+              <p data-en="An independent Chrome side-panel assistant in development for Salesforce workflows, connecting selected org context to an AI service through a Cloud Run function." data-ja="Salesforce 業務向けに開発中の独立した Chrome サイドパネルアシスタント。選択した組織コンテキストを Cloud Run function 経由で AI サービスに接続します。">
+                An independent Chrome side-panel assistant in development for Salesforce workflows, connecting selected org context to an AI service through a Cloud Run function.
               </p>
-              <ul class="meta-list" aria-label="Salesforce Agentic Bot highlights">
-                <li>ChatBot</li>
-                <li>Org context</li>
-                <li>Cloud Function</li>
-                <li>Salesforce tools</li>
+              <ul class="meta-list" aria-label="DinaLab Agent Assistant highlights">
+                <li data-en="Chat assistant" data-ja="チャットアシスタント">Chat assistant</li>
+                <li data-en="Org context" data-ja="組織コンテキスト">Org context</li>
+                <li>Cloud Run function</li>
+                <li data-en="Salesforce tools" data-ja="Salesforce ツール">Salesforce tools</li>
               </ul>
-              <a class="text-link" href="apps/salesforce-agentic-bot/">Open app page</a>
+              <a class="text-link" href="apps/salesforce-agentic-bot/" data-en="Open app page" data-ja="アプリページを開く">Open app page</a>
             </div>
           </article>
         </div>
@@ -789,10 +833,10 @@
       <div class="section-inner">
         <div class="section-head">
           <div>
-            <p class="eyebrow">Love To Build</p>
-            <h2 id="builds-title">Systems that reduce repeated work.</h2>
+            <p class="eyebrow" data-en="Capabilities" data-ja="対応領域">Capabilities</p>
+            <h2 id="builds-title" data-en="Systems that reduce repeated work." data-ja="繰り返し作業を減らすシステム。">Systems that reduce repeated work.</h2>
           </div>
-          <p>
+          <p data-en="The common theme is practical software for teams that need reliable operations, clear workflows, and faster delivery." data-ja="共通するのは、信頼できる運用・明確なワークフロー・より速い提供を必要とするチームのための実用的なソフトウェアです。">
             The common theme is practical software for teams that need reliable operations, clear workflows, and faster delivery.
           </p>
         </div>
@@ -820,7 +864,7 @@
                 <path d="m20 7-8 4v10l8-4V7Z"></path>
               </svg>
             </span>
-            <span class="build-label">Salesforce Package</span>
+            <span class="build-label" data-en="Salesforce Packages" data-ja="Salesforce パッケージ">Salesforce Packages</span>
           </li>
           <li>
             <span class="build-icon" aria-hidden="true">
@@ -831,7 +875,7 @@
                 <path d="M18 16v-4"></path>
               </svg>
             </span>
-            <span class="build-label">Financial Systems</span>
+            <span class="build-label" data-en="Financial Systems" data-ja="財務システム">Financial Systems</span>
           </li>
           <li>
             <span class="build-icon" aria-hidden="true">
@@ -842,7 +886,7 @@
                 <path d="M8 11V8h8v3"></path>
               </svg>
             </span>
-            <span class="build-label">Booking System</span>
+            <span class="build-label" data-en="Booking Systems" data-ja="予約システム">Booking Systems</span>
           </li>
           <li>
             <span class="build-icon" aria-hidden="true">
@@ -852,7 +896,7 @@
                 <path d="M7 15h4"></path>
               </svg>
             </span>
-            <span class="build-label">Payment Systems</span>
+            <span class="build-label" data-en="Payment Systems" data-ja="決済システム">Payment Systems</span>
           </li>
         </ul>
       </div>
@@ -862,15 +906,15 @@
       <div class="section-inner">
         <div class="mcp">
           <div class="mcp-title">
-            <p class="eyebrow">Starting To Build</p>
+            <p class="eyebrow" data-en="In development" data-ja="開発中">In development</p>
             <h2 id="mcp-title">Model Context Protocol</h2>
           </div>
           <div class="mcp-body">
-            <h3>MCP-first tool integrations</h3>
-            <p>
+            <h3 data-en="MCP-first tool integrations" data-ja="MCP を軸としたツール連携">MCP-first tool integrations</h3>
+            <p data-en="DinaLab is starting to build with Model Context Protocol, connecting assistants to real tools, live context, and internal systems in a controlled way." data-ja="DinaLab は Model Context Protocol を用いた開発を始めており、アシスタントを実際のツール・ライブなコンテキスト・社内システムへ、管理された形で接続します。">
               DinaLab is starting to build with Model Context Protocol, connecting assistants to real tools, live context, and internal systems in a controlled way.
             </p>
-            <p>
+            <p data-en="The goal is direct, useful automation: Salesforce-aware tooling, cloud-backed services, and repeatable workflows that fit how engineering and operations teams already work." data-ja="目指すのは、直接的で役立つ自動化です。Salesforce を理解したツール、クラウドを基盤としたサービス、そしてエンジニアリングと運用チームの既存の働き方に合う再現可能なワークフロー。">
               The goal is direct, useful automation: Salesforce-aware tooling, cloud-backed services, and repeatable workflows that fit how engineering and operations teams already work.
             </p>
           </div>
@@ -880,7 +924,47 @@
   </main>
 
   <footer class="footer">
-    DinaLab builds independent tools for Salesforce and cloud workflows. Salesforce is a trademark of Salesforce, Inc.; these apps are independent projects.
+    <span data-en="DinaLab is an independent product studio. Salesforce is a trademark of Salesforce, Inc. DinaLab products are not affiliated with, endorsed by, or sponsored by Salesforce." data-ja="DinaLab は独立したプロダクトスタジオです。Salesforce は Salesforce, Inc. の商標です。DinaLab のプロダクトは Salesforce と提携しておらず、Salesforce による承認または後援を受けていません。">DinaLab is an independent product studio. Salesforce is a trademark of Salesforce, Inc. DinaLab products are not affiliated with, endorsed by, or sponsored by Salesforce.</span>
   </footer>
+
+  <script>
+    (function () {
+      // Shared, same-origin language preference. The manual pages read the same
+      // key on load, so a language chosen here carries over to those child pages.
+      var KEY = "dinalab-lang";
+      var toggle = document.getElementById("langToggle");
+      var label = document.getElementById("langLabel");
+      var nodes = document.querySelectorAll("[data-en][data-ja]");
+
+      function readLang() {
+        try {
+          return localStorage.getItem(KEY) === "ja" ? "ja" : "en";
+        } catch (e) {
+          return "en";
+        }
+      }
+
+      function apply(lang) {
+        document.documentElement.lang = lang;
+        nodes.forEach(function (node) {
+          node.textContent = node.getAttribute(lang === "en" ? "data-en" : "data-ja");
+        });
+        // Button shows the language it switches TO.
+        label.textContent = lang === "en" ? "日本語" : "English";
+        toggle.setAttribute("aria-label", lang === "en" ? "View in Japanese" : "英語で表示");
+      }
+
+      // Apply the remembered choice on load.
+      apply(readLang());
+
+      toggle.addEventListener("click", function () {
+        var next = readLang() === "en" ? "ja" : "en";
+        try {
+          localStorage.setItem(KEY, next);
+        } catch (e) {}
+        apply(next);
+      });
+    })();
+  </script>
 </body>
 </html>

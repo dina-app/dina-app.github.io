@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy Policy for Salesforce Agentic Bot | DinaLab</title>
-  <meta name="description" content="Privacy policy for the Salesforce Agentic Bot Chrome extension.">
+  <title>Privacy Policy for DinaLab Agent Assistant</title>
+  <meta name="description" content="Privacy policy for the DinaLab Agent Assistant Chrome extension for Salesforce workflows.">
+  <link rel="canonical" href="https://dina.jp/apps/salesforce-agentic-bot/PRIVACY_POLICY.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>
     :root {
       color-scheme: light;
@@ -148,10 +150,10 @@
     </nav>
 
     <article>
-      <h1>Privacy Policy for Salesforce Agentic Bot</h1>
-      <p class="updated">Last updated: June 26, 2026</p>
-      <p>Salesforce Agentic Bot is an in-development Chrome extension for Salesforce admins and developers. It adds a Chrome side panel assistant that can use active Salesforce org context and route chat requests through a Google Cloud Function backend.</p>
-      <p>This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+      <h1>Privacy Policy for DinaLab Agent Assistant</h1>
+      <p class="updated">Last updated: July 18, 2026</p>
+      <p>DinaLab Agent Assistant is an independent Chrome extension in development for Salesforce workflows. It adds a side-panel assistant that can use selected Salesforce org context and route chat requests through a Cloud Run function backend.</p>
+      <p>Salesforce is a trademark of Salesforce, Inc. The extension is not affiliated with, endorsed by, or sponsored by Salesforce. The OpenAI name identifies the configured AI service; no affiliation with or endorsement by OpenAI is implied.</p>
 
       <h2>Data the Extension Handles</h2>
       <p>The extension may handle:</p>
@@ -171,21 +173,22 @@
         <li>Authenticate Salesforce API calls for the active Salesforce org.</li>
         <li>Display org, user, schema, metadata, REST, Tooling, and Metadata API information inside the extension.</li>
         <li>Show the current Salesforce tab context in the side panel.</li>
-        <li>Send chat messages, selected Salesforce context, current tab context, and Salesforce session data to the configured Google Cloud Function endpoint only when the user sends a chat message.</li>
+        <li>Send chat messages, selected Salesforce context, current tab context, and extension tool results to the configured Cloud Run function endpoint only when the user sends a chat message. AI chat requests do not include Salesforce session IDs or authentication credentials.</li>
         <li>Store chat history, previous response IDs, retrieved metadata, and UI settings locally for convenience.</li>
       </ul>
 
       <h2>OpenAI Transport</h2>
       <p>The extension does not store an OpenAI API key in the browser and does not call OpenAI directly from the extension.</p>
-      <p>OpenAI requests are handled by the configured Google Cloud Function endpoint. The function uses its server-side <code>OPENAI_API_KEY</code> to call OpenAI and return the assistant's response to the extension.</p>
+      <p>OpenAI requests are handled by the configured Cloud Run function endpoint. The function uses its server-side <code>OPENAI_API_KEY</code> to call OpenAI and return the assistant's response to the extension.</p>
 
       <h2>Data Sharing and Transfers</h2>
-      <p>Salesforce Agentic Bot does not sell user data and does not use user data for advertising, tracking, profiling, creditworthiness, or lending purposes.</p>
+      <p>DinaLab Agent Assistant does not sell user data and does not use user data for advertising, tracking, profiling, creditworthiness, or lending purposes.</p>
       <p>Data is shared only as needed for user-facing functionality:</p>
       <ul>
         <li>Salesforce data is requested from Salesforce domains for the currently signed-in Salesforce user.</li>
-        <li>Chat messages, selected Salesforce context, current tab context, and Salesforce session data are sent to the configured Google Cloud Function endpoint when the user sends a chat message.</li>
-        <li>The Google Cloud Function sends chat input and selected context to OpenAI to produce the assistant's response.</li>
+        <li>Chat messages, selected Salesforce context, current tab context, and extension tool results are sent to the configured Cloud Run function endpoint when the user sends a chat message. Salesforce session IDs and authentication credentials are excluded from AI chat requests.</li>
+        <li>If the user starts a backend-assisted metadata index or file search, the extension may send the Salesforce instance URL, session credential, org identity, and requested search configuration to the configured backend for that operation. This data is not sent to OpenAI as part of chat transport.</li>
+        <li>The Cloud Run function sends chat input and selected context to OpenAI to produce the assistant's response.</li>
       </ul>
 
       <h2>Storage and Retention</h2>
@@ -196,13 +199,13 @@
       <p>The extension does not load or execute remotely hosted code. Extension code is packaged with the Chrome extension.</p>
 
       <h2>Human Access</h2>
-      <p>The developer does not have access to data handled locally by the extension unless the user separately shares it for support. Data sent through the configured Google Cloud Function is processed only to provide the requested response.</p>
+      <p>The developer does not have access to data handled locally by the extension unless the user separately shares it for support. Data sent through the configured Cloud Run function is processed only to provide the requested response.</p>
 
       <h2>Chrome Web Store Limited Use Disclosure</h2>
       <p>The use of information received from Google APIs will adhere to the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
 
       <h2>Contact</h2>
-      <p>For privacy questions or support, use the support contact provided on the Chrome Web Store listing.</p>
+      <p>For privacy questions or support, use the <a href="/support/">DinaLab support page</a>.</p>
     </article>
   </main>
 </body>

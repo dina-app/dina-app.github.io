@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Common Tools | DinaLab</title>
   <meta name="description" content="Browser-only common tools for developers and admins.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +19,10 @@
         <h1>Common Tools</h1>
         <p>Developer and admin workbench</p>
       </div>
-      <a class="home-link" href="../">Home</a>
+      <div class="topbar-actions">
+        <button type="button" id="siteLangToggle" class="lang-toggle" aria-label="日本語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg><span class="lang-label">日本語</span></button>
+        <a class="home-link" href="../">Home</a>
+      </div>
     </header>
 
     <div class="workspace">
@@ -45,5 +49,6 @@
   </div>
 
   <script src="app.js" defer></script>
+  <script src="../assets/site-language.js" defer></script>
 </body>
 </html>

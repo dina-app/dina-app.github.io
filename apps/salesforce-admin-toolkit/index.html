@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Toolkit for Salesforce | DinaLab</title>
-  <meta name="description" content="Admin Toolkit for Salesforce is an independent Chrome side-panel suite for metadata administration, SOQL spreadsheets, object schemas, APIs, Apex, exports, and monitoring.">
+  <title>DinaLab Admin Toolkit | Compatible with Salesforce</title>
+  <meta name="description" content="DinaLab Admin Toolkit is an independent Chrome side-panel suite compatible with Salesforce for metadata, SOQL, schemas, APIs, Apex, exports, and monitoring.">
+  <link rel="canonical" href="https://dina.jp/apps/salesforce-admin-toolkit/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>
     :root {
       color-scheme: light;
@@ -70,6 +72,11 @@
       background: var(--panel);
       color: var(--rust);
     }
+
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
+    .lang-toggle svg { width: 16px; height: 16px; }
 
     .hero {
       display: grid;
@@ -215,26 +222,29 @@
         <span class="brand-mark">D</span>
         <span>DinaLab</span>
       </a>
-      <a href="../../">Back to home</a>
+      <span class="nav-actions">
+        <button type="button" id="siteLangToggle" class="lang-toggle" aria-label="日本語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg><span class="lang-label">日本語</span></button>
+        <a href="../../">Back to home</a>
+      </span>
     </nav>
 
     <header class="hero">
       <div>
         <span class="release-pill">Current release: 0.6.2</span>
-        <h1>Admin Toolkit for Salesforce</h1>
+        <h1>DinaLab Admin Toolkit</h1>
         <p class="lead">
-          Admin Toolkit for Salesforce is an independent Chrome right-side panel suite for Salesforce administrators and developers. It uses the Salesforce session you are already signed in with to provide metadata administration, SOQL spreadsheets, object schema exploration, API tools, Apex execution, exports, and monitoring without an external metadata service.
+          DinaLab Admin Toolkit is an independent Chrome right-side panel suite compatible with Salesforce. It uses the Salesforce session you are already signed in with to provide metadata administration, SOQL workspaces, object schema exploration, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.
         </p>
         <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
         <a class="store-link" href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Install from Chrome Web Store</a>
         <a href="manual/" style="margin-left: 14px;">User Manual</a>
       </div>
-      <img class="logo" src="logo-512.png" alt="Admin Toolkit for Salesforce logo">
+      <img class="logo" src="logo-512.png" alt="DinaLab Admin Toolkit logo">
     </header>
 
     <div class="content">
       <section aria-labelledby="apps-title">
-        <h2 id="apps-title">One Toolkit, Focused Apps</h2>
+        <h2 id="apps-title">One Toolkit, Focused Workspaces</h2>
         <p>The popup Apps tab is the main entry point for the toolkit's Salesforce workspaces.</p>
         <div class="app-grid">
           <article class="app-summary">
@@ -257,7 +267,7 @@
       </section>
 
       <section aria-labelledby="features-title">
-        <h2 id="features-title">Admin And Developer Tools</h2>
+        <h2 id="features-title">Administrator and Developer Tools</h2>
         <ul>
           <li>Search Salesforce metadata by label, name, API name, object, developer name, and matching snippets.</li>
           <li>Open supported metadata records directly in Salesforce Setup.</li>
@@ -296,12 +306,12 @@
 
       <section aria-labelledby="install-title">
         <h2 id="install-title">Install</h2>
-        <p>Install <a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Admin Toolkit for Salesforce from the Chrome Web Store</a>. For local development:</p>
+        <p>Install <a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">DinaLab Admin Toolkit from the Chrome Web Store</a>. For local development:</p>
         <ol>
           <li>Open <code>chrome://extensions</code>.</li>
           <li>Enable Developer mode.</li>
           <li>Choose <strong>Load unpacked</strong>.</li>
-          <li>Select the <code>Admin Toolkit for Salesforce</code> folder.</li>
+          <li>Select the extension source folder.</li>
           <li>Open a Salesforce tab and launch the extension.</li>
         </ol>
       </section>
@@ -313,9 +323,12 @@
 
       <section aria-labelledby="support-title">
         <h2 id="support-title">Support</h2>
-        <p>Read the <a href="manual/">user manual with screenshots</a>. For support, use the support contact on the Chrome Web Store listing or open an issue in the project repository.</p>
+        <p>Read the <a href="manual/">user manual with screenshots</a>. Report a problem or ask a product question through the <a href="/support/">DinaLab support page</a>.</p>
       </section>
+
+      <p class="notice">Salesforce is a trademark of Salesforce, Inc. DinaLab Admin Toolkit is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
     </div>
   </main>
+  <script src="../../assets/site-language.js"></script>
 </body>
 </html>

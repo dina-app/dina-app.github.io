@@ -1,17 +1,23 @@
-# GitHub Pages Entry Point
+# DinaLab public site
 
-This site is configured for GitHub Pages and uses `index.html` as the main landing page.
+This repository publishes [dina.jp](https://dina.jp/) through GitHub Pages.
 
-## How to use
+Public product pages:
 
-- Put your homepage content in `index.html`.
-- Keep supporting assets (CSS/JS/images) in this repository and reference them from `index.html`.
-- After pushing to the default branch, GitHub Pages will publish the site automatically.
+- [DinaLab Admin Toolkit](apps/salesforce-admin-toolkit/index.html), an independent Chrome extension compatible with Salesforce.
+- [DinaLab Agent Assistant](apps/salesforce-agentic-bot/index.html), an independent assistant in development for Salesforce workflows.
+- [Common Tools](tools/index.html), a browser-only developer and administrator workbench.
 
-## Preview URL format
+The Admin Toolkit manual is generated from
+[`manual/_build/scenes.mjs`](apps/salesforce-admin-toolkit/manual/_build/scenes.mjs)
+and [`manual/_build/generate.mjs`](apps/salesforce-admin-toolkit/manual/_build/generate.mjs).
+Regenerate both languages with:
 
-Your published site URL will be:
+```sh
+node apps/salesforce-admin-toolkit/manual/_build/generate.mjs
+```
 
-`https://<your-username>.github.io/<repository-name>/`
+Before publishing, complete [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md).
 
-GitHub Pages serves `index.html` by default at that URL.
+Salesforce is a trademark of Salesforce, Inc. DinaLab products are independent
+and are not affiliated with, endorsed by, or sponsored by Salesforce.

@@ -29,7 +29,7 @@ Prepared: July 18, 2026
 - [ ] Confirm the Chrome Web Store item remains named `Admin Toolkit for Salesforce` and update its description and screenshots for version 0.7.0.
 - [ ] Confirm the Chrome Web Store privacy declarations exactly match the current extension behavior and the published privacy policy.
 - [ ] Confirm the Store single-purpose statement describes one narrow focus area: Salesforce administration and development workflows.
-- [ ] Verify the developer support email and privacy-policy URL in the Chrome Web Store dashboard. The public site now provides a direct GitHub Issues support route.
+- [ ] Verify the developer support email and privacy-policy URL in the Chrome Web Store dashboard.
 - [x] Rename the draft assistant in its source repository to `Dina Agent for Salesforce` before any public submission.
 - [x] Exclude Salesforce session IDs, instance URLs, and authentication credentials from AI chat requests at both the callers and shared transport; reject these fields at the chat backend.
 - [ ] Review whether backend-assisted metadata index and file-search features should continue receiving Salesforce session credentials; remove or retain with explicit in-product disclosure before releasing the assistant.

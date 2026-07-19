@@ -72,8 +72,6 @@
     "Read the user manual with screenshots": "スクリーンショット付きユーザーマニュアルをご覧ください",
     "Report a problem or ask a product question through the": "不具合の報告や製品に関する質問は、次のページからお送りください:",
     ". Report a problem or ask a product question through the": "。不具合の報告や製品に関する質問は、次のページからお送りください:",
-    "DinaLab support page": "DinaLab サポートページ",
-    "Report a problem or ask a product question through the DinaLab support page": "不具合の報告や製品に関する質問は、DinaLab サポートページからお送りください",
     "Dina Agent for Salesforce is an independent Chrome extension in development for Salesforce administrators and developers. It adds a side-panel assistant that can use selected Salesforce org context and route chat requests through a Cloud Run function backend.": "Dina Agent for Salesforce は、Salesforce の管理者と開発者向けに開発中の独立した Chrome 拡張機能です。選択した Salesforce 組織コンテキストを利用し、Cloud Run function バックエンドを経由してチャットリクエストを処理するサイドパネルアシスタントを追加します。",
     "What You Can Do": "できること",
     "Open a Chrome side panel on Salesforce pages.": "Salesforce ページで Chrome サイドパネルを開きます。",

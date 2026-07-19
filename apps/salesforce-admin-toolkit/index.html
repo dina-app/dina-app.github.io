@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Toolkit for Salesforce | Compatible with Salesforce</title>
-  <meta name="description" content="Admin Toolkit for Salesforce is an independent Chrome side-panel suite compatible with Salesforce for metadata, SOQL, schemas, APIs, Apex, exports, and monitoring.">
+  <meta name="description" content="Admin Toolkit for Salesforce is an independent Chrome side-panel suite compatible with Salesforce for metadata, SOQL, permissions, schemas, APIs, Apex, exports, and monitoring.">
   <link rel="canonical" href="https://dina.jp/apps/salesforce-admin-toolkit/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>
@@ -230,10 +230,10 @@
 
     <header class="hero">
       <div>
-        <span class="release-pill">Current release: 0.6.2</span>
+        <span class="release-pill">Current release: 0.7.0</span>
         <h1>Admin Toolkit for Salesforce</h1>
         <p class="lead">
-          Admin Toolkit for Salesforce is an independent Chrome right-side panel suite compatible with Salesforce. It uses the Salesforce session you are already signed in with to provide metadata administration, SOQL workspaces, object schema exploration, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.
+          Admin Toolkit for Salesforce is an independent Chrome right-side panel suite compatible with Salesforce. It uses the Salesforce session you are already signed in with to provide metadata administration, SOQL workspaces, permission analysis, object schema exploration, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.
         </p>
         <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
         <a class="store-link" href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Install from Chrome Web Store</a>
@@ -263,6 +263,10 @@
             <h3>Object Schema</h3>
             <p>Explore parent and child relationships in an interactive map with packaged-namespace scope, search, zoom, layout controls, relationship details, and a spreadsheet Fields view with filters, search highlights, CSV export, and full screen.</p>
           </article>
+          <article class="app-summary">
+            <h3>Permission Explorer</h3>
+            <p>Explain why a user can access an object or field, identify overlapping grants, and trace each permission to the profile, permission set, or permission set group that grants it.</p>
+          </article>
         </div>
       </section>
 
@@ -275,6 +279,7 @@
           <li>Execute anonymous Apex and review compile, execution, and debug output.</li>
           <li>Export SOQL, SOSL, GraphQL, and report results as available CSV or JSON output.</li>
           <li>Browse Salesforce document folders, preview supported files, and download selected folders and files as ZIP.</li>
+          <li>Trace object and field permissions to the profiles, permission sets, and permission set groups that grant them.</li>
           <li>Inspect setup audit trail, API limits, login history, event log files, org summaries, and user summaries.</li>
           <li>Use the built-in English and Japanese manual for end-user guidance.</li>
         </ul>
@@ -318,7 +323,7 @@
 
       <section aria-labelledby="release-title">
         <h2 id="release-title">Current Release</h2>
-        <p>Version <code>0.6.2</code> makes Document Folders selection recursive and reliable across lazily loaded subtrees, keeps duplicate document occurrences independent with folder-preserving ZIP paths, and adds ZIP file and size limits with cancelable downloads; rebuilds the Object Schema fields experience as a spreadsheet view with native header filters, global search highlights, CSV export, and full screen, scoped by per-org Packaged Objects settings; and applies the shared compact app header to Metadata Admin for Salesforce and Org Review. No new permissions were added.</p>
+        <p>Version 0.7.0 adds Permission Explorer, a read-only workspace that explains why a user can access an object or field. It lists every assigned record that grants access, highlights objects granted by more than one record, and traces each permission to the profile, permission set, or permission set group that grants it. Permission Explorer explains object and field permissions only, not record-level sharing. No new Chrome permissions were added.</p>
       </section>
 
       <section aria-labelledby="support-title">

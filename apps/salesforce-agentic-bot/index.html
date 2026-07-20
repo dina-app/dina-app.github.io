@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dina Agent for Salesforce | Compatible with Salesforce</title>
+  <meta name="description" content="Dina Agent for Salesforce is an independent Chrome side-panel assistant in development for Salesforce workflows, backed by a Cloud Run function.">
+  <link rel="canonical" href="https://dina.jp/apps/salesforce-agentic-bot/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7f4;
+      --ink: #172027;
+      --muted: #5b6770;
+      --panel: #ffffff;
+      --line: #d6ded8;
+      --green: #1f6b54;
+      --rust: #a24d32;
+      --blue: #235f82;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .shell {
+      width: min(980px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 26px 0 64px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 54px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--rust);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
+    .lang-toggle svg { width: 16px; height: 16px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 152px;
+      gap: 34px;
+      align-items: center;
+      margin-bottom: 44px;
+    }
+
+    .logo {
+      width: 152px;
+      height: 152px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      object-fit: cover;
+      box-shadow: 0 16px 34px rgba(23, 32, 39, 0.11);
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: 28px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin-bottom: 12px;
+      color: #3a464f;
+      font-size: 19px;
+    }
+
+    .notice {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .content {
+      display: grid;
+      gap: 18px;
+    }
+
+    section {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 12px 26px rgba(23, 32, 39, 0.07);
+    }
+
+    ul,
+    ol {
+      margin-bottom: 0;
+      padding-left: 22px;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    code,
+    pre {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: #edf3ef;
+    }
+
+    pre {
+      overflow: auto;
+      margin: 0;
+      padding: 14px;
+      border-radius: 8px;
+      background: #0e1720;
+      color: #edf7f3;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 700px) {
+      .shell {
+        width: min(100% - 28px, 980px);
+        padding-top: 18px;
+      }
+
+      .nav,
+      .hero {
+        align-items: flex-start;
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="../../">
+        <span class="brand-mark">D</span>
+        <span>DinaLab</span>
+      </a>
+      <span class="nav-actions">
+        <button type="button" id="siteLangToggle" class="lang-toggle" aria-label="日本語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg><span class="lang-label">日本語</span></button>
+        <a href="../../">Back to home</a>
+      </span>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <h1>Dina Agent for Salesforce</h1>
+        <p class="lead">
+          Dina Agent for Salesforce is an independent Chrome extension in development for Salesforce administrators and developers. It adds a side-panel assistant that can use selected Salesforce org context and route chat requests through a Cloud Run function backend.
+        </p>
+        <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+      </div>
+      <img class="logo" src="logo-512.png" alt="Dina Agent for Salesforce icon">
+    </header>
+
+    <div class="content">
+      <section aria-labelledby="features-title">
+        <h2 id="features-title">What You Can Do</h2>
+        <ul>
+          <li>Open a Chrome side panel on Salesforce pages.</li>
+          <li>Detect the active Salesforce tab title and URL.</li>
+          <li>Read org and user summary information from the signed-in Salesforce org.</li>
+          <li>Chat with an assistant backed by a Cloud Run function.</li>
+          <li>Send selected Salesforce context with chat requests.</li>
+          <li>Keep the OpenAI API key out of the browser by storing it in the Cloud Run function environment.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="architecture-title">
+        <h2 id="architecture-title">Architecture</h2>
+        <p>Dina Agent for Salesforce separates the browser extension from the OpenAI transport layer.</p>
+        <ol>
+          <li>The extension reads the active Salesforce org session in the browser.</li>
+          <li>The side-panel chat sends chat history, selected Salesforce context, current tab context, and extension tool results to the configured Cloud Run function endpoint.</li>
+          <li>Salesforce session IDs and authentication credentials are not included in AI chat requests. Salesforce API tools run inside the extension.</li>
+          <li>The Cloud Run function calls OpenAI with its function-level <code>OPENAI_API_KEY</code>.</li>
+          <li>The Cloud Run function returns the assistant's response to the extension.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="configuration-title">
+        <h2 id="configuration-title">Configuration</h2>
+        <p>Set the Cloud Run function URL in the extension's <code>api.js</code>:</p>
+        <pre><code>export const GCF_ENDPOINT_URL = "https://YOUR_REGION-YOUR_PROJECT.cloudfunctions.net/agenticBot";</code></pre>
+        <p>Then load the extension locally:</p>
+        <ol>
+          <li>Open <code>chrome://extensions</code>.</li>
+          <li>Enable Developer mode.</li>
+          <li>Choose <code>Load unpacked</code>.</li>
+          <li>Select the extension source folder.</li>
+          <li>Open a Salesforce tab and launch the extension.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="gcf-title">
+        <h2 id="gcf-title">Cloud Run Function</h2>
+        <p>Deploy the Cloud Run function broker from:</p>
+        <pre><code>gcf/agentic-bot/index.js</code></pre>
+        <p>Required environment variable: <code>OPENAI_API_KEY</code>.</p>
+        <p>Optional runtime settings: <code>OPENAI_MODEL</code> defaults to <code>gpt-5-mini</code>; <code>OPENAI_MAX_OUTPUT_TOKENS</code> defaults to <code>1000</code>.</p>
+      </section>
+
+      <section aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Privacy</h2>
+        <p>
+          The extension stores UI settings, chat history, previous response IDs, and retrieved Salesforce metadata locally in the browser. AI chat requests send chat messages, selected Salesforce context, current tab context, and extension tool results to the configured Cloud Run function endpoint, but do not include Salesforce session IDs or authentication credentials.
+        </p>
+        <p>The extension does not store an OpenAI API key in the browser and does not call OpenAI directly from the extension.</p>
+        <p>Read the full policy: <a href="PRIVACY_POLICY.html">Privacy Policy</a></p>
+      </section>
+
+      <section aria-labelledby="status-title">
+        <h2 id="status-title">Status</h2>
+        <p>Dina Agent for Salesforce is currently in development and is not publicly released.</p>
+      </section>
+
+      <p class="notice">Salesforce is a trademark of Salesforce, Inc. Dina Agent for Salesforce is not affiliated with, endorsed by, or sponsored by Salesforce. The OpenAI name identifies the configured AI service; no affiliation with or endorsement by OpenAI is implied.</p>
+    </div>
+  </main>
+  <script src="../../assets/site-language.js"></script>
+</body>
+</html>

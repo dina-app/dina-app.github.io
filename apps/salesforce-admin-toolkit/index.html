@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Toolkit for Salesforce | Compatible with Salesforce</title>
+  <meta name="description" content="Admin Toolkit for Salesforce is an independent Chrome side-panel suite compatible with Salesforce for metadata, SOQL, permissions, schemas, APIs, Apex, exports, and monitoring.">
+  <link rel="canonical" href="https://dina.jp/apps/salesforce-admin-toolkit/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7f4;
+      --ink: #172027;
+      --muted: #5b6770;
+      --panel: #ffffff;
+      --line: #d6ded8;
+      --green: #1f6b54;
+      --green-soft: #e7f4ed;
+      --rust: #a24d32;
+      --blue: #235f82;
+      --blue-soft: #e7f1f7;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .shell {
+      width: min(1040px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 26px 0 64px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 54px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--rust);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
+    .lang-toggle svg { width: 16px; height: 16px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 168px;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 44px;
+    }
+
+    .logo {
+      width: 168px;
+      height: 168px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      object-fit: cover;
+      padding: 10px;
+      box-shadow: 0 16px 34px rgba(23, 32, 39, 0.11);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 16px;
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: 28px;
+      line-height: 1.12;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .lead {
+      margin-bottom: 12px;
+      color: #3a464f;
+      font-size: 19px;
+    }
+
+    .notice {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .store-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 11px 20px;
+      border-radius: 8px;
+      background: var(--green);
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .store-link:hover {
+      background: #185544;
+      text-decoration: none;
+    }
+
+    .release-pill {
+      display: inline-flex;
+      margin-bottom: 16px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .content { display: grid; gap: 18px; }
+
+    section {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 12px 26px rgba(23, 32, 39, 0.07);
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .app-summary {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--blue-soft);
+    }
+
+    .app-summary:nth-child(2) { background: var(--green-soft); }
+    .app-summary p { margin-bottom: 0; }
+
+    ul, ol {
+      margin-bottom: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: #edf3ef;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    @media (max-width: 700px) {
+      .shell {
+        width: min(100% - 28px, 1040px);
+        padding-top: 18px;
+      }
+
+      .nav, .hero {
+        align-items: flex-start;
+        grid-template-columns: 1fr;
+      }
+
+      .nav { flex-direction: column; }
+      .app-grid { grid-template-columns: 1fr; }
+      .logo { width: 132px; height: 132px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="../../">
+        <span class="brand-mark">D</span>
+        <span>DinaLab</span>
+      </a>
+      <span class="nav-actions">
+        <button type="button" id="siteLangToggle" class="lang-toggle" aria-label="日本語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg><span class="lang-label">日本語</span></button>
+        <a href="../../">Back to home</a>
+      </span>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <span class="release-pill">Current release: 0.7.0</span>
+        <h1>Admin Toolkit for Salesforce</h1>
+        <p class="lead">
+          Admin Toolkit for Salesforce is an independent Chrome right-side panel suite compatible with Salesforce. It uses the Salesforce session you are already signed in with to provide metadata administration, SOQL workspaces, permission analysis, object schema exploration, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.
+        </p>
+        <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+        <a class="store-link" href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Install from Chrome Web Store</a>
+        <a href="manual/" style="margin-left: 14px;">User Manual</a>
+      </div>
+      <img class="logo" src="logo-512.png" alt="Admin Toolkit for Salesforce logo">
+    </header>
+
+    <div class="content">
+      <section aria-labelledby="apps-title">
+        <h2 id="apps-title">One Toolkit, Focused Workspaces</h2>
+        <p>The popup Apps tab is the main entry point for the toolkit's Salesforce workspaces.</p>
+        <div class="app-grid">
+          <article class="app-summary">
+            <h3>Metadata Admin for Salesforce</h3>
+            <p>Browse source-style metadata, search the loaded workspace, edit files locally, track changes, build package.xml selections, and deploy or discard changes.</p>
+          </article>
+          <article class="app-summary">
+            <h3>Force Sheet</h3>
+            <p>Run SOQL queries and Salesforce reports or import CSV/XLSX data in a multi-tab spreadsheet grid with streaming pagination and Salesforce CRUD workflows.</p>
+          </article>
+          <article class="app-summary">
+            <h3>Org Review</h3>
+            <p>Run a read-only assessment with evidence, scorecards, security review, remediation guidance, and PDF, Markdown, summary JSON, or evidence JSON exports.</p>
+          </article>
+          <article class="app-summary">
+            <h3>Object Schema</h3>
+            <p>Explore parent and child relationships in an interactive map with packaged-namespace scope, search, zoom, layout controls, relationship details, and a spreadsheet Fields view with filters, search highlights, CSV export, and full screen.</p>
+          </article>
+          <article class="app-summary">
+            <h3>Permission Explorer</h3>
+            <p>Explain why a user can access an object or field, identify overlapping grants, and trace each permission to the profile, permission set, or permission set group that grants it.</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="features-title">
+        <h2 id="features-title">Administrator and Developer Tools</h2>
+        <ul>
+          <li>Search Salesforce metadata by label, name, API name, object, developer name, and matching snippets.</li>
+          <li>Open supported metadata records directly in Salesforce Setup.</li>
+          <li>Send user-initiated Salesforce REST API requests and inspect JSON responses.</li>
+          <li>Execute anonymous Apex and review compile, execution, and debug output.</li>
+          <li>Export SOQL, SOSL, GraphQL, and report results as available CSV or JSON output.</li>
+          <li>Browse Salesforce document folders, preview supported files, and download selected folders and files as ZIP.</li>
+          <li>Trace object and field permissions to the profiles, permission sets, and permission set groups that grant them.</li>
+          <li>Inspect setup audit trail, API limits, login history, event log files, org summaries, and user summaries.</li>
+          <li>Use the built-in English and Japanese manual for end-user guidance.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="runtime-title">
+        <h2 id="runtime-title">How It Works</h2>
+        <ul>
+          <li>The extension runs in Chrome and uses the active Salesforce session.</li>
+          <li>Salesforce user and organization identity fields are used to identify the active session and org.</li>
+          <li>Salesforce metadata, records, user identity data, authentication information, and user-entered requests are sent only to the Salesforce org selected by the user—not to developer-operated servers or non-Salesforce third-party services.</li>
+          <li>Workspace preferences, search data, pending edits, saved Force Sheet files, recent/favorite tools, and sanitized operation history may be stored locally in Chrome browser storage on the user's device.</li>
+          <li>Operation history is limited to the most recent 100 entries and excludes session tokens and authorization headers. Feature-specific saved data can be cleared where the extension offers that control, and removing the extension clears its Chrome-managed local storage.</li>
+          <li>The extension does not include analytics, telemetry, advertising, affiliate links, or remotely hosted JavaScript or WebAssembly.</li>
+          <li>Extension JavaScript, HTML, CSS, and third-party spreadsheet code are packaged with the extension. Salesforce responses are treated as data and are not executed as code.</li>
+        </ul>
+        <p><a href="PRIVACY_POLICY.html">Read the full Privacy Policy</a>.</p>
+      </section>
+
+      <section aria-labelledby="permissions-title">
+        <h2 id="permissions-title">Permissions</h2>
+        <ul>
+          <li><code>cookies</code>: reads Salesforce session cookies so the toolkit can connect to the org where the user is already signed in.</li>
+          <li><code>sidePanel</code>: opens the toolkit in Chrome's side panel.</li>
+          <li><code>storage</code>: saves local workspace preferences, data, UI settings, and pending edits.</li>
+          <li>Salesforce host access: permits requests to Salesforce org, Setup, Experience Cloud, Visualforce, and Salesforce Sites domains used by the active org.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="install-title">
+        <h2 id="install-title">Install</h2>
+        <p><a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Install Admin Toolkit for Salesforce from the Chrome Web Store</a>. For local development:</p>
+        <ol>
+          <li>Open chrome://extensions.</li>
+          <li>Enable Developer mode.</li>
+          <li>Choose Load unpacked.</li>
+          <li>Select the extension source folder.</li>
+          <li>Open a Salesforce tab and launch the extension.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="release-title">
+        <h2 id="release-title">Current Release</h2>
+        <p>Version 0.7.0 adds Permission Explorer, a read-only workspace that explains why a user can access an object or field. It lists every assigned record that grants access, highlights objects granted by more than one record, and traces each permission to the profile, permission set, or permission set group that grants it. Permission Explorer explains object and field permissions only, not record-level sharing. No new Chrome permissions were added.</p>
+      </section>
+
+      <section aria-labelledby="support-title">
+        <h2 id="support-title">Support</h2>
+        <p><a href="manual/">Read the user manual with screenshots</a>.</p>
+      </section>
+
+      <p class="notice">Salesforce is a trademark of Salesforce, Inc. Admin Toolkit for Salesforce is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+    </div>
+  </main>
+  <script src="../../assets/site-language.js"></script>
+</body>
+</html>

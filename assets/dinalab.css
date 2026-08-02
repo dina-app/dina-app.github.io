@@ -1,0 +1,1337 @@
+/*
+ * DinaLab design system
+ * ---------------------
+ * One stylesheet for every public page: homepage, product pages, privacy
+ * policies, and manuals. Pages opt into a composition with a body class:
+ *
+ *   body.home        full-bleed marketing bands (homepage only)
+ *   body.doc-page    centred column of card sections (product + policy pages)
+ *   body.manual-page doc-page plus manual extras (TOC, figures, callouts)
+ *
+ * Theme: assets/site-theme.js stamps data-theme="light|dark" on <html> before
+ * first paint, so only one dark token block is needed below.
+ */
+
+/* ---------------------------------------------------------------- tokens */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces: warm paper, not grey. */
+  --bg: #f7f5ef;
+  --bg-sunken: #efece3;
+  --surface: #ffffff;
+  --surface-soft: #faf8f3;
+  --surface-inset: #f2efe7;
+
+  /* Ink */
+  --ink: #171d23;
+  --ink-soft: #3b454e;
+  --muted: #66707a;
+
+  /* Lines */
+  --line: #e2ddd2;
+  --line-strong: #c7c0b1;
+
+  /* Accents */
+  --accent: #a94b2c;
+  --accent-ink: #8e3d22;
+  --accent-soft: #f8ece6;
+  --blue: #1c5b86;
+  --blue-ink: #164a6d;
+  --blue-soft: #e8f2f9;
+  --green: #1c6a52;
+  --green-ink: #145441;
+  --green-soft: #e6f3ec;
+  --danger: #a8382f;
+  --danger-soft: #fbeae7;
+
+  /* Inverted block (footer, feature panel) */
+  --invert-bg: #1b2229;
+  --invert-ink: #f4f1ea;
+  --invert-muted: rgba(244, 241, 234, 0.72);
+
+  /* Code */
+  --code-bg: #f0ede4;
+  --code-ink: #2c3a2f;
+  --pre-bg: #12181d;
+  --pre-ink: #e9f0ef;
+
+  /* Radii */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-pill: 999px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(23, 29, 35, 0.05), 0 6px 16px rgba(23, 29, 35, 0.05);
+  --shadow-md: 0 2px 4px rgba(23, 29, 35, 0.05), 0 14px 32px rgba(23, 29, 35, 0.08);
+  --shadow-lg: 0 4px 8px rgba(23, 29, 35, 0.06), 0 26px 60px rgba(23, 29, 35, 0.12);
+  --ring: 0 0 0 3px rgba(28, 91, 134, 0.32);
+
+  /* Rhythm */
+  --gap: 18px;
+  --band: clamp(56px, 7vw, 92px);
+  --measure: 68ch;
+
+  /* Type */
+  --fs-display: clamp(42px, 7.2vw, 84px);
+  --fs-h1: clamp(34px, 5.4vw, 58px);
+  --fs-h2: clamp(26px, 3.4vw, 40px);
+  --fs-h3: clamp(19px, 1.5vw, 22px);
+  --fs-lead: clamp(17px, 1.25vw, 20px);
+  --fs-sm: 14px;
+  --fs-xs: 13px;
+
+  --sans: Inter, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo,
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "SFMono-Regular", ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+
+  font-family: var(--sans);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Warm charcoal rather than blue-grey, so both themes read as one brand. */
+  --bg: #1a1917;
+  --bg-sunken: #131211;
+  --surface: #24221f;
+  --surface-soft: #2b2925;
+  --surface-inset: #322f2a;
+
+  --ink: #f3f0e9;
+  --ink-soft: #d4cfc4;
+  --muted: #a09a8e;
+
+  --line: #38352f;
+  --line-strong: #524d45;
+
+  --accent: #e79068;
+  --accent-ink: #f0a687;
+  --accent-soft: #35211a;
+  --blue: #7fb9e0;
+  --blue-ink: #9ccbeb;
+  --blue-soft: #16293a;
+  --green: #74c9a3;
+  --green-ink: #92d8b7;
+  --green-soft: #14291f;
+  --danger: #e88a80;
+  --danger-soft: #351d1b;
+
+  --invert-bg: #131211;
+  --invert-ink: #f3f0e9;
+  --invert-muted: rgba(243, 240, 233, 0.68);
+
+  --code-bg: #322f2a;
+  --code-ink: #e0dbd0;
+  --pre-bg: #100f0e;
+  --pre-ink: #e6e2d9;
+
+  /* Dark surfaces read as elevated through contrast, not drop shadow. */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.55);
+  --ring: 0 0 0 3px rgba(127, 185, 224, 0.4);
+}
+
+/* ------------------------------------------------------------ base reset */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid transparent;
+  border-radius: var(--r-sm);
+  box-shadow: var(--ring);
+  outline-offset: 2px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+hr {
+  height: 1px;
+  margin: 28px 0;
+  border: 0;
+  background: var(--line);
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+/* ------------------------------------------------------------ typography */
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--ink);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+h1 {
+  margin-bottom: 16px;
+  font-size: var(--fs-h1);
+  line-height: 1.05;
+}
+
+h2 {
+  margin-bottom: 12px;
+  font-size: var(--fs-h2);
+  line-height: 1.12;
+}
+
+h3 {
+  margin-bottom: 8px;
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+
+/* Japanese has no descender-light lowercase, so tight display leading
+   collapses. Give CJK a little more room at every display size. */
+:lang(ja) h1,
+:lang(ja) h2 {
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lead {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+}
+
+.notice,
+.updated {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.text-link + .text-link {
+  margin-left: 16px;
+}
+
+ul,
+ol {
+  margin-bottom: 0;
+  padding-left: 22px;
+}
+
+li + li {
+  margin-top: 8px;
+}
+
+code {
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--code-bg);
+  color: var(--code-ink);
+  font-family: var(--mono);
+  font-size: 0.92em;
+}
+
+pre {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  overflow: auto;
+  border-radius: var(--r-sm);
+  background: var(--pre-bg);
+  color: var(--pre-ink);
+  font-family: var(--mono);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+pre code {
+  padding: 0;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ---------------------------------------------------------------- layout */
+
+.shell {
+  width: min(1080px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 22px 0 72px;
+}
+
+.shell.narrow {
+  width: min(880px, calc(100% - 48px));
+}
+
+/* --------------------------------------------------------- navigation */
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  min-height: 48px;
+  margin-bottom: 44px;
+}
+
+/* The brand claims the free space so every other child — whether grouped in a
+   .nav-actions span or dropped in loose — clusters on the right. */
+.nav > :first-child {
+  margin-right: auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+
+.brand:hover {
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--accent);
+  font-weight: 900;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-links,
+.nav-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.nav-links > a:not(.lang-toggle):not(.button),
+.nav-actions > a:not(.lang-toggle):not(.button) {
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.nav-links > a:not(.lang-toggle):not(.button):hover,
+.nav-actions > a:not(.lang-toggle):not(.button):hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------- controls */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--ink);
+  border-radius: var(--r-sm);
+  background: var(--ink);
+  color: var(--bg);
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button.secondary {
+  border-color: var(--line-strong);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.button.accent {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.button-row,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Toggles share one shape so the nav reads as a single control group. */
+.lang-toggle,
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.lang-toggle:hover,
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.lang-toggle svg,
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+}
+
+.theme-toggle {
+  width: 36px;
+  padding: 0;
+  justify-content: center;
+}
+
+/* Each toggle shows the state it switches TO. */
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+/* ------------------------------------------------------------ indicators */
+
+.pill,
+.release-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 11px;
+  border-radius: var(--r-pill);
+  background: var(--surface-inset);
+  color: var(--ink-soft);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.release-pill {
+  margin-bottom: 16px;
+  background: var(--green-soft);
+  color: var(--green-ink);
+}
+
+.pill.release {
+  background: var(--green-soft);
+  color: var(--green-ink);
+}
+
+.pill.draft {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.pill.info {
+  background: var(--blue-soft);
+  color: var(--blue-ink);
+}
+
+.meta-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.meta-list li {
+  margin: 0;
+  padding: 6px 11px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--surface-soft);
+  color: var(--ink-soft);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------- panels */
+
+.card,
+.doc-page .content > section,
+.doc-page > .shell > article,
+.doc-page .shell > article {
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.content {
+  display: grid;
+  gap: var(--gap);
+}
+
+figure {
+  margin: 0;
+}
+
+figure img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.page-footer {
+  margin-top: 26px;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.footer {
+  padding: 32px 24px;
+  background: var(--invert-bg);
+  color: var(--invert-muted);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.footer a {
+  color: var(--invert-ink);
+}
+
+/* ================================================== homepage composition */
+
+.home .hero {
+  position: relative;
+  padding: 22px 0 clamp(56px, 8vw, 96px);
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Watermark sits behind content and stays legible in both themes. */
+.home .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../apps/salesforce-admin-toolkit/logo-512.png") right 7vw top 58% /
+    min(420px, 38vw) no-repeat;
+  opacity: 0.13;
+  pointer-events: none;
+}
+
+:root[data-theme="dark"] .home .hero::before {
+  opacity: 0.16;
+}
+
+.home .nav,
+.home .hero-content,
+.home .section-inner {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.home .hero-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.62fr);
+  gap: clamp(32px, 5vw, 60px);
+  align-items: end;
+  padding-top: clamp(48px, 8vw, 104px);
+}
+
+.home .hero-content h1 {
+  max-width: 15ch;
+  font-size: var(--fs-display);
+  line-height: 0.99;
+  letter-spacing: -0.03em;
+}
+
+.home .hero-content .lead {
+  max-width: 46ch;
+  margin-bottom: 28px;
+}
+
+.home section {
+  padding: var(--band) 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.home section.alt {
+  background: var(--bg-sunken);
+}
+
+.home .section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) minmax(280px, 0.38fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: end;
+  margin-bottom: 34px;
+}
+
+.home .section-head p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+/* Status panel in the hero */
+.signal {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: color-mix(in srgb, var(--surface-soft) 90%, transparent);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(14px);
+}
+
+.signal-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.signal-top strong {
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+}
+
+.signal-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.signal-icons img {
+  width: 44px;
+  height: 44px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #ffffff;
+  object-fit: contain;
+}
+
+.signal-icons img:first-child {
+  padding: 0;
+}
+
+.status-stack {
+  display: grid;
+}
+
+.status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+.status-row strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Capability cards */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.tool {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.home section.alt .tool,
+.home section.alt .app-card {
+  background: var(--surface);
+}
+
+.tool p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.tool-mark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  color: #ffffff;
+  font-weight: 900;
+  font-size: var(--fs-sm);
+}
+
+.tool:nth-child(1) .tool-mark {
+  background: var(--blue);
+}
+
+.tool:nth-child(2) .tool-mark {
+  background: var(--green);
+}
+
+.tool:nth-child(3) .tool-mark {
+  background: var(--accent);
+}
+
+:root[data-theme="dark"] .tool-mark {
+  color: #14161a;
+}
+
+/* App cards */
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: var(--gap);
+}
+
+.app-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-media {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 168px;
+  padding: 24px;
+  border-bottom: 1px solid var(--line);
+  background: var(--blue-soft);
+}
+
+.app-card:nth-child(2) .app-media {
+  background: var(--green-soft);
+}
+
+.app-card:nth-child(3) .app-media {
+  background: var(--accent-soft);
+}
+
+.app-logo {
+  width: 84px;
+  height: 84px;
+  padding: 8px;
+  align-self: center;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: #ffffff;
+  object-fit: contain;
+  box-shadow: var(--shadow-md);
+}
+
+.app-card:nth-child(3) .app-logo {
+  padding: 0;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.app-body > p {
+  color: var(--muted);
+}
+
+.app-body .meta-list {
+  margin-top: auto;
+}
+
+/* Capability list */
+.build-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.build-list li {
+  display: grid;
+  min-height: 124px;
+  align-content: space-between;
+  gap: 18px;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.build-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.build-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.build-list li:nth-child(1) .build-icon,
+.build-list li:nth-child(4) .build-icon {
+  background: var(--blue-soft);
+  color: var(--blue-ink);
+}
+
+.build-list li:nth-child(2) .build-icon {
+  background: var(--green-soft);
+  color: var(--green-ink);
+}
+
+/* MCP panel */
+.mcp {
+  display: grid;
+  grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+  gap: var(--gap);
+  align-items: stretch;
+}
+
+.mcp-title {
+  display: grid;
+  align-content: center;
+  min-height: 220px;
+  padding: 32px;
+  border-radius: var(--r-md);
+  background: var(--invert-bg);
+  color: var(--invert-ink);
+}
+
+.mcp-title .eyebrow {
+  color: var(--accent);
+}
+
+.mcp-title h2 {
+  margin-bottom: 0;
+  color: var(--invert-ink);
+}
+
+.mcp-body {
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.mcp-body p {
+  color: var(--muted);
+}
+
+/* ============================================ product / policy documents */
+
+/* Document pages need section headings that sit below the page title rather
+   than competing with it. The homepage keeps the full display scale. */
+.doc-page h2 {
+  font-size: clamp(23px, 2.6vw, 30px);
+}
+
+.doc-page h3 {
+  font-size: 19px;
+}
+
+.doc-page .hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(28px, 4vw, 44px);
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.doc-page .hero .lead {
+  margin-bottom: 14px;
+}
+
+.doc-page .logo {
+  width: 156px;
+  height: 156px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  object-fit: contain;
+  box-shadow: var(--shadow-md);
+}
+
+/* DinaSheet leads with a screenshot instead of a logo. */
+.doc-page .hero.wide-shot {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+}
+
+.hero-shot {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+}
+
+.store-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--green);
+  border-radius: var(--r-sm);
+  background: var(--green);
+  color: #ffffff;
+  font-weight: 700;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+:root[data-theme="dark"] .store-link {
+  color: #12181d;
+}
+
+.store-link:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+.app-grid.summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.app-summary {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-soft);
+}
+
+.app-summary p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.feature {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-soft);
+}
+
+.feature p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.step-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  counter-reset: steps;
+}
+
+.step {
+  position: relative;
+  padding-left: 46px;
+}
+
+.step::before {
+  counter-increment: steps;
+  content: counter(steps);
+  position: absolute;
+  top: 1px;
+  left: 0;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: var(--fs-sm);
+}
+
+:root[data-theme="dark"] .step::before {
+  color: #12181d;
+}
+
+.step p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.gallery .wide {
+  grid-column: 1 / -1;
+}
+
+/* ------------------------------------------------------ manual extras */
+
+.manual-page .intro,
+.manual-page > .shell > header {
+  max-width: 900px;
+  margin-bottom: 30px;
+}
+
+.manual-page .content > section {
+  scroll-margin-top: 20px;
+}
+
+/* Section titles already carry their own "1." prefix, so the list marker
+   would print the number twice. */
+.manual-page .toc ol {
+  columns: 2;
+  column-gap: 32px;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.manual-page .toc li {
+  break-inside: avoid;
+}
+
+.manual-page figure {
+  margin-top: 18px;
+}
+
+.manual-page figure + figure {
+  margin-top: 24px;
+}
+
+.manual-page figure.narrow img {
+  width: min(430px, 100%);
+  margin: 0 auto;
+}
+
+.manual-page figcaption {
+  text-align: center;
+}
+
+.callout {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--green);
+  border-radius: 4px var(--r-sm) var(--r-sm) 4px;
+  background: var(--green-soft);
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+.callout.warning,
+.warning {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* --------------------------------------------------------- responsive */
+
+@media (max-width: 940px) {
+  .home .hero-content,
+  .home .section-head,
+  .mcp,
+  .doc-page .hero,
+  .doc-page .hero.wide-shot {
+    grid-template-columns: 1fr;
+  }
+
+  .home .hero-content {
+    align-items: start;
+  }
+
+  .home .hero::before {
+    background-position: right -70px top 60px;
+    background-size: 300px;
+  }
+
+  .doc-page .hero .logo {
+    order: -1;
+  }
+
+  .doc-page .hero.wide-shot .hero-shot {
+    order: -1;
+  }
+
+  .tool-grid,
+  .build-list,
+  .feature-grid,
+  .step-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 660px) {
+  .shell,
+  .shell.narrow,
+  .home .nav,
+  .home .hero-content,
+  .home .section-inner {
+    width: calc(100% - 32px);
+  }
+
+  .nav {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .nav-links,
+  .nav-actions {
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .home .hero-content h1 {
+    max-width: none;
+  }
+
+  .actions .button,
+  .button-row .button {
+    flex: 1 1 200px;
+  }
+
+  .signal-top,
+  .status-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .app-media {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .tool-grid,
+  .app-grid,
+  .app-grid.summary,
+  .build-list,
+  .feature-grid,
+  .step-grid,
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .manual-page .toc ol {
+    columns: 1;
+  }
+
+  .doc-page .logo {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* ------------------------------------------------- motion and printing */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .nav,
+  .theme-toggle,
+  .lang-toggle,
+  .footer {
+    display: none;
+  }
+
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .card,
+  .doc-page .content > section,
+  .doc-page .shell > article {
+    border: 1px solid #cccccc;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+}

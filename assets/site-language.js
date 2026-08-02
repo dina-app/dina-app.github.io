@@ -5,6 +5,7 @@
   var translations = {
     "Back to home": "ホームに戻る",
     "Home": "ホーム",
+    "Toggle dark theme": "ダークテーマを切り替え",
     "Page navigation": "ページナビゲーション",
     ".": "。",
     "Current release: 0.8.0": "現在のリリース: 0.8.0",

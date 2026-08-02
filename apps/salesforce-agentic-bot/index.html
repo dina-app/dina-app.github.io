@@ -7,201 +7,20 @@
   <meta name="description" content="Dina Agent for Salesforce is an independent Chrome side-panel assistant in development for Salesforce workflows, backed by a Cloud Run function.">
   <link rel="canonical" href="https://dina.jp/apps/salesforce-agentic-bot/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f5f7f4;
-      --ink: #172027;
-      --muted: #5b6770;
-      --panel: #ffffff;
-      --line: #d6ded8;
-      --green: #1f6b54;
-      --rust: #a24d32;
-      --blue: #235f82;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.65;
-    }
-
-    a {
-      color: var(--blue);
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .shell {
-      width: min(980px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 26px 0 64px;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 54px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--ink);
-      font-weight: 900;
-    }
-
-    .brand-mark {
-      display: grid;
-      width: 36px;
-      height: 36px;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      color: var(--rust);
-    }
-
-    .nav-actions { display: flex; align-items: center; gap: 14px; }
-    .lang-toggle { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); color: var(--ink); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
-    .lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
-    .lang-toggle svg { width: 16px; height: 16px; }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 152px;
-      gap: 34px;
-      align-items: center;
-      margin-bottom: 44px;
-    }
-
-    .logo {
-      width: 152px;
-      height: 152px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #ffffff;
-      object-fit: cover;
-      box-shadow: 0 16px 34px rgba(23, 32, 39, 0.11);
-    }
-
-    h1,
-    h2,
-    p {
-      margin-top: 0;
-    }
-
-    h1 {
-      margin-bottom: 16px;
-      font-size: clamp(42px, 8vw, 76px);
-      line-height: 1;
-      letter-spacing: 0;
-    }
-
-    h2 {
-      margin-bottom: 12px;
-      font-size: 28px;
-      line-height: 1.12;
-      letter-spacing: 0;
-    }
-
-    .lead {
-      margin-bottom: 12px;
-      color: #3a464f;
-      font-size: 19px;
-    }
-
-    .notice {
-      margin-bottom: 0;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .content {
-      display: grid;
-      gap: 18px;
-    }
-
-    section {
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--panel);
-      box-shadow: 0 12px 26px rgba(23, 32, 39, 0.07);
-    }
-
-    ul,
-    ol {
-      margin-bottom: 0;
-      padding-left: 22px;
-    }
-
-    li + li {
-      margin-top: 8px;
-    }
-
-    code,
-    pre {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-    }
-
-    code {
-      padding: 2px 6px;
-      border-radius: 5px;
-      background: #edf3ef;
-    }
-
-    pre {
-      overflow: auto;
-      margin: 0;
-      padding: 14px;
-      border-radius: 8px;
-      background: #0e1720;
-      color: #edf7f3;
-      white-space: pre-wrap;
-    }
-
-    @media (max-width: 700px) {
-      .shell {
-        width: min(100% - 28px, 980px);
-        padding-top: 18px;
-      }
-
-      .nav,
-      .hero {
-        align-items: flex-start;
-        grid-template-columns: 1fr;
-      }
-
-      .nav {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../../assets/dinalab.css">
+  <script src="../../assets/site-theme.js"></script>
 </head>
-<body>
-  <main class="shell">
+<body class="doc-page">
+  <main class="shell narrow">
     <nav class="nav" aria-label="Page navigation">
       <a class="brand" href="../../">
         <span class="brand-mark">D</span>
         <span>DinaLab</span>
       </a>
       <span class="nav-actions">
-        <button type="button" id="siteLangToggle" class="lang-toggle" aria-label="日本語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg><span class="lang-label">日本語</span></button>
         <a href="../../">Back to home</a>
+        <button type="button" id="siteLangToggle" class="lang-toggle" aria-label="日本語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg><span class="lang-label">日本語</span></button>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"></path></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
       </span>
     </nav>
 

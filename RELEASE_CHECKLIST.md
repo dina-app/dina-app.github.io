@@ -13,6 +13,10 @@ Prepared: July 31, 2026
 
 ## Completed in this release
 
+- [x] Move every page onto one design system (`assets/dinalab.css`), replacing the three divergent palettes previously inlined per page.
+- [x] Add a light/dark theme with a nav toggle, a shared preference key, and no flash of the wrong theme on navigation.
+- [x] Apply the Japanese font stack site-wide; previously only the homepage and DinaSheet pages carried CJK fallbacks.
+- [x] Publish `demo.html` as an internal, non-indexed design reference.
 - [x] Update Admin Toolkit public content for v0.8.0, SheetD, and GitHub Metadata Sync.
 - [x] Publish the DinaSheet v0.2.0 release-candidate page and privacy-policy URL.
 - [x] Add DinaSheet to the homepage, sitemap, site validation, and not-found navigation.
@@ -44,6 +48,7 @@ Prepared: July 31, 2026
 ## Final publish checks
 
 - [ ] Review the production pages at `https://dina.jp/` after deployment.
+- [ ] Check every page in both light and dark themes after deployment, including the Common Tools workbench.
 - [ ] Confirm the Chrome Web Store item ID still resolves after its listing metadata is updated.
 - [x] Confirm EN/JP preference persistence across homepage, app pages, tools, and manuals in local headless Chrome.
 - [x] Confirm all local links, image references, and redirects resolve in the release worktree.

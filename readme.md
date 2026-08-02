@@ -9,6 +9,17 @@ Public product pages:
 - [Dina Agent for Salesforce](apps/salesforce-agentic-bot/index.html), an independent assistant in development for Salesforce workflows.
 - [Common Tools](tools/index.html), a browser-only developer and administrator workbench.
 
+## Design system
+
+Every page renders from one stylesheet, [`assets/dinalab.css`](assets/dinalab.css).
+Pages pick a composition with a body class — `home` for the marketing bands,
+`doc-page` for product and policy pages, and `doc-page manual-page` for the
+manuals. [`assets/site-theme.js`](assets/site-theme.js) stamps
+`data-theme="light|dark"` on `<html>` before first paint and is loaded
+synchronously from `<head>` on every page, so there is no flash of the wrong
+theme. [`demo.html`](demo.html) is an internal, `noindex` reference showing the
+tokens, type scale, and components; it is not linked from the public site.
+
 The Admin Toolkit manual is generated from
 [`manual/_build/scenes.mjs`](apps/salesforce-admin-toolkit/manual/_build/scenes.mjs)
 and [`manual/_build/generate.mjs`](apps/salesforce-admin-toolkit/manual/_build/generate.mjs).

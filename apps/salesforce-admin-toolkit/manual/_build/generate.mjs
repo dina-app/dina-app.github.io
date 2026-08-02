@@ -13,40 +13,8 @@ const STORE_URL = "https://chromewebstore.google.com/detail/admin-toolkit-for-sa
 
 const GLOBE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17"/><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"/></svg>';
 
-const CSS = `
-:root{color-scheme:light;--bg:#f5f7f4;--ink:#172027;--muted:#5b6770;--panel:#fff;--line:#d6ded8;--green:#1f6b54;--green-soft:#e7f4ed;--rust:#a24d32;--blue:#235f82;font-family:Inter,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
-*{box-sizing:border-box;}
-body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;}
-a{color:var(--blue);font-weight:800;text-decoration:none;}
-a:hover{text-decoration:underline;}
-.shell{width:min(1040px,calc(100% - 40px));margin:0 auto;padding:26px 0 64px;}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:40px;}
-.nav-links{display:flex;align-items:center;gap:16px;}
-.brand{display:inline-flex;align-items:center;gap:10px;color:var(--ink);font-weight:900;}
-.brand-mark{display:grid;width:36px;height:36px;place-items:center;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--rust);}
-.lang-toggle{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink);font-weight:800;font-size:13px;}
-.lang-toggle:hover{text-decoration:none;border-color:var(--blue);color:var(--blue);}
-.lang-toggle svg{width:16px;height:16px;flex:none;}
-h1,h2,h3,p{margin-top:0;}
-h1{margin-bottom:14px;font-size:clamp(32px,5.6vw,52px);line-height:1.1;}
-h2{margin-bottom:12px;font-size:26px;line-height:1.18;}
-h3{margin:18px 0 8px;font-size:19px;line-height:1.3;}
-.lead{margin-bottom:10px;color:#3a464f;font-size:18px;}
-.release-pill{display:inline-flex;margin-bottom:14px;padding:5px 10px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:13px;font-weight:900;}
-.content{display:grid;gap:18px;}
-section{padding:24px;border:1px solid var(--line);border-radius:8px;background:var(--panel);box-shadow:0 12px 26px rgba(23,32,39,.07);}
-.toc ol{columns:2;column-gap:32px;margin:0;padding-left:22px;}
-.toc li{break-inside:avoid;}
-figure{margin:16px 0 0;}
-figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 22px rgba(23,32,39,.09);}
-figure.narrow img{width:min(430px,100%);margin:0 auto;}
-figcaption{margin-top:8px;color:var(--muted);font-size:14px;font-weight:700;text-align:center;}
-ul,ol{margin-bottom:0;padding-left:22px;}
-li+li{margin-top:8px;}
-code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;}
-.notice{color:var(--muted);font-weight:700;}
-@media(max-width:700px){.shell{width:min(100% - 28px,1040px);padding-top:18px;}.nav{flex-direction:column;align-items:flex-start;}.toc ol{columns:1;}}
-`;
+const MOON = '<svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"/></svg>';
+const SUN = '<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
 
 function esc(text) {
   return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -68,6 +36,7 @@ function buildPage(lang) {
   const imgDirAbs = path.join(manualRoot, "img", lang);
   const imgPrefix = isEN ? `img/${lang}/` : `../img/${lang}/`;
   const homeHref = isEN ? "../../../" : "../../../../";
+  const assetHref = isEN ? "../../../assets/" : "../../../../assets/";
   const overviewHref = isEN ? "../" : "../../";
   const privacyHref = isEN ? "../PRIVACY_POLICY.html" : "../../PRIVACY_POLICY.html";
   const otherHref = isEN ? "jp/" : "../";
@@ -111,14 +80,15 @@ function buildPage(lang) {
   <meta name="description" content="${t("Step-by-step user manual for Admin Toolkit for Salesforce with screenshots.", "Admin Toolkit for Salesforce のスクリーンショット付きユーザーマニュアル。")}">
   <link rel="canonical" href="${canonicalUrl}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <style>${CSS}</style>
+  <link rel="stylesheet" href="${assetHref}dinalab.css">
+  <script src="${assetHref}site-theme.js"></script>
   <script>
     (function () {
       try { ${redirectScript} } catch (error) {}
     })();
   </script>
 </head>
-<body>
+<body class="doc-page manual-page">
   <main class="shell">
     <nav class="nav" aria-label="${t("Page navigation", "ページナビゲーション")}">
       <a class="brand" href="${homeHref}">
@@ -126,12 +96,13 @@ function buildPage(lang) {
         <span>DinaLab</span>
       </a>
       <span class="nav-links">
-        <a class="lang-toggle" href="${otherHref}" hreflang="${otherLangCode}" lang="${otherLangCode}" aria-label="${otherLangAria}" title="${otherLangAria}">${GLOBE}<span>${otherLangLabel}</span></a>
         <a href="${overviewHref}">${t("Back to Admin Toolkit for Salesforce", "Admin Toolkit for Salesforce に戻る")}</a>
+        <a class="lang-toggle" href="${otherHref}" hreflang="${otherLangCode}" lang="${otherLangCode}" aria-label="${otherLangAria}" title="${otherLangAria}">${GLOBE}<span>${otherLangLabel}</span></a>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="${t("Toggle dark theme", "ダークテーマを切り替え")}" aria-pressed="false">${MOON}${SUN}</button>
       </span>
     </nav>
 
-    <header>
+    <header class="intro">
       <span class="release-pill">${t("Manual for release 0.8.0", "リリース 0.8.0 対応マニュアル")}</span>
       <h1>${t("Admin Toolkit for Salesforce — User Manual", "Admin Toolkit for Salesforce ユーザーマニュアル")}</h1>
       <p class="lead">${t("How to install the toolkit, launch its apps from the popup, and use each workspace and tool — with " + total + " screenshots.", "インストールから、ポップアップでのアプリ起動、各ワークスペース・ツールの使い方まで、" + total + " 枚のスクリーンショットで解説します。")}</p>

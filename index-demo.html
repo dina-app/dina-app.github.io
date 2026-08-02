@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homepage Proposal | DinaLab</title>
+  <meta name="description" content="Proposed DinaLab homepage: sharing what we learn, building helpful tools, and exploring new ideas.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/dinalab.css">
+  <script src="assets/site-theme.js"></script>
+  <style>
+    /*
+     * Layout proposal only. Everything below is scoped to .home-demo and uses
+     * the shared tokens — if this direction is approved, these blocks move into
+     * assets/dinalab.css and the classes drop the scope.
+     */
+
+    .home-demo main {
+      overflow-x: clip;
+    }
+
+    .home-demo .band {
+      padding: var(--band) 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .home-demo .band.sunken {
+      background: var(--bg-sunken);
+    }
+
+    .home-demo .band.plain {
+      background: var(--bg);
+    }
+
+    .home-demo .inner {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* ---------------------------------------------------------- hero */
+
+    /* .section-head is scoped to .home in the shared sheet; this page is a
+       different composition, so it opts in explicitly. */
+    .home-demo .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.62fr) minmax(280px, 0.38fr);
+      gap: clamp(24px, 4vw, 48px);
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .home-demo .section-head p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .home-demo .hero {
+      position: relative;
+      padding: 22px 0 clamp(22px, 2.5vw, 34px);
+      background: var(--bg);
+    }
+
+    .home-demo .hero::before {
+      content: "";
+      position: absolute;
+      top: -22%;
+      left: 50%;
+      width: min(940px, 130%);
+      aspect-ratio: 1;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--accent-soft) 0%, transparent 62%);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .home-demo .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .home-demo .hero-body {
+      padding-top: clamp(44px, 7vw, 92px);
+      text-align: center;
+    }
+
+    /* Only the headline gets the narrow measure — capping the whole block
+       would drag the lead and buttons in with it. */
+    .home-demo .hero-body h1 {
+      max-width: 17ch;
+      margin: 0 auto 22px;
+      font-size: var(--fs-display);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+    }
+
+    .home-demo .hero-body .lead {
+      max-width: 60ch;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .home-demo .hero-body .actions {
+      justify-content: center;
+    }
+
+    /* ---------------------------------------------------- stat strip */
+
+    .home-demo .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: clamp(48px, 6vw, 84px);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .home-demo .stat {
+      padding: 26px 24px;
+      border-right: 1px solid var(--line);
+    }
+
+    .home-demo .stat:last-child {
+      border-right: 0;
+    }
+
+    .home-demo .stat b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent);
+      font-size: clamp(34px, 3.6vw, 48px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .home-demo .stat span {
+      color: var(--muted);
+      font-size: var(--fs-sm);
+      line-height: 1.45;
+    }
+
+    /* -------------------------------------------------- intent rows */
+
+    .home-demo .intent {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr) minmax(0, 1.05fr);
+      gap: clamp(20px, 3vw, 44px);
+      padding: clamp(28px, 3.5vw, 44px) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .home-demo .intent:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .home-demo .intent-num {
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.08em;
+    }
+
+    .home-demo .intent h3 {
+      margin: 0;
+      font-size: clamp(24px, 2.8vw, 34px);
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+    }
+
+    .home-demo .intent p {
+      color: var(--muted);
+    }
+
+    /* ------------------------------------------------------- guides */
+
+    .home-demo .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+      gap: var(--gap);
+      margin-top: 32px;
+    }
+
+    .home-demo .guide {
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .home-demo .guide:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .home-demo .guide .eyebrow {
+      margin-bottom: 10px;
+    }
+
+    .home-demo .guide h3 {
+      margin-bottom: 10px;
+    }
+
+    .home-demo .guide p {
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: var(--fs-sm);
+    }
+
+    .home-demo .guide .guide-foot {
+      margin-top: auto;
+      padding-top: 4px;
+    }
+
+    /* -------------------------------------------------- tool chips */
+
+    .home-demo .chip-panel {
+      margin-top: var(--gap);
+      padding: clamp(24px, 3vw, 32px);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .home-demo .chip-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .home-demo .chip-head h3 {
+      margin: 0;
+    }
+
+    .home-demo .chip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .home-demo .chip-grid li {
+      margin: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      background: var(--surface-soft);
+    }
+
+    .home-demo .chip-grid b {
+      display: block;
+      font-size: var(--fs-sm);
+    }
+
+    .home-demo .chip-grid span {
+      color: var(--muted);
+      font-size: var(--fs-xs);
+    }
+
+    /* ------------------------------------------------------- rules */
+
+    .home-demo .rule-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--gap);
+      margin-top: 32px;
+    }
+
+    .home-demo .rule {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr);
+      gap: 18px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      background: var(--surface);
+    }
+
+    .home-demo .rule i {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 800;
+    }
+
+    .home-demo .rule h3 {
+      margin-bottom: 6px;
+    }
+
+    .home-demo .rule p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: var(--fs-sm);
+    }
+
+    /* --------------------------------------------------- idea band */
+
+    .home-demo .idea {
+      padding: clamp(36px, 5vw, 60px);
+      border-radius: var(--r-lg);
+      background: var(--invert-bg);
+      color: var(--invert-ink);
+    }
+
+    .home-demo .idea .eyebrow {
+      color: var(--accent);
+    }
+
+    .home-demo .idea h2 {
+      max-width: 18ch;
+      color: var(--invert-ink);
+    }
+
+    .home-demo .idea p {
+      max-width: 62ch;
+      color: var(--invert-muted);
+    }
+
+    .home-demo .idea .button.secondary {
+      border-color: rgba(255, 255, 255, 0.28);
+      background: transparent;
+      color: var(--invert-ink);
+    }
+
+    /* ---------------------------------------------------- closing */
+
+    .home-demo .closing {
+      padding: var(--band) 0;
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .home-demo .closing h2 {
+      max-width: 20ch;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .home-demo .closing .actions {
+      justify-content: center;
+    }
+
+    /* -------------------------------------------------- responsive */
+
+    @media (max-width: 940px) {
+      .home-demo .stat-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .home-demo .stat:nth-child(2) {
+        border-right: 0;
+      }
+
+      .home-demo .stat:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .home-demo .intent {
+        grid-template-columns: 60px minmax(0, 1fr);
+      }
+
+      .home-demo .intent > :last-child {
+        grid-column: 2;
+      }
+
+      .home-demo .rule-grid,
+      .home-demo .section-head {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 660px) {
+      .home-demo .inner {
+        width: calc(100% - 32px);
+      }
+
+      .home-demo .hero-body {
+        max-width: none;
+        text-align: left;
+      }
+
+      .home-demo .hero-body .actions,
+      .home-demo .closing .actions {
+        justify-content: flex-start;
+      }
+
+      .home-demo .stat-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .home-demo .stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .home-demo .stat:last-child {
+        border-bottom: 0;
+      }
+
+      .home-demo .intent {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .home-demo .intent > :last-child {
+        grid-column: 1;
+      }
+
+      .home-demo .closing h2 {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body class="home-demo">
+  <main>
+    <header class="hero">
+      <nav class="nav inner" aria-label="Primary navigation">
+        <a class="brand" href="#">
+          <span class="brand-mark">D</span>
+          <span>DinaLab</span>
+        </a>
+        <div class="nav-links">
+          <a href="#share" data-en="Guides" data-ja="ガイド">Guides</a>
+          <a href="#build" data-en="Tools" data-ja="ツール">Tools</a>
+          <a href="#rules" data-en="Principles" data-ja="方針">Principles</a>
+          <a href="#ideas" data-en="Ideas" data-ja="研究中">Ideas</a>
+          <button type="button" id="langToggle" class="lang-toggle" aria-label="View in Japanese">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M3.5 9h17M3.5 15h17"></path>
+              <path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path>
+            </svg>
+            <span id="langLabel">日本語</span>
+          </button>
+          <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"></path></svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+          </button>
+        </div>
+      </nav>
+
+      <div class="inner">
+        <div class="hero-body">
+          <p class="eyebrow" data-en="Independent studio · Salesforce · Cloud" data-ja="独立系スタジオ · Salesforce · クラウド">Independent studio · Salesforce · Cloud</p>
+          <h1 data-en="Share what we learn. Build what's missing." data-ja="学んだことを共有し、足りないものをつくる。">Share what we learn. Build what's missing.</h1>
+          <p class="lead" data-en="DinaLab works deep inside Salesforce and cloud systems, writes down what it learns, and turns the repetitive parts into tools anyone can use — in the browser, in English and Japanese, with nothing sent back to us." data-ja="DinaLab は Salesforce とクラウドの現場に深く入り、そこで学んだことを書き残し、繰り返しの作業を誰でも使えるツールに変えています。ブラウザーだけで動き、英語と日本語に対応し、こちらへデータが送られることはありません。">
+            DinaLab works deep inside Salesforce and cloud systems, writes down what it learns, and turns the repetitive parts into tools anyone can use — in the browser, in English and Japanese, with nothing sent back to us.
+          </p>
+          <div class="actions">
+            <a class="button" href="#build" data-en="Explore the tools" data-ja="ツールを見る">Explore the tools</a>
+            <a class="button secondary" href="#share" data-en="Read the guides" data-ja="ガイドを読む">Read the guides</a>
+          </div>
+        </div>
+
+        <dl class="stat-strip" aria-label="What exists today">
+          <div class="stat">
+            <b>3</b>
+            <span data-en="Chrome extensions for Salesforce work" data-ja="Salesforce 業務向けの Chrome 拡張機能">Chrome extensions for Salesforce work</span>
+          </div>
+          <div class="stat">
+            <b>10</b>
+            <span data-en="Browser-only developer and admin tools" data-ja="ブラウザーだけで動く開発・管理ツール">Browser-only developer and admin tools</span>
+          </div>
+          <div class="stat">
+            <b>2</b>
+            <span data-en="Languages, on every page and manual" data-ja="全ページ・全マニュアルの対応言語">Languages, on every page and manual</span>
+          </div>
+          <div class="stat">
+            <b>0</b>
+            <span data-en="Trackers, analytics, or ad code" data-ja="トラッカー・分析・広告コード">Trackers, analytics, or ad code</span>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    <section class="band plain" aria-labelledby="intent-title">
+      <div class="inner">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" data-en="What we do" data-ja="取り組んでいること">What we do</p>
+            <h2 id="intent-title" data-en="Three ways we try to be useful." data-ja="役に立つための、3 つの取り組み。">Three ways we try to be useful.</h2>
+          </div>
+          <p data-en="This is not a services pitch. It is a list of what we actually spend our time on, and where the results end up." data-ja="サービスの売り込みではありません。実際に時間を使っていることと、その成果がどこにあるかを並べています。">
+            This is not a services pitch. It is a list of what we actually spend our time on, and where the results end up.
+          </p>
+        </div>
+
+        <div class="intent">
+          <div class="intent-num" aria-hidden="true">01</div>
+          <h3 data-en="Share what we learn" data-ja="学んだことを共有する">Share what we learn</h3>
+          <div>
+            <p data-en="Every tool ships with a written manual — step by step, screenshot by screenshot, English and Japanese released together. The Admin Toolkit guide alone runs to 54 annotated screens. If something took us a week to work out, we write it down so it takes you an afternoon." data-ja="すべてのツールに、手順とスクリーンショットで解説したマニュアルを用意し、英語版と日本語版を同時に公開しています。Admin Toolkit のガイドだけでも 54 枚の注釈付き画面があります。私たちが 1 週間かけて分かったことは、あなたが半日で分かるように書き残します。">
+              Every tool ships with a written manual — step by step, screenshot by screenshot, English and Japanese released together. The Admin Toolkit guide alone runs to 54 annotated screens. If something took us a week to work out, we write it down so it takes you an afternoon.
+            </p>
+            <p>
+              <a class="text-link" href="apps/salesforce-admin-toolkit/manual/" data-en="Admin Toolkit manual" data-ja="Admin Toolkit マニュアル">Admin Toolkit manual</a>
+              <a class="text-link" href="apps/dinasheet-for-salesforce/manual/" data-en="DinaSheet manual" data-ja="DinaSheet マニュアル">DinaSheet manual</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="intent">
+          <div class="intent-num" aria-hidden="true">02</div>
+          <h3 data-en="Build helpful tools" data-ja="役に立つツールをつくる">Build helpful tools</h3>
+          <div>
+            <p data-en="Three Chrome extensions for the Salesforce work that eats whole afternoons — metadata administration, spreadsheet data work, permission tracing — plus ten small browser tools for the everyday jobs: JSON, diffs, regex, CSV, dates, checklists. Free, and they run entirely on your own machine." data-ja="午後をまるごと奪うような Salesforce 業務のために、メタデータ管理・スプレッドシートでのデータ作業・権限の追跡に対応する 3 つの Chrome 拡張機能を提供しています。あわせて、JSON、差分、正規表現、CSV、日付、チェックリストなど、日々の作業のための小さなブラウザーツールを 10 個用意しました。すべて無料で、お使いの端末の中だけで動作します。">
+              Three Chrome extensions for the Salesforce work that eats whole afternoons — metadata administration, spreadsheet data work, permission tracing — plus ten small browser tools for the everyday jobs: JSON, diffs, regex, CSV, dates, checklists. Free, and they run entirely on your own machine.
+            </p>
+            <p>
+              <a class="text-link" href="tools/" data-en="Open Common Tools" data-ja="共通ツールを開く">Open Common Tools</a>
+              <a class="text-link" href="#build" data-en="See the extensions" data-ja="拡張機能を見る">See the extensions</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="intent">
+          <div class="intent-num" aria-hidden="true">03</div>
+          <h3 data-en="Explore new ideas" data-ja="新しいアイデアを試す">Explore new ideas</h3>
+          <div>
+            <p data-en="We are building with the Model Context Protocol, connecting assistants to real tools and live context instead of guesswork. It is early, and we would rather say so than oversell it. The parts that work get shipped; the parts that do not get written up anyway." data-ja="Model Context Protocol を用いた開発に取り組み、アシスタントを推測ではなく、実際のツールとライブなコンテキストに接続しています。まだ初期段階であり、そこは誇張せずお伝えします。うまくいったものは公開し、うまくいかなかったものも記録として残します。">
+              We are building with the Model Context Protocol, connecting assistants to real tools and live context instead of guesswork. It is early, and we would rather say so than oversell it. The parts that work get shipped; the parts that do not get written up anyway.
+            </p>
+            <p>
+              <a class="text-link" href="#ideas" data-en="What we are exploring" data-ja="研究中のテーマ">What we are exploring</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="share" class="band" aria-labelledby="share-title">
+      <div class="inner">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" data-en="Knowledge" data-ja="ナレッジ">Knowledge</p>
+            <h2 id="share-title" data-en="Written down, so it can be reused." data-ja="再利用できるように、書き残す。">Written down, so it can be reused.</h2>
+          </div>
+          <p data-en="Documentation is not the thing we do after the work. For a tool nobody can learn, it is the work." data-ja="ドキュメントは、開発のあとに片付ける作業ではありません。学べないツールに価値はなく、ドキュメントそのものが開発の一部です。">
+            Documentation is not the thing we do after the work. For a tool nobody can learn, it is the work.
+          </p>
+        </div>
+
+        <div class="guide-grid">
+          <article class="guide">
+            <p class="eyebrow" data-en="54 screenshots" data-ja="54 枚のスクリーンショット">54 screenshots</p>
+            <h3 data-en="Admin Toolkit user manual" data-ja="Admin Toolkit ユーザーマニュアル">Admin Toolkit user manual</h3>
+            <p data-en="Install, launch each workspace from the popup, and work through metadata administration, permission tracing, org reviews, schema exploration, and GitHub metadata sync." data-ja="インストールから、ポップアップでの各ワークスペースの起動、メタデータ管理、権限の追跡、組織レビュー、スキーマ探索、GitHub メタデータ同期までを解説します。">
+              Install, launch each workspace from the popup, and work through metadata administration, permission tracing, org reviews, schema exploration, and GitHub metadata sync.
+            </p>
+            <p class="guide-foot"><a class="text-link" href="apps/salesforce-admin-toolkit/manual/" data-en="Read the manual" data-ja="マニュアルを読む">Read the manual</a></p>
+          </article>
+
+          <article class="guide">
+            <p class="eyebrow" data-en="Walkthrough" data-ja="操作ガイド">Walkthrough</p>
+            <h3 data-en="DinaSheet user manual" data-ja="DinaSheet ユーザーマニュアル">DinaSheet user manual</h3>
+            <p data-en="Load Salesforce data into a spreadsheet grid, review the exact fields you changed, confirm the update, and prepare a rollback from the local audit history." data-ja="Salesforce のデータをスプレッドシートに読み込み、変更した項目を正確に確認し、更新を確定し、端末内の監査履歴からロールバックを準備するまでを解説します。">
+              Load Salesforce data into a spreadsheet grid, review the exact fields you changed, confirm the update, and prepare a rollback from the local audit history.
+            </p>
+            <p class="guide-foot"><a class="text-link" href="apps/dinasheet-for-salesforce/manual/" data-en="Read the manual" data-ja="マニュアルを読む">Read the manual</a></p>
+          </article>
+
+          <article class="guide">
+            <p class="eyebrow" data-en="Plain language" data-ja="平易な言葉で">Plain language</p>
+            <h3 data-en="What each tool touches" data-ja="各ツールが扱うデータ">What each tool touches</h3>
+            <p data-en="Every extension publishes exactly which data it reads, what stays in your browser, and what leaves it. Worth reading before you install anything from anyone, including us." data-ja="各拡張機能について、どのデータを読み取り、何がブラウザー内に留まり、何が外に出るのかを明記しています。私たちを含め、誰かの拡張機能を入れる前に確認する価値があります。">
+              Every extension publishes exactly which data it reads, what stays in your browser, and what leaves it. Worth reading before you install anything from anyone, including us.
+            </p>
+            <p class="guide-foot"><a class="text-link" href="apps/dinasheet-for-salesforce/PRIVACY_POLICY.html" data-en="Read a privacy policy" data-ja="プライバシーポリシーを読む">Read a privacy policy</a></p>
+          </article>
+
+          <article class="guide">
+            <p class="eyebrow" data-en="Worked examples" data-ja="実例つき">Worked examples</p>
+            <h3 data-en="Common Tools, with samples" data-ja="サンプル付きの共通ツール">Common Tools, with samples</h3>
+            <p data-en="Each of the ten tools opens with real example input, so you can see what it does before deciding whether it is the one you need." data-ja="10 個のツールはいずれも実際のサンプル入力付きで開くので、自分に必要かどうかを試しながら判断できます。">
+              Each of the ten tools opens with real example input, so you can see what it does before deciding whether it is the one you need.
+            </p>
+            <p class="guide-foot"><a class="text-link" href="tools/" data-en="Open the workbench" data-ja="ワークベンチを開く">Open the workbench</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="build" class="band sunken" aria-labelledby="build-title">
+      <div class="inner">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" data-en="Tools" data-ja="ツール">Tools</p>
+            <h2 id="build-title" data-en="Built because we needed them first." data-ja="まず自分たちが必要だったから、つくった。">Built because we needed them first.</h2>
+          </div>
+          <p data-en="Each one started as a workaround for a job that took too long by hand. They are shared in the state we use them in ourselves." data-ja="どれも、手作業では時間がかかりすぎる仕事のための応急処置から始まりました。自分たちが使っているそのままの形で公開しています。">
+            Each one started as a workaround for a job that took too long by hand. They are shared in the state we use them in ourselves.
+          </p>
+        </div>
+
+        <div class="app-grid">
+          <article class="app-card">
+            <div class="app-media">
+              <img class="app-logo" src="apps/salesforce-admin-toolkit/logo-512.png" alt="Admin Toolkit for Salesforce logo">
+              <span class="pill release app-status" data-en="Release" data-ja="リリース済">Release</span>
+            </div>
+            <div class="app-body">
+              <h3>Admin Toolkit for Salesforce</h3>
+              <p data-en="Six workspaces in one Chrome side panel: metadata administration, SheetD data work, permission analysis, org reviews, object schemas, and GitHub metadata sync." data-ja="1 つの Chrome サイドパネルに 6 つのワークスペース。メタデータ管理、SheetD でのデータ作業、権限分析、組織レビュー、オブジェクトスキーマ、GitHub メタデータ同期に対応します。">
+                Six workspaces in one Chrome side panel: metadata administration, SheetD data work, permission analysis, org reviews, object schemas, and GitHub metadata sync.
+              </p>
+              <ul class="meta-list" aria-label="Admin Toolkit for Salesforce highlights">
+                <li data-en="Metadata Admin" data-ja="メタデータ管理">Metadata Admin</li>
+                <li>SheetD</li>
+                <li data-en="Org Review" data-ja="組織レビュー">Org Review</li>
+                <li data-en="Permission Explorer" data-ja="権限エクスプローラー">Permission Explorer</li>
+              </ul>
+              <p>
+                <a class="text-link" href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener" data-en="Install free" data-ja="無料で入手">Install free</a>
+                <a class="text-link" href="apps/salesforce-admin-toolkit/" data-en="Details" data-ja="詳細">Details</a>
+              </p>
+            </div>
+          </article>
+
+          <article class="app-card">
+            <div class="app-media">
+              <img class="app-logo" src="apps/dinasheet-for-salesforce/logo.svg" alt="DinaSheet for Salesforce logo">
+              <span class="pill draft app-status" data-en="Release candidate" data-ja="リリース候補">Release candidate</span>
+            </div>
+            <div class="app-body">
+              <h3>DinaSheet for Salesforce</h3>
+              <p data-en="A spreadsheet for Salesforce data that shows you every field you changed and waits for a yes. Successful updates leave a receipt you can roll back." data-ja="変更した項目をすべて表示し、確認を待ってから実行する、Salesforce データ向けのスプレッドシートです。更新が成功すると、ロールバックに使える記録が残ります。">
+                A spreadsheet for Salesforce data that shows you every field you changed and waits for a yes. Successful updates leave a receipt you can roll back.
+              </p>
+              <ul class="meta-list" aria-label="DinaSheet for Salesforce highlights">
+                <li>SOQL</li>
+                <li data-en="Reports" data-ja="レポート">Reports</li>
+                <li data-en="CSV / Excel import" data-ja="CSV / Excel 取り込み">CSV / Excel import</li>
+                <li data-en="Audit and rollback" data-ja="監査とロールバック">Audit and rollback</li>
+              </ul>
+              <p>
+                <a class="text-link" href="apps/dinasheet-for-salesforce/" data-en="Details" data-ja="詳細">Details</a>
+                <a class="text-link" href="apps/dinasheet-for-salesforce/manual/" data-en="Manual" data-ja="マニュアル">Manual</a>
+              </p>
+            </div>
+          </article>
+
+          <article class="app-card">
+            <div class="app-media">
+              <img class="app-logo" src="assets/salesforce-agentic-bot-icon.jpg" alt="Dina Agent for Salesforce icon">
+              <span class="pill draft app-status" data-en="In development" data-ja="開発中">In development</span>
+            </div>
+            <div class="app-body">
+              <h3>Dina Agent for Salesforce</h3>
+              <p data-en="An assistant that can see the org you are actually looking at. Session IDs and credentials are never included in a chat request — the Salesforce tools run inside the extension." data-ja="いま見ている組織のコンテキストを理解できるアシスタントです。セッション ID や認証情報がチャットリクエストに含まれることはなく、Salesforce のツールは拡張機能内で実行されます。">
+                An assistant that can see the org you are actually looking at. Session IDs and credentials are never included in a chat request — the Salesforce tools run inside the extension.
+              </p>
+              <ul class="meta-list" aria-label="Dina Agent for Salesforce highlights">
+                <li data-en="Chat assistant" data-ja="チャットアシスタント">Chat assistant</li>
+                <li data-en="Org context" data-ja="組織コンテキスト">Org context</li>
+                <li data-en="Salesforce tools" data-ja="Salesforce ツール">Salesforce tools</li>
+              </ul>
+              <p>
+                <a class="text-link" href="apps/salesforce-agentic-bot/" data-en="Details" data-ja="詳細">Details</a>
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="chip-panel">
+          <div class="chip-head">
+            <h3 data-en="Ten small tools, no sign-up" data-ja="登録不要の小さなツール 10 個">Ten small tools, no sign-up</h3>
+            <a class="text-link" href="tools/" data-en="Open the workbench" data-ja="ワークベンチを開く">Open the workbench</a>
+          </div>
+          <ul class="chip-grid">
+            <li><b>JSON Formatter</b><span data-en="Format, validate, paths, types" data-ja="整形、検証、パス、型">Format, validate, paths, types</span></li>
+            <li><b>Code Diff Viewer</b><span data-en="Side-by-side and patch output" data-ja="横並び表示とパッチ出力">Side-by-side and patch output</span></li>
+            <li><b>HTML Playground</b><span data-en="HTML, CSS, JS preview" data-ja="HTML、CSS、JS プレビュー">HTML, CSS, JS preview</span></li>
+            <li><b>JavaScript Playground</b><span data-en="Run snippets safely" data-ja="スニペットを安全に実行">Run snippets safely</span></li>
+            <li><b>TypeScript Playground</b><span data-en="Compile and run JS output" data-ja="コンパイルして JS 出力を実行">Compile and run JS output</span></li>
+            <li><b>Regex Tester</b><span data-en="Matches, groups, replacement" data-ja="一致、グループ、置換">Matches, groups, replacement</span></li>
+            <li><b>CSV Cleaner</b><span data-en="Clean rows and export JSON" data-ja="行を整えて JSON 出力">Clean rows and export JSON</span></li>
+            <li><b>Bulk Text Transformer</b><span data-en="Trim, case, sort, dedupe" data-ja="トリム、大文字小文字、並べ替え、重複除去">Trim, case, sort, dedupe</span></li>
+            <li><b>Date and Time Converter</b><span data-en="ISO, Unix, timezones" data-ja="ISO、Unix、タイムゾーン">ISO, Unix, timezones</span></li>
+            <li><b>Checklist Builder</b><span data-en="Markdown and JSON export" data-ja="Markdown・JSON 出力">Markdown and JSON export</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="rules" class="band plain" aria-labelledby="rules-title">
+      <div class="inner">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow" data-en="How we build" data-ja="つくり方">How we build</p>
+            <h2 id="rules-title" data-en="Four rules we do not bend." data-ja="曲げない 4 つのルール。">Four rules we do not bend.</h2>
+          </div>
+          <p data-en="These are constraints, not marketing. They rule out features we would otherwise like to ship, and that is the point of having them." data-ja="これらは宣伝文句ではなく、制約です。本当は出したい機能を諦めることもありますが、それこそがルールを持つ意味です。">
+            These are constraints, not marketing. They rule out features we would otherwise like to ship, and that is the point of having them.
+          </p>
+        </div>
+
+        <div class="rule-grid">
+          <article class="rule">
+            <i aria-hidden="true">01</i>
+            <div>
+              <h3 data-en="Your data stays on your machine" data-ja="データは、あなたの端末の中に">Your data stays on your machine</h3>
+              <p data-en="No developer-operated servers hold your Salesforce data. No analytics, no telemetry, no advertising, no remotely hosted scripts. There is nothing for us to leak." data-ja="あなたの Salesforce データを開発者のサーバーが保持することはありません。分析、テレメトリ、広告、外部ホストのスクリプトも使いません。私たちが漏らせるものが、そもそも存在しません。">
+                No developer-operated servers hold your Salesforce data. No analytics, no telemetry, no advertising, no remotely hosted scripts. There is nothing for us to leak.
+              </p>
+            </div>
+          </article>
+
+          <article class="rule">
+            <i aria-hidden="true">02</i>
+            <div>
+              <h3 data-en="Show the change before making it" data-ja="変更は、実行する前に見せる">Show the change before making it</h3>
+              <p data-en="Field-level before-and-after values stay on screen through the final confirmation, and a successful update leaves a local receipt that can prepare a rollback." data-ja="項目単位の変更前・変更後の値は最終確認まで画面に残り、更新が成功するとロールバックを準備できる記録が端末内に残ります。">
+                Field-level before-and-after values stay on screen through the final confirmation, and a successful update leaves a local receipt that can prepare a rollback.
+              </p>
+            </div>
+          </article>
+
+          <article class="rule">
+            <i aria-hidden="true">03</i>
+            <div>
+              <h3 data-en="Read the source of truth" data-ja="正となるデータを直接読む">Read the source of truth</h3>
+              <p data-en="Tools call your Salesforce org directly using the session you are already signed in with. Nothing is cached on our side, because there is no our side." data-ja="ツールは、すでにログイン済みのセッションを使って Salesforce 組織へ直接アクセスします。こちら側にキャッシュはありません。そもそも「こちら側」が存在しないからです。">
+                Tools call your Salesforce org directly using the session you are already signed in with. Nothing is cached on our side, because there is no our side.
+              </p>
+            </div>
+          </article>
+
+          <article class="rule">
+            <i aria-hidden="true">04</i>
+            <div>
+              <h3 data-en="Unwritten means unfinished" data-ja="書き残していないものは、未完成">Unwritten means unfinished</h3>
+              <p data-en="A release is not done when the code works. It is done when someone who has never seen it can follow the manual — in English and in Japanese, published together." data-ja="コードが動いた時点では、リリースは終わっていません。はじめて触れる人がマニュアルを追って使えるようになって、ようやく完了です。英語版と日本語版は同時に公開します。">
+                A release is not done when the code works. It is done when someone who has never seen it can follow the manual — in English and in Japanese, published together.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ideas" class="band" aria-labelledby="ideas-title">
+      <div class="inner">
+        <div class="idea">
+          <p class="eyebrow" data-en="Currently exploring" data-ja="現在の研究テーマ">Currently exploring</p>
+          <h2 id="ideas-title" data-en="Assistants that can actually see your systems." data-ja="システムを本当に「見られる」アシスタントへ。">Assistants that can actually see your systems.</h2>
+          <p data-en="An assistant is only as good as what it can genuinely observe and do. We are building with the Model Context Protocol to connect assistants to real tools, live org context, and internal systems — under the same four rules above, with credentials that never travel." data-ja="アシスタントの実力は、実際に観察できることと実行できることで決まります。私たちは Model Context Protocol を用いて、アシスタントを実際のツール、ライブな組織コンテキスト、社内システムへ接続しています。上の 4 つのルールを守り、認証情報が外に出ることはありません。">
+            An assistant is only as good as what it can genuinely observe and do. We are building with the Model Context Protocol to connect assistants to real tools, live org context, and internal systems — under the same four rules above, with credentials that never travel.
+          </p>
+          <div class="actions">
+            <a class="button secondary" href="apps/salesforce-agentic-bot/" data-en="See the current draft" data-ja="開発中のものを見る">See the current draft</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="inner">
+        <p class="eyebrow" data-en="Start anywhere" data-ja="どこからでも">Start anywhere</p>
+        <h2 id="closing-title" data-en="Begin with whatever is closest to your problem." data-ja="いま抱えている課題に、いちばん近いものから。">Begin with whatever is closest to your problem.</h2>
+        <div class="actions">
+          <a class="button" href="tools/" data-en="Open Common Tools" data-ja="共通ツールを開く">Open Common Tools</a>
+          <a class="button secondary" href="apps/salesforce-admin-toolkit/" data-en="Browse the extensions" data-ja="拡張機能を見る">Browse the extensions</a>
+          <a class="button secondary" href="apps/salesforce-admin-toolkit/manual/" data-en="Read a manual" data-ja="マニュアルを読む">Read a manual</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span data-en="DinaLab is an independent product studio. Salesforce is a trademark of Salesforce, Inc. DinaLab products are not affiliated with, endorsed by, or sponsored by Salesforce." data-ja="DinaLab は独立したプロダクトスタジオです。Salesforce は Salesforce, Inc. の商標です。DinaLab のプロダクトは Salesforce と提携しておらず、Salesforce による承認または後援を受けていません。">DinaLab is an independent product studio. Salesforce is a trademark of Salesforce, Inc. DinaLab products are not affiliated with, endorsed by, or sponsored by Salesforce.</span>
+  </footer>
+
+  <script>
+    (function () {
+      // Same shared language key and leaf-node swap the live homepage uses.
+      var KEY = "dinalab-lang";
+      var toggle = document.getElementById("langToggle");
+      var label = document.getElementById("langLabel");
+      var nodes = document.querySelectorAll("[data-en][data-ja]");
+
+      function readLang() {
+        try {
+          return localStorage.getItem(KEY) === "ja" ? "ja" : "en";
+        } catch (e) {
+          return "en";
+        }
+      }
+
+      function apply(lang) {
+        document.documentElement.lang = lang;
+        nodes.forEach(function (node) {
+          node.textContent = node.getAttribute(lang === "en" ? "data-en" : "data-ja");
+        });
+        label.textContent = lang === "en" ? "日本語" : "English";
+        toggle.setAttribute("aria-label", lang === "en" ? "View in Japanese" : "英語で表示");
+      }
+
+      apply(readLang());
+
+      toggle.addEventListener("click", function () {
+        var next = readLang() === "en" ? "ja" : "en";
+        try {
+          localStorage.setItem(KEY, next);
+        } catch (e) {}
+        apply(next);
+      });
+    })();
+  </script>
+</body>
+</html>

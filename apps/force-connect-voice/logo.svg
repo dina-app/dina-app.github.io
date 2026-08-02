@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Force Connect Voice — D voice mark">
+  <defs>
+    <linearGradient id="bg" x1="12" y1="8" x2="116" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1557ff"/><stop offset="1" stop-color="#6c35df"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="24" y1="18" x2="98" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".24"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="30" fill="url(#bg)"/>
+  <circle cx="97" cy="27" r="34" fill="url(#shine)"/>
+  <path d="M34 27h27c23 0 38 14.5 38 37s-15 37-38 37H34V27Zm20 18v38h8c11 0 18-7 18-19s-7-19-18-19h-8Z" fill="#fff" fill-rule="evenodd"/>
+  <g fill="none" stroke="#b9d2ff" stroke-linecap="round" stroke-linejoin="round"><rect x="62" y="53" width="12" height="20" rx="6" stroke-width="4"/><path d="M57 69c0 9 22 9 22 0M68 78v8M62 86h12" stroke-width="4"/></g>
+</svg>

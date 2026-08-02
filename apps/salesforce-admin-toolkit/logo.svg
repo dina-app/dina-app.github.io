@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="t d">
+  <title id="t">Admin Toolkit for Salesforce</title>
+  <desc id="d">Gold hexagonal badge with a honeycomb field and a gold letter D.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7e7ac"/><stop offset="0.30" stop-color="#e3c268"/>
+      <stop offset="0.55" stop-color="#c79936"/><stop offset="0.78" stop-color="#ead089"/>
+      <stop offset="1" stop-color="#b3821f"/>
+    </linearGradient>
+    <linearGradient id="letter" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#fef6d8"/><stop offset="0.35" stop-color="#f2d68d"/>
+      <stop offset="0.70" stop-color="#ddb054"/><stop offset="1" stop-color="#bd8c28"/>
+    </linearGradient>
+    <radialGradient id="navy" cx="50%" cy="36%" r="80%">
+      <stop offset="0" stop-color="#1d3360"/><stop offset="0.55" stop-color="#122142"/>
+      <stop offset="1" stop-color="#080f24"/>
+    </radialGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8ceaff"/><stop offset="0.5" stop-color="#3fc3f0"/>
+      <stop offset="1" stop-color="#1a6f9f"/>
+    </linearGradient>
+    <clipPath id="field"><polygon points="256,46 437.9,151 437.9,361 256,466 74.1,361 74.1,151"/></clipPath>
+    <filter id="ds" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#050b1a" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <polygon points="256,16 463.8,136 463.8,376 256,496 48.2,376 48.2,136" fill="url(#gold)"/>
+  <polygon points="256,46 437.9,151 437.9,361 256,466 74.1,361 74.1,151" fill="url(#navy)"/>
+
+  <g clip-path="url(#field)" fill="none" stroke="url(#cyan)" stroke-width="5" stroke-linejoin="round">
+      <polygon points="127.8,-40 191.9,-3 191.9,71 127.8,108 63.7,71 63.7,-3" opacity="0.3"/>
+      <polygon points="256,-40 320.1,-3 320.1,71 256,108 191.9,71 191.9,-3" opacity="0.5"/>
+      <polygon points="384.2,-40 448.3,-3 448.3,71 384.2,108 320.1,71 320.1,-3" opacity="0.3"/>
+      <polygon points="63.7,71 127.8,108 127.8,182 63.7,219 -0.3,182 -0.3,108" opacity="0.5"/>
+      <polygon points="191.9,71 256,108 256,182 191.9,219 127.8,182 127.8,108" opacity="0.72"/>
+      <polygon points="320.1,71 384.2,108 384.2,182 320.1,219 256,182 256,108" opacity="0.72"/>
+      <polygon points="448.3,71 512.3,108 512.3,182 448.3,219 384.2,182 384.2,108" opacity="0.5"/>
+      <polygon points="-0.3,182 63.7,219 63.7,293 -0.3,330 -64.4,293 -64.4,219" opacity="0.3"/>
+      <polygon points="127.8,182 191.9,219 191.9,293 127.8,330 63.7,293 63.7,219" opacity="0.72"/>
+      <polygon points="256,182 320.1,219 320.1,293 256,330 191.9,293 191.9,219" opacity="0.9"/>
+      <polygon points="384.2,182 448.3,219 448.3,293 384.2,330 320.1,293 320.1,219" opacity="0.72"/>
+      <polygon points="512.3,182 576.4,219 576.4,293 512.3,330 448.3,293 448.3,219" opacity="0.3"/>
+      <polygon points="63.7,293 127.8,330 127.8,404 63.7,441 -0.3,404 -0.3,330" opacity="0.5"/>
+      <polygon points="191.9,293 256,330 256,404 191.9,441 127.8,404 127.8,330" opacity="0.72"/>
+      <polygon points="320.1,293 384.2,330 384.2,404 320.1,441 256,404 256,330" opacity="0.72"/>
+      <polygon points="448.3,293 512.3,330 512.3,404 448.3,441 384.2,404 384.2,330" opacity="0.5"/>
+      <polygon points="127.8,404 191.9,441 191.9,515 127.8,552 63.7,515 63.7,441" opacity="0.3"/>
+      <polygon points="256,404 320.1,441 320.1,515 256,552 191.9,515 191.9,441" opacity="0.5"/>
+      <polygon points="384.2,404 448.3,441 448.3,515 384.2,552 320.1,515 320.1,441" opacity="0.3"/>
+  </g>
+
+  <polygon points="256,46 437.9,151 437.9,361 256,466 74.1,361 74.1,151" fill="none" stroke="#070e20" stroke-width="7" opacity="0.55"/>
+
+  <g filter="url(#ds)" transform="translate(256 256) scale(0.74) translate(-256 -256)">
+    <path fill="url(#letter)" fill-rule="evenodd"
+          d="M 143 130 H 243 A 126 126 0 0 1 243 382 H 143 Z
+             M 198 185 H 243 A 71 71 0 0 1 243 327 H 198 Z"/>
+  </g>
+</svg>

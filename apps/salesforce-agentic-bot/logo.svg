@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+    <title id="title">Dina Agent for Salesforce</title>
+    <desc id="desc">A blue hexagonal D with connected circuit paths and an AI spark.</desc>
+    
+    <defs>
+      <linearGradient id="logo-edge" x1="86" y1="54" x2="430" y2="460" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#68dcff"/><stop offset="0.55" stop-color="#168eea"/><stop offset="1" stop-color="#0750a4"/>
+      </linearGradient>
+      <linearGradient id="logo-core" x1="110" y1="86" x2="405" y2="428" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#153666"/><stop offset="1" stop-color="#07172f"/>
+      </linearGradient>
+      <linearGradient id="logo-spark" x1="332" y1="128" x2="395" y2="207" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#fff2b3"/><stop offset="1" stop-color="#e7ad2b"/>
+      </linearGradient>
+      <filter id="logo-shadow" x="-20%" y="-20%" width="140%" height="150%">
+        <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#020a18" flood-opacity=".34"/>
+      </filter>
+      <clipPath id="logo-clip"><path d="M256 24 452 137v238L256 488 60 375V137Z"/></clipPath>
+    </defs>
+    <g filter="url(#logo-shadow)">
+      <path d="M256 24 452 137v238L256 488 60 375V137Z" fill="url(#logo-edge)"/>
+      <path d="M256 51 429 151v210L256 461 83 361V151Z" fill="url(#logo-core)" stroke="#b8ebff" stroke-opacity=".45" stroke-width="4"/>
+      <g clip-path="url(#logo-clip)" fill="none" stroke="#47c9ff" stroke-width="4" opacity=".45">
+        <path d="M58 190h92l46-46h91l48 47h120M60 324h91l44 43h120l42-43h99M151 190v134M335 191v133M256 52v92M256 367v94"/>
+        <circle cx="151" cy="190" r="7" fill="#47c9ff"/><circle cx="335" cy="191" r="7" fill="#47c9ff"/>
+        <circle cx="151" cy="324" r="7" fill="#47c9ff"/><circle cx="357" cy="324" r="7" fill="#47c9ff"/>
+      </g>
+      <path d="M142 132h105c84 0 139 49 139 124s-55 124-139 124H142V132Zm73 68v112h36c36 0 60-20 60-56s-24-56-60-56h-36Z" fill="#fff" fill-rule="evenodd"/>
+      <path d="m367 120 10 26 26 10-26 10-10 27-10-27-27-10 27-10Z" fill="url(#logo-spark)" stroke="#fff7d5" stroke-width="3"/>
+      <circle cx="398" cy="236" r="10" fill="#f5c85b" stroke="#fff6ca" stroke-width="3"/>
+      <path d="M384 236h-34" stroke="#f5c85b" stroke-width="7" stroke-linecap="round"/>
+    </g>
+  </svg>

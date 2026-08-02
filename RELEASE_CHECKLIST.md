@@ -13,10 +13,15 @@ Prepared: July 31, 2026
 
 ## Completed in this release
 
+- [x] Replace the Admin Toolkit and Dina Agent raster logos with the current vector marks from `dina-app`, and drop the duplicate `assets/salesforce-agentic-bot-icon.jpg` reference.
+- [x] Add an "In the workshop" section to the homepage listing six earlier-stage apps with logo, platform, one line, and status.
+- [ ] Confirm the new homepage copy reads correctly in Japanese; the marketing strings are newly written, unlike the manual translations.
+- [ ] Confirm each workshop status is still accurate at publish time: DinaDevOps beta 0.1.0, OrgDock in development, Salesforce Prompter in development, Force Connect Voice prototype, Dina Bot early build, DinaSheet for Google Sheets in development.
+- [ ] Decide whether the four consumer iOS apps (Dina tutor, Dina 3D, Dina Draw, Dina Snap) should appear on dina.jp or stay off a Salesforce-focused site.
 - [x] Move every page onto one design system (`assets/dinalab.css`), replacing the three divergent palettes previously inlined per page.
 - [x] Add a light/dark theme with a nav toggle, a shared preference key, and no flash of the wrong theme on navigation.
 - [x] Apply the Japanese font stack site-wide; previously only the homepage and DinaSheet pages carried CJK fallbacks.
-- [x] Publish `demo.html` as an internal, non-indexed design reference.
+- [x] Rebuild the homepage around sharing knowledge, tools, and ideas, and retire the demo and style-guide pages into `index.html` and `assets/dinalab.css`.
 - [x] Update Admin Toolkit public content for v0.8.0, SheetD, and GitHub Metadata Sync.
 - [x] Publish the DinaSheet v0.2.0 release-candidate page and privacy-policy URL.
 - [x] Add DinaSheet to the homepage, sitemap, site validation, and not-found navigation.

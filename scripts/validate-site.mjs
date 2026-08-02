@@ -45,6 +45,8 @@ const primaryPages = [
   "apps/salesforce-admin-toolkit/PRIVACY_POLICY.html",
   "apps/salesforce-admin-toolkit/manual/index.html",
   "apps/salesforce-admin-toolkit/manual/jp/index.html",
+  "apps/dinasheet-for-salesforce/index.html",
+  "apps/dinasheet-for-salesforce/PRIVACY_POLICY.html",
   "apps/salesforce-agentic-bot/index.html",
   "apps/salesforce-agentic-bot/PRIVACY_POLICY.html",
 ];
@@ -58,6 +60,7 @@ for (const relative of primaryPages) {
 
 for (const relative of [
   "apps/salesforce-admin-toolkit/PRIVACY_POLICY.html",
+  "apps/dinasheet-for-salesforce/PRIVACY_POLICY.html",
   "apps/salesforce-agentic-bot/PRIVACY_POLICY.html",
 ]) {
   const html = fs.readFileSync(path.join(root, relative), "utf8");

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Toolkit for Salesforce | Compatible with Salesforce</title>
-  <meta name="description" content="Admin Toolkit for Salesforce is an independent Chrome side-panel suite compatible with Salesforce for metadata, SOQL, permissions, schemas, APIs, Apex, exports, and monitoring.">
+  <meta name="description" content="Admin Toolkit for Salesforce is an independent Chrome side-panel suite for metadata, SheetD, permissions, schemas, GitHub metadata sync, APIs, Apex, exports, and monitoring.">
   <link rel="canonical" href="https://dina.jp/apps/salesforce-admin-toolkit/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>
@@ -230,10 +230,10 @@
 
     <header class="hero">
       <div>
-        <span class="release-pill">Current release: 0.7.0</span>
+        <span class="release-pill">Current release: 0.8.0</span>
         <h1>Admin Toolkit for Salesforce</h1>
         <p class="lead">
-          Admin Toolkit for Salesforce is an independent Chrome right-side panel suite compatible with Salesforce. It uses the Salesforce session you are already signed in with to provide metadata administration, SOQL workspaces, permission analysis, object schema exploration, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.
+          Admin Toolkit for Salesforce is an independent Chrome right-side panel suite compatible with Salesforce. It uses the Salesforce session you are already signed in with for metadata administration, spreadsheet data work, permission analysis, object schema exploration, GitHub metadata retrieval, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.
         </p>
         <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
         <a class="store-link" href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Install from Chrome Web Store</a>
@@ -252,8 +252,8 @@
             <p>Browse source-style metadata, search the loaded workspace, edit files locally, track changes, build package.xml selections, and deploy or discard changes.</p>
           </article>
           <article class="app-summary">
-            <h3>Force Sheet</h3>
-            <p>Run SOQL queries and Salesforce reports or import CSV/XLSX data in a multi-tab spreadsheet grid with streaming pagination and Salesforce CRUD workflows.</p>
+            <h3>SheetD</h3>
+            <p>Browse Salesforce objects and reports in a multi-tab spreadsheet grid, inspect file details, and review exact changed fields before confirmed record updates or deletes.</p>
           </article>
           <article class="app-summary">
             <h3>Org Review</h3>
@@ -266,6 +266,10 @@
           <article class="app-summary">
             <h3>Permission Explorer</h3>
             <p>Explain why a user can access an object or field, identify overlapping grants, and trace each permission to the profile, permission set, or permission set group that grants it.</p>
+          </article>
+          <article class="app-summary">
+            <h3>GitHub Metadata Sync</h3>
+            <p>Configure and preflight governed metadata retrieval to an approved repository through an org-side bridge, Salesforce native credentials, and a pull-request-only delivery workflow.</p>
           </article>
         </div>
       </section>
@@ -280,6 +284,7 @@
           <li>Export SOQL, SOSL, GraphQL, and report results as available CSV or JSON output.</li>
           <li>Browse Salesforce document folders, preview supported files, and download selected folders and files as ZIP.</li>
           <li>Trace object and field permissions to the profiles, permission sets, and permission set groups that grant them.</li>
+          <li>Configure and validate a governed, allowlisted Salesforce-to-GitHub metadata retrieval workflow without storing GitHub tokens in the browser.</li>
           <li>Inspect setup audit trail, API limits, login history, event log files, org summaries, and user summaries.</li>
           <li>Use the built-in English and Japanese manual for end-user guidance.</li>
         </ul>
@@ -290,8 +295,9 @@
         <ul>
           <li>The extension runs in Chrome and uses the active Salesforce session.</li>
           <li>Salesforce user and organization identity fields are used to identify the active session and org.</li>
-          <li>Salesforce metadata, records, user identity data, authentication information, and user-entered requests are sent only to the Salesforce org selected by the user—not to developer-operated servers or non-Salesforce third-party services.</li>
-          <li>Workspace preferences, search data, pending edits, saved Force Sheet files, recent/favorite tools, and sanitized operation history may be stored locally in Chrome browser storage on the user's device.</li>
+          <li>Browser API requests containing Salesforce data, identity data, authentication information, and user-entered requests are sent only to the selected Salesforce org, not to developer-operated servers.</li>
+          <li>When an administrator explicitly configures and a user confirms GitHub Metadata Sync, the org-side bridge and protected workflow may retrieve only an approved metadata scope into the configured organization-owned GitHub repository through a branch and pull request.</li>
+          <li>Workspace preferences, search data, pending edits, saved SheetD files, recent/favorite tools, sanitized operation history, and non-secret organization-bound GitHub Metadata Sync drafts may be stored locally in Chrome browser storage on the user's device.</li>
           <li>Operation history is limited to the most recent 100 entries and excludes session tokens and authorization headers. Feature-specific saved data can be cleared where the extension offers that control, and removing the extension clears its Chrome-managed local storage.</li>
           <li>The extension does not include analytics, telemetry, advertising, affiliate links, or remotely hosted JavaScript or WebAssembly.</li>
           <li>Extension JavaScript, HTML, CSS, and third-party spreadsheet code are packaged with the extension. Salesforce responses are treated as data and are not executed as code.</li>
@@ -323,7 +329,7 @@
 
       <section aria-labelledby="release-title">
         <h2 id="release-title">Current Release</h2>
-        <p>Version 0.7.0 adds Permission Explorer, a read-only workspace that explains why a user can access an object or field. It lists every assigned record that grants access, highlights objects granted by more than one record, and traces each permission to the profile, permission set, or permission set group that grants it. Permission Explorer explains object and field permissions only, not record-level sharing. No new Chrome permissions were added.</p>
+        <p>Version 0.8.0 adds GitHub Metadata Sync as the sixth app, with a resumable Setup Center, verified org and server prefill, server-derived technical configuration, governed preflight, Salesforce native Named Credential APIs, and pull-request-only delivery. It also rebuilds SheetD on the DinaSheet engine so objects and reports open directly as editable data and pending cell edits are reviewed from a Changed fields card before a confirmed update. No browser permission was added, and the extension stores no GitHub secret, token, or OAuth URL.</p>
       </section>
 
       <section aria-labelledby="support-title">

@@ -51,8 +51,9 @@
 
     <article>
       <h1>Privacy Policy for Admin Toolkit for Salesforce</h1>
-      <p class="updated">Last updated: July 18, 2026</p>
-      <p>Admin Toolkit for Salesforce is an independent Chrome extension compatible with Salesforce for metadata administration. Salesforce is a trademark of Salesforce, Inc. The extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+      <p class="updated">Last updated: July 31, 2026</p>
+      <p>Admin Toolkit for Salesforce is an independent Chrome extension for Salesforce metadata administration. It is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+      <p>GitHub and the GitHub logo are trademarks of GitHub, Inc. Their use identifies the optional integration and does not imply affiliation or endorsement.</p>
 
       <h2>Data the Extension Handles</h2>
       <p>The extension may handle:</p>
@@ -62,7 +63,9 @@
         <li>Salesforce metadata, setup data, org limits, event log file metadata, login history, setup audit trail rows, and records returned by user-run queries or requests.</li>
         <li>Salesforce object schema data used by Object Schema, including global describe results, installed-package namespaces, object and field describes, active picklist values, formulas, and reference targets.</li>
         <li>User-entered Apex, SOQL, SOSL, REST paths, request bodies, metadata search terms, workspace selections, and local edits.</li>
+        <li>Salesforce list view and report definitions shown in SheetD's file details, including the list view's generated SOQL and a report's format, report type, scope, filters, and created/last-modified user names, together with the rows those list views and reports return. When a report's results exceed the 2,000-row limit of Salesforce's report API, the extension requests the same report as a workbook export from that same Salesforce endpoint over the existing session.</li>
         <li>Local extension preferences and state such as language, selected workspace folders, selected namespaces, search settings, UI settings, recent/favorite tools, and sanitized operation history or receipts.</li>
+        <li>GitHub Metadata Sync accepts only four required browser fields: connection owner, rotation owner, GitHub repository in <code>owner/repository</code> form, and CI username. It may display server-reported immutable target IDs, non-secret external-app and credential-definition status, roles, quotas, validation, policy, setup-capability, optimistic-revision, setup-receipt, and run-receipt data. The server resolves technical configuration and fixed safety limits after its organization ID matches the independently resolved Salesforce session. The extension does not accept or store GitHub tokens, authorization headers, Salesforce session IDs, JWT private keys, passwords, OAuth/GitHub authorization URLs, arbitrary remote endpoints, or authorization handoff IDs.</li>
       </ul>
 
       <h2>How Data Is Used</h2>
@@ -73,16 +76,23 @@
         <li>Run Salesforce REST, SOQL, SOSL, data export, and anonymous Apex actions initiated by the user.</li>
         <li>View Salesforce setup audit trail, event log files, login history, org summary, and limits.</li>
         <li>Build an interactive object relationship map and display field details selected by the user.</li>
+        <li>Prepare and validate a governed Salesforce-to-GitHub metadata retrieval, optionally request an exact server-advertised setup action for an inactive policy draft or the fixed product-owned CI permission-set definition, create fixed non-secret outbound definitions with Salesforce's standard Named Credential REST APIs, continue Salesforce-native OAuth when required, then request an approved GitHub Actions workflow through an administrator-installed Salesforce Apex REST bridge.</li>
+        <li>Open Salesforce list views and reports in a spreadsheet grid, edit the returned rows locally, and—only for object rows that carry a record Id, and only when the user selects rows and confirms the action from the grid—update or delete those Salesforce records. Reports are edited locally only; the extension never writes report rows back to Salesforce.</li>
         <li>Save local workspace state and pending edits in browser storage.</li>
       </ul>
 
       <h2>Data Sharing and Transfers</h2>
-      <p>Salesforce metadata, records, user identity data, authentication information, and user-entered requests are sent only to the Salesforce org selected by the user. The extension does not transfer this data to developer-operated servers or non-Salesforce third-party services.</p>
+      <p>Browser API requests containing Salesforce data, identity data, authentication information, and user-entered requests are sent only to the Salesforce org selected by the user. The extension does not request browser host access to GitHub and does not transfer this data to developer-operated servers. When the user explicitly continues outbound authentication, the extension opens only a fixed route on the verified Salesforce host; that Salesforce route may redirect the tab to the native Salesforce-generated OAuth/GitHub page.</p>
+      <p>GitHub Metadata Sync is optional and must be configured and activated by an authorized administrator. When a user explicitly confirms a live run, the Salesforce org-side bridge may use its administrator-managed GitHub credential to dispatch one allowlisted workflow in one allowlisted repository. The protected GitHub Actions workflow then authenticates to Salesforce with a dedicated CI identity, retrieves only the approved metadata profile, and writes results to a branch and pull request in that configured repository. GitHub therefore processes the selected metadata and workflow evidence under the user's or organization's GitHub account and policies. The extension displays only redacted status, quota, policy, and receipt data returned by Salesforce.</p>
+      <p>Before activation, an authorized administrator may explicitly confirm one of the bridge's exact, fresh setup capabilities. These requests go only to the selected Salesforce org and may create or revise a non-secret, inactive server policy draft or reconcile only the fixed product-owned CI permission-set definition. Requests use stable idempotency identifiers and optimistic capability and policy revisions. Saving a server draft does not activate it, and permission-set reconciliation neither creates a user nor assigns the permission set.</p>
+      <p>The outbound authentication button uses Salesforce's standard Named Credential REST resources directly with the active Salesforce session. It reads the org's non-secret External App ID, derives collision-safe names, and creates only missing External Auth Identity Provider, External Credential, Named Principal, and Named Credential definitions; a same-name mismatch fails without update or adoption. The extension never accepts or submits the GitHub client secret, never creates a principal-access assignment, and never enables callouts.</p>
+      <p>If OAuth is required, the extension asks Salesforce's standard <code>/named-credentials/credential/auth-url/o-auth</code> resource for the authentication URL. It accepts only an HTTPS URL on the verified Salesforce org host under <code>/services/auth/xds/</code>, opens it in a separate no-opener window, and does not persist or log the URL. Salesforce completes the GitHub callback and stores encrypted access and refresh tokens in <code>UserExternalCredential</code>; the extension never receives those tokens. Repository access is verified server-side after OAuth/installation; a callback repository label or <code>installation_id</code> alone is not treated as proof.</p>
+      <p>Policy-draft create/update and live validation send only the five setup-intent strings described above. The fixed CI permission-set action sends an empty input object. Immutable target identifiers and workflow/branch/environment data are resolved by the selected Salesforce org. The standard Named Credential setup request contains only fixed, non-secret definition metadata and names derived from the org's External App ID.</p>
       <p>The extension does not sell user data, does not use user data for advertising, does not use user data for credit-worthiness or lending purposes, and does not share user data with data brokers or advertising platforms.</p>
       <p>The extension does not include usage analytics or telemetry.</p>
 
       <h2>Local Storage</h2>
-      <p>Workspace preferences, search data, pending edits, saved Force Sheet files, recent/favorite tools, and sanitized operation history may be stored locally in Chrome browser storage on the user's device. Operation history is limited to the most recent 100 entries and excludes session tokens and authorization headers. Files find is scoped to the loaded workspace tree. Users can clear feature-specific saved data from the extension UI where offered; removing the extension clears its Chrome-managed local storage.</p>
+      <p>Workspace preferences, search data, pending edits, saved SheetD files, recent/favorite tools, sanitized operation history, and non-secret GitHub Metadata Sync drafts may be stored locally in Chrome browser storage on the user's device. Operation history is limited to the most recent 100 entries and excludes session tokens and authorization headers. GitHub Metadata Sync local draft schema v2 stores exactly five intent strings—connection owner, rotation owner, repository owner, repository name, and CI username—and is bound to both the normalized Salesforce host and independently resolved Salesforce organization ID. Locally supplied technical IDs, credential/application names, workflow/branch data, and governance values are discarded, preventing browser storage from becoming policy authority. To recover safely after an interrupted confirmed setup mutation, the extension may separately store one organization-bound, non-secret attempt record, capped at 16 KB, containing the exact idempotent request and sanitized pending operation state. It is never replayed automatically; explicit Recheck polls or exact-replays it, and a known terminal outcome clears it. Native authentication state, the Salesforce-generated OAuth URL, and terminal credential status are excluded from both local records. Files find is scoped to the loaded workspace tree. Users can clear feature-specific saved data from the extension UI where offered; removing the extension clears its Chrome-managed local storage.</p>
 
       <h2>Remote Code</h2>
       <p>The extension does not load or execute remotely hosted JavaScript or WebAssembly. Extension JavaScript, HTML, CSS, and third-party spreadsheet code are packaged with the Chrome extension. Responses from the selected Salesforce org are treated as data and are not executed as code.</p>
@@ -92,6 +102,9 @@
 
       <h2>Chrome Web Store Limited Use Disclosure</h2>
       <p>The use of information received from Google APIs will adhere to the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
+
+      <h2>Contact</h2>
+      <p>For privacy questions or support, use the support contact provided on the Chrome Web Store listing.</p>
 
     </article>
   </main>

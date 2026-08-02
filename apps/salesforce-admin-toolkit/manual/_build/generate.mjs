@@ -132,7 +132,7 @@ function buildPage(lang) {
     </nav>
 
     <header>
-      <span class="release-pill">${t("Manual for release 0.6.2", "リリース 0.6.2 対応マニュアル")}</span>
+      <span class="release-pill">${t("Manual for release 0.8.0", "リリース 0.8.0 対応マニュアル")}</span>
       <h1>${t("Admin Toolkit for Salesforce — User Manual", "Admin Toolkit for Salesforce ユーザーマニュアル")}</h1>
       <p class="lead">${t("How to install the toolkit, launch its apps from the popup, and use each workspace and tool — with " + total + " screenshots.", "インストールから、ポップアップでのアプリ起動、各ワークスペース・ツールの使い方まで、" + total + " 枚のスクリーンショットで解説します。")}</p>
       <p class="notice">${t("Screenshots were taken against a Salesforce Developer Edition org; org-identifying values (host, org and user names, IDs, addresses) are replaced with sample values. Salesforce is a trademark of Salesforce, Inc. This extension is not affiliated with, endorsed by, or sponsored by Salesforce.", "スクリーンショットは Salesforce Developer Edition 組織で撮影し、組織を特定できる情報（ホスト名、組織名・ユーザー名、ID、アドレス）はサンプル値に置き換えています。Salesforce は Salesforce, Inc. の商標です。本拡張機能は Salesforce の提携・承認・後援を受けていません。")}</p>

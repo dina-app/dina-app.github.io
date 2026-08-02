@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy for DinaSheet for Salesforce</title>
+  <meta name="description" content="Privacy policy for the DinaSheet for Salesforce Chrome extension.">
+  <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/PRIVACY_POLICY.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    :root{color-scheme:light;--bg:#f4f7f4;--ink:#172027;--muted:#5b6770;--panel:#fff;--line:#d6ded8;--blue:#235f82;--rust:#a24d32;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.65}a{color:var(--blue);font-weight:800;text-decoration:none}a:hover{text-decoration:underline}.shell{width:min(900px,calc(100% - 40px));margin:0 auto;padding:26px 0 64px}.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:42px}.brand{display:inline-flex;align-items:center;gap:10px;color:var(--ink);font-weight:900}.brand-mark{display:grid;width:36px;height:36px;place-items:center;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--rust)}article{padding:28px;border:1px solid var(--line);border-radius:8px;background:var(--panel);box-shadow:0 12px 26px rgba(23,32,39,.07)}h1,h2,p{margin-top:0}h1{margin-bottom:8px;font-size:clamp(36px,7vw,58px);line-height:1.04}h2{margin:28px 0 10px;font-size:24px;line-height:1.14}.updated{color:var(--muted);font-weight:800}ul{margin:0;padding-left:22px}li+li{margin-top:8px}code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}@media(max-width:640px){.shell{width:min(100% - 28px,900px)}.nav{align-items:flex-start;flex-direction:column}article{padding:20px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation"><a class="brand" href="../../"><span class="brand-mark">D</span><span>DinaLab</span></a><a href="./">Back to app page</a></nav>
+    <article>
+      <h1>Privacy Policy for DinaSheet for Salesforce</h1>
+      <p class="updated">Effective date: July 31, 2026</p>
+      <p>DinaSheet for Salesforce ("DinaSheet") is a Chrome extension that provides a spreadsheet workspace for data in a Salesforce organization where the user is already signed in. It can run user-requested Salesforce queries and reports, display and locally organize results, import local CSV or Excel files, and send user-confirmed record updates back to that Salesforce organization.</p>
+
+      <h2>Data DinaSheet Handles</h2>
+      <p>DinaSheet may handle the following data only to provide its user-facing spreadsheet features:</p>
+      <ul>
+        <li><strong>Authentication information:</strong> the Salesforce <code>sid</code> session cookie for the organization where the user is already signed in. The extension reads this cookie locally to authenticate requests to that same Salesforce organization.</li>
+        <li><strong>Salesforce account and identity data:</strong> the selected Salesforce host, organization ID, user ID, username, display name, language, and similar information returned by Salesforce APIs.</li>
+        <li><strong>Salesforce website and API content:</strong> object and field metadata, report metadata and results, query results, record IDs and field values, and update results requested by the user. This content may include personal data if the user's Salesforce organization stores such data and the user chooses to retrieve it.</li>
+        <li><strong>User-provided content:</strong> SOQL queries, selected report or object names, spreadsheet edits, and local CSV or Excel files opened by the user.</li>
+        <li><strong>Local preferences and rollback receipts:</strong> the selected language, sidebar width, and bounded per-organization update receipts containing update time, Salesforce object, record IDs, changed field names, and the prior and updated values needed to prepare a user-selected rollback.</li>
+      </ul>
+      <p>DinaSheet does not collect browsing history, advertising identifiers, analytics, telemetry, mouse movement, scrolling behavior, or keystroke logs. It does not contain ads.</p>
+
+      <h2>How Data Is Used</h2>
+      <p>DinaSheet uses data only to:</p>
+      <ul>
+        <li>authenticate requests to the Salesforce organization selected by the user;</li>
+        <li>run user-requested Salesforce queries, reports, schema lookups, and updates;</li>
+        <li>render and operate the spreadsheet interface;</li>
+        <li>import files selected by the user locally in the browser;</li>
+        <li>retain bounded update receipts locally so the user can select recorded prior values, review them, and confirm a rollback update; and</li>
+        <li>show the user which Salesforce organization is connected.</li>
+      </ul>
+
+      <h2>Data Sharing and Transfers</h2>
+      <p>DinaSheet does not sell user data and does not use it for advertising, tracking, credit decisions, or profiling.</p>
+      <ul>
+        <li>Salesforce API requests and user-confirmed record changes are sent only to the user's selected Salesforce organization over HTTPS.</li>
+        <li>Salesforce processes data under the user's or organization's account and its applicable terms and policies.</li>
+      </ul>
+      <p>The Salesforce session cookie, cookie domain, and authorization header never leave the Chrome extension.</p>
+      <p>No data is sent to developer-operated servers. DinaSheet has no analytics or telemetry endpoint.</p>
+
+      <h2>Storage and Retention</h2>
+      <ul>
+        <li>UI preferences and per-organization update receipts are stored in Chrome extension storage on the user's device. Workbook files and sheet snapshots are not persisted. Update receipts retain only changed fields, are limited to the newest 50 successful update events and 2 MB per Salesforce organization, and are removed as older events exceed those limits or when the user clears extension storage or uninstalls the extension.</li>
+        <li>The Salesforce session cookie remains managed by Salesforce and Chrome; DinaSheet does not copy it into persistent extension storage.</li>
+        <li>Local CSV and Excel files are parsed in the browser. Opening a file does not upload it to the developer.</li>
+      </ul>
+
+      <h2>User Controls</h2>
+      <p>Users choose which Salesforce organization, query, report, file, rows, and fields to use. Salesforce record updates, including rollback updates prepared from audit receipts, require explicit row selection, review, and confirmation. Users can remove local data by clearing Chrome extension storage or uninstalling DinaSheet.</p>
+
+      <h2>Security</h2>
+      <p>DinaSheet uses HTTPS for network requests and packages its executable JavaScript, HTML, and CSS with the extension. It does not execute remotely hosted code.</p>
+      <h2>Limited Use Disclosure</h2>
+      <p>DinaSheet's use of user data adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/policies" target="_blank" rel="noopener">Chrome Web Store User Data Policy, including the Limited Use requirements</a>. Data is used only to provide or improve DinaSheet's disclosed user-facing spreadsheet features, is not used for advertising, and is not made available for human reading except with the user's affirmative agreement for support, when necessary for security, to comply with applicable law, or after aggregation and anonymization for internal operations. DinaSheet currently performs no developer-operated analytics or telemetry.</p>
+
+      <h2>Independent Product</h2>
+      <p>DinaSheet is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce. Salesforce and Chrome are trademarks of their respective owners.</p>
+
+      <h2>Contact</h2>
+      <p>For privacy questions, contact the publisher using the verified contact email shown on the Chrome Web Store listing.</p>
+    </article>
+  </main>
+</body>
+</html>

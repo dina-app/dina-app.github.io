@@ -19,48 +19,58 @@ export const SECTIONS = [
   },
   {
     id: "force-sheet",
-    en: { title: "3. Force Sheet", intro: "A multi-tab spreadsheet for Salesforce data: run SOQL, open reports and list views, import CSV/XLSX, and start CRUD workflows from grid selections — every write asks for confirmation first." },
-    jp: { title: "3. Force Sheet", intro: "Salesforce データのためのマルチタブ・スプレッドシート。SOQL の実行、レポートやリストビューの展開、CSV/XLSX の取り込み、グリッド選択からの CRUD 操作ができます。書き込みは必ず実行前に確認されます。" }
+    en: { title: "3. SheetD", intro: "A multi-tab spreadsheet for Salesforce data: browse objects and reports, run SOQL, inspect file details, edit supported object records, and review exact changed fields before a confirmed update or delete." },
+    jp: { title: "3. SheetD", intro: "Salesforce データのためのマルチタブ・スプレッドシート。オブジェクトやレポートの参照、SOQL の実行、ファイル詳細の確認、対応オブジェクトレコードの編集、確定更新・削除前の変更項目レビューができます。" }
+  },
+  {
+    id: "permission-explorer",
+    en: { title: "4. Permission Explorer", intro: "Trace effective object and field access to the assigned profile, permission sets, and permission set groups that grant it, or compare two users across the returned access metadata." },
+    jp: { title: "4. Permission Explorer（権限エクスプローラー）", intro: "有効なオブジェクト・項目アクセスを、付与元のプロファイル、権限セット、権限セットグループまで追跡し、返されたアクセスメタデータで 2 ユーザーを比較できます。" }
+  },
+  {
+    id: "github-metadata-sync",
+    en: { title: "5. GitHub Metadata Sync", intro: "Configure and preflight governed metadata retrieval to an approved repository through an org-side bridge, Salesforce native credentials, and a branch-and-pull-request-only workflow." },
+    jp: { title: "5. GitHub Metadata Sync", intro: "組織側ブリッジ、Salesforce ネイティブ認証情報、ブランチとプルリクエスト限定のワークフローを通じて、承認済みリポジトリへの統制されたメタデータ取得を設定・事前検証します。" }
   },
   {
     id: "org-review",
-    en: { title: "4. Org Review", intro: "A read-only assessment of org health that runs automatically when opened. Each section carries evidence and remediation guidance; the report exports as PDF, Markdown, summary JSON, or evidence JSON." },
-    jp: { title: "4. Org Review（組織レビュー）", intro: "ページを開くと自動で実行される読み取り専用の組織健全性アセスメント。各セクションに根拠と改善ガイダンスが付き、PDF・Markdown・サマリー JSON・エビデンス JSON でエクスポートできます。" }
+    en: { title: "6. Org Review", intro: "A read-only assessment of org health that runs automatically when opened. Each section carries evidence and remediation guidance; the report exports as PDF, Markdown, summary JSON, or evidence JSON." },
+    jp: { title: "6. Org Review（組織レビュー）", intro: "ページを開くと自動で実行される読み取り専用の組織健全性アセスメント。各セクションに根拠と改善ガイダンスが付き、PDF・Markdown・サマリー JSON・エビデンス JSON でエクスポートできます。" }
   },
   {
     id: "object-schema",
-    en: { title: "5. Object Schema", intro: "Build an interactive relationship map for any pickable object, then explore every field of every selectable object in the Fields spreadsheet below it." },
-    jp: { title: "5. Object Schema（オブジェクトスキーマ）", intro: "選択可能な任意のオブジェクトからインタラクティブなリレーションマップを作成し、その下の Fields スプレッドシートで選択可能な全オブジェクトの全項目を探索できます。" }
+    en: { title: "7. Object Schema", intro: "Build an interactive relationship map for any pickable object, then explore every field of every selectable object in the Fields spreadsheet below it." },
+    jp: { title: "7. Object Schema（オブジェクトスキーマ）", intro: "選択可能な任意のオブジェクトからインタラクティブなリレーションマップを作成し、その下の Fields スプレッドシートで選択可能な全オブジェクトの全項目を探索できます。" }
   },
   {
     id: "document-folders",
-    en: { title: "6. Document Folders", intro: "Browse Salesforce libraries and folders, preview supported files, and download selections as a ZIP that preserves folder paths. Folder selection is recursive; downloads are limited to 500 files and 250 MB and can be canceled mid-run." },
-    jp: { title: "6. ドキュメントフォルダー", intro: "Salesforce のライブラリとフォルダーを参照し、対応ファイルをプレビューし、フォルダーパスを保持した ZIP として選択内容をダウンロードできます。フォルダー選択は再帰的で、500 ファイル・250 MB まで、実行中にキャンセルできます。" }
+    en: { title: "8. Document Folders", intro: "Browse Salesforce libraries and folders, preview supported files, and download selections as a ZIP that preserves folder paths. Folder selection is recursive; downloads are limited to 500 files and 250 MB and can be canceled mid-run." },
+    jp: { title: "8. ドキュメントフォルダー", intro: "Salesforce のライブラリとフォルダーを参照し、対応ファイルをプレビューし、フォルダーパスを保持した ZIP として選択内容をダウンロードできます。フォルダー選択は再帰的で、500 ファイル・250 MB まで、実行中にキャンセルできます。" }
   },
   {
     id: "rest-explorer",
-    en: { title: "7. REST Explorer", intro: "Compose Salesforce REST API requests with endpoint templates, send them against the connected org, and inspect the JSON response. Requests run only when you send them." },
-    jp: { title: "7. REST Explorer", intro: "エンドポイントテンプレートで Salesforce REST API リクエストを組み立て、接続中の組織に送信し、JSON レスポンスを確認できます。リクエストはあなたが送信したときだけ実行されます。" }
+    en: { title: "9. REST Explorer", intro: "Compose Salesforce REST API requests with endpoint templates, send them against the connected org, and inspect the JSON response. Requests run only when you send them." },
+    jp: { title: "9. REST Explorer", intro: "エンドポイントテンプレートで Salesforce REST API リクエストを組み立て、接続中の組織に送信し、JSON レスポンスを確認できます。リクエストはあなたが送信したときだけ実行されます。" }
   },
   {
     id: "data-export",
-    en: { title: "8. Data Export", intro: "Run SOQL, SOSL, and GraphQL queries or report exports, preview the result as a CSV grid or JSON, and download it." },
-    jp: { title: "8. データエクスポート", intro: "SOQL・SOSL・GraphQL クエリやレポートエクスポートを実行し、CSV グリッドまたは JSON でプレビューしてダウンロードできます。" }
+    en: { title: "10. Data Export", intro: "Run SOQL, SOSL, and GraphQL queries or report exports, preview the result as a CSV grid or JSON, and download it." },
+    jp: { title: "10. データエクスポート", intro: "SOQL・SOSL・GraphQL クエリやレポートエクスポートを実行し、CSV グリッドまたは JSON でプレビューしてダウンロードできます。" }
   },
   {
     id: "run-apex",
-    en: { title: "9. Run Apex", intro: "Execute anonymous Apex and review the compile result, execution status, and debug output." },
-    jp: { title: "9. Apex 実行", intro: "匿名 Apex を実行し、コンパイル結果・実行ステータス・デバッグ出力を確認できます。" }
+    en: { title: "11. Run Apex", intro: "Execute anonymous Apex and review the compile result, execution status, and debug output." },
+    jp: { title: "11. Apex 実行", intro: "匿名 Apex を実行し、コンパイル結果・実行ステータス・デバッグ出力を確認できます。" }
   },
   {
     id: "monitoring",
-    en: { title: "10. Limits & monitoring", intro: "Read-only monitoring pages for the org: API limits with live usage bars, the setup audit trail, login history, and event log files." },
-    jp: { title: "10. 制限値とモニタリング", intro: "組織の読み取り専用モニタリングページ：使用量バー付きの API 制限、設定変更履歴、ログイン履歴、イベントログファイル。" }
+    en: { title: "12. Limits & monitoring", intro: "Read-only monitoring pages for the org: API limits with live usage bars, the setup audit trail, login history, and event log files." },
+    jp: { title: "12. 制限値とモニタリング", intro: "組織の読み取り専用モニタリングページ：使用量バー付きの API 制限、設定変更履歴、ログイン履歴、イベントログファイル。" }
   },
   {
     id: "builtin-manual",
-    en: { title: "11. Built-in manual (EN/JP)", intro: "The extension ships with its own manual in English and Japanese, including per-version release notes. Every page has a language toggle in its header." },
-    jp: { title: "11. 内蔵マニュアル（英語/日本語）", intro: "拡張機能には英語・日本語の内蔵マニュアルとバージョンごとのリリースノートが同梱されています。各ページのヘッダーに言語切り替えがあります。" }
+    en: { title: "13. Built-in manual (EN/JP)", intro: "The extension ships with its own manual in English and Japanese, including per-version release notes. Every page has a language toggle in its header." },
+    jp: { title: "13. 内蔵マニュアル（英語/日本語）", intro: "拡張機能には英語・日本語の内蔵マニュアルとバージョンごとのリリースノートが同梱されています。各ページのヘッダーに言語切り替えがあります。" }
   }
 ];
 
@@ -69,7 +79,7 @@ const S = (section, enAlt, enCap, jpAlt, jpCap) => ({ section, en: { alt: enAlt,
 
 export const SCENES = {
   // ── Getting started ──
-  "popup-apps": S("getting-started", "Popup Apps tab", "The Apps tab launches the four primary workspaces.", "ポップアップのアプリタブ", "アプリタブは 4 つの主要ワークスペースを起動します。"),
+  "popup-apps": S("getting-started", "Popup Apps tab", "The Apps tab launches the six primary workspaces.", "ポップアップのアプリタブ", "アプリタブは 6 つの主要ワークスペースを起動します。"),
   "popup-tools": S("getting-started", "Popup Tools tab", "The Tools tab lists every single-purpose page.", "ポップアップのツールタブ", "ツールタブには単機能ページが並びます。"),
   "popup-org": S("getting-started", "Popup Org tab", "The Org tab summarizes the connected org and user.", "ポップアップの組織タブ", "組織タブは接続中の組織とユーザーの概要を表示します。"),
   "popup-search": S("getting-started", "Popup metadata search", "Search metadata across the org by API name, label, or text.", "ポップアップのメタデータ検索", "API 参照名・ラベル・テキストで組織全体のメタデータを検索します。"),
@@ -93,15 +103,13 @@ export const SCENES = {
   "metadata-package-xml": S("metadata-admin", "package.xml builder", "Assemble a package.xml from tree selections.", "package.xml ビルダー", "ツリーの選択から package.xml を組み立てます。"),
   "metadata-package-tree": S("metadata-admin", "package.xml selection tree", "Selecting components for the package.", "package.xml 選択ツリー", "パッケージに含めるコンポーネントの選択。"),
 
-  // ── Force Sheet ──
-  "force-sheet-query-editor": S("force-sheet", "Force Sheet SOQL editor", "The SOQL query editor.", "Force Sheet の SOQL エディター", "SOQL クエリエディター。"),
+  // ── SheetD ──
+  "force-sheet-query-editor": S("force-sheet", "SheetD SOQL editor", "The SOQL query editor.", "SheetD の SOQL エディター", "SOQL クエリエディター。"),
   "force-sheet-field-suggestions": S("force-sheet", "SOQL field suggestions", "Field suggestions while composing SOQL.", "SOQL 項目サジェスト", "SOQL 作成中の項目サジェスト。"),
   "force-sheet-query-results": S("force-sheet", "SOQL results grid", "Query results streamed into the grid.", "SOQL 結果グリッド", "グリッドにストリーミングされたクエリ結果。"),
-  "force-sheet-report-tab": S("force-sheet", "Force Sheet report tab", "Open org reports into the sheet.", "Force Sheet のレポートタブ", "組織のレポートをシートに展開します。"),
-  "force-sheet-upload-tab": S("force-sheet", "Force Sheet upload tab", "Import CSV or XLSX files.", "Force Sheet のアップロードタブ", "CSV / XLSX ファイルを取り込みます。"),
-  "force-sheet-crud-panel": S("force-sheet", "Force Sheet CRUD panel", "Turn grid selections into insert/update/delete requests.", "Force Sheet の CRUD パネル", "グリッド選択を挿入／更新／削除リクエストに変換します。"),
-  "force-sheet-crud-object": S("force-sheet", "CRUD object and mapping", "Choosing the object and field mapping for a write.", "CRUD のオブジェクトとマッピング", "書き込み対象のオブジェクトと項目マッピングの選択。"),
-  "force-sheet-workspace": S("force-sheet", "Force Sheet workspace tree", "Auto-saved spreadsheet files in folders.", "Force Sheet のワークスペースツリー", "フォルダー分けされた自動保存スプレッドシートファイル。"),
+  "force-sheet-report-tab": S("force-sheet", "SheetD report tab", "Open org reports into the sheet.", "SheetD のレポートタブ", "組織のレポートをシートに展開します。"),
+  "force-sheet-upload-tab": S("force-sheet", "SheetD upload tab", "Import CSV or XLSX files.", "SheetD のアップロードタブ", "CSV / XLSX ファイルを取り込みます。"),
+  "force-sheet-workspace": S("force-sheet", "SheetD workspace tree", "Spreadsheet files organized with Objects and Reports.", "SheetD のワークスペースツリー", "Objects と Reports で整理されたスプレッドシートファイル。"),
   "force-sheet-objects-tree": S("force-sheet", "Objects tree", "Objects that have list views.", "Objects ツリー", "リストビューを持つオブジェクト。"),
   "force-sheet-reports-tree": S("force-sheet", "Reports tree", "Org reports available to open.", "Reports ツリー", "展開可能な組織レポート。"),
   "force-sheet-file-context-menu": S("force-sheet", "Workspace file context menu", "Rename, move, download, or delete a file.", "ワークスペースファイルのコンテキストメニュー", "ファイルの名前変更・移動・ダウンロード・削除。"),
@@ -182,9 +190,17 @@ export const SCENES = {
 
 export const RELEASE_NOTES = {
   en: {
-    title: "12. Release notes",
+    title: "14. Release notes",
     intro: "Recent releases. No release has added new Chrome permissions, host permissions, remote code, telemetry, ads, or third-party data services. The full per-version history ships inside the extension's built-in manual.",
     versions: [
+      ["0.8.0 (2026-07-31)", [
+        "Added GitHub Metadata Sync with an org-bound setup draft, Salesforce native Named Credential definitions and OAuth, governed preflight, and branch-and-pull-request-only delivery.",
+        "Rebuilt SheetD on the DinaSheet engine so objects and reports open directly as editable data and exact pending field changes are reviewed before update.",
+        "Added report workbook fallback for results beyond Salesforce's report API row limit."
+      ]],
+      ["0.7.0 (2026-07-18)", [
+        "Added Permission Explorer for tracing effective object and field access to profiles, permission sets, and permission set groups."
+      ]],
       ["0.6.2 (2026-07-15)", [
         "Document Folders: folder selection is recursive and atomic across lazily loaded subtrees, with folder-preserving ZIP paths for duplicate document occurrences.",
         "Document Folders: added 500-file and 250 MB ZIP limits, cancelable downloads, and one-time fetching of shared document content.",
@@ -200,14 +216,22 @@ export const RELEASE_NOTES = {
       ["0.6.0 (2026-07-11)", [
         "Added the read-only Org Review covering health, limits, setup changes, and login failures.",
         "Added a per-org read-only lock and consistent risk confirmation for Apex, data mutation, and metadata deployment.",
-        "Fixed Force Sheet workspace files sharing the last active grid; values and formulas now stay isolated per file and org."
+        "Fixed SheetD workspace files sharing the last active grid; values and formulas now stay isolated per file and org."
       ]]
     ]
   },
   jp: {
-    title: "12. リリースノート",
+    title: "14. リリースノート",
     intro: "最近のリリースの概要です。いずれのリリースでも、新しい Chrome 権限・ホスト権限・リモートコード・テレメトリー・広告・サードパーティのデータサービスは追加されていません。完全なバージョン別履歴は内蔵マニュアルに同梱されています。",
     versions: [
+      ["0.8.0（2026-07-31）", [
+        "組織に紐づくセットアップドラフト、Salesforce ネイティブの Named Credential 定義と OAuth、統制された事前検証、ブランチとプルリクエスト限定配信を備えた GitHub Metadata Sync を追加。",
+        "SheetD を DinaSheet エンジンで再構築し、オブジェクトとレポートを編集可能なデータとして直接開き、更新前に保留中の項目変更を正確に確認できるようにしました。",
+        "Salesforce レポート API の行数上限を超える結果向けに、ワークブックフォールバックを追加。"
+      ]],
+      ["0.7.0（2026-07-18）", [
+        "有効なオブジェクト・項目アクセスをプロファイル、権限セット、権限セットグループまで追跡する Permission Explorer を追加。"
+      ]],
       ["0.6.2（2026-07-15）", [
         "ドキュメントフォルダー：フォルダー選択が遅延読み込みサブツリーを含めて再帰的・アトミックになり、重複ドキュメントもフォルダーパスを保持した ZIP パスで扱われます。",
         "ドキュメントフォルダー：500 ファイル・250 MB の ZIP 上限、キャンセル可能なダウンロード、共有ドキュメント内容の一括取得を追加。",
@@ -223,7 +247,7 @@ export const RELEASE_NOTES = {
       ["0.6.0（2026-07-11）", [
         "健全性・制限値・設定変更・ログイン失敗を対象とする読み取り専用の Org Review を追加。",
         "組織ごとの読み取り専用ロックと、Apex・データ変更・メタデータデプロイの一貫したリスク確認を追加。",
-        "Force Sheet のワークスペースファイルが最後のグリッドを共有する問題を修正。値と数式はファイル・組織ごとに分離。"
+        "SheetD のワークスペースファイルが最後のグリッドを共有する問題を修正。値と数式はファイル・組織ごとに分離。"
       ]]
     ]
   }

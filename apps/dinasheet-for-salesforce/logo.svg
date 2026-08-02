@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">DinaSheet brand mark</title>
+  <desc id="desc">A white spreadsheet sheet containing a blue letter D and green rows on an emerald tile.</desc>
+  <rect x="128" y="128" width="768" height="768" rx="176" fill="#188038"/>
+  <path d="M278 230h384l110 110v454H278V230Z" fill="#fff"/>
+  <path d="M662 230l110 110H662V230Z" fill="#a8d5b5"/>
+  <g fill="#188038">
+    <rect x="336" y="312" width="82" height="34" rx="10"/>
+    <rect x="438" y="312" width="82" height="34" rx="10"/>
+    <rect x="540" y="312" width="66" height="34" rx="10"/>
+    <rect x="524" y="446" width="168" height="28" rx="14"/>
+    <rect x="524" y="508" width="132" height="28" rx="14"/>
+    <rect x="524" y="570" width="156" height="28" rx="14"/>
+    <rect x="524" y="632" width="112" height="28" rx="14"/>
+  </g>
+  <path d="M330 406h82c82 0 137 48 137 128s-55 128-137 128h-82V406Zm66 62v132h16c43 0 70-23 70-66s-27-66-70-66h-16Z" fill="#55b7e8" fill-rule="evenodd"/>
+</svg>

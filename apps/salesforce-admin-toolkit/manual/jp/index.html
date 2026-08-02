@@ -61,9 +61,9 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
     </nav>
 
     <header>
-      <span class="release-pill">リリース 0.6.2 対応マニュアル</span>
+      <span class="release-pill">リリース 0.8.0 対応マニュアル</span>
       <h1>Admin Toolkit for Salesforce ユーザーマニュアル</h1>
-      <p class="lead">インストールから、ポップアップでのアプリ起動、各ワークスペース・ツールの使い方まで、45 枚のスクリーンショットで解説します。</p>
+      <p class="lead">インストールから、ポップアップでのアプリ起動、各ワークスペース・ツールの使い方まで、44 枚のスクリーンショットで解説します。</p>
       <p class="notice">スクリーンショットは Salesforce Developer Edition 組織で撮影し、組織を特定できる情報（ホスト名、組織名・ユーザー名、ID、アドレス）はサンプル値に置き換えています。Salesforce は Salesforce, Inc. の商標です。本拡張機能は Salesforce の提携・承認・後援を受けていません。</p>
     </header>
 
@@ -73,16 +73,18 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
         <ol>
           <li><a href="#getting-started">1. はじめに・ポップアップ</a></li>
           <li><a href="#metadata-admin">2. Metadata Admin for Salesforce</a></li>
-          <li><a href="#force-sheet">3. Force Sheet</a></li>
-          <li><a href="#org-review">4. Org Review（組織レビュー）</a></li>
-          <li><a href="#object-schema">5. Object Schema（オブジェクトスキーマ）</a></li>
-          <li><a href="#document-folders">6. ドキュメントフォルダー</a></li>
-          <li><a href="#rest-explorer">7. REST Explorer</a></li>
-          <li><a href="#data-export">8. データエクスポート</a></li>
-          <li><a href="#run-apex">9. Apex 実行</a></li>
-          <li><a href="#monitoring">10. 制限値とモニタリング</a></li>
-          <li><a href="#builtin-manual">11. 内蔵マニュアル（英語/日本語）</a></li>
-          <li><a href="#release-notes">12. リリースノート</a></li>
+          <li><a href="#force-sheet">3. SheetD</a></li>
+          <li><a href="#permission-explorer">4. Permission Explorer（権限エクスプローラー）</a></li>
+          <li><a href="#github-metadata-sync">5. GitHub Metadata Sync</a></li>
+          <li><a href="#org-review">6. Org Review（組織レビュー）</a></li>
+          <li><a href="#object-schema">7. Object Schema（オブジェクトスキーマ）</a></li>
+          <li><a href="#document-folders">8. ドキュメントフォルダー</a></li>
+          <li><a href="#rest-explorer">9. REST Explorer</a></li>
+          <li><a href="#data-export">10. データエクスポート</a></li>
+          <li><a href="#run-apex">11. Apex 実行</a></li>
+          <li><a href="#monitoring">12. 制限値とモニタリング</a></li>
+          <li><a href="#builtin-manual">13. 内蔵マニュアル（英語/日本語）</a></li>
+          <li><a href="#release-notes">14. リリースノート</a></li>
         </ol>
       </section>
 
@@ -96,7 +98,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
         </ol>
         <figure class="narrow">
           <img src="../img/jp/popup-apps.png" alt="ポップアップのアプリタブ" loading="lazy">
-          <figcaption>アプリタブは 4 つの主要ワークスペースを起動します。</figcaption>
+          <figcaption>アプリタブは 6 つの主要ワークスペースを起動します。</figcaption>
         </figure>
         <figure class="narrow">
           <img src="../img/jp/popup-tools.png" alt="ポップアップのツールタブ" loading="lazy">
@@ -146,10 +148,10 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="force-sheet" aria-labelledby="force-sheet-title">
-        <h2 id="force-sheet-title">3. Force Sheet</h2>
-        <p>Salesforce データのためのマルチタブ・スプレッドシート。SOQL の実行、レポートやリストビューの展開、CSV/XLSX の取り込み、グリッド選択からの CRUD 操作ができます。書き込みは必ず実行前に確認されます。</p>
+        <h2 id="force-sheet-title">3. SheetD</h2>
+        <p>Salesforce データのためのマルチタブ・スプレッドシート。オブジェクトやレポートの参照、SOQL の実行、ファイル詳細の確認、対応オブジェクトレコードの編集、確定更新・削除前の変更項目レビューができます。</p>
         <figure>
-          <img src="../img/jp/force-sheet-query-editor.png" alt="Force Sheet の SOQL エディター" loading="lazy">
+          <img src="../img/jp/force-sheet-query-editor.png" alt="SheetD の SOQL エディター" loading="lazy">
           <figcaption>SOQL クエリエディター。</figcaption>
         </figure>
         <figure>
@@ -157,20 +159,16 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
           <figcaption>グリッドにストリーミングされたクエリ結果。</figcaption>
         </figure>
         <figure>
-          <img src="../img/jp/force-sheet-report-tab.png" alt="Force Sheet のレポートタブ" loading="lazy">
+          <img src="../img/jp/force-sheet-report-tab.png" alt="SheetD のレポートタブ" loading="lazy">
           <figcaption>組織のレポートをシートに展開します。</figcaption>
         </figure>
         <figure>
-          <img src="../img/jp/force-sheet-upload-tab.png" alt="Force Sheet のアップロードタブ" loading="lazy">
+          <img src="../img/jp/force-sheet-upload-tab.png" alt="SheetD のアップロードタブ" loading="lazy">
           <figcaption>CSV / XLSX ファイルを取り込みます。</figcaption>
         </figure>
         <figure>
-          <img src="../img/jp/force-sheet-crud-panel.png" alt="Force Sheet の CRUD パネル" loading="lazy">
-          <figcaption>グリッド選択を挿入／更新／削除リクエストに変換します。</figcaption>
-        </figure>
-        <figure>
-          <img src="../img/jp/force-sheet-workspace.png" alt="Force Sheet のワークスペースツリー" loading="lazy">
-          <figcaption>フォルダー分けされた自動保存スプレッドシートファイル。</figcaption>
+          <img src="../img/jp/force-sheet-workspace.png" alt="SheetD のワークスペースツリー" loading="lazy">
+          <figcaption>Objects と Reports で整理されたスプレッドシートファイル。</figcaption>
         </figure>
         <figure>
           <img src="../img/jp/force-sheet-objects-tree.png" alt="Objects ツリー" loading="lazy">
@@ -178,8 +176,20 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
         </figure>
       </section>
 
+      <section id="permission-explorer" aria-labelledby="permission-explorer-title">
+        <h2 id="permission-explorer-title">4. Permission Explorer（権限エクスプローラー）</h2>
+        <p>有効なオブジェクト・項目アクセスを、付与元のプロファイル、権限セット、権限セットグループまで追跡し、返されたアクセスメタデータで 2 ユーザーを比較できます。</p>
+
+      </section>
+
+      <section id="github-metadata-sync" aria-labelledby="github-metadata-sync-title">
+        <h2 id="github-metadata-sync-title">5. GitHub Metadata Sync</h2>
+        <p>組織側ブリッジ、Salesforce ネイティブ認証情報、ブランチとプルリクエスト限定のワークフローを通じて、承認済みリポジトリへの統制されたメタデータ取得を設定・事前検証します。</p>
+
+      </section>
+
       <section id="org-review" aria-labelledby="org-review-title">
-        <h2 id="org-review-title">4. Org Review（組織レビュー）</h2>
+        <h2 id="org-review-title">6. Org Review（組織レビュー）</h2>
         <p>ページを開くと自動で実行される読み取り専用の組織健全性アセスメント。各セクションに根拠と改善ガイダンスが付き、PDF・Markdown・サマリー JSON・エビデンス JSON でエクスポートできます。</p>
         <figure>
           <img src="../img/jp/org-review-summary.png" alt="Org Review のエグゼクティブサマリー" loading="lazy">
@@ -196,7 +206,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="object-schema" aria-labelledby="object-schema-title">
-        <h2 id="object-schema-title">5. Object Schema（オブジェクトスキーマ）</h2>
+        <h2 id="object-schema-title">7. Object Schema（オブジェクトスキーマ）</h2>
         <p>選択可能な任意のオブジェクトからインタラクティブなリレーションマップを作成し、その下の Fields スプレッドシートで選択可能な全オブジェクトの全項目を探索できます。</p>
         <figure>
           <img src="../img/jp/object-schema-start.png" alt="起動直後の Object Schema" loading="lazy">
@@ -241,7 +251,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="document-folders" aria-labelledby="document-folders-title">
-        <h2 id="document-folders-title">6. ドキュメントフォルダー</h2>
+        <h2 id="document-folders-title">8. ドキュメントフォルダー</h2>
         <p>Salesforce のライブラリとフォルダーを参照し、対応ファイルをプレビューし、フォルダーパスを保持した ZIP として選択内容をダウンロードできます。フォルダー選択は再帰的で、500 ファイル・250 MB まで、実行中にキャンセルできます。</p>
         <figure>
           <img src="../img/jp/document-folders-tree.png" alt="ドキュメントフォルダーツリー" loading="lazy">
@@ -258,7 +268,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="rest-explorer" aria-labelledby="rest-explorer-title">
-        <h2 id="rest-explorer-title">7. REST Explorer</h2>
+        <h2 id="rest-explorer-title">9. REST Explorer</h2>
         <p>エンドポイントテンプレートで Salesforce REST API リクエストを組み立て、接続中の組織に送信し、JSON レスポンスを確認できます。リクエストはあなたが送信したときだけ実行されます。</p>
         <figure>
           <img src="../img/jp/rest-api.png" alt="REST リクエストビルダー" loading="lazy">
@@ -271,7 +281,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="data-export" aria-labelledby="data-export-title">
-        <h2 id="data-export-title">8. データエクスポート</h2>
+        <h2 id="data-export-title">10. データエクスポート</h2>
         <p>SOQL・SOSL・GraphQL クエリやレポートエクスポートを実行し、CSV グリッドまたは JSON でプレビューしてダウンロードできます。</p>
         <figure>
           <img src="../img/jp/data-export.png" alt="データエクスポートのソースとクエリ" loading="lazy">
@@ -284,7 +294,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="run-apex" aria-labelledby="run-apex-title">
-        <h2 id="run-apex-title">9. Apex 実行</h2>
+        <h2 id="run-apex-title">11. Apex 実行</h2>
         <p>匿名 Apex を実行し、コンパイル結果・実行ステータス・デバッグ出力を確認できます。</p>
         <figure>
           <img src="../img/jp/run-apex.png" alt="Apex 実行エディター" loading="lazy">
@@ -293,7 +303,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="monitoring" aria-labelledby="monitoring-title">
-        <h2 id="monitoring-title">10. 制限値とモニタリング</h2>
+        <h2 id="monitoring-title">12. 制限値とモニタリング</h2>
         <p>組織の読み取り専用モニタリングページ：使用量バー付きの API 制限、設定変更履歴、ログイン履歴、イベントログファイル。</p>
         <figure>
           <img src="../img/jp/limits.png" alt="組織の制限値" loading="lazy">
@@ -314,7 +324,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="builtin-manual" aria-labelledby="builtin-manual-title">
-        <h2 id="builtin-manual-title">11. 内蔵マニュアル（英語/日本語）</h2>
+        <h2 id="builtin-manual-title">13. 内蔵マニュアル（英語/日本語）</h2>
         <p>拡張機能には英語・日本語の内蔵マニュアルとバージョンごとのリリースノートが同梱されています。各ページのヘッダーに言語切り替えがあります。</p>
         <figure>
           <img src="../img/jp/builtin-manual.png" alt="内蔵マニュアルの概要" loading="lazy">
@@ -327,8 +337,18 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="release-notes" aria-labelledby="release-notes-title">
-        <h2 id="release-notes-title">12. リリースノート</h2>
+        <h2 id="release-notes-title">14. リリースノート</h2>
         <p>最近のリリースの概要です。いずれのリリースでも、新しい Chrome 権限・ホスト権限・リモートコード・テレメトリー・広告・サードパーティのデータサービスは追加されていません。完全なバージョン別履歴は内蔵マニュアルに同梱されています。</p>
+        <h3>0.8.0（2026-07-31）</h3>
+        <ul>
+          <li>組織に紐づくセットアップドラフト、Salesforce ネイティブの Named Credential 定義と OAuth、統制された事前検証、ブランチとプルリクエスト限定配信を備えた GitHub Metadata Sync を追加。</li>
+          <li>SheetD を DinaSheet エンジンで再構築し、オブジェクトとレポートを編集可能なデータとして直接開き、更新前に保留中の項目変更を正確に確認できるようにしました。</li>
+          <li>Salesforce レポート API の行数上限を超える結果向けに、ワークブックフォールバックを追加。</li>
+        </ul>
+        <h3>0.7.0（2026-07-18）</h3>
+        <ul>
+          <li>有効なオブジェクト・項目アクセスをプロファイル、権限セット、権限セットグループまで追跡する Permission Explorer を追加。</li>
+        </ul>
         <h3>0.6.2（2026-07-15）</h3>
         <ul>
           <li>ドキュメントフォルダー：フォルダー選択が遅延読み込みサブツリーを含めて再帰的・アトミックになり、重複ドキュメントもフォルダーパスを保持した ZIP パスで扱われます。</li>
@@ -347,7 +367,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
         <ul>
           <li>健全性・制限値・設定変更・ログイン失敗を対象とする読み取り専用の Org Review を追加。</li>
           <li>組織ごとの読み取り専用ロックと、Apex・データ変更・メタデータデプロイの一貫したリスク確認を追加。</li>
-          <li>Force Sheet のワークスペースファイルが最後のグリッドを共有する問題を修正。値と数式はファイル・組織ごとに分離。</li>
+          <li>SheetD のワークスペースファイルが最後のグリッドを共有する問題を修正。値と数式はファイル・組織ごとに分離。</li>
         </ul>
       </section>
 

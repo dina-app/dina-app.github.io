@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DinaSheet for Salesforce | Spreadsheet Workspace</title>
+  <meta name="description" content="DinaSheet for Salesforce is an independent Chrome spreadsheet workspace for SOQL, reports, local files, and reviewed Salesforce record changes.">
+  <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    :root{color-scheme:light;--bg:#f4f7f4;--ink:#172027;--muted:#5b6770;--panel:#fff;--line:#d6ded8;--green:#188038;--green-soft:#e7f4ed;--blue:#235f82;--rust:#a24d32;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);line-height:1.65}a{color:var(--blue);font-weight:800;text-decoration:none}a:hover{text-decoration:underline}.shell{width:min(1040px,calc(100% - 40px));margin:0 auto;padding:26px 0 64px}.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:54px}.brand{display:inline-flex;align-items:center;gap:10px;color:var(--ink);font-weight:900}.brand-mark{display:grid;width:36px;height:36px;place-items:center;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--rust)}.hero{display:grid;grid-template-columns:minmax(0,1fr) 168px;gap:40px;align-items:center;margin-bottom:44px}.logo{width:168px;height:168px;border:1px solid var(--line);border-radius:8px;background:#fff;object-fit:contain;padding:8px;box-shadow:0 16px 34px rgba(23,32,39,.11)}h1,h2,h3,p{margin-top:0}h1{margin-bottom:16px;font-size:clamp(42px,8vw,72px);line-height:1}h2{margin-bottom:12px;font-size:28px;line-height:1.12}h3{margin-bottom:8px;font-size:20px;line-height:1.2}.lead{margin-bottom:12px;color:#3a464f;font-size:19px}.notice{margin-bottom:0;color:var(--muted);font-weight:700}.release-pill{display:inline-flex;margin-bottom:16px;padding:5px 10px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:13px;font-weight:900}.content{display:grid;gap:18px}section{padding:24px;border:1px solid var(--line);border-radius:8px;background:var(--panel);box-shadow:0 12px 26px rgba(23,32,39,.07)}.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}.feature{padding:20px;border:1px solid var(--line);border-radius:8px;background:var(--green-soft)}.feature:nth-child(even){background:#e7f1f7}.feature p{margin-bottom:0}ul{margin-bottom:0;padding-left:22px}li+li{margin-top:8px}code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}@media(max-width:700px){.shell{width:min(100% - 28px,1040px);padding-top:18px}.nav{align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr;align-items:flex-start}.feature-grid{grid-template-columns:1fr}.logo{width:132px;height:132px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="../../"><span class="brand-mark">D</span><span>DinaLab</span></a>
+      <a href="../../">Back to home</a>
+    </nav>
+    <header class="hero">
+      <div>
+        <span class="release-pill">Release candidate: 0.2.0</span>
+        <h1>DinaSheet for Salesforce</h1>
+        <p class="lead">A focused spreadsheet workspace for Salesforce data. Run SOQL queries and reports, import local CSV or Excel files, edit supported object records, and review exact changes before sending a confirmed update to Salesforce.</p>
+        <p class="notice">DinaSheet is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+      </div>
+      <img class="logo" src="logo.svg" alt="DinaSheet for Salesforce logo">
+    </header>
+    <div class="content">
+      <section aria-labelledby="features-title">
+        <h2 id="features-title">Spreadsheet Workflows for Salesforce</h2>
+        <div class="feature-grid">
+          <article class="feature"><h3>Query and reports</h3><p>Run SOQL, browse objects, and open Salesforce reports in a familiar multi-tab grid.</p></article>
+          <article class="feature"><h3>Local file import</h3><p>Open CSV and Excel files locally in the browser without uploading them to the developer.</p></article>
+          <article class="feature"><h3>Type-aware editing</h3><p>Edit supported object fields inline with validation based on Salesforce schema information.</p></article>
+          <article class="feature"><h3>Reviewed write-back</h3><p>Inspect field-level changes and explicitly confirm selected rows before Salesforce updates run.</p></article>
+          <article class="feature"><h3>Update audit and rollback</h3><p>Review bounded, per-organization update receipts and prepare prior values for a separately confirmed rollback update.</p></article>
+          <article class="feature"><h3>Export</h3><p>Copy or download spreadsheet data for use in your own workflow.</p></article>
+        </div>
+      </section>
+      <section aria-labelledby="runtime-title">
+        <h2 id="runtime-title">How It Works</h2>
+        <ul>
+          <li>DinaSheet reads the active Salesforce session cookie locally and calls only the selected Salesforce organization over HTTPS.</li>
+          <li>The Salesforce session cookie, cookie domain, and authorization header never leave the Chrome extension.</li>
+          <li>Preferences and bounded, per-organization update receipts stay in Chrome extension storage on the user's device; workbook files and sheet snapshots are not persisted.</li>
+          <li>There are no ads, analytics, telemetry, remotely hosted executable code, or developer-operated data servers.</li>
+        </ul>
+        <p><a href="PRIVACY_POLICY.html">Read the full Privacy Policy</a>.</p>
+      </section>
+      <section aria-labelledby="permissions-title">
+        <h2 id="permissions-title">Permissions</h2>
+        <ul>
+          <li><code>cookies</code>: reads the existing Salesforce session cookie locally for user-requested Salesforce API calls.</li>
+          <li><code>storage</code>: stores preferences and bounded, per-organization update receipts used for audit and rollback.</li>
+          <li>Salesforce host access: discovers the signed-in org and calls its APIs for schema, SOQL, reports, and confirmed record updates.</li>
+        </ul>
+      </section>
+      <section aria-labelledby="status-title">
+        <h2 id="status-title">Release Status</h2>
+        <p>Version 0.2.0 is a validated release candidate. The extension package and Chrome Web Store assets are prepared for submission.</p>
+      </section>
+      <p class="notice">Salesforce and Chrome are trademarks of their respective owners.</p>
+    </div>
+  </main>
+</body>
+</html>

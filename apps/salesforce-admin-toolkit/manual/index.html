@@ -61,9 +61,9 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
     </nav>
 
     <header>
-      <span class="release-pill">Manual for release 0.6.2</span>
+      <span class="release-pill">Manual for release 0.8.0</span>
       <h1>Admin Toolkit for Salesforce — User Manual</h1>
-      <p class="lead">How to install the toolkit, launch its apps from the popup, and use each workspace and tool — with 55 screenshots.</p>
+      <p class="lead">How to install the toolkit, launch its apps from the popup, and use each workspace and tool — with 54 screenshots.</p>
       <p class="notice">Screenshots were taken against a Salesforce Developer Edition org; org-identifying values (host, org and user names, IDs, addresses) are replaced with sample values. Salesforce is a trademark of Salesforce, Inc. This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
     </header>
 
@@ -73,16 +73,18 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
         <ol>
           <li><a href="#getting-started">1. Getting started &amp; popup</a></li>
           <li><a href="#metadata-admin">2. Metadata Admin for Salesforce</a></li>
-          <li><a href="#force-sheet">3. Force Sheet</a></li>
-          <li><a href="#org-review">4. Org Review</a></li>
-          <li><a href="#object-schema">5. Object Schema</a></li>
-          <li><a href="#document-folders">6. Document Folders</a></li>
-          <li><a href="#rest-explorer">7. REST Explorer</a></li>
-          <li><a href="#data-export">8. Data Export</a></li>
-          <li><a href="#run-apex">9. Run Apex</a></li>
-          <li><a href="#monitoring">10. Limits &amp; monitoring</a></li>
-          <li><a href="#builtin-manual">11. Built-in manual (EN/JP)</a></li>
-          <li><a href="#release-notes">12. Release notes</a></li>
+          <li><a href="#force-sheet">3. SheetD</a></li>
+          <li><a href="#permission-explorer">4. Permission Explorer</a></li>
+          <li><a href="#github-metadata-sync">5. GitHub Metadata Sync</a></li>
+          <li><a href="#org-review">6. Org Review</a></li>
+          <li><a href="#object-schema">7. Object Schema</a></li>
+          <li><a href="#document-folders">8. Document Folders</a></li>
+          <li><a href="#rest-explorer">9. REST Explorer</a></li>
+          <li><a href="#data-export">10. Data Export</a></li>
+          <li><a href="#run-apex">11. Run Apex</a></li>
+          <li><a href="#monitoring">12. Limits &amp; monitoring</a></li>
+          <li><a href="#builtin-manual">13. Built-in manual (EN/JP)</a></li>
+          <li><a href="#release-notes">14. Release notes</a></li>
         </ol>
       </section>
 
@@ -96,7 +98,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
         </ol>
         <figure class="narrow">
           <img src="img/en/popup-apps.png" alt="Popup Apps tab" loading="lazy">
-          <figcaption>The Apps tab launches the four primary workspaces.</figcaption>
+          <figcaption>The Apps tab launches the six primary workspaces.</figcaption>
         </figure>
         <figure class="narrow">
           <img src="img/en/popup-tools.png" alt="Popup Tools tab" loading="lazy">
@@ -182,10 +184,10 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="force-sheet" aria-labelledby="force-sheet-title">
-        <h2 id="force-sheet-title">3. Force Sheet</h2>
-        <p>A multi-tab spreadsheet for Salesforce data: run SOQL, open reports and list views, import CSV/XLSX, and start CRUD workflows from grid selections — every write asks for confirmation first.</p>
+        <h2 id="force-sheet-title">3. SheetD</h2>
+        <p>A multi-tab spreadsheet for Salesforce data: browse objects and reports, run SOQL, inspect file details, edit supported object records, and review exact changed fields before a confirmed update or delete.</p>
         <figure>
-          <img src="img/en/force-sheet-query-editor.png" alt="Force Sheet SOQL editor" loading="lazy">
+          <img src="img/en/force-sheet-query-editor.png" alt="SheetD SOQL editor" loading="lazy">
           <figcaption>The SOQL query editor.</figcaption>
         </figure>
         <figure>
@@ -197,20 +199,16 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
           <figcaption>Query results streamed into the grid.</figcaption>
         </figure>
         <figure>
-          <img src="img/en/force-sheet-report-tab.png" alt="Force Sheet report tab" loading="lazy">
+          <img src="img/en/force-sheet-report-tab.png" alt="SheetD report tab" loading="lazy">
           <figcaption>Open org reports into the sheet.</figcaption>
         </figure>
         <figure>
-          <img src="img/en/force-sheet-upload-tab.png" alt="Force Sheet upload tab" loading="lazy">
+          <img src="img/en/force-sheet-upload-tab.png" alt="SheetD upload tab" loading="lazy">
           <figcaption>Import CSV or XLSX files.</figcaption>
         </figure>
         <figure>
-          <img src="img/en/force-sheet-crud-panel.png" alt="Force Sheet CRUD panel" loading="lazy">
-          <figcaption>Turn grid selections into insert/update/delete requests.</figcaption>
-        </figure>
-        <figure>
-          <img src="img/en/force-sheet-workspace.png" alt="Force Sheet workspace tree" loading="lazy">
-          <figcaption>Auto-saved spreadsheet files in folders.</figcaption>
+          <img src="img/en/force-sheet-workspace.png" alt="SheetD workspace tree" loading="lazy">
+          <figcaption>Spreadsheet files organized with Objects and Reports.</figcaption>
         </figure>
         <figure>
           <img src="img/en/force-sheet-objects-tree.png" alt="Objects tree" loading="lazy">
@@ -218,8 +216,20 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
         </figure>
       </section>
 
+      <section id="permission-explorer" aria-labelledby="permission-explorer-title">
+        <h2 id="permission-explorer-title">4. Permission Explorer</h2>
+        <p>Trace effective object and field access to the assigned profile, permission sets, and permission set groups that grant it, or compare two users across the returned access metadata.</p>
+
+      </section>
+
+      <section id="github-metadata-sync" aria-labelledby="github-metadata-sync-title">
+        <h2 id="github-metadata-sync-title">5. GitHub Metadata Sync</h2>
+        <p>Configure and preflight governed metadata retrieval to an approved repository through an org-side bridge, Salesforce native credentials, and a branch-and-pull-request-only workflow.</p>
+
+      </section>
+
       <section id="org-review" aria-labelledby="org-review-title">
-        <h2 id="org-review-title">4. Org Review</h2>
+        <h2 id="org-review-title">6. Org Review</h2>
         <p>A read-only assessment of org health that runs automatically when opened. Each section carries evidence and remediation guidance; the report exports as PDF, Markdown, summary JSON, or evidence JSON.</p>
         <figure>
           <img src="img/en/org-review-summary.png" alt="Org Review executive summary" loading="lazy">
@@ -236,7 +246,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="object-schema" aria-labelledby="object-schema-title">
-        <h2 id="object-schema-title">5. Object Schema</h2>
+        <h2 id="object-schema-title">7. Object Schema</h2>
         <p>Build an interactive relationship map for any pickable object, then explore every field of every selectable object in the Fields spreadsheet below it.</p>
         <figure>
           <img src="img/en/object-schema-start.png" alt="Object Schema on open" loading="lazy">
@@ -281,7 +291,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="document-folders" aria-labelledby="document-folders-title">
-        <h2 id="document-folders-title">6. Document Folders</h2>
+        <h2 id="document-folders-title">8. Document Folders</h2>
         <p>Browse Salesforce libraries and folders, preview supported files, and download selections as a ZIP that preserves folder paths. Folder selection is recursive; downloads are limited to 500 files and 250 MB and can be canceled mid-run.</p>
         <figure>
           <img src="img/en/document-folders-tree.png" alt="Document folders tree" loading="lazy">
@@ -298,7 +308,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="rest-explorer" aria-labelledby="rest-explorer-title">
-        <h2 id="rest-explorer-title">7. REST Explorer</h2>
+        <h2 id="rest-explorer-title">9. REST Explorer</h2>
         <p>Compose Salesforce REST API requests with endpoint templates, send them against the connected org, and inspect the JSON response. Requests run only when you send them.</p>
         <figure>
           <img src="img/en/rest-api.png" alt="REST request builder" loading="lazy">
@@ -311,7 +321,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="data-export" aria-labelledby="data-export-title">
-        <h2 id="data-export-title">8. Data Export</h2>
+        <h2 id="data-export-title">10. Data Export</h2>
         <p>Run SOQL, SOSL, and GraphQL queries or report exports, preview the result as a CSV grid or JSON, and download it.</p>
         <figure>
           <img src="img/en/data-export.png" alt="Data Export source &amp; query" loading="lazy">
@@ -324,7 +334,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="run-apex" aria-labelledby="run-apex-title">
-        <h2 id="run-apex-title">9. Run Apex</h2>
+        <h2 id="run-apex-title">11. Run Apex</h2>
         <p>Execute anonymous Apex and review the compile result, execution status, and debug output.</p>
         <figure>
           <img src="img/en/run-apex.png" alt="Run Apex editor" loading="lazy">
@@ -333,7 +343,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="monitoring" aria-labelledby="monitoring-title">
-        <h2 id="monitoring-title">10. Limits &amp; monitoring</h2>
+        <h2 id="monitoring-title">12. Limits &amp; monitoring</h2>
         <p>Read-only monitoring pages for the org: API limits with live usage bars, the setup audit trail, login history, and event log files.</p>
         <figure>
           <img src="img/en/limits.png" alt="Org limits" loading="lazy">
@@ -354,7 +364,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="builtin-manual" aria-labelledby="builtin-manual-title">
-        <h2 id="builtin-manual-title">11. Built-in manual (EN/JP)</h2>
+        <h2 id="builtin-manual-title">13. Built-in manual (EN/JP)</h2>
         <p>The extension ships with its own manual in English and Japanese, including per-version release notes. Every page has a language toggle in its header.</p>
         <figure>
           <img src="img/en/builtin-manual.png" alt="Built-in manual overview" loading="lazy">
@@ -367,8 +377,18 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
       </section>
 
       <section id="release-notes" aria-labelledby="release-notes-title">
-        <h2 id="release-notes-title">12. Release notes</h2>
+        <h2 id="release-notes-title">14. Release notes</h2>
         <p>Recent releases. No release has added new Chrome permissions, host permissions, remote code, telemetry, ads, or third-party data services. The full per-version history ships inside the extension's built-in manual.</p>
+        <h3>0.8.0 (2026-07-31)</h3>
+        <ul>
+          <li>Added GitHub Metadata Sync with an org-bound setup draft, Salesforce native Named Credential definitions and OAuth, governed preflight, and branch-and-pull-request-only delivery.</li>
+          <li>Rebuilt SheetD on the DinaSheet engine so objects and reports open directly as editable data and exact pending field changes are reviewed before update.</li>
+          <li>Added report workbook fallback for results beyond Salesforce's report API row limit.</li>
+        </ul>
+        <h3>0.7.0 (2026-07-18)</h3>
+        <ul>
+          <li>Added Permission Explorer for tracing effective object and field access to profiles, permission sets, and permission set groups.</li>
+        </ul>
         <h3>0.6.2 (2026-07-15)</h3>
         <ul>
           <li>Document Folders: folder selection is recursive and atomic across lazily loaded subtrees, with folder-preserving ZIP paths for duplicate document occurrences.</li>
@@ -387,7 +407,7 @@ code{padding:2px 6px;border-radius:5px;background:#edf3ef;font-family:"SFMono-Re
         <ul>
           <li>Added the read-only Org Review covering health, limits, setup changes, and login failures.</li>
           <li>Added a per-org read-only lock and consistent risk confirmation for Apex, data mutation, and metadata deployment.</li>
-          <li>Fixed Force Sheet workspace files sharing the last active grid; values and formulas now stay isolated per file and org.</li>
+          <li>Fixed SheetD workspace files sharing the last active grid; values and formulas now stay isolated per file and org.</li>
         </ul>
       </section>
 

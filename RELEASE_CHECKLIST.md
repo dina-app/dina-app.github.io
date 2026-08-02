@@ -16,6 +16,7 @@ Prepared: July 31, 2026
 - [x] Update Admin Toolkit public content for v0.8.0, SheetD, and GitHub Metadata Sync.
 - [x] Publish the DinaSheet v0.2.0 release-candidate page and privacy-policy URL.
 - [x] Add DinaSheet to the homepage, sitemap, site validation, and not-found navigation.
+- [x] Publish DinaSheet product pages and screenshot manuals in English and Japanese.
 - [x] Keep the requested `Admin Toolkit for Salesforce` product name consistent across the extension, website, manual, privacy policy, and Store materials.
 - [x] Use Salesforce in the product name as a compatibility reference and retain clear independence language.
 - [x] Add Salesforce trademark attribution and independence language to primary product surfaces.

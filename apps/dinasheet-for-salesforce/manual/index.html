@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Manual | DinaSheet for Salesforce</title>
+  <meta name="description" content="Step-by-step DinaSheet for Salesforce user manual covering queries, reviewed updates, rollback, file import, and reports with screenshots.">
+  <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/manual/">
+  <link rel="alternate" hreflang="ja" href="https://dina.jp/apps/dinasheet-for-salesforce/manual/jp/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="manual-page">
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="../../../"><span class="brand-mark">D</span><span>DinaLab</span></a>
+      <span class="nav-links">
+        <a class="lang-toggle" href="jp/" hreflang="ja" lang="ja" aria-label="日本語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17"/><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"/></svg><span>日本語</span></a>
+        <a href="../">Back to DinaSheet</a>
+      </span>
+    </nav>
+
+    <header class="intro">
+      <span class="release-pill">Manual for release candidate 0.2.0</span>
+      <h1>DinaSheet for Salesforce — User Manual</h1>
+      <p class="lead">A practical guide to loading Salesforce data, working in the spreadsheet grid, reviewing record updates, preparing rollback updates, and importing local files.</p>
+      <p class="notice">The six screenshots use synthetic demo data and identifiers. No customer or production-org data is shown.</p>
+    </header>
+
+    <div class="content">
+      <section class="toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">Contents</h2>
+        <ol>
+          <li><a href="#getting-started">1. Getting started</a></li>
+          <li><a href="#queries">2. Objects and SOQL queries</a></li>
+          <li><a href="#updates">3. Review and update records</a></li>
+          <li><a href="#rollback">4. Update audit and rollback</a></li>
+          <li><a href="#files">5. CSV and Excel files</a></li>
+          <li><a href="#reports">6. Salesforce reports</a></li>
+          <li><a href="#download-language">7. Download and language</a></li>
+          <li><a href="#safety">8. Storage, privacy, and safety</a></li>
+        </ol>
+      </section>
+
+      <section id="getting-started" aria-labelledby="getting-started-title">
+        <h2 id="getting-started-title">1. Getting started</h2>
+        <ol>
+          <li>Install the supplied DinaSheet build, then pin <strong>DinaSheet for Salesforce</strong> from Chrome's Extensions menu if you want quick access.</li>
+          <li>Open Salesforce in Chrome and sign in normally. DinaSheet reuses that browser session; it does not ask for a separate Salesforce password.</li>
+          <li>Click the DinaSheet toolbar icon. Select the current Salesforce org, or another detected signed-in org, and choose <strong>Open</strong>.</li>
+          <li>Check the org indicator at the top of DinaSheet before loading or updating data.</li>
+        </ol>
+        <figure>
+          <img src="../img/00-org-launcher.png" width="1280" height="800" decoding="async" alt="DinaSheet popup showing the current Salesforce tab and other signed-in orgs">
+          <figcaption>The popup distinguishes the current tab from other detected org sessions before opening a sheet.</figcaption>
+        </figure>
+        <div class="callout"><p><strong>No org shown?</strong> Open or sign in to Salesforce, return to the toolbar popup, and refresh the detected sessions.</p></div>
+      </section>
+
+      <section id="queries" aria-labelledby="queries-title">
+        <h2 id="queries-title">2. Objects and SOQL queries</h2>
+        <ol>
+          <li>Open the <strong>Import</strong> panel and select <strong>Query</strong>, or open an object from the Salesforce data browser.</li>
+          <li>Choose an object and fields to build a query, or enter your own SOQL. Include <code>Id</code> if you may need to update the returned records.</li>
+          <li>Choose whether to load into the current sheet or a new sheet, then select <strong>Run</strong>.</li>
+          <li>Use the spreadsheet toolbar for cell formatting and grid actions. The loaded values are editable static cells; changing a cell does not immediately change Salesforce.</li>
+        </ol>
+        <figure>
+          <img src="../img/01-query-and-grid.png" width="1280" height="800" alt="DinaSheet Query panel and Salesforce Account data in the spreadsheet grid">
+          <figcaption>A SOQL query loads Account fields into an editable sheet while the active org remains visible in the header.</figcaption>
+        </figure>
+        <div class="callout"><p><strong>Update eligibility:</strong> a sheet needs an <code>Id</code> column whose records resolve to one Salesforce object. Read-only and invalid values are rejected using Salesforce field metadata.</p></div>
+      </section>
+
+      <section id="updates" aria-labelledby="updates-title">
+        <h2 id="updates-title">3. Review and update records</h2>
+        <ol>
+          <li>Edit one or more supported fields in a sheet that has an eligible <code>Id</code> column.</li>
+          <li>Open the details panel if it is hidden. The <strong>Changed fields</strong> card lists each record and its exact before-and-after values.</li>
+          <li>Select <strong>Update</strong> on the review card.</li>
+          <li>Read the confirmation dialog. Choose <strong>Cancel</strong> to make more changes, or <strong>Update</strong> to send only the displayed values to Salesforce.</li>
+          <li>After a successful update, DinaSheet saves a bounded local audit receipt for the changed fields.</li>
+        </ol>
+        <figure>
+          <img src="../img/02-safe-update-review.png" width="1280" height="800" decoding="async" alt="Changed fields review card and final Salesforce update confirmation dialog">
+          <figcaption>The review card and confirmation dialog show the same record and field values before the update runs.</figcaption>
+        </figure>
+        <div class="callout warning"><p><strong>DinaSheet does not provide record deletion.</strong> Editing the grid remains local until you explicitly confirm an eligible update.</p></div>
+      </section>
+
+      <section id="rollback" aria-labelledby="rollback-title">
+        <h2 id="rollback-title">4. Update audit and rollback</h2>
+        <ol>
+          <li>Select the <strong>LOG</strong> rail icon to open the Update Audit Log.</li>
+          <li>Find the relevant object and update time. Audit entries are shown newest first.</li>
+          <li>Select the <strong>Rollback</strong> cell for each row whose recorded prior values you want to restore.</li>
+          <li>Review the resulting Changed fields card. A rollback is prepared as a normal Salesforce update; it is not sent automatically.</li>
+          <li>Verify the record's current Salesforce value, especially if someone may have edited it since the receipt was recorded, then confirm or cancel the update.</li>
+        </ol>
+        <figure>
+          <img src="../img/03-update-audit-rollback.png" width="1280" height="800" decoding="async" alt="DinaSheet Update Audit Log showing one selected rollback row and prior values">
+          <figcaption>A selected audit row prepares recorded prior values for the same review-and-confirm update flow.</figcaption>
+        </figure>
+        <div class="callout warning"><p><strong>Receipts are historical snapshots.</strong> They do not prove the record is unchanged. Verify current values before confirming a rollback.</p></div>
+      </section>
+
+      <section id="files" aria-labelledby="files-title">
+        <h2 id="files-title">5. CSV and Excel files</h2>
+        <ol>
+          <li>Open the <strong>Import</strong> panel and select <strong>Upload</strong>.</li>
+          <li>Choose a local CSV or Excel file and select the current sheet or a new sheet as the target.</li>
+          <li>Select <strong>Run</strong>. DinaSheet parses the file locally in the browser and shows the file name, row count, target, and detected Salesforce object details.</li>
+          <li>If the imported table contains valid record IDs for one object, the reviewed update flow can become available. Confirm the resolved object before updating.</li>
+        </ol>
+        <figure>
+          <img src="../img/04-csv-import-details.png" width="1280" height="800" decoding="async" alt="Imported CSV records with Import details and Last import info cards">
+          <figcaption>The details panel explains the import source and whether a usable Salesforce Id column was detected.</figcaption>
+        </figure>
+        <div class="callout"><p>Opening a file does not upload it to DinaLab or another developer-operated server. Workbook files and sheet snapshots are not persisted by DinaSheet.</p></div>
+      </section>
+
+      <section id="reports" aria-labelledby="reports-title">
+        <h2 id="reports-title">6. Salesforce reports</h2>
+        <ol>
+          <li>Open the <strong>Report</strong> import mode or choose a report from the Salesforce data browser.</li>
+          <li>Search by report name or enter a report ID, choose the target sheet, and select <strong>Run</strong>.</li>
+          <li>Review the report name, API name, folder, format, description, filters, and source details beside the grid.</li>
+          <li>If Salesforce's JSON report API reaches its 2,000-row cap, DinaSheet attempts the same report's full workbook export from Salesforce.</li>
+        </ol>
+        <figure>
+          <img src="../img/05-report-data-only.png" width="1280" height="800" decoding="async" alt="Salesforce report rows with report and import details in DinaSheet">
+          <figcaption>Report results open as data-only rows, with source details and filters kept in the side panel.</figcaption>
+        </figure>
+        <div class="callout"><p>Grid edits do not change the Salesforce report definition. If report rows contain valid record IDs for one object, any available reviewed update acts on those Salesforce records—not on the report itself.</p></div>
+      </section>
+
+      <section id="download-language" aria-labelledby="download-language-title">
+        <h2 id="download-language-title">7. Download and language</h2>
+        <h3>Download sheet data</h3>
+        <ol>
+          <li>Activate the sheet you want to export.</li>
+          <li>Choose the download action in the toolbar and select the available format.</li>
+          <li>Review the downloaded file before using it in another system.</li>
+        </ol>
+        <h3>Change the interface language</h3>
+        <p>DinaSheet initially follows the Salesforce user language when available. Use the language selector in the popup or DinaSheet header to switch between <strong>EN — English</strong> and <strong>JP — 日本語</strong>. Changing the language reloads DinaSheet.</p>
+      </section>
+
+      <section id="safety" aria-labelledby="safety-title">
+        <h2 id="safety-title">8. Storage, privacy, and safety</h2>
+        <ul>
+          <li>Always confirm the active Salesforce org before running a query or update.</li>
+          <li>Record updates require row selection, field-level review, and final confirmation.</li>
+          <li>Audit receipts store only changed fields and are limited to the newest 50 successful update events and 2 MB per Salesforce org.</li>
+          <li>Preferences and receipts are stored on the device in Chrome extension storage. Clear extension storage or uninstall DinaSheet to remove them.</li>
+          <li>The Salesforce session cookie and authorization header remain inside the extension.</li>
+          <li>DinaSheet has no analytics, telemetry, advertising, external messaging, or developer-operated data backend.</li>
+        </ul>
+        <p style="margin-top:18px"><a href="../PRIVACY_POLICY.html">Read the complete DinaSheet Privacy Policy</a>.</p>
+      </section>
+    </div>
+
+    <p class="page-footer">Salesforce is a trademark of Salesforce, Inc. DinaSheet is independent and is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+  </main>
+</body>
+</html>

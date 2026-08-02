@@ -5,7 +5,7 @@ This repository publishes [dina.jp](https://dina.jp/) through GitHub Pages.
 Public product pages:
 
 - [Admin Toolkit for Salesforce](apps/salesforce-admin-toolkit/index.html), an independent Chrome extension compatible with Salesforce.
-- [DinaSheet for Salesforce](apps/dinasheet-for-salesforce/index.html), a spreadsheet workspace for Salesforce data currently prepared as a release candidate.
+- [DinaSheet for Salesforce](apps/dinasheet-for-salesforce/index.html), a spreadsheet workspace for Salesforce data currently prepared as a release candidate, with an [English](apps/dinasheet-for-salesforce/manual/index.html) and [Japanese](apps/dinasheet-for-salesforce/manual/jp/index.html) screenshot manual.
 - [Dina Agent for Salesforce](apps/salesforce-agentic-bot/index.html), an independent assistant in development for Salesforce workflows.
 - [Common Tools](tools/index.html), a browser-only developer and administrator workbench.
 

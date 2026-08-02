@@ -46,7 +46,10 @@ const primaryPages = [
   "apps/salesforce-admin-toolkit/manual/index.html",
   "apps/salesforce-admin-toolkit/manual/jp/index.html",
   "apps/dinasheet-for-salesforce/index.html",
+  "apps/dinasheet-for-salesforce/jp/index.html",
   "apps/dinasheet-for-salesforce/PRIVACY_POLICY.html",
+  "apps/dinasheet-for-salesforce/manual/index.html",
+  "apps/dinasheet-for-salesforce/manual/jp/index.html",
   "apps/salesforce-agentic-bot/index.html",
   "apps/salesforce-agentic-bot/PRIVACY_POLICY.html",
 ];

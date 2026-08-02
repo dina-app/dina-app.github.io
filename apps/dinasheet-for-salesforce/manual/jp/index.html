@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ユーザーマニュアル | DinaSheet for Salesforce</title>
+  <meta name="description" content="DinaSheet for Salesforce のスクリーンショット付きユーザーマニュアル。クエリ、確認付き更新、ロールバック、ファイル読み込み、レポートについて説明します。">
+  <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/manual/jp/">
+  <link rel="alternate" hreflang="en" href="https://dina.jp/apps/dinasheet-for-salesforce/manual/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body class="manual-page">
+  <main class="shell">
+    <nav class="nav" aria-label="ページナビゲーション">
+      <a class="brand" href="../../../../"><span class="brand-mark">D</span><span>DinaLab</span></a>
+      <span class="nav-links">
+        <a class="lang-toggle" href="../" hreflang="en" lang="en" aria-label="View in English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17"/><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"/></svg><span>EN</span></a>
+        <a href="../../jp/">DinaSheet に戻る</a>
+      </span>
+    </nav>
+
+    <header class="intro">
+      <span class="release-pill">リリース候補 0.2.0 対応マニュアル</span>
+      <h1>DinaSheet for Salesforce ユーザーマニュアル</h1>
+      <p class="lead">Salesforce データの読み込み、スプレッドシートグリッドでの操作、レコード更新の確認、ロールバック更新の準備、ローカルファイルの読み込みを説明する実践ガイドです。</p>
+      <p class="notice">6 枚のスクリーンショットは合成デモデータとサンプル ID を使用しています。顧客データや本番組織のデータは含まれていません。起動ポップアップは日本語、ワークスペースは英語で表示しています。</p>
+    </header>
+
+    <div class="content">
+      <section class="toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">目次</h2>
+        <ol>
+          <li><a href="#getting-started">1. はじめに</a></li>
+          <li><a href="#queries">2. オブジェクトと SOQL クエリ</a></li>
+          <li><a href="#updates">3. レコードの確認と更新</a></li>
+          <li><a href="#rollback">4. 更新監査とロールバック</a></li>
+          <li><a href="#files">5. CSV・Excel ファイル</a></li>
+          <li><a href="#reports">6. Salesforce レポート</a></li>
+          <li><a href="#download-language">7. ダウンロードと言語</a></li>
+          <li><a href="#safety">8. 保存、プライバシー、安全性</a></li>
+        </ol>
+      </section>
+
+      <section id="getting-started" aria-labelledby="getting-started-title">
+        <h2 id="getting-started-title">1. はじめに</h2>
+        <ol>
+          <li>提供された DinaSheet ビルドをインストールします。すぐに起動できるようにする場合は、Chrome の拡張機能メニューから <strong>DinaSheet for Salesforce</strong> を固定します。</li>
+          <li>Chrome で Salesforce を開き、通常どおりログインします。DinaSheet はブラウザーのセッションを再利用するため、Salesforce パスワードを別途入力する必要はありません。</li>
+          <li>DinaSheet のツールバーアイコンをクリックします。現在の Salesforce 組織、または検出された別のログイン済み組織を選び、<strong>開く</strong>を選択します。</li>
+          <li>データの読み込みや更新を行う前に、DinaSheet 上部の組織表示を確認します。</li>
+        </ol>
+        <figure>
+          <img src="../../img/00-org-launcher-jp.png" width="1280" height="800" decoding="async" alt="現在の Salesforce タブとほかのログイン済み組織を表示する DinaSheet ポップアップ">
+          <figcaption>シートを開く前に、現在のタブと検出済みの別組織セッションを区別して確認できます。</figcaption>
+        </figure>
+        <div class="callout"><p><strong>組織が表示されない場合：</strong>Salesforce を開くかログインし、ツールバーポップアップに戻って検出済みセッションを更新してください。</p></div>
+      </section>
+
+      <section id="queries" aria-labelledby="queries-title">
+        <h2 id="queries-title">2. オブジェクトと SOQL クエリ</h2>
+        <ol>
+          <li><strong>インポート</strong>パネルを開いて<strong>クエリ</strong>を選ぶか、Salesforce データブラウザーからオブジェクトを開きます。</li>
+          <li>オブジェクトと項目を選んでクエリを作成するか、独自の SOQL を入力します。取得したレコードを更新する可能性がある場合は <code>Id</code> を含めます。</li>
+          <li>現在のシートまたは新しいシートを出力先として選び、<strong>実行</strong>を選択します。</li>
+          <li>セルの書式設定やグリッド操作には、スプレッドシートのツールバーを使用します。読み込んだ値は編集可能な静的セルであり、セルを変更しただけでは Salesforce は更新されません。</li>
+        </ol>
+        <figure>
+          <img src="../../img/01-query-and-grid.png" width="1280" height="800" alt="DinaSheet のクエリパネルとスプレッドシートグリッドに表示された Salesforce 取引先データ">
+          <figcaption>SOQL クエリで取引先の項目を編集可能なシートへ読み込みます。接続中の組織はヘッダーで確認できます。</figcaption>
+        </figure>
+        <div class="callout"><p><strong>更新可能になる条件：</strong>シートに <code>Id</code> 列があり、レコードが 1 種類の Salesforce オブジェクトとして判定できる必要があります。読み取り専用の項目や無効な値は Salesforce の項目メタデータに基づいて拒否されます。</p></div>
+      </section>
+
+      <section id="updates" aria-labelledby="updates-title">
+        <h2 id="updates-title">3. レコードの確認と更新</h2>
+        <ol>
+          <li>更新可能な <code>Id</code> 列を持つシートで、対応する項目を 1 つ以上編集します。</li>
+          <li>詳細パネルが閉じている場合は開きます。<strong>変更項目</strong>カードに、各レコードの変更前・変更後の値が正確に表示されます。</li>
+          <li>確認カードの<strong>更新</strong>を選択します。</li>
+          <li>確認ダイアログを読みます。さらに編集する場合は<strong>キャンセル</strong>、表示された値だけを Salesforce に送る場合は<strong>更新</strong>を選択します。</li>
+          <li>更新に成功すると、変更項目を含む上限付きの監査記録がローカルに保存されます。</li>
+        </ol>
+        <figure>
+          <img src="../../img/02-safe-update-review.png" width="1280" height="800" decoding="async" alt="変更項目の確認カードと Salesforce 更新の最終確認ダイアログ">
+          <figcaption>更新を実行する前に、確認カードとダイアログで同じレコードと項目値を確認できます。</figcaption>
+        </figure>
+        <div class="callout warning"><p><strong>DinaSheet にレコード削除機能はありません。</strong>対象となる更新を明示的に確定するまで、グリッドでの編集はローカルのままです。</p></div>
+      </section>
+
+      <section id="rollback" aria-labelledby="rollback-title">
+        <h2 id="rollback-title">4. 更新監査とロールバック</h2>
+        <ol>
+          <li>レールの <strong>LOG</strong> アイコンを選択して更新監査ログを開きます。</li>
+          <li>対象のオブジェクトと更新日時を探します。監査ログは新しい順に表示されます。</li>
+          <li>記録された以前の値へ戻したい各行の<strong>ロールバック</strong>セルを選択します。</li>
+          <li>表示された変更項目カードを確認します。ロールバックは通常の Salesforce 更新として準備され、自動では送信されません。</li>
+          <li>監査記録の作成後に別の編集が行われた可能性がある場合は、特に現在の Salesforce 値を確認してから、更新を確定またはキャンセルします。</li>
+        </ol>
+        <figure>
+          <img src="../../img/03-update-audit-rollback.png" width="1280" height="800" decoding="async" alt="以前の値と選択済みロールバック行を表示する DinaSheet 更新監査ログ">
+          <figcaption>監査ログの行を選ぶと、記録された以前の値が同じ確認付き更新フローに準備されます。</figcaption>
+        </figure>
+        <div class="callout warning"><p><strong>監査記録は過去時点のスナップショットです。</strong>レコードが変更されていないことを保証するものではありません。ロールバックを確定する前に現在の値を確認してください。</p></div>
+      </section>
+
+      <section id="files" aria-labelledby="files-title">
+        <h2 id="files-title">5. CSV・Excel ファイル</h2>
+        <ol>
+          <li><strong>インポート</strong>パネルを開き、<strong>アップロード</strong>を選択します。</li>
+          <li>ローカルの CSV または Excel ファイルを選び、現在のシートまたは新しいシートを出力先として指定します。</li>
+          <li><strong>実行</strong>を選択します。DinaSheet はブラウザー内でファイルをローカル解析し、ファイル名、行数、出力先、判定された Salesforce オブジェクトの詳細を表示します。</li>
+          <li>読み込んだ表に 1 種類のオブジェクトの有効なレコード ID が含まれる場合は、確認付き更新が利用可能になります。更新前に判定されたオブジェクトを確認してください。</li>
+        </ol>
+        <figure>
+          <img src="../../img/04-csv-import-details.png" width="1280" height="800" decoding="async" alt="インポート詳細と前回のインポート情報を表示する CSV レコード">
+          <figcaption>詳細パネルで、読み込み元と利用可能な Salesforce Id 列が検出されたかを確認できます。</figcaption>
+        </figure>
+        <div class="callout"><p>ファイルを開いても、DinaLab や開発者運営のサーバーへアップロードされることはありません。ワークブックファイルとシートスナップショットは DinaSheet に永続保存されません。</p></div>
+      </section>
+
+      <section id="reports" aria-labelledby="reports-title">
+        <h2 id="reports-title">6. Salesforce レポート</h2>
+        <ol>
+          <li><strong>レポート</strong>インポートモードを開くか、Salesforce データブラウザーからレポートを選びます。</li>
+          <li>レポート名で検索するかレポート ID を入力し、出力先シートを選んで<strong>実行</strong>を選択します。</li>
+          <li>グリッドの横で、レポート名、API 参照名、フォルダー、形式、説明、検索条件、取得元の詳細を確認します。</li>
+          <li>Salesforce の JSON レポート API が 2,000 行の上限に達した場合、DinaSheet は Salesforce から同じレポートの全件ワークブックエクスポート取得を試みます。</li>
+        </ol>
+        <figure>
+          <img src="../../img/05-report-data-only.png" width="1280" height="800" decoding="async" alt="Salesforce レポートの行とレポート・インポート詳細を表示する DinaSheet">
+          <figcaption>レポート結果はデータ行として開き、取得元の詳細と検索条件はサイドパネルで確認できます。</figcaption>
+        </figure>
+        <div class="callout"><p>グリッドの編集で Salesforce レポート定義が変更されることはありません。レポート行に 1 種類のオブジェクトの有効なレコード ID がある場合、利用可能な確認付き更新はレポートではなく Salesforce レコードを更新します。</p></div>
+      </section>
+
+      <section id="download-language" aria-labelledby="download-language-title">
+        <h2 id="download-language-title">7. ダウンロードと言語</h2>
+        <h3>シートデータをダウンロードする</h3>
+        <ol>
+          <li>エクスポートするシートを選択します。</li>
+          <li>ツールバーのダウンロード操作を選び、利用可能な形式を指定します。</li>
+          <li>別のシステムで使用する前に、ダウンロードしたファイルを確認します。</li>
+        </ol>
+        <h3>画面表示の言語を変更する</h3>
+        <p>DinaSheet は、取得できる場合は最初に Salesforce ユーザーの言語に従います。ポップアップまたは DinaSheet ヘッダーの言語セレクターで <strong>EN — English</strong> と <strong>JP — 日本語</strong>を切り替えられます。言語を変更すると DinaSheet が再読み込みされます。</p>
+      </section>
+
+      <section id="safety" aria-labelledby="safety-title">
+        <h2 id="safety-title">8. 保存、プライバシー、安全性</h2>
+        <ul>
+          <li>クエリや更新を実行する前に、接続中の Salesforce 組織を必ず確認してください。</li>
+          <li>レコード更新には、行の選択、項目単位の確認、最終確定が必要です。</li>
+          <li>監査記録は変更項目だけを保存し、Salesforce 組織ごとに成功した最新 50 件の更新イベント、最大 2 MB に制限されます。</li>
+          <li>設定と監査記録は端末上の Chrome 拡張機能ストレージに保存されます。削除するには拡張機能ストレージを消去するか、DinaSheet をアンインストールします。</li>
+          <li>Salesforce セッション Cookie と認証ヘッダーは拡張機能内に保持されます。</li>
+          <li>DinaSheet には分析、テレメトリー、広告、外部メッセージング、開発者運営のデータバックエンドはありません。</li>
+        </ul>
+        <p style="margin-top:18px"><a href="../../PRIVACY_POLICY.html">DinaSheet のプライバシーポリシー全文（英語）を読む</a>。</p>
+      </section>
+    </div>
+
+    <p class="page-footer">Salesforce は Salesforce, Inc. の商標です。DinaSheet は独立した製品であり、Salesforce との提携、Salesforce による承認または後援を受けていません。</p>
+  </main>
+</body>
+</html>

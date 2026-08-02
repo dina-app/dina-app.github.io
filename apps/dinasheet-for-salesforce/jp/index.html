@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DinaSheet for Salesforce | スプレッドシートワークスペース</title>
+  <meta name="description" content="DinaSheet for Salesforce は、SOQL、レポート、ローカルファイル、確認付きレコード更新、ロールバックに対応する独立した Chrome スプレッドシートワークスペースです。">
+  <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/jp/">
+  <link rel="alternate" hreflang="en" href="https://dina.jp/apps/dinasheet-for-salesforce/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="product-page">
+  <main class="shell">
+    <nav class="nav" aria-label="ページナビゲーション">
+      <a class="brand" href="../../../"><span class="brand-mark">D</span><span>DinaLab</span></a>
+      <span class="nav-links">
+        <a class="lang-toggle" href="../" hreflang="en" lang="en" aria-label="View in English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17"/><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"/></svg><span>EN</span></a>
+        <a href="../manual/jp/">ユーザーマニュアル</a>
+        <a href="../../../">ホームに戻る</a>
+      </span>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <span class="release-pill">リリース候補：0.2.0</span>
+        <h1>DinaSheet for Salesforce</h1>
+        <p class="lead">Salesforce データに特化したスプレッドシートワークスペースです。SOQL クエリやレポートの実行、CSV・Excel ファイルの読み込み、対応レコードの編集、Salesforce へ送信する前の変更内容確認ができます。</p>
+        <p class="notice">DinaSheet は独立した製品であり、Salesforce との提携、Salesforce による承認または後援を受けていません。</p>
+        <div class="button-row">
+          <a class="button" href="../manual/jp/">ユーザーマニュアルを読む</a>
+          <a class="button secondary" href="../PRIVACY_POLICY.html">プライバシーポリシー（英語）</a>
+        </div>
+      </div>
+      <img class="hero-shot" src="../img/01-query-and-grid.png" width="1280" height="800" alt="SOQL クエリで取得した Salesforce の取引先レコードを表示する DinaSheet">
+    </header>
+
+    <div class="content">
+      <section aria-labelledby="features-title">
+        <h2 id="features-title">Salesforce 向けスプレッドシートワークフロー</h2>
+        <div class="feature-grid">
+          <article class="feature"><h3>組織を確認して起動</h3><p>現在の Salesforce タブと、ほかのログイン済み組織を確認してから、選択したセッションのシートを開きます。</p></article>
+          <article class="feature"><h3>クエリとレポート</h3><p>SOQL の実行、オブジェクトの参照、Salesforce レポートの読み込みを、使い慣れた複数シートのグリッドで行えます。</p></article>
+          <article class="feature"><h3>ローカルファイルの読み込み</h3><p>CSV・Excel ファイルを開発者へアップロードせず、ブラウザー内でローカルに開きます。</p></article>
+          <article class="feature"><h3>型を考慮した編集</h3><p>Salesforce スキーマ情報に基づく検証を使って、対応するオブジェクト項目を直接編集します。</p></article>
+          <article class="feature"><h3>確認付き更新</h3><p>項目ごとの変更前・変更後の値を確認し、選択した行を明示的に確定してから更新します。</p></article>
+          <article class="feature"><h3>監査とロールバック</h3><p>組織ごとに上限付きで保存された更新記録を確認し、以前の値を別途確認するロールバック更新として準備します。</p></article>
+        </div>
+      </section>
+
+      <section aria-labelledby="workflow-title">
+        <h2 id="workflow-title">意図しない更新を防ぐフロー</h2>
+        <div class="step-grid">
+          <article class="step"><h3>読み込む</h3><p>オブジェクトのクエリ、レポート、またはローカルの CSV・Excel ファイルを開きます。</p></article>
+          <article class="step"><h3>確認する</h3><p>対応する行を編集し、変更項目カードですべての変更値を確認します。</p></article>
+          <article class="step"><h3>確定する</h3><p>DinaSheet が Salesforce に更新を送る前に、対象レコードと値を確定します。</p></article>
+        </div>
+      </section>
+
+      <section aria-labelledby="screenshots-title">
+        <h2 id="screenshots-title">DinaSheet の画面</h2>
+        <p class="notice">以下は合成デモデータを使った画面例です。起動ポップアップは日本語、ワークスペースは英語で表示しています。</p>
+        <div class="gallery">
+          <figure class="wide"><img src="../img/00-org-launcher-jp.png" width="1280" height="800" decoding="async" alt="現在の Salesforce タブとほかのログイン済み組織を表示する DinaSheet ポップアップ"><figcaption>現在のタブまたは検出済みの別組織を選んでから DinaSheet を開きます。</figcaption></figure>
+          <figure><img src="../img/02-safe-update-review.png" width="1280" height="800" decoding="async" alt="Salesforce レコード 1 件の変更項目カードと確認ダイアログ"><figcaption>最終確認まで、変更前・変更後の項目値を表示します。</figcaption></figure>
+          <figure><img src="../img/03-update-audit-rollback.png" width="1280" height="800" decoding="async" alt="ロールバック行を選択した更新監査ログ"><figcaption>成功した更新の記録から、以前の値をロールバック用に準備できます。</figcaption></figure>
+          <figure><img src="../img/04-csv-import-details.png" width="1280" height="800" decoding="async" alt="CSV データとインポート詳細を表示する DinaSheet"><figcaption>CSV・Excel ファイルはローカルで解析され、編集可能な静的セルとして開きます。</figcaption></figure>
+          <figure><img src="../img/05-report-data-only.png" width="1280" height="800" decoding="async" alt="DinaSheet に表示された Salesforce レポートデータ"><figcaption>レポートデータと、取得元・検索条件などの詳細を並べて確認できます。</figcaption></figure>
+        </div>
+        <div class="button-row"><a class="button secondary" href="../manual/jp/">スクリーンショット付きマニュアルを開く</a></div>
+      </section>
+
+      <section aria-labelledby="runtime-title">
+        <h2 id="runtime-title">ローカル処理を重視</h2>
+        <ul>
+          <li>DinaSheet は現在の Salesforce セッション Cookie をローカルで読み取り、選択した Salesforce 組織だけに HTTPS でアクセスします。</li>
+          <li>Salesforce セッション Cookie、Cookie ドメイン、認証ヘッダーが拡張機能の外へ送信されることはありません。</li>
+          <li>設定と組織ごとの上限付き更新記録は Chrome ストレージに保存されますが、ワークブックファイルとシートスナップショットは永続化されません。</li>
+          <li>広告、分析、テレメトリー、外部ホストの実行可能コード、外部メッセージング、開発者運営のデータサーバーはありません。</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="permissions-title">
+        <h2 id="permissions-title">権限</h2>
+        <ul>
+          <li><code>cookies</code>：ユーザーが要求した API 呼び出しのため、既存の Salesforce セッション Cookie をローカルで読み取ります。</li>
+          <li><code>storage</code>：設定と、監査・ロールバックに使う組織ごとの上限付き更新記録を保存します。</li>
+          <li>Salesforce ホストアクセス：ログイン済み組織を検出し、スキーマ、SOQL、レポート、確認済みレコード更新のために API を呼び出します。</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="status-title">
+        <h2 id="status-title">リリース状況</h2>
+        <p>バージョン 0.2.0 は検証済みのリリース候補です。拡張機能パッケージと Chrome ウェブストア用素材は提出準備が完了しています。</p>
+      </section>
+    </div>
+    <p class="page-footer">Salesforce および Chrome は、それぞれの所有者の商標です。</p>
+  </main>
+</body>
+</html>

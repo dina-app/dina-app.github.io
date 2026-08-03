@@ -390,15 +390,21 @@ pre code {
   box-shadow: var(--shadow-sm);
 }
 
-/* The artwork brings its own dark tile, so it drops the bordered-surface
-   treatment the lettered span needs; the inherited radius crops its square
-   corners. Scoped to img so pages still using the lettered span are untouched. */
+/* The light mark is the default source; dark mode swaps to prismatic option 20.
+   Both carry transparent corners, so the shadow follows their alpha instead of
+   drawing a square around the image canvas. */
 img.brand-mark {
   display: block;
-  border: 0;
   background: none;
-  object-fit: cover;
-  box-shadow: 0 2px 10px rgba(10, 99, 255, 0.3);
+  object-fit: contain;
+  border: 0;
+  box-shadow: none;
+  filter: drop-shadow(0 2px 5px rgba(10, 99, 255, 0.22));
+}
+
+:root[data-theme="dark"] img.brand-mark {
+  content: url("dinalab-d-option-20-prismatic-premium.png");
+  filter: drop-shadow(0 2px 7px rgba(10, 99, 255, 0.4));
 }
 
 .nav-links,

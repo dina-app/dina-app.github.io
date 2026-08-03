@@ -390,7 +390,7 @@ pre code {
   box-shadow: var(--shadow-sm);
 }
 
-/* The light mark is the default source; dark mode swaps to prismatic option 20.
+/* The light mark is the default source; dark mode swaps to the prismatic mark.
    Both carry transparent corners, so the shadow follows their alpha instead of
    drawing a square around the image canvas. */
 img.brand-mark {
@@ -403,7 +403,7 @@ img.brand-mark {
 }
 
 :root[data-theme="dark"] img.brand-mark {
-  content: url("dinalab-d-option-20-prismatic-premium.png");
+  content: url("dinalab-logo-dark.png");
   filter: drop-shadow(0 2px 7px rgba(10, 99, 255, 0.4));
 }
 

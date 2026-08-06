@@ -15,7 +15,7 @@
     <nav class="nav" aria-label="Page navigation"><a class="brand" href="../../"><span class="brand-mark">D</span><span>DinaLab</span></a><a href="./">Back to app page</a>  <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></nav>
     <article>
       <h1>Privacy Policy for DinaSheet for Salesforce</h1>
-      <p class="updated">Effective date: July 31, 2026</p>
+      <p class="updated">Effective date: August 5, 2026</p>
       <p>DinaSheet for Salesforce ("DinaSheet") is a Chrome extension that provides a spreadsheet workspace for data in a Salesforce organization where the user is already signed in. It can run user-requested Salesforce queries and reports, display and locally organize results, import local CSV or Excel files, and send user-confirmed record updates back to that Salesforce organization.</p>
 
       <h2>Data DinaSheet Handles</h2>
@@ -25,7 +25,7 @@
         <li><strong>Salesforce account and identity data:</strong> the selected Salesforce host, organization ID, user ID, username, display name, language, and similar information returned by Salesforce APIs.</li>
         <li><strong>Salesforce website and API content:</strong> object and field metadata, report metadata and results, query results, record IDs and field values, and update results requested by the user. This content may include personal data if the user's Salesforce organization stores such data and the user chooses to retrieve it.</li>
         <li><strong>User-provided content:</strong> SOQL queries, selected report or object names, spreadsheet edits, and local CSV or Excel files opened by the user.</li>
-        <li><strong>Local preferences and rollback receipts:</strong> the selected language, sidebar width, and bounded per-organization update receipts containing update time, Salesforce object, record IDs, changed field names, and the prior and updated values needed to prepare a user-selected rollback.</li>
+        <li><strong>Local preferences, query definitions, favorite shortcuts, and rollback receipts:</strong> the selected language and sidebar width; per-organization query file and folder names plus their SOQL text; bounded per-organization favorite query/list-view/report shortcut metadata; and bounded per-organization update receipts containing update time, Salesforce object, record IDs, changed field names, and the prior and updated values needed to prepare a user-selected rollback.</li>
       </ul>
       <p>DinaSheet does not collect browsing history, advertising identifiers, analytics, telemetry, mouse movement, scrolling behavior, or keystroke logs. It does not contain ads.</p>
 
@@ -36,7 +36,9 @@
         <li>run user-requested Salesforce queries, reports, schema lookups, and updates;</li>
         <li>render and operate the spreadsheet interface;</li>
         <li>import files selected by the user locally in the browser;</li>
-        <li>retain bounded update receipts locally so the user can select recorded prior values, review them, and confirm a rollback update; and</li>
+        <li>retain query file names, folders, and SOQL text locally for the selected Salesforce organization;</li>
+        <li>retain bounded update receipts locally so the user can select recorded prior values, review them, and confirm a rollback update;</li>
+        <li>retain favorite query, list-view, and report shortcuts locally for the selected Salesforce organization; and</li>
         <li>show the user which Salesforce organization is connected.</li>
       </ul>
 
@@ -51,7 +53,7 @@
 
       <h2>Storage and Retention</h2>
       <ul>
-        <li>UI preferences and per-organization update receipts are stored in Chrome extension storage on the user's device. Workbook files and sheet snapshots are not persisted. Update receipts retain only changed fields, are limited to the newest 50 successful update events and 2 MB per Salesforce organization, and are removed as older events exceed those limits or when the user clears extension storage or uninstalls the extension.</li>
+        <li>UI preferences; query file and folder names with their SOQL text; up to 30 favorite folder names and 100 favorite shortcut records per Salesforce organization; and per-organization update receipts are stored in Chrome extension storage on the user's device. Query definitions remain until the user deletes them, clears extension storage, or uninstalls DinaSheet. Favorite shortcuts contain item IDs and display metadata and may include saved SOQL for a query shortcut. Salesforce query/report result rows, imported file contents, and workbook cell snapshots are not persisted in extension storage. Update receipts retain only changed fields, are limited to the newest 50 successful update events and 2 MB per Salesforce organization, and are removed as older events exceed those limits or when the user clears extension storage or uninstalls the extension.</li>
         <li>The Salesforce session cookie remains managed by Salesforce and Chrome; DinaSheet does not copy it into persistent extension storage.</li>
         <li>Local CSV and Excel files are parsed in the browser. Opening a file does not upload it to the developer.</li>
       </ul>

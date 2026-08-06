@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ユーザーマニュアル | DinaSheet for Salesforce</title>
-  <meta name="description" content="DinaSheet for Salesforce のスクリーンショット付きユーザーマニュアル。クエリ、確認付き更新、ロールバック、ファイル読み込み、レポートについて説明します。">
+  <meta name="description" content="保存できる Query、Favorites、ダウンロード、確認付き更新、ロールバック、ファイル読み込み、レポートを解説する DinaSheet for Salesforce 0.3.0 マニュアル。">
   <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/manual/jp/">
   <link rel="alternate" hreflang="en" href="https://dina.jp/apps/dinasheet-for-salesforce/manual/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -23,9 +23,9 @@
     </nav>
 
     <header class="intro">
-      <span class="release-pill">DinaSheet ユーザーマニュアル</span>
+      <span class="release-pill">DinaSheet 0.3.0 ユーザーマニュアル</span>
       <h1>DinaSheet for Salesforce ユーザーマニュアル</h1>
-      <p class="lead">Salesforce データの読み込み、スプレッドシートグリッドでの操作、レコード更新の確認、ロールバック更新の準備、ローカルファイルの読み込みを説明する実践ガイドです。</p>
+      <p class="lead">保存できる Query ファイル、Favorites フォルダー、Salesforce データのグリッド操作、確認付き更新、ロールバック、ダウンロード、ローカルファイル読み込みを説明する実践ガイドです。</p>
       <p class="notice">6 枚のスクリーンショットは合成デモデータとサンプル ID を使用しています。顧客データや本番組織のデータは含まれていません。起動ポップアップは日本語、ワークスペースは英語で表示しています。</p>
     </header>
 
@@ -34,7 +34,7 @@
         <h2 id="toc-title">目次</h2>
         <ol>
           <li><a href="#getting-started">1. はじめに</a></li>
-          <li><a href="#queries">2. オブジェクトと SOQL クエリ</a></li>
+          <li><a href="#queries">2. 保存 Query と Favorites</a></li>
           <li><a href="#updates">3. レコードの確認と更新</a></li>
           <li><a href="#rollback">4. 更新監査とロールバック</a></li>
           <li><a href="#files">5. CSV・Excel ファイル</a></li>
@@ -60,18 +60,20 @@
       </section>
 
       <section id="queries" aria-labelledby="queries-title">
-        <h2 id="queries-title">2. オブジェクトと SOQL クエリ</h2>
+        <h2 id="queries-title">2. 保存 Query と Favorites</h2>
         <ol>
-          <li><strong>インポート</strong>パネルを開いて<strong>クエリ</strong>を選ぶか、Salesforce データブラウザーからオブジェクトを開きます。</li>
-          <li>オブジェクトと項目を選んでクエリを作成するか、独自の SOQL を入力します。取得したレコードを更新する可能性がある場合は <code>Id</code> を含めます。</li>
-          <li>現在のシートまたは新しいシートを出力先として選び、<strong>実行</strong>を選択します。</li>
-          <li>セルの書式設定やグリッド操作には、スプレッドシートのツールバーを使用します。読み込んだ値は編集可能な静的セルであり、セルを変更しただけでは Salesforce は更新されません。</li>
+          <li>Salesforce Data サイドバーの <strong>Query</strong> を展開します。現在の Salesforce 組織に紐づくフォルダーと SOQL ファイルを作成できます。</li>
+          <li>Query ファイルを開くと SOQL が実行され、Salesforce の最新データが読み込まれます。取得レコードを更新する可能性がある場合は <code>Id</code> を含めます。</li>
+          <li>File details で SOQL を編集し、解決された Salesforce オブジェクトと更新可否を確認して、<strong>Run and update sheet</strong> を選びます。</li>
+          <li>Query ファイル、リストビュー、レポートのメニューから <strong>Add to Favorites…</strong> を選びます。常設の Default または新しく作成した Favorites フォルダーを指定できます。</li>
+          <li>Favorites からショートカットを再度開き、別フォルダーへの移動、所属フォルダーの編集、削除を行えます。定義は組織ごとに保存され、結果行は都度読み込まれます。</li>
+          <li>セル書式やグリッド操作にはスプレッドシートのツールバーを使います。セルを変更しても、Salesforce はすぐには更新されません。</li>
         </ol>
         <figure>
           <img src="../../img/01-query-and-grid.png" width="1280" height="800" alt="DinaSheet のクエリパネルとスプレッドシートグリッドに表示された Salesforce 取引先データ">
           <figcaption>SOQL クエリで取引先の項目を編集可能なシートへ読み込みます。接続中の組織はヘッダーで確認できます。</figcaption>
         </figure>
-        <div class="callout"><p><strong>更新可能になる条件：</strong>シートに <code>Id</code> 列があり、レコードが 1 種類の Salesforce オブジェクトとして判定できる必要があります。読み取り専用の項目や無効な値は Salesforce の項目メタデータに基づいて拒否されます。</p></div>
+        <div class="callout"><p><strong>更新可能になる条件：</strong>シートに <code>Id</code> 列があり、レコードが 1 種類の Salesforce オブジェクトとして判定できる必要があります。Query 定義と Favorite ショートカットはローカルに保存されますが、Salesforce の結果行は保存されません。</p></div>
       </section>
 
       <section id="updates" aria-labelledby="updates-title">
@@ -138,10 +140,12 @@
 
       <section id="download-language" aria-labelledby="download-language-title">
         <h2 id="download-language-title">7. ダウンロードと言語</h2>
-        <h3>シートデータをダウンロードする</h3>
+        <h3>シートと Favorites をダウンロードする</h3>
         <ol>
-          <li>エクスポートするシートを選択します。</li>
-          <li>ツールバーのダウンロード操作を選び、利用可能な形式を指定します。</li>
+          <li>Query ファイルまたは Favorite のメニューから、1 件を CSV または Excel で直接ダウンロードします。</li>
+          <li>Favorites フォルダーの <strong>Download Folder…</strong> から、複数 CSV の ZIP または複数シートの Excel ワークブックを作成します。</li>
+          <li>フォルダーダウンロードでは進捗が表示され、項目の間でキャンセルでき、一部に失敗しても 1 件以上成功すれば処理を続行します。</li>
+          <li>現在のグリッドを出力する場合は、対象シートをアクティブにしてスプレッドシートのダウンロード操作を使います。</li>
           <li>別のシステムで使用する前に、ダウンロードしたファイルを確認します。</li>
         </ol>
         <h3>画面表示の言語を変更する</h3>
@@ -154,7 +158,9 @@
           <li>クエリや更新を実行する前に、接続中の Salesforce 組織を必ず確認してください。</li>
           <li>レコード更新には、行の選択、項目単位の確認、最終確定が必要です。</li>
           <li>監査記録は変更項目だけを保存し、Salesforce 組織ごとに成功した最新 50 件の更新イベント、最大 2 MB に制限されます。</li>
-          <li>設定と監査記録は端末上の Chrome 拡張機能ストレージに保存されます。削除するには拡張機能ストレージを消去するか、DinaSheet をアンインストールします。</li>
+          <li>設定、Query フォルダー／ファイル名と SOQL、1 組織あたり最大 30 の Favorites フォルダーと 100 件の Favorite ショートカット、更新記録は端末の Chrome 拡張機能ストレージに保存されます。</li>
+          <li>Salesforce のクエリ／レポート結果行、読み込んだファイル内容、ワークブックのセルスナップショットは拡張機能ストレージに保存されません。</li>
+          <li>Query 定義は DinaSheet 内で削除できます。保存済み定義とショートカットをまとめて削除するには、拡張機能ストレージを消去するか DinaSheet をアンインストールします。</li>
           <li>Salesforce セッション Cookie と認証ヘッダーは拡張機能内に保持されます。</li>
           <li>DinaSheet には分析、テレメトリー、広告、外部メッセージング、開発者運営のデータバックエンドはありません。</li>
         </ul>

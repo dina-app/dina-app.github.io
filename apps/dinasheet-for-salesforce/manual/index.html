@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>User Manual | DinaSheet for Salesforce</title>
-  <meta name="description" content="Step-by-step DinaSheet for Salesforce user manual covering queries, reviewed updates, rollback, file import, and reports with screenshots.">
+  <meta name="description" content="Step-by-step DinaSheet for Salesforce 0.3.0 manual covering saved queries, Favorites, downloads, reviewed updates, rollback, imports, and reports.">
   <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/manual/">
   <link rel="alternate" hreflang="ja" href="https://dina.jp/apps/dinasheet-for-salesforce/manual/jp/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -23,9 +23,9 @@
     </nav>
 
     <header class="intro">
-      <span class="release-pill">DinaSheet user manual</span>
+      <span class="release-pill">DinaSheet 0.3.0 user manual</span>
       <h1>DinaSheet for Salesforce — User Manual</h1>
-      <p class="lead">A practical guide to loading Salesforce data, working in the spreadsheet grid, reviewing record updates, preparing rollback updates, and importing local files.</p>
+      <p class="lead">A practical guide to saved Query files, Favorites folders, Salesforce data in the spreadsheet grid, reviewed updates, rollback, downloads, and local file imports.</p>
       <p class="notice">The six screenshots use synthetic demo data and identifiers. No customer or production-org data is shown.</p>
     </header>
 
@@ -34,7 +34,7 @@
         <h2 id="toc-title">Contents</h2>
         <ol>
           <li><a href="#getting-started">1. Getting started</a></li>
-          <li><a href="#queries">2. Objects and SOQL queries</a></li>
+          <li><a href="#queries">2. Saved queries and Favorites</a></li>
           <li><a href="#updates">3. Review and update records</a></li>
           <li><a href="#rollback">4. Update audit and rollback</a></li>
           <li><a href="#files">5. CSV and Excel files</a></li>
@@ -60,18 +60,20 @@
       </section>
 
       <section id="queries" aria-labelledby="queries-title">
-        <h2 id="queries-title">2. Objects and SOQL queries</h2>
+        <h2 id="queries-title">2. Saved queries and Favorites</h2>
         <ol>
-          <li>Open the <strong>Import</strong> panel and select <strong>Query</strong>, or open an object from the Salesforce data browser.</li>
-          <li>Choose an object and fields to build a query, or enter your own SOQL. Include <code>Id</code> if you may need to update the returned records.</li>
-          <li>Choose whether to load into the current sheet or a new sheet, then select <strong>Run</strong>.</li>
-          <li>Use the spreadsheet toolbar for cell formatting and grid actions. The loaded values are editable static cells; changing a cell does not immediately change Salesforce.</li>
+          <li>Expand <strong>Query</strong> in the Salesforce Data sidebar. Create folders and SOQL files to keep reusable queries scoped to the current Salesforce org.</li>
+          <li>Open a Query file to run its SOQL and load current Salesforce data. Include <code>Id</code> if you may need to update the returned records.</li>
+          <li>Use File details to edit the SOQL, see the resolved Salesforce object and update availability, then choose <strong>Run and update sheet</strong>.</li>
+          <li>From a Query file, list view, or report menu, choose <strong>Add to Favorites…</strong>. Select the permanent Default folder or create another Favorites folder.</li>
+          <li>Open Favorites to reopen a shortcut, move it to another folder, edit its folder memberships, or remove it. Favorite definitions are per org; result rows are loaded live and are not cached with the shortcut.</li>
+          <li>Use the spreadsheet toolbar for cell formatting and grid actions. Changing a cell does not immediately change Salesforce.</li>
         </ol>
         <figure>
           <img src="../img/01-query-and-grid.png" width="1280" height="800" alt="DinaSheet Query panel and Salesforce Account data in the spreadsheet grid">
           <figcaption>A SOQL query loads Account fields into an editable sheet while the active org remains visible in the header.</figcaption>
         </figure>
-        <div class="callout"><p><strong>Update eligibility:</strong> a sheet needs an <code>Id</code> column whose records resolve to one Salesforce object. Read-only and invalid values are rejected using Salesforce field metadata.</p></div>
+        <div class="callout"><p><strong>Update eligibility:</strong> a sheet needs an <code>Id</code> column whose records resolve to one Salesforce object. Query definitions and Favorite shortcuts persist locally; Salesforce result rows do not.</p></div>
       </section>
 
       <section id="updates" aria-labelledby="updates-title">
@@ -138,10 +140,12 @@
 
       <section id="download-language" aria-labelledby="download-language-title">
         <h2 id="download-language-title">7. Download and language</h2>
-        <h3>Download sheet data</h3>
+        <h3>Download sheets and Favorites</h3>
         <ol>
-          <li>Activate the sheet you want to export.</li>
-          <li>Choose the download action in the toolbar and select the available format.</li>
+          <li>Use a Query file or Favorite menu to download one item directly as CSV or Excel.</li>
+          <li>Use <strong>Download Folder…</strong> on a Favorites folder to create a ZIP of CSV files or one Excel workbook with multiple sheets.</li>
+          <li>For folder downloads, DinaSheet shows progress, allows cancellation between items, and continues past individual failures when at least one item succeeds.</li>
+          <li>To export the current grid instead, activate its sheet and use the spreadsheet download action.</li>
           <li>Review the downloaded file before using it in another system.</li>
         </ol>
         <h3>Change the interface language</h3>
@@ -154,7 +158,9 @@
           <li>Always confirm the active Salesforce org before running a query or update.</li>
           <li>Record updates require row selection, field-level review, and final confirmation.</li>
           <li>Audit receipts store only changed fields and are limited to the newest 50 successful update events and 2 MB per Salesforce org.</li>
-          <li>Preferences and receipts are stored on the device in Chrome extension storage. Clear extension storage or uninstall DinaSheet to remove them.</li>
+          <li>Preferences, Query folder/file names and SOQL, up to 30 Favorites folders and 100 Favorite shortcuts per org, and receipts are stored on the device in Chrome extension storage.</li>
+          <li>Salesforce query/report result rows, imported file contents, and workbook cell snapshots are not persisted in extension storage.</li>
+          <li>Delete Query definitions in DinaSheet, or clear extension storage or uninstall DinaSheet, to remove locally stored definitions and shortcuts.</li>
           <li>The Salesforce session cookie and authorization header remain inside the extension.</li>
           <li>DinaSheet has no analytics, telemetry, advertising, external messaging, or developer-operated data backend.</li>
         </ul>

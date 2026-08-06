@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DinaSheet for Salesforce | Spreadsheet Workspace</title>
-  <meta name="description" content="DinaSheet for Salesforce is an independent Chrome spreadsheet workspace for SOQL, reports, local files, reviewed record updates, and rollback.">
+  <meta name="description" content="DinaSheet for Salesforce 0.3.0 is an independent Chrome spreadsheet workspace with saved SOQL files, Favorites, downloads, reports, reviewed updates, and rollback.">
   <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/">
   <link rel="alternate" hreflang="ja" href="https://dina.jp/apps/dinasheet-for-salesforce/jp/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -25,9 +25,9 @@
 
     <header class="hero wide-shot">
       <div>
-        <span class="release-pill">Available on the Chrome Web Store</span>
+        <span class="release-pill">Available on the Chrome Web Store · next release 0.3.0</span>
         <h1>DinaSheet for Salesforce</h1>
-        <p class="lead">A focused spreadsheet workspace for Salesforce data. Run SOQL queries and reports, import CSV or Excel files, edit supported records, and review exact changes before sending a confirmed update.</p>
+        <p class="lead">A focused spreadsheet workspace for Salesforce data. Save SOQL files in folders, organize query, list-view, and report shortcuts in Favorites, download results, and review exact changes before sending a confirmed update.</p>
         <p class="notice">DinaSheet is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
         <div class="button-row">
           <a class="button" href="https://chromewebstore.google.com/detail/dinasheet-for-salesforce/bclfoieebdchpaplhlgnobcmpjhepgal" target="_blank" rel="noopener">Install from Chrome Web Store</a>
@@ -43,7 +43,10 @@
         <h2 id="features-title">Spreadsheet workflows for Salesforce</h2>
         <div class="feature-grid">
           <article class="feature"><h3>Org-aware launch</h3><p>See the current Salesforce tab and other signed-in orgs before opening a sheet for the selected session.</p></article>
-          <article class="feature"><h3>Query and reports</h3><p>Run SOQL, browse objects, and open Salesforce reports in a familiar multi-sheet grid.</p></article>
+          <article class="feature"><h3>Saved queries</h3><p>Keep per-org SOQL files in Query folders, edit their query text, and reopen them as live Salesforce views.</p></article>
+          <article class="feature"><h3>Favorites folders</h3><p>Organize query files, object list views, and reports into per-org Favorites folders for one-click access.</p></article>
+          <article class="feature"><h3>Flexible downloads</h3><p>Download one favorite as CSV or Excel, or export a whole Favorites folder as ZIP or a multi-sheet workbook.</p></article>
+          <article class="feature"><h3>Objects and reports</h3><p>Browse Salesforce list views and reports in a familiar multi-sheet grid, including large-report workbook fallback.</p></article>
           <article class="feature"><h3>Local file import</h3><p>Open CSV and Excel files locally in the browser without uploading them to the developer.</p></article>
           <article class="feature"><h3>Type-aware editing</h3><p>Edit supported object fields inline with validation based on Salesforce schema information.</p></article>
           <article class="feature"><h3>Reviewed updates</h3><p>Inspect field-level before-and-after values and explicitly confirm selected rows before an update runs.</p></article>
@@ -54,7 +57,7 @@
       <section aria-labelledby="workflow-title">
         <h2 id="workflow-title">A deliberate update flow</h2>
         <div class="step-grid">
-          <article class="step"><h3>Load</h3><p>Query an object, open a report, or select a local CSV or Excel file.</p></article>
+          <article class="step"><h3>Load</h3><p>Open a saved query, favorite, list view, report, or local CSV or Excel file.</p></article>
           <article class="step"><h3>Review</h3><p>Edit supported rows and inspect every changed field in the review card.</p></article>
           <article class="step"><h3>Confirm</h3><p>Confirm the exact records and values before DinaSheet sends the update to Salesforce.</p></article>
         </div>
@@ -77,7 +80,7 @@
         <ul>
           <li>DinaSheet reads the active Salesforce session cookie locally and calls only the selected Salesforce organization over HTTPS.</li>
           <li>The Salesforce session cookie, cookie domain, and authorization header never leave the extension.</li>
-          <li>Preferences and bounded per-org update receipts stay in Chrome storage; workbook files and sheet snapshots are not persisted.</li>
+          <li>Preferences, per-org query definitions, bounded Favorites metadata, and bounded update receipts stay in Chrome storage; Salesforce result rows, imported file contents, and workbook snapshots are not persisted there.</li>
           <li>There are no ads, analytics, telemetry, remotely hosted executable code, external messaging, or developer-operated data servers.</li>
         </ul>
       </section>
@@ -86,14 +89,14 @@
         <h2 id="permissions-title">Permissions</h2>
         <ul>
           <li><code>cookies</code>: reads the existing Salesforce session cookie locally for user-requested API calls.</li>
-          <li><code>storage</code>: stores preferences and bounded per-org update receipts used for audit and rollback.</li>
+          <li><code>storage</code>: stores preferences, per-org query file and folder definitions, up to 30 Favorites folders and 100 shortcuts per org, and bounded update receipts used for audit and rollback.</li>
           <li>Salesforce host access: discovers signed-in orgs and calls their APIs for schema, SOQL, reports, and confirmed record updates.</li>
         </ul>
       </section>
 
       <section aria-labelledby="status-title">
         <h2 id="status-title">Release status</h2>
-        <p>DinaSheet for Salesforce is available to <a href="https://chromewebstore.google.com/detail/dinasheet-for-salesforce/bclfoieebdchpaplhlgnobcmpjhepgal" target="_blank" rel="noopener">install from the Chrome Web Store</a>.</p>
+        <p>Version 0.3.0 is a validated release candidate awaiting Chrome Web Store upload. It adds persistent Query folders and SOQL files, Favorites folders for query files, list views, and reports, and CSV, Excel, ZIP, or multi-sheet workbook downloads. The current published DinaSheet is available to <a href="https://chromewebstore.google.com/detail/dinasheet-for-salesforce/bclfoieebdchpaplhlgnobcmpjhepgal" target="_blank" rel="noopener">install from the Chrome Web Store</a>.</p>
       </section>
     </div>
     <p class="page-footer">Salesforce and Chrome are trademarks of their respective owners.</p>

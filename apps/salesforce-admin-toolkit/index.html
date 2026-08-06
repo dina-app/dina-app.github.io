@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Toolkit for Salesforce | Compatible with Salesforce</title>
-  <meta name="description" content="Admin Toolkit for Salesforce is an independent Chrome side-panel suite for metadata, SheetD, permissions, schemas, GitHub metadata sync, APIs, Apex, exports, and monitoring.">
+  <meta name="description" content="Admin Toolkit for Salesforce 0.9.0 is an independent Chrome suite for metadata administration and org comparison, SheetD, permissions, schemas, APIs, Apex, exports, and monitoring.">
   <link rel="canonical" href="https://dina.jp/apps/salesforce-admin-toolkit/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/dinalab.css">
@@ -27,10 +27,10 @@
 
     <header class="hero">
       <div>
-        <span class="release-pill">Current release: 0.8.0</span>
+        <span class="release-pill">Next release: 0.9.0</span>
         <h1>Admin Toolkit for Salesforce</h1>
         <p class="lead">
-          Admin Toolkit for Salesforce is an independent Chrome right-side panel suite compatible with Salesforce. It uses the Salesforce session you are already signed in with for metadata administration, spreadsheet data work, permission analysis, object schema exploration, GitHub metadata retrieval, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.
+          Admin Toolkit for Salesforce is an independent Chrome suite compatible with Salesforce. It uses the Salesforce sessions you are already signed in with for metadata administration and read-only org comparison, spreadsheet data work, permission analysis, object schema exploration, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.
         </p>
         <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
         <div class="button-row">
@@ -48,11 +48,11 @@
         <div class="app-grid summary">
           <article class="app-summary">
             <h3>Metadata Admin for Salesforce</h3>
-            <p>Browse source-style metadata, search the loaded workspace, edit files locally, track changes, build package.xml selections, and deploy or discard changes.</p>
+            <p>Browse a compact source-style metadata tree, search the loaded workspace, edit files locally, track changes, build package.xml selections, and compare metadata across signed-in Salesforce orgs.</p>
           </article>
           <article class="app-summary">
             <h3>SheetD</h3>
-            <p>Browse Salesforce objects and reports in a multi-tab spreadsheet grid, inspect file details, and review exact changed fields before confirmed record updates or deletes.</p>
+            <p>Browse Salesforce objects and reports in a multi-tab spreadsheet grid, inspect file details, and review exact changed fields before confirmed record updates.</p>
           </article>
           <article class="app-summary">
             <h3>Org Review</h3>
@@ -66,10 +66,6 @@
             <h3>Permission Explorer</h3>
             <p>Explain why a user can access an object or field, identify overlapping grants, and trace each permission to the profile, permission set, or permission set group that grants it.</p>
           </article>
-          <article class="app-summary">
-            <h3>GitHub Metadata Sync</h3>
-            <p>Configure and preflight governed metadata retrieval to an approved repository through an org-side bridge, Salesforce native credentials, and a pull-request-only delivery workflow.</p>
-          </article>
         </div>
       </section>
 
@@ -77,13 +73,13 @@
         <h2 id="features-title">Administrator and Developer Tools</h2>
         <ul>
           <li>Search Salesforce metadata by label, name, API name, object, developer name, and matching snippets.</li>
+          <li>Compare metadata from two signed-in Salesforce orgs, filter differing files, and inspect actual source changes side by side.</li>
           <li>Open supported metadata records directly in Salesforce Setup.</li>
           <li>Send user-initiated Salesforce REST API requests and inspect JSON responses.</li>
           <li>Execute anonymous Apex and review compile, execution, and debug output.</li>
           <li>Export SOQL, SOSL, GraphQL, and report results as available CSV or JSON output.</li>
           <li>Browse Salesforce document folders, preview supported files, and download selected folders and files as ZIP.</li>
           <li>Trace object and field permissions to the profiles, permission sets, and permission set groups that grant them.</li>
-          <li>Configure and validate a governed, allowlisted Salesforce-to-GitHub metadata retrieval workflow without storing GitHub tokens in the browser.</li>
           <li>Inspect setup audit trail, API limits, login history, event log files, org summaries, and user summaries.</li>
           <li>Use the built-in English and Japanese manual for end-user guidance.</li>
         </ul>
@@ -95,8 +91,8 @@
           <li>The extension runs in Chrome and uses the active Salesforce session.</li>
           <li>Salesforce user and organization identity fields are used to identify the active session and org.</li>
           <li>Browser API requests containing Salesforce data, identity data, authentication information, and user-entered requests are sent only to the selected Salesforce org, not to developer-operated servers.</li>
-          <li>When an administrator explicitly configures and a user confirms GitHub Metadata Sync, the org-side bridge and protected workflow may retrieve only an approved metadata scope into the configured organization-owned GitHub repository through a branch and pull request.</li>
-          <li>Workspace preferences, search data, pending edits, saved SheetD files, recent/favorite tools, sanitized operation history, and non-secret organization-bound GitHub Metadata Sync drafts may be stored locally in Chrome browser storage on the user's device.</li>
+          <li>Org comparison reads the current workspace and the selected comparison org over that org's existing signed-in Salesforce session. Its Pull and Deploy actions are read-only previews in this release.</li>
+          <li>Workspace preferences, search data, pending edits, recent/favorite tools, sanitized operation history, and bounded SheetD update receipts may be stored locally in Chrome browser storage on the user's device. SheetD workbooks are not persisted.</li>
           <li>Operation history is limited to the most recent 100 entries and excludes session tokens and authorization headers. Feature-specific saved data can be cleared where the extension offers that control, and removing the extension clears its Chrome-managed local storage.</li>
           <li>The extension does not include analytics, telemetry, advertising, affiliate links, or remotely hosted JavaScript or WebAssembly.</li>
           <li>Extension JavaScript, HTML, CSS, and third-party spreadsheet code are packaged with the extension. Salesforce responses are treated as data and are not executed as code.</li>
@@ -127,8 +123,8 @@
       </section>
 
       <section aria-labelledby="release-title">
-        <h2 id="release-title">Current Release</h2>
-        <p>Version 0.8.0 adds GitHub Metadata Sync as the sixth app, with a resumable Setup Center, verified org and server prefill, server-derived technical configuration, governed preflight, Salesforce native Named Credential APIs, and pull-request-only delivery. It also rebuilds SheetD on the DinaSheet engine so objects and reports open directly as editable data and pending cell edits are reviewed from a Changed fields card before a confirmed update. No browser permission was added, and the extension stores no GitHub secret, token, or OAuth URL.</p>
+        <h2 id="release-title">Next Release</h2>
+        <p>Version 0.9.0 is a validated release candidate awaiting Chrome Web Store upload. It streamlines Metadata Admin with a flattened source tree, compact rows, breadcrumb navigation, visible row actions, and a docked resizable file-details panel. The new <strong>Compare with</strong> control finds metadata drift between Salesforce orgs already signed in to this browser, filters files by Different, Only here, or Only in the compared org, and opens actual source changes side by side. Pull Selected Preview and Deploy Selected Preview are read-only in this release. No Chrome permission or browser host permission was added.</p>
       </section>
 
       <section aria-labelledby="support-title">

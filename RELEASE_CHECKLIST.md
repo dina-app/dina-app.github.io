@@ -14,10 +14,11 @@ Prepared: July 31, 2026
 ## Completed in this release
 
 - [x] Replace the Admin Toolkit and Dina Agent raster logos with the current vector marks from `dina-app`, and drop the duplicate `assets/salesforce-agentic-bot-icon.jpg` reference.
-- [x] Add an "In the workshop" section to the homepage listing six earlier-stage apps with logo, platform, one line, and status.
-- [ ] Confirm the new homepage copy reads correctly in Japanese; the marketing strings are newly written, unlike the manual translations.
-- [ ] Confirm each workshop status is still accurate at publish time: DinaDevOps beta 0.1.0, OrgDock in development, Salesforce Prompter in development, Force Connect Voice prototype, Dina Bot early build, DinaSheet for Google Sheets in development.
-- [ ] Decide whether the four consumer iOS apps (Dina tutor, Dina 3D, Dina Draw, Dina Snap) should appear on dina.jp or stay off a Salesforce-focused site.
+- [x] Add an "In the workshop" section to the homepage listing eleven earlier-stage apps with logo, platform, one line, and status.
+- [ ] Confirm the new homepage copy reads correctly in Japanese; the marketing strings are newly written, unlike the manual translations. The four iOS app descriptions are the newest and have had the least review.
+- [ ] Confirm each workshop status is still accurate at publish time: DinaDevOps beta 0.1.0, Dina Dock in development 0.1.0, Salesforce Prompter in development, Force Connect Voice prototype, Dina Bot early build, DinaSheet for Google Sheets in development, Dina Bloom early build 0.1.0, Dina in development 0.3.0, Dina 3D / Dina Draw / Dina Snap early build 0.1.0.
+- [x] Decide whether the four consumer iOS apps (Dina tutor, Dina 3D, Dina Draw, Dina Snap) should appear on dina.jp or stay off a Salesforce-focused site. Decided: all four are listed in the workshop.
+- [ ] Confirm Admin Toolkit 0.9.0 and Dina Agent 0.4.0 store status before publish. `dina-app` manifests are at those versions, but the homepage still frames Admin Toolkit as "Next release · 0.9.0" and Dina Agent as "In development" with no version.
 - [x] Move every page onto one design system (`assets/dinalab.css`), replacing the three divergent palettes previously inlined per page.
 - [x] Add a light/dark theme with a nav toggle, a shared preference key, and no flash of the wrong theme on navigation.
 - [x] Apply the Japanese font stack site-wide; previously only the homepage and DinaSheet pages carried CJK fallbacks.

@@ -9,17 +9,22 @@ Public product pages:
 - [Dina Agent for Salesforce](apps/salesforce-agentic-bot/index.html), an independent assistant in development for Salesforce workflows.
 - [Common Tools](tools/index.html), a browser-only developer and administrator workbench.
 
-Six earlier-stage apps are listed on the homepage under "In the workshop" with a
-logo, one line, and an honest status. They have no product page yet, so their
-folders under `apps/` hold only `logo.svg`: `dinadevops-for-salesforce`,
-`orgdock-for-salesforce`, `salesforce-prompter`, and `force-connect-voice`.
-Dina Bot for Salesforce (iOS) has no icon drawn yet and falls back to a
-`.lab-mark` monogram; DinaSheet for Google Sheets reuses the DinaSheet mark.
+Eleven earlier-stage apps are listed on the homepage under "In the workshop" with
+a logo, one line, and an honest status. They have no product page yet, so their
+folders under `apps/` hold only a logo: `dinadevops-for-salesforce`,
+`dina-dock-for-salesforce`, `salesforce-prompter`, and `force-connect-voice` as
+`logo.svg`, and the iOS apps `dina`, `dina-3d`, `dina-bloom`, `dina-draw`, and
+`dina-snap` as `logo.png`. Dina Bot for Salesforce (iOS) has no icon drawn yet
+and falls back to a `.lab-mark` monogram; DinaSheet for Google Sheets reuses the
+DinaSheet mark.
 
 Logos are copied from the app sources in the sibling `dina-app` repository —
 `<App>/icon.svg` for the newer extensions, `<App>/logo.svg` for Admin Toolkit and
 Dina Agent, and `DinaSheet for Salesforce Store Assets/brand-mark.svg` for
-DinaSheet. Re-copy from there when a mark changes rather than editing in place.
+DinaSheet. The iOS marks come from each project's
+`Assets.xcassets/AppIcon.appiconset`, downscaled to 128px and corner-rounded by
+`scripts/build-ios-app-marks.py` because the store icons ship as hard squares.
+Re-copy from there when a mark changes rather than editing in place.
 
 ## Design system
 

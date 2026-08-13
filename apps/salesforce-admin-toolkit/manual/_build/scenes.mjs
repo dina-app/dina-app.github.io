@@ -14,13 +14,13 @@ export const SECTIONS = [
   },
   {
     id: "metadata-admin",
-    en: { title: "2. Metadata Admin for Salesforce", intro: "Browse the org's metadata in a source-style tree, inspect folders and files, search the loaded workspace, track local edits, and build package.xml selections." },
-    jp: { title: "2. Metadata Admin for Salesforce", intro: "組織のメタデータをソース形式のツリーで参照し、フォルダーやファイルの確認、ワークスペース内の検索、ローカル編集の追跡、package.xml の組み立てができます。" }
+    en: { title: "2. Metadata Admin for Salesforce", intro: "Browse the org's metadata in a compact source-style tree, inspect folders and files in a docked details column, search the loaded workspace, track local edits, and build package.xml selections. The visual tree starts directly at metadata folders such as <code>objects</code>, <code>classes</code>, and <code>flows</code>; the real <code>force-app/main/default</code> source paths remain unchanged." },
+    jp: { title: "2. Metadata Admin for Salesforce", intro: "組織のメタデータをコンパクトなソース形式ツリーで参照し、ドッキングされた詳細列でフォルダーやファイルを確認し、ワークスペース内の検索、ローカル編集の追跡、package.xml の組み立てができます。表示ツリーは <code>objects</code>、<code>classes</code>、<code>flows</code> などのメタデータフォルダーから直接始まりますが、実際の <code>force-app/main/default</code> ソースパスは変わりません。" }
   },
   {
     id: "force-sheet",
-    en: { title: "3. SheetD", intro: "A multi-tab spreadsheet for Salesforce data: browse objects and reports, run SOQL, inspect file details, edit supported object records, and review exact changed fields before a confirmed update or delete." },
-    jp: { title: "3. SheetD", intro: "Salesforce データのためのマルチタブ・スプレッドシート。オブジェクトやレポートの参照、SOQL の実行、ファイル詳細の確認、対応オブジェクトレコードの編集、確定更新・削除前の変更項目レビューができます。" }
+    en: { title: "3. SheetD", intro: "A multi-tab spreadsheet for Salesforce data: browse objects and reports, run SOQL, inspect file details, edit supported object records, and review exact changed fields before a confirmed update." },
+    jp: { title: "3. SheetD", intro: "Salesforce データのためのマルチタブ・スプレッドシート。オブジェクトやレポートの参照、SOQL の実行、ファイル詳細の確認、対応オブジェクトレコードの編集、確定更新前の変更項目レビューができます。" }
   },
   {
     id: "permission-explorer",
@@ -28,9 +28,17 @@ export const SECTIONS = [
     jp: { title: "4. Permission Explorer（権限エクスプローラー）", intro: "有効なオブジェクト・項目アクセスを、付与元のプロファイル、権限セット、権限セットグループまで追跡し、返されたアクセスメタデータで 2 ユーザーを比較できます。" }
   },
   {
-    id: "github-metadata-sync",
-    en: { title: "5. GitHub Metadata Sync", intro: "Configure and preflight governed metadata retrieval to an approved repository through an org-side bridge, Salesforce native credentials, and a branch-and-pull-request-only workflow." },
-    jp: { title: "5. GitHub Metadata Sync", intro: "組織側ブリッジ、Salesforce ネイティブ認証情報、ブランチとプルリクエスト限定のワークフローを通じて、承認済みリポジトリへの統制されたメタデータ取得を設定・事前検証します。" }
+    id: "org-comparison",
+    en: {
+      title: "5. Metadata org comparison",
+      intro: "Use <strong>Compare with</strong> in Metadata Admin to compare the current workspace with another Salesforce org already signed in to this browser. Filter the Org Differences panel by Different, Only here, or Only in the compared org; select files individually or together; and open a candidate to retrieve both source bodies and view actual changes side by side.",
+      callout: "<strong>Preview only in 0.9.0:</strong> Deploy Selected Preview and Pull Selected Preview are read-only review flows. They do not write metadata to either org."
+    },
+    jp: {
+      title: "5. メタデータ組織比較",
+      intro: "Metadata Admin の <strong>Compare with</strong> を使い、現在のワークスペースと、このブラウザーですでにログイン済みの別 Salesforce 組織を比較します。Org Differences パネルを Different、Only here、Only in the compared org で絞り込み、ファイルを個別またはまとめて選択できます。候補ファイルを開くと両組織のソース本文を取得し、実際の変更を左右に並べて確認できます。",
+      callout: "<strong>0.9.0 ではプレビューのみ：</strong>Deploy Selected Preview と Pull Selected Preview は読み取り専用の確認フローです。どちらの組織にもメタデータを書き込みません。"
+    }
   },
   {
     id: "org-review",
@@ -79,7 +87,7 @@ const S = (section, enAlt, enCap, jpAlt, jpCap) => ({ section, en: { alt: enAlt,
 
 export const SCENES = {
   // ── Getting started ──
-  "popup-apps": S("getting-started", "Popup Apps tab", "The Apps tab launches the six primary workspaces.", "ポップアップのアプリタブ", "アプリタブは 6 つの主要ワークスペースを起動します。"),
+  "popup-apps": S("getting-started", "Popup Apps tab", "The Apps tab launches the five primary workspaces.", "ポップアップのアプリタブ", "アプリタブは 5 つの主要ワークスペースを起動します。"),
   "popup-tools": S("getting-started", "Popup Tools tab", "The Tools tab lists every single-purpose page.", "ポップアップのツールタブ", "ツールタブには単機能ページが並びます。"),
   "popup-org": S("getting-started", "Popup Org tab", "The Org tab summarizes the connected org and user.", "ポップアップの組織タブ", "組織タブは接続中の組織とユーザーの概要を表示します。"),
   "popup-search": S("getting-started", "Popup metadata search", "Search metadata across the org by API name, label, or text.", "ポップアップのメタデータ検索", "API 参照名・ラベル・テキストで組織全体のメタデータを検索します。"),
@@ -193,10 +201,15 @@ export const RELEASE_NOTES = {
     title: "14. Release notes",
     intro: "Recent releases. No release has added new Chrome permissions, host permissions, remote code, telemetry, ads, or third-party data services. The full per-version history ships inside the extension's built-in manual.",
     versions: [
-      ["0.8.0 (2026-07-31)", [
-        "Added GitHub Metadata Sync with an org-bound setup draft, Salesforce native Named Credential definitions and OAuth, governed preflight, and branch-and-pull-request-only delivery.",
+      ["0.9.0 (2026-08-05)", [
+        "Flattened the visible Metadata Admin tree while preserving real source paths, and added compact rows, breadcrumb navigation, visible row actions, and a docked resizable details panel.",
+        "Added read-only comparison between signed-in Salesforce orgs with difference filters, tree badges, folder counts, and side-by-side source review.",
+        "Rebuilt the extension icon from the approved DinaLab gradient mark. No Chrome permission or browser host permission was added."
+      ]],
+      ["0.8.0 (2026-08-02)", [
         "Rebuilt SheetD on the DinaSheet engine so objects and reports open directly as editable data and exact pending field changes are reviewed before update.",
-        "Added report workbook fallback for results beyond Salesforce's report API row limit."
+        "Added report workbook fallback for results beyond Salesforce's report API row limit.",
+        "Removed the unreleased metadata-sync feature from the packaged extension, manual, privacy policy, and browser permissions."
       ]],
       ["0.7.0 (2026-07-18)", [
         "Added Permission Explorer for tracing effective object and field access to profiles, permission sets, and permission set groups."
@@ -224,10 +237,15 @@ export const RELEASE_NOTES = {
     title: "14. リリースノート",
     intro: "最近のリリースの概要です。いずれのリリースでも、新しい Chrome 権限・ホスト権限・リモートコード・テレメトリー・広告・サードパーティのデータサービスは追加されていません。完全なバージョン別履歴は内蔵マニュアルに同梱されています。",
     versions: [
-      ["0.8.0（2026-07-31）", [
-        "組織に紐づくセットアップドラフト、Salesforce ネイティブの Named Credential 定義と OAuth、統制された事前検証、ブランチとプルリクエスト限定配信を備えた GitHub Metadata Sync を追加。",
+      ["0.9.0（2026-08-05）", [
+        "実際のソースパスを保持したまま Metadata Admin の表示ツリーをフラット化し、コンパクトな行、パンくず、見える行アクション、ドッキング式でサイズ変更可能な詳細パネルを追加。",
+        "ログイン済み Salesforce 組織間の読み取り専用比較を追加。差分フィルター、ツリーバッジ、フォルダー別件数、左右並列のソース確認に対応。",
+        "承認済み DinaLab グラデーションマークから拡張機能アイコンを再構築。Chrome 権限やブラウザーホスト権限の追加はありません。"
+      ]],
+      ["0.8.0（2026-08-02）", [
         "SheetD を DinaSheet エンジンで再構築し、オブジェクトとレポートを編集可能なデータとして直接開き、更新前に保留中の項目変更を正確に確認できるようにしました。",
-        "Salesforce レポート API の行数上限を超える結果向けに、ワークブックフォールバックを追加。"
+        "Salesforce レポート API の行数上限を超える結果向けに、ワークブックフォールバックを追加。",
+        "未公開だった metadata-sync 機能を、パッケージ済み拡張機能、マニュアル、プライバシーポリシー、ブラウザー権限から削除。"
       ]],
       ["0.7.0（2026-07-18）", [
         "有効なオブジェクト・項目アクセスをプロファイル、権限セット、権限セットグループまで追跡する Permission Explorer を追加。"

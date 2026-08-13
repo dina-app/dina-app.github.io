@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dina Agent for Salesforce | Compatible with Salesforce</title>
-  <meta name="description" content="Dina Agent for Salesforce is an independent Chrome side-panel assistant in development for Salesforce workflows, backed by a Cloud Run function.">
+  <meta name="description" content="Dina Agent for Salesforce 0.4.0 is an independent Chrome side-panel assistant in development for Salesforce workflows, with its own metadata, spreadsheet, review, and permission workspaces, backed by a Cloud Run function.">
   <link rel="canonical" href="https://dina.jp/apps/salesforce-agentic-bot/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/dinalab.css">
@@ -26,9 +26,10 @@
 
     <header class="hero">
       <div>
+        <span class="release-pill">In development: 0.4.0</span>
         <h1>Dina Agent for Salesforce</h1>
         <p class="lead">
-          Dina Agent for Salesforce is an independent Chrome extension in development for Salesforce administrators and developers. It adds a side-panel assistant that can use selected Salesforce org context and route chat requests through a Cloud Run function backend.
+          Dina Agent for Salesforce is an independent Chrome extension in development for Salesforce administrators and developers. It adds a side-panel assistant that can use selected Salesforce org context, routes chat requests through a Cloud Run function backend, and now carries its own copy of the Admin Toolkit workspaces with a feature-specific AI panel inside each one.
         </p>
         <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
       </div>
@@ -39,11 +40,16 @@
       <section aria-labelledby="features-title">
         <h2 id="features-title">What You Can Do</h2>
         <ul>
-          <li>Open a Chrome side panel on Salesforce pages.</li>
+          <li>Open a Chrome side panel on supported Salesforce pages.</li>
           <li>Detect the active Salesforce tab title and URL.</li>
           <li>Read org and user summary information from the signed-in Salesforce org.</li>
           <li>Chat with an assistant backed by a Cloud Run function.</li>
           <li>Send selected Salesforce context with chat requests.</li>
+          <li>Let the assistant use compact live object context, pinned Metadata API schema context, metadata text search, and read-only SOQL query-plan validation.</li>
+          <li>Work in the extension's own copy of Metadata Admin, SheetD, Org Review, Object Schema, and Permission Explorer, plus a Query Data Bot for multi-tab SOQL sheets.</li>
+          <li>Use the REST API, Data Export, Document Folders, Run Apex, Setup Audit Trail, API Usage, Login History, Event Logs, and manual tools.</li>
+          <li>Ask the advisory Dina AI panel inside any copied app or tool, with bounded visible context that can be turned off and is only sent after Send is pressed.</li>
+          <li>Sign in once with a Google account, which owns the trial allowance and aggregate AI usage across every Salesforce org.</li>
           <li>Keep the OpenAI API key out of the browser by storing it in the Cloud Run function environment.</li>
         </ul>
       </section>
@@ -53,18 +59,19 @@
         <p>Dina Agent for Salesforce separates the browser extension from the OpenAI transport layer.</p>
         <ol>
           <li>The extension reads the active Salesforce org session in the browser.</li>
-          <li>The side-panel chat sends chat history, selected Salesforce context, current tab context, and extension tool results to the configured Cloud Run function endpoint.</li>
+          <li>The side-panel chat sends chat history, selected Salesforce context, current tab context, and extension tool results to the configured Cloud Run function endpoint, together with the signed-in Google account's access token.</li>
           <li>Salesforce session IDs and authentication credentials are not included in AI chat requests. Salesforce API tools run inside the extension.</li>
-          <li>The Cloud Run function calls OpenAI with its function-level <code>OPENAI_API_KEY</code>.</li>
+          <li>The Cloud Run function verifies the Google token and reserves the account's Send and cost allowance before calling OpenAI with its function-level <code>OPENAI_API_KEY</code>.</li>
           <li>The Cloud Run function returns the assistant's response to the extension.</li>
         </ol>
+        <p>Firestore holds the account record and aggregate Send, token, and cost counters. It does not hold Salesforce sessions, Salesforce records, prompts, or transcripts.</p>
       </section>
 
       <section aria-labelledby="configuration-title">
         <h2 id="configuration-title">Configuration</h2>
-        <p>Set the Cloud Run function URL in the extension's <code>api.js</code>:</p>
+        <p>Set the Cloud Run function URL in the extension's <code>api.js</code>, and match its hostname in <code>manifest.json</code>:</p>
         <pre><code>export const GCF_ENDPOINT_URL = "https://YOUR_REGION-YOUR_PROJECT.cloudfunctions.net/agenticBot";</code></pre>
-        <p>Then load the extension locally:</p>
+        <p>Create a Google OAuth client of type <strong>Chrome extension</strong> for the extension's ID, and put its public client ID in <code>manifest.json</code> and in the backend's <code>GOOGLE_OAUTH_CLIENT_ID</code>. Then load the extension locally:</p>
         <ol>
           <li>Open <code>chrome://extensions</code>.</li>
           <li>Enable Developer mode.</li>
@@ -78,22 +85,23 @@
         <h2 id="gcf-title">Cloud Run Function</h2>
         <p>Deploy the Cloud Run function broker from:</p>
         <pre><code>gcf/agentic-bot/index.js</code></pre>
-        <p>Required environment variable: <code>OPENAI_API_KEY</code>.</p>
-        <p>Optional runtime settings: <code>OPENAI_MODEL</code> defaults to <code>gpt-5-mini</code>; <code>OPENAI_MAX_OUTPUT_TOKENS</code> defaults to <code>1000</code>.</p>
+        <p>Required environment variable: <code>OPENAI_API_KEY</code>. Required account configuration: <code>GOOGLE_OAUTH_CLIENT_ID</code>.</p>
+        <p>Optional runtime settings: <code>OPENAI_MODEL</code>, <code>OPENAI_MAX_OUTPUT_TOKENS</code>, whose default of <code>1000</code> is also its hard maximum, and <code>OPENAI_COMPACT_THRESHOLD</code>.</p>
       </section>
 
       <section aria-labelledby="privacy-title">
         <h2 id="privacy-title">Privacy</h2>
         <p>
-          The extension stores UI settings, chat history, previous response IDs, and retrieved Salesforce metadata locally in the browser. AI chat requests send chat messages, selected Salesforce context, current tab context, and extension tool results to the configured Cloud Run function endpoint, but do not include Salesforce session IDs or authentication credentials.
+          The extension stores UI settings, chat history, previous response IDs, workspace state, retrieved Salesforce schema metadata, query sheets, pending metadata edits, and bounded operation receipts locally in the browser. AI chat requests send chat messages, selected Salesforce context, optional bounded visible context, current tab context, and extension tool results to the configured Cloud Run function endpoint, but do not include Salesforce session IDs, instance URLs, access tokens, or authorization headers.
         </p>
+        <p>Signing in identifies the account by its Google email address. The backend keeps that account record and aggregate usage counters in Firestore; it does not keep Salesforce sessions, Salesforce records, prompts, or transcripts.</p>
         <p>The extension does not store an OpenAI API key in the browser and does not call OpenAI directly from the extension.</p>
         <p>Read the full policy: <a href="PRIVACY_POLICY.html">Privacy Policy</a></p>
       </section>
 
       <section aria-labelledby="status-title">
         <h2 id="status-title">Status</h2>
-        <p>Dina Agent for Salesforce is currently in development and is not publicly released.</p>
+        <p>Dina Agent for Salesforce is at version 0.4.0. It is currently in development and is not publicly released. The current build starts a limited trial allowance at the first AI Send; billing and paid plans are not part of this release.</p>
       </section>
 
       <p class="notice">Salesforce is a trademark of Salesforce, Inc. Dina Agent for Salesforce is not affiliated with, endorsed by, or sponsored by Salesforce. The OpenAI name identifies the configured AI service; no affiliation with or endorsement by OpenAI is implied.</p>

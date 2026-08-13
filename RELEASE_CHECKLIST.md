@@ -1,6 +1,6 @@
 # Website release checklist
 
-Prepared: July 31, 2026
+Prepared: July 31, 2026. Last synced with `dina-app`: August 13, 2026.
 
 ## Release scope
 
@@ -14,11 +14,18 @@ Prepared: July 31, 2026
 ## Completed in this release
 
 - [x] Replace the Admin Toolkit and Dina Agent raster logos with the current vector marks from `dina-app`, and drop the duplicate `assets/salesforce-agentic-bot-icon.jpg` reference.
-- [x] Add an "In the workshop" section to the homepage listing eleven earlier-stage apps with logo, platform, one line, and status.
-- [ ] Confirm the new homepage copy reads correctly in Japanese; the marketing strings are newly written, unlike the manual translations. The four iOS app descriptions are the newest and have had the least review.
-- [ ] Confirm each workshop status is still accurate at publish time: DinaDevOps beta 0.1.0, Dina Dock in development 0.1.0, Salesforce Prompter in development, Force Connect Voice prototype, Dina Bot early build, DinaSheet for Google Sheets in development, Dina Bloom early build 0.1.0, Dina in development 0.3.0, Dina 3D / Dina Draw / Dina Snap early build 0.1.0.
+- [x] Add an "In the workshop" section to the homepage listing thirteen earlier-stage apps with logo, platform, one line, and status.
+- [x] Sync every version, status, and description on the homepage and product pages with the `dina-app` sources as of August 13, 2026: Admin Toolkit 0.9.1, DinaSheet 0.3.2, Dina Agent 0.4.0, Force Connect Voice 0.1.1, Salesforce Prompter 0.1.0, and the reworked Dina Dock and Dina Bloom descriptions.
+- [x] Add the two new iOS apps from `dina-app` to the workshop grid: Dina Agent for iOS (text-first Mobile SDK companion) and Dina Shiori (three keepers, three books).
+- [ ] Confirm the new homepage copy reads correctly in Japanese; the marketing strings are newly written, unlike the manual translations. The iOS app descriptions are the newest and have had the least review, in particular the Dina Agent for iOS and Dina Shiori entries added on August 13.
+- [ ] Confirm each workshop status is still accurate at publish time: DinaDevOps beta 0.1.0, Dina Dock in development 0.1.0, Salesforce Prompter in development 0.1.0, Force Connect Voice prototype 0.1.1, Dina Bot early build 0.1.0, Dina Agent for iOS early build 0.1.0, DinaSheet for Google Sheets in development, Dina Bloom early build 0.1.0, Dina Shiori early build 0.1.0, Dina in development 0.3.0, Dina 3D / Dina Draw / Dina Snap early build 0.1.0.
+- [ ] Decide whether Dina Bot for Salesforce and Dina Agent for iOS should both stay listed. They are separate projects in `dina-app` — one voice-first, one text-first — and both are mobile companions to the same extension.
 - [x] Decide whether the four consumer iOS apps (Dina tutor, Dina 3D, Dina Draw, Dina Snap) should appear on dina.jp or stay off a Salesforce-focused site. Decided: all four are listed in the workshop.
-- [ ] Confirm Admin Toolkit 0.9.0 and Dina Agent 0.4.0 store status before publish. `dina-app` manifests are at those versions, but the homepage still frames Admin Toolkit as "Next release · 0.9.0" and Dina Agent as "In development" with no version.
+- [ ] Confirm Admin Toolkit 0.9.1 and DinaSheet 0.3.2 store status before publish. Both are validated release candidates in `dina-app` awaiting upload, and the pages frame them as the next release; the published Store items are still 0.9.0 and the earlier DinaSheet build.
+- [x] Correct the Admin Toolkit product page against the 0.9.1 source: Metadata Admin is view-only rather than locally editable, the extension requests only `cookies` and `storage`, and Org Differences is now a sixth app.
+- [x] Rewrite the Dina Agent product page for 0.4.0, which added the copied toolkit workspaces, the per-feature advisory AI panel, and Google account sign-in with backend-enforced usage allowance.
+- [x] Reconcile `manual/_build` with the published manual. The generator had drifted back to 0.8.0 content — section 5 was still GitHub Metadata Sync and the 0.9.0 release notes were missing — so the documented regenerate command would have reverted the manual. It now reproduces the published pages exactly, and section intros can carry a callout.
+- [ ] Give the manual a 0.9.1 pass once that release ships: Org Differences as its own app chapter, Metadata Admin change-set retrieval, a six-app popup capture, and the 0.9.1 release notes. The manual currently documents 0.9.0, which is what the Store serves.
 - [x] Move every page onto one design system (`assets/dinalab.css`), replacing the three divergent palettes previously inlined per page.
 - [x] Add a light/dark theme with a nav toggle, a shared preference key, and no flash of the wrong theme on navigation.
 - [x] Apply the Japanese font stack site-wide; previously only the homepage and DinaSheet pages carried CJK fallbacks.
@@ -40,10 +47,10 @@ Prepared: July 31, 2026
 
 ## Required external actions before publishing
 
-- [ ] Submit the DinaSheet v0.2.0 package, store icon, promotional tiles, and screenshots to the Chrome Web Store.
+- [ ] Submit the DinaSheet v0.3.2 package, store icon, promotional tiles, and screenshots to the Chrome Web Store.
 - [ ] Confirm the DinaSheet Store privacy declarations match its current permissions, local update receipts, and published privacy policy.
 - [x] Keep the extension manifest and user-visible extension UI named `Admin Toolkit for Salesforce` in the extension source repository.
-- [ ] Confirm the Chrome Web Store item remains named `Admin Toolkit for Salesforce` and update its description and screenshots for version 0.8.0.
+- [ ] Confirm the Chrome Web Store item remains named `Admin Toolkit for Salesforce` and update its description and screenshots for version 0.9.1.
 - [ ] Confirm the Chrome Web Store privacy declarations exactly match the current extension behavior and the published privacy policy.
 - [ ] Confirm the Store single-purpose statement describes one narrow focus area: Salesforce administration and development workflows.
 - [ ] Verify the developer support email and privacy-policy URL in the Chrome Web Store dashboard.

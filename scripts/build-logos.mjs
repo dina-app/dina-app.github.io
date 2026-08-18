@@ -11,20 +11,30 @@
 //
 // Edit this file rather than the SVGs — the SVGs are output.
 
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 // ---------------------------------------------------------------------------
-// Master geometry, in a 256 box.
+// Master geometry.
 // ---------------------------------------------------------------------------
 
-// Open bracket: the gap at the top right is what makes the frame read as a mark
-// rather than a plain rounded square, and it doubles as the slot for the glyph.
-const FRAME = 'M150 44H88a40 40 0 0 0-40 40v80a40 40 0 0 0 40 40h80a40 40 0 0 0 40-40v-46';
-const LETTER = 'M88 76h34a49 49 0 0 1 0 98H88Z';
+// The homepage SVG is the source of truth. App marks reuse its exact frame and
+// bowl paths at 4x scale, so changing the master shape updates every product
+// without manually copying path data into this generator.
+const masterFile = join(root, 'assets/dinalab-logo.svg');
+const masterSource = await readFile(masterFile, 'utf8');
+
+function masterPath(id) {
+  const match = masterSource.match(new RegExp('<path\\s+id="' + id + '"\\s+d="([^"]+)"'));
+  if (!match) throw new Error('Missing #' + id + ' path in assets/dinalab-logo.svg');
+  return match[1];
+}
+
+const FRAME = masterPath('frame');
+const LETTER = masterPath('bowl');
 
 // Four-point star with the control points collapsed onto the centre, which is
 // what gives the concave waist.
@@ -130,21 +140,20 @@ const GLYPHS = {
       { d: `${dot(190, 36)}${dot(181, 66)}${dot(199, 66)}`, scale: 1.4 },
     ],
   },
+
+  phone: {
+    strokes: [
+      { d: 'M174 36h32a8 8 0 0 1 8 8v42a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8V44a8 8 0 0 1 8-8Z', scale: 0.85 },
+      { d: 'M180 46h20M184 82h12', scale: 0.7 },
+    ],
+  },
 };
 
 // ---------------------------------------------------------------------------
-// The marks. Order matches the homepage: brand, product cards, then workshop.
+// The marks. Order matches the homepage: product cards, then business roadmap.
 // ---------------------------------------------------------------------------
 
 const MARKS = [
-  {
-    file: 'assets/dinalab-logo.svg',
-    title: 'DinaLab',
-    desc: 'A neon blue letter D inside an open bracket frame, with two sparkles in the gap.',
-    palette: 'brand',
-    glyph: 'sparkles',
-    transparent: true,
-  },
   {
     file: 'apps/salesforce-admin-toolkit/logo.svg',
     title: 'Admin Toolkit for Salesforce',
@@ -174,8 +183,8 @@ const MARKS = [
     glyph: 'loop',
   },
   {
-    file: 'apps/orgdock-for-salesforce/logo.svg',
-    title: 'OrgDock for Salesforce',
+    file: 'apps/dina-dock-for-salesforce/logo.svg',
+    title: 'Dina Dock for Salesforce',
     desc: 'The DinaLab neon D in sky blue, with a dock of three lights in the frame gap.',
     palette: 'sky',
     glyph: 'dock',
@@ -202,6 +211,14 @@ const MARKS = [
     palette: 'violet',
     glyph: 'bot',
   },
+  // Shares Dina Agent's violet: it is the same assistant on iOS.
+  {
+    file: 'apps/dina-agent-ios/logo.svg',
+    title: 'Dina Agent for iOS',
+    desc: 'The DinaLab neon D in violet, with a phone in the frame gap.',
+    palette: 'violet',
+    glyph: 'phone',
+  },
   // Shares DinaSheet's emerald: same product, different host.
   {
     file: 'apps/dinasheet-for-google-sheets/logo.svg',
@@ -219,14 +236,21 @@ const round = (n) => Number(n.toFixed(2));
 function render({ title, desc, palette, glyph, transparent = false }) {
   const { neon, core } = PALETTES[palette];
   const { strokes = [], fills = [] } = GLYPHS[glyph];
-  const shapes = [{ d: FRAME, scale: 1 }, { d: LETTER, scale: 1 }, ...strokes];
+  const shapes = [
+    { d: FRAME, scale: 1, master: true },
+    { d: LETTER, scale: 1, master: true },
+    ...strokes,
+  ];
   const passes = transparent ? TRANSPARENT_PASSES : PASSES;
   const sparkleBloom = transparent ? 'url(#markBloom)' : 'url(#bloom)';
   const viewBox = transparent ? '18 18 220 220' : '0 0 256 256';
 
   const layers = passes.map(({ width, stroke, opacity, filter }) => {
     const paths = shapes
-      .map(({ d, scale }) => `      <path d="${d}" stroke-width="${round(width * scale)}"/>`)
+      .map(({ d, scale, master }) => {
+        const masterAttrs = master ? ' transform="scale(4)" vector-effect="non-scaling-stroke"' : '';
+        return `      <path d="${d}" stroke-width="${round(width * scale)}"${masterAttrs}/>`;
+      })
       .join('\n');
     return (
       `    <g stroke="${stroke.replace('var(--core)', core)}" opacity="${opacity}"${filter}>\n` +
@@ -252,6 +276,7 @@ function render({ title, desc, palette, glyph, transparent = false }) {
 `;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="${viewBox}" role="img" aria-labelledby="t d">
+  <!-- Generated from assets/dinalab-logo.svg by scripts/build-logos.mjs. -->
   <title id="t">${title}</title>
   <desc id="d">${desc}</desc>
   <defs>

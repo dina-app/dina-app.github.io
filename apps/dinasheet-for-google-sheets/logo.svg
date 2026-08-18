@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="t d">
   <!-- Generated from assets/dinalab-logo.svg by scripts/build-logos.mjs. -->
-  <title id="t">DinaSheet for Salesforce</title>
-  <desc id="d">The DinaLab neon D in emerald, with a spreadsheet grid in the frame gap.</desc>
+  <title id="t">DinaSheet for Google Sheets</title>
+  <desc id="d">The DinaLab neon D in emerald, with a sheet document in the frame gap.</desc>
   <defs>
     <linearGradient id="neon" x1="40" y1="216" x2="216" y2="40" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#a8ffd8"/>
@@ -29,20 +29,20 @@
     <g stroke="url(#neon)" opacity=".55" filter="url(#bloom)">
       <path d="M36 12H19A13 13 0 0 0 6 25v20a13 13 0 0 0 13 13h18a13 13 0 0 0 13-13V32" stroke-width="12" transform="scale(4)" vector-effect="non-scaling-stroke"/>
       <path d="M20 23v24h7a12 12 0 0 0 0-24Z" stroke-width="12" transform="scale(4)" vector-effect="non-scaling-stroke"/>
-      <path d="M174 40h32a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8V48a8 8 0 0 1 8-8Z" stroke-width="10.2"/>
-      <path d="M190 40v48M166 64h48" stroke-width="8.4"/>
+      <path d="M172 38h22l16 16v28a8 8 0 0 1-8 8h-30a8 8 0 0 1-8-8V46a8 8 0 0 1 8-8Z" stroke-width="10.2"/>
+      <path d="M176 66h26M176 78h18" stroke-width="8.4"/>
     </g>
     <g stroke="url(#neon)" opacity="1">
       <path d="M36 12H19A13 13 0 0 0 6 25v20a13 13 0 0 0 13 13h18a13 13 0 0 0 13-13V32" stroke-width="7" transform="scale(4)" vector-effect="non-scaling-stroke"/>
       <path d="M20 23v24h7a12 12 0 0 0 0-24Z" stroke-width="7" transform="scale(4)" vector-effect="non-scaling-stroke"/>
-      <path d="M174 40h32a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8V48a8 8 0 0 1 8-8Z" stroke-width="5.95"/>
-      <path d="M190 40v48M166 64h48" stroke-width="4.9"/>
+      <path d="M172 38h22l16 16v28a8 8 0 0 1-8 8h-30a8 8 0 0 1-8-8V46a8 8 0 0 1 8-8Z" stroke-width="5.95"/>
+      <path d="M176 66h26M176 78h18" stroke-width="4.9"/>
     </g>
     <g stroke="#e6fff4" opacity=".95">
       <path d="M36 12H19A13 13 0 0 0 6 25v20a13 13 0 0 0 13 13h18a13 13 0 0 0 13-13V32" stroke-width="2.4" transform="scale(4)" vector-effect="non-scaling-stroke"/>
       <path d="M20 23v24h7a12 12 0 0 0 0-24Z" stroke-width="2.4" transform="scale(4)" vector-effect="non-scaling-stroke"/>
-      <path d="M174 40h32a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8V48a8 8 0 0 1 8-8Z" stroke-width="2.04"/>
-      <path d="M190 40v48M166 64h48" stroke-width="1.68"/>
+      <path d="M172 38h22l16 16v28a8 8 0 0 1-8 8h-30a8 8 0 0 1-8-8V46a8 8 0 0 1 8-8Z" stroke-width="2.04"/>
+      <path d="M176 66h26M176 78h18" stroke-width="1.68"/>
     </g>
   </g>
 </svg>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-title-en="Salesforce Org Review Before Release | DinaLab" data-title-ja="Salesforce リリース前の組織レビュー | DinaLab">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salesforce Org Review Before Release | DinaLab</title>
+  <meta name="description" content="A practical guide to reviewing Salesforce limits, security, automation, permissions, and metadata evidence before a release.">
+  <link rel="canonical" href="https://dina.jp/blog/salesforce-org-review-before-release/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/dinalab.css">
+  <script src="../../assets/site-theme.js"></script>
+</head>
+<body class="article-page">
+  <main class="article-shell">
+    <nav class="nav" aria-label="Page navigation" data-aria-en="Page navigation" data-aria-ja="ページナビゲーション">
+      <a class="brand" href="../../"><img class="brand-mark" src="../../assets/dinalab-logo-light.png" alt="" width="36" height="36"><span>DinaLab</span></a>
+      <span class="nav-actions"><a href="../" data-en="All guides" data-ja="すべてのガイド">All guides</a><button type="button" id="siteLangToggle" class="lang-toggle" data-language-toggle aria-label="View in Japanese" data-aria-en="View in Japanese" data-aria-ja="英語で表示"><span class="lang-label">日本語</span></button><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"></path></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg></button></span>
+    </nav>
+
+    <header class="article-header">
+      <p class="eyebrow" data-en="Release governance" data-ja="リリース管理">Release governance</p>
+      <h1 data-en="A practical Salesforce org review before release" data-ja="リリース前に行う実践的な Salesforce 組織レビュー">A practical Salesforce org review before release</h1>
+      <p class="article-meta" data-en="August 18, 2026 · 8 minute read" data-ja="2026年8月18日 · 読了 8 分">August 18, 2026 · 8 minute read</p>
+      <p class="article-lead" data-en="A release review should answer one business question: do we understand the change, the target org, and the recovery path well enough to proceed? This guide turns that question into a compact, repeatable evidence pack." data-ja="リリースレビューで答えるべき業務上の問いは 1 つです。変更内容、対象組織、復旧手順を十分に理解したうえで実行できるか。このガイドでは、その問いをコンパクトで再現可能な証跡パックに変えます。">A release review should answer one business question: do we understand the change, the target org, and the recovery path well enough to proceed? This guide turns that question into a compact, repeatable evidence pack.</p>
+    </header>
+
+    <article class="article-content">
+      <section>
+        <h2 data-en="1. Freeze the release scope first" data-ja="1. 最初にリリース範囲を固定する">1. Freeze the release scope first</h2>
+        <p data-en="Write down the source org, target org, release owner, planned window, metadata types, data changes, integrations, and rollback owner. A review cannot be reliable while the package is still changing." data-ja="ソース組織、対象組織、リリース責任者、予定時間、メタデータタイプ、データ変更、連携、ロールバック責任者を記録します。パッケージが変化し続けている状態では、信頼できるレビューはできません。">Write down the source org, target org, release owner, planned window, metadata types, data changes, integrations, and rollback owner. A review cannot be reliable while the package is still changing.</p>
+        <div class="article-callout"><p data-en="Treat “no data change” as an explicit statement, not an assumption. The same applies to permissions, scheduled jobs, integration endpoints, and destructive changes." data-ja="「データ変更なし」は推測ではなく、明示的な確認事項として扱います。権限、スケジュールジョブ、連携先、削除変更も同様です。">Treat “no data change” as an explicit statement, not an assumption. The same applies to permissions, scheduled jobs, integration endpoints, and destructive changes.</p></div>
+      </section>
+
+      <section>
+        <h2 data-en="2. Capture the target-org baseline" data-ja="2. 対象組織の基準状態を記録する">2. Capture the target-org baseline</h2>
+        <p data-en="Collect evidence close to the release window so the review represents the org that will actually receive the change. At minimum, review the following areas." data-ja="実際に変更を受け取る組織の状態を反映するため、リリース時間に近い時点で証跡を取得します。最低限、次の領域を確認します。">Collect evidence close to the release window so the review represents the org that will actually receive the change. At minimum, review the following areas.</p>
+        <ul>
+          <li data-en="API, storage, and platform limits that the release may consume." data-ja="リリースによって消費される可能性がある API、ストレージ、プラットフォーム制限。">API, storage, and platform limits that the release may consume.</li>
+          <li data-en="Security settings, login policy, health-check findings, and recent authentication failures." data-ja="セキュリティ設定、ログインポリシー、ヘルスチェック結果、最近の認証失敗。">Security settings, login policy, health-check findings, and recent authentication failures.</li>
+          <li data-en="Active flows, triggers, scheduled jobs, and automation that touch the same objects." data-ja="同じオブジェクトを扱う有効なフロー、トリガー、スケジュールジョブ、自動化。">Active flows, triggers, scheduled jobs, and automation that touch the same objects.</li>
+          <li data-en="Profiles, permission sets, permission set groups, and field-level access affected by the change." data-ja="変更の影響を受けるプロファイル、権限セット、権限セットグループ、項目レベルアクセス。">Profiles, permission sets, permission set groups, and field-level access affected by the change.</li>
+          <li data-en="Recent setup audit trail entries that could explain unexpected differences." data-ja="予期しない差分の原因になりうる最近の設定変更履歴。">Recent setup audit trail entries that could explain unexpected differences.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 data-en="3. Compare meaning, not only file counts" data-ja="3. ファイル数だけでなく意味を比較する">3. Compare meaning, not only file counts</h2>
+        <p data-en="An org comparison should separate expected release differences, accepted environment-specific differences, and unexplained drift. A large diff is not automatically dangerous, and a one-line permission change is not automatically safe." data-ja="組織比較では、想定されたリリース差分、承認済みの環境固有差分、説明できないドリフトを分けます。差分が大きいから危険とは限らず、権限の 1 行変更だから安全とも限りません。">An org comparison should separate expected release differences, accepted environment-specific differences, and unexplained drift. A large diff is not automatically dangerous, and a one-line permission change is not automatically safe.</p>
+        <p data-en="For every unexplained difference, assign an owner and choose one action: include it, exclude it, document it as intentional, or stop the release until it is understood." data-ja="説明できない差分ごとに担当者を決め、「含める」「除外する」「意図した差分として記録する」「理解できるまでリリースを止める」のいずれかを選びます。">For every unexplained difference, assign an owner and choose one action: include it, exclude it, document it as intentional, or stop the release until it is understood.</p>
+      </section>
+
+      <section>
+        <h2 data-en="4. Turn findings into release decisions" data-ja="4. 結果をリリース判断に変える">4. Turn findings into release decisions</h2>
+        <p data-en="Classify each finding by business impact, likelihood, detectability, owner, and required action. Then define the go/no-go threshold before the meeting. This prevents the loudest person in the room from becoming the release policy." data-ja="各指摘を業務影響、発生可能性、検出可能性、担当者、必要な対応で分類します。会議の前に Go／No-Go の基準を定義することで、その場の声の大きさがリリース方針になることを防ぎます。">Classify each finding by business impact, likelihood, detectability, owner, and required action. Then define the go/no-go threshold before the meeting. This prevents the loudest person in the room from becoming the release policy.</p>
+        <div class="article-checklist">
+          <h3 data-en="Minimum sign-off pack" data-ja="最小限の承認パック">Minimum sign-off pack</h3>
+          <ul>
+            <li data-en="Frozen release manifest and named owners." data-ja="固定されたリリース一覧と担当者。">Frozen release manifest and named owners.</li>
+            <li data-en="Timestamped target-org baseline evidence." data-ja="日時付きの対象組織基準証跡。">Timestamped target-org baseline evidence.</li>
+            <li data-en="Source-to-target differences with a disposition for every unexplained item." data-ja="説明できない項目すべてに対応方針を付けたソース・対象組織差分。">Source-to-target differences with a disposition for every unexplained item.</li>
+            <li data-en="Validation results, business smoke tests, and monitoring owner." data-ja="検証結果、業務スモークテスト、監視担当者。">Validation results, business smoke tests, and monitoring owner.</li>
+            <li data-en="Rollback trigger, rollback steps, and authority to invoke them." data-ja="ロールバック条件、手順、実行権限。">Rollback trigger, rollback steps, and authority to invoke them.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2 data-en="Where the tools fit" data-ja="ツールの役割">Where the tools fit</h2>
+        <p data-en="Admin Toolkit for Salesforce can help gather read-only org review evidence, inspect permissions, explore schema, compare org metadata, and export supporting material. It does not replace release ownership, business acceptance, live validation, or rollback authority." data-ja="Admin Toolkit for Salesforce は、読み取り専用の組織レビュー証跡、権限確認、スキーマ探索、組織メタデータ比較、資料出力を支援します。ただし、リリース責任、業務受け入れ、実環境検証、ロールバック権限の代わりにはなりません。">Admin Toolkit for Salesforce can help gather read-only org review evidence, inspect permissions, explore schema, compare org metadata, and export supporting material. It does not replace release ownership, business acceptance, live validation, or rollback authority.</p>
+        <p><a class="text-link" href="../../apps/salesforce-admin-toolkit/" data-en="Explore Admin Toolkit for Salesforce" data-ja="Admin Toolkit for Salesforce の詳細">Explore Admin Toolkit for Salesforce</a></p>
+      </section>
+
+      <p class="article-next"><a class="text-link" href="../safer-salesforce-bulk-data-updates/" data-en="Next guide: safer bulk data updates" data-ja="次のガイド：安全な一括データ更新">Next guide: safer bulk data updates</a></p>
+    </article>
+  </main>
+  <script src="../../assets/page-language.js"></script>
+</body>
+</html>

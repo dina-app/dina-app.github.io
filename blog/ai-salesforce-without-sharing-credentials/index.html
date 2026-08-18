@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-title-en="AI with Salesforce Without Sharing Credentials | DinaLab" data-title-ja="Salesforce 認証情報を共有せずに AI を使う | DinaLab">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI with Salesforce Without Sharing Credentials | DinaLab</title>
+  <meta name="description" content="A business architecture guide for using AI with Salesforce while keeping session credentials out of chat and preserving user confirmation.">
+  <link rel="canonical" href="https://dina.jp/blog/ai-salesforce-without-sharing-credentials/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/dinalab.css">
+  <script src="../../assets/site-theme.js"></script>
+</head>
+<body class="article-page">
+  <main class="article-shell">
+    <nav class="nav" aria-label="Page navigation" data-aria-en="Page navigation" data-aria-ja="ページナビゲーション">
+      <a class="brand" href="../../"><img class="brand-mark" src="../../assets/dinalab-logo-light.png" alt="" width="36" height="36"><span>DinaLab</span></a>
+      <span class="nav-actions"><a href="../" data-en="All guides" data-ja="すべてのガイド">All guides</a><button type="button" id="siteLangToggle" class="lang-toggle" data-language-toggle aria-label="View in Japanese" data-aria-en="View in Japanese" data-aria-ja="英語で表示"><span class="lang-label">日本語</span></button><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"></path></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg></button></span>
+    </nav>
+
+    <header class="article-header">
+      <p class="eyebrow" data-en="AI governance" data-ja="AI ガバナンス">AI governance</p>
+      <h1 data-en="How to use AI with Salesforce without sharing session credentials" data-ja="Salesforce のセッション認証情報を共有せずに AI を使う方法">How to use AI with Salesforce without sharing session credentials</h1>
+      <p class="article-meta" data-en="August 18, 2026 · 9 minute read" data-ja="2026年8月18日 · 読了 9 分">August 18, 2026 · 9 minute read</p>
+      <p class="article-lead" data-en="The safest useful architecture separates system access from model reasoning. Salesforce credentials stay with the component that needs them, while the AI receives only the bounded context required to answer the user's question." data-ja="安全で実用的な設計では、システムアクセスとモデルの推論を分離します。Salesforce 認証情報は必要なコンポーネントに留め、AI にはユーザーの質問に答えるために必要な限定コンテキストだけを渡します。">The safest useful architecture separates system access from model reasoning. Salesforce credentials stay with the component that needs them, while the AI receives only the bounded context required to answer the user's question.</p>
+    </header>
+
+    <article class="article-content">
+      <section>
+        <h2 data-en="Start with four separate responsibilities" data-ja="4 つの責任を分離する">Start with four separate responsibilities</h2>
+        <ol>
+          <li data-en="Salesforce session holder: the browser extension or approved client that already has the signed-in session." data-ja="Salesforce セッション保持者：ログイン済みセッションを持つブラウザー拡張機能または承認済みクライアント。">Salesforce session holder: the browser extension or approved client that already has the signed-in session.</li>
+          <li data-en="Salesforce tool executor: the local component that performs allowlisted API requests and returns bounded results." data-ja="Salesforce ツール実行者：許可された API リクエストを行い、限定された結果を返すローカルコンポーネント。">Salesforce tool executor: the local component that performs allowlisted API requests and returns bounded results.</li>
+          <li data-en="AI transport: the backend that authenticates the product account, applies limits, and calls the configured AI service." data-ja="AI 通信：製品アカウントを認証し、制限を適用し、設定済み AI サービスを呼び出すバックエンド。">AI transport: the backend that authenticates the product account, applies limits, and calls the configured AI service.</li>
+          <li data-en="Human decision maker: the user who chooses context, presses Send, reviews output, and confirms consequential actions." data-ja="人間の意思決定者：コンテキストを選び、Send を押し、出力を確認し、重要な操作を承認するユーザー。">Human decision maker: the user who chooses context, presses Send, reviews output, and confirms consequential actions.</li>
+        </ol>
+        <p data-en="Combining these responsibilities into one opaque request makes it difficult to prove where credentials travel, which data the model saw, and who authorized an action." data-ja="これらの責任を 1 つの不透明なリクエストにまとめると、認証情報の送信先、モデルが見たデータ、操作を承認した人物を証明しにくくなります。">Combining these responsibilities into one opaque request makes it difficult to prove where credentials travel, which data the model saw, and who authorized an action.</p>
+      </section>
+
+      <section>
+        <h2 data-en="Keep credentials out of the chat payload" data-ja="チャットペイロードから認証情報を除外する">Keep credentials out of the chat payload</h2>
+        <p data-en="Salesforce session IDs, access tokens, cookies, authorization headers, connected-app secrets, and refresh tokens are capabilities, not context. The model does not need them to explain a permission path, summarize a schema, or reason over a query result." data-ja="Salesforce セッション ID、アクセストークン、Cookie、認証ヘッダー、Connected App シークレット、更新トークンはコンテキストではなく権限そのものです。権限経路の説明、スキーマ要約、クエリ結果の分析にモデルはそれらを必要としません。">Salesforce session IDs, access tokens, cookies, authorization headers, connected-app secrets, and refresh tokens are capabilities, not context. The model does not need them to explain a permission path, summarize a schema, or reason over a query result.</p>
+        <div class="article-callout"><p data-en="A backend log, analytics event, error report, or model tool argument is still a transmission path. Credential exclusion must happen before every backend and model boundary, not only in the visible chat text." data-ja="バックエンドログ、分析イベント、エラーレポート、モデルのツール引数も送信経路です。認証情報の除外は、表示されるチャット本文だけでなく、すべてのバックエンド境界とモデル境界の前で行う必要があります。">A backend log, analytics event, error report, or model tool argument is still a transmission path. Credential exclusion must happen before every backend and model boundary, not only in the visible chat text.</p></div>
+      </section>
+
+      <section>
+        <h2 data-en="Send bounded business context" data-ja="限定された業務コンテキストを送る">Send bounded business context</h2>
+        <p data-en="Useful context may include the user's question, selected object and field definitions, a small set of relevant metadata matches, compact org facts, current page purpose, and a bounded page of tool results. The product should make the selection visible and allow the user to remove it." data-ja="有用なコンテキストには、ユーザーの質問、選択したオブジェクトと項目定義、少数の関連メタデータ一致、コンパクトな組織情報、現在のページ目的、限定されたツール結果ページなどがあります。製品は選択内容を見える形にし、ユーザーが除外できるようにします。">Useful context may include the user's question, selected object and field definitions, a small set of relevant metadata matches, compact org facts, current page purpose, and a bounded page of tool results. The product should make the selection visible and allow the user to remove it.</p>
+        <p data-en="Use minimization twice: first select only the sources relevant to the task, then reduce each result to the fields and rows needed for the answer. Pagination should require an explicit next request rather than silently sending an entire org inventory." data-ja="最小化を 2 段階で行います。まず作業に関係する情報源だけを選び、次に各結果を回答に必要な項目と行に絞ります。ページネーションは組織全体を暗黙に送るのではなく、次の明示的なリクエストを必要とすべきです。">Use minimization twice: first select only the sources relevant to the task, then reduce each result to the fields and rows needed for the answer. Pagination should require an explicit next request rather than silently sending an entire org inventory.</p>
+      </section>
+
+      <section>
+        <h2 data-en="Keep execution and confirmation outside the model" data-ja="実行と確認をモデルの外に置く">Keep execution and confirmation outside the model</h2>
+        <p data-en="The AI may recommend a query, explain a difference, or propose a change. The product should still validate the request, show the exact operation, apply existing permission checks, and wait for user confirmation in the authoritative workspace." data-ja="AI はクエリを提案し、差分を説明し、変更案を示すことができます。それでも製品側でリクエストを検証し、正確な操作を表示し、既存の権限確認を適用し、正式なワークスペースでユーザー確認を待つ必要があります。">The AI may recommend a query, explain a difference, or propose a change. The product should still validate the request, show the exact operation, apply existing permission checks, and wait for user confirmation in the authoritative workspace.</p>
+        <p data-en="This keeps the model advisory. It also preserves familiar audit evidence: who initiated the action, which org received it, what changed, which checks ran, and what the result was." data-ja="これによりモデルは助言役に留まります。また、誰が操作を開始し、どの組織に対して、何を変更し、どの確認を行い、結果がどうだったかという監査証跡も維持できます。">This keeps the model advisory. It also preserves familiar audit evidence: who initiated the action, which org received it, what changed, which checks ran, and what the result was.</p>
+      </section>
+
+      <section>
+        <h2 data-en="Architecture review checklist" data-ja="アーキテクチャ・レビューのチェックリスト">Architecture review checklist</h2>
+        <div class="article-checklist"><ul>
+          <li data-en="Can you list every network destination for Salesforce data, identity data, prompts, and tool results?" data-ja="Salesforce データ、ID 情報、プロンプト、ツール結果のすべての送信先を列挙できますか。">Can you list every network destination for Salesforce data, identity data, prompts, and tool results?</li>
+          <li data-en="Are session credentials excluded before backend, log, telemetry, and model boundaries?" data-ja="バックエンド、ログ、テレメトリ、モデルの境界前にセッション認証情報を除外していますか。">Are session credentials excluded before backend, log, telemetry, and model boundaries?</li>
+          <li data-en="Can the user see and remove selected context before Send?" data-ja="Send の前に、ユーザーが選択コンテキストを確認・除外できますか。">Can the user see and remove selected context before Send?</li>
+          <li data-en="Are tool schemas, result sizes, page counts, and function calls bounded?" data-ja="ツールスキーマ、結果サイズ、ページ数、関数呼び出し回数は制限されていますか。">Are tool schemas, result sizes, page counts, and function calls bounded?</li>
+          <li data-en="Do write, deploy, delete, Apex, and other consequential actions retain product-side validation and confirmation?" data-ja="書き込み、デプロイ、削除、Apex などの重要操作に、製品側の検証と確認が残っていますか。">Do write, deploy, delete, Apex, and other consequential actions retain product-side validation and confirmation?</li>
+          <li data-en="Are local tests, live backend readiness, billing readiness, store approval, and customer-org validation reported separately?" data-ja="ローカルテスト、実バックエンド準備、課金準備、ストア承認、顧客組織検証を分けて報告していますか。">Are local tests, live backend readiness, billing readiness, store approval, and customer-org validation reported separately?</li>
+        </ul></div>
+      </section>
+
+      <section>
+        <h2 data-en="How Dina Agent applies the model" data-ja="Dina Agent での適用">How Dina Agent applies the model</h2>
+        <p data-en="Dina Agent for Salesforce 0.5.0 runs Salesforce tools inside the Chrome extension, excludes Salesforce credentials from AI chat requests, sends bounded context only after the user presses Send, and keeps the AI panel advisory. It is still a development preview: this architecture and local validation do not establish live production, billing, store, or customer-org readiness." data-ja="Dina Agent for Salesforce 0.5.0 は Salesforce ツールを Chrome 拡張機能内で実行し、AI チャットリクエストから Salesforce 認証情報を除外し、ユーザーが Send を押した後にだけ限定コンテキストを送信し、AI パネルを助言機能として保ちます。なお開発プレビューであり、この設計とローカル検証だけでは実本番、課金、ストア、顧客組織での準備完了を証明しません。">Dina Agent for Salesforce 0.5.0 runs Salesforce tools inside the Chrome extension, excludes Salesforce credentials from AI chat requests, sends bounded context only after the user presses Send, and keeps the AI panel advisory. It is still a development preview: this architecture and local validation do not establish live production, billing, store, or customer-org readiness.</p>
+        <p><a class="text-link" href="../../apps/salesforce-agentic-bot/" data-en="Explore Dina Agent for Salesforce 0.5.0" data-ja="Dina Agent for Salesforce 0.5.0 の詳細">Explore Dina Agent for Salesforce 0.5.0</a></p>
+      </section>
+
+      <p class="article-next"><a class="text-link" href="../salesforce-org-review-before-release/" data-en="Continue reading: Salesforce org review before release" data-ja="次に読む：Salesforce リリース前の組織レビュー">Continue reading: Salesforce org review before release</a></p>
+    </article>
+  </main>
+  <script src="../../assets/page-language.js"></script>
+</body>
+</html>

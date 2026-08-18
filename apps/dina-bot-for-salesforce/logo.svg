@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="t d">
   <!-- Generated from assets/dinalab-logo.svg by scripts/build-logos.mjs. -->
-  <title id="t">DinaSheet for Salesforce</title>
-  <desc id="d">The DinaLab neon D in emerald, with a spreadsheet grid in the frame gap.</desc>
+  <title id="t">Dina Bot for Salesforce</title>
+  <desc id="d">The DinaLab neon D in violet, with a bot head in the frame gap.</desc>
   <defs>
     <linearGradient id="neon" x1="40" y1="216" x2="216" y2="40" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#a8ffd8"/>
-      <stop offset="0.5" stop-color="#12c974"/>
-      <stop offset="1" stop-color="#5ef2a4"/>
+      <stop offset="0" stop-color="#d8c7ff"/>
+      <stop offset="0.5" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#a78bfa"/>
     </linearGradient>
     <radialGradient id="glow" cx="0.46" cy="0.44" r="0.62">
-      <stop offset="0" stop-color="#12c974" stop-opacity="0.34"/>
-      <stop offset="1" stop-color="#12c974" stop-opacity="0"/>
+      <stop offset="0" stop-color="#7c3aed" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#7c3aed" stop-opacity="0"/>
     </radialGradient>
     <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="7"/>
@@ -29,20 +29,23 @@
     <g stroke="url(#neon)" opacity=".55" filter="url(#bloom)">
       <path d="M36 12H19A13 13 0 0 0 6 25v20a13 13 0 0 0 13 13h18a13 13 0 0 0 13-13V32" stroke-width="12" transform="scale(4)" vector-effect="non-scaling-stroke"/>
       <path d="M20 23v24h7a12 12 0 0 0 0-24Z" stroke-width="12" transform="scale(4)" vector-effect="non-scaling-stroke"/>
-      <path d="M174 40h32a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8V48a8 8 0 0 1 8-8Z" stroke-width="10.2"/>
-      <path d="M190 40v48M166 64h48" stroke-width="8.4"/>
+      <path d="M180 48h20a10 10 0 0 1 10 10v16a10 10 0 0 1-10 10h-20a10 10 0 0 1-10-10V58a10 10 0 0 1 10-10Z" stroke-width="10.2"/>
+      <path d="M190 48v-9" stroke-width="8.4"/>
+      <path d="M189.5 36h1M180.5 66h1M198.5 66h1" stroke-width="16.8"/>
     </g>
     <g stroke="url(#neon)" opacity="1">
       <path d="M36 12H19A13 13 0 0 0 6 25v20a13 13 0 0 0 13 13h18a13 13 0 0 0 13-13V32" stroke-width="7" transform="scale(4)" vector-effect="non-scaling-stroke"/>
       <path d="M20 23v24h7a12 12 0 0 0 0-24Z" stroke-width="7" transform="scale(4)" vector-effect="non-scaling-stroke"/>
-      <path d="M174 40h32a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8V48a8 8 0 0 1 8-8Z" stroke-width="5.95"/>
-      <path d="M190 40v48M166 64h48" stroke-width="4.9"/>
+      <path d="M180 48h20a10 10 0 0 1 10 10v16a10 10 0 0 1-10 10h-20a10 10 0 0 1-10-10V58a10 10 0 0 1 10-10Z" stroke-width="5.95"/>
+      <path d="M190 48v-9" stroke-width="4.9"/>
+      <path d="M189.5 36h1M180.5 66h1M198.5 66h1" stroke-width="9.8"/>
     </g>
-    <g stroke="#e6fff4" opacity=".95">
+    <g stroke="#f3ecff" opacity=".95">
       <path d="M36 12H19A13 13 0 0 0 6 25v20a13 13 0 0 0 13 13h18a13 13 0 0 0 13-13V32" stroke-width="2.4" transform="scale(4)" vector-effect="non-scaling-stroke"/>
       <path d="M20 23v24h7a12 12 0 0 0 0-24Z" stroke-width="2.4" transform="scale(4)" vector-effect="non-scaling-stroke"/>
-      <path d="M174 40h32a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8h-32a8 8 0 0 1-8-8V48a8 8 0 0 1 8-8Z" stroke-width="2.04"/>
-      <path d="M190 40v48M166 64h48" stroke-width="1.68"/>
+      <path d="M180 48h20a10 10 0 0 1 10 10v16a10 10 0 0 1-10 10h-20a10 10 0 0 1-10-10V58a10 10 0 0 1 10-10Z" stroke-width="2.04"/>
+      <path d="M190 48v-9" stroke-width="1.68"/>
+      <path d="M189.5 36h1M180.5 66h1M198.5 66h1" stroke-width="3.36"/>
     </g>
   </g>
 </svg>

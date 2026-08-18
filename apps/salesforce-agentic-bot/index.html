@@ -1,112 +1,113 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-title-en="Dina Agent for Salesforce | Chrome Side-Panel AI Assistant" data-title-ja="Dina Agent for Salesforce | Chrome サイドパネル AI アシスタント">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dina Agent for Salesforce | Compatible with Salesforce</title>
-  <meta name="description" content="Dina Agent for Salesforce 0.4.0 is an independent Chrome side-panel assistant in development for Salesforce workflows, with its own metadata, spreadsheet, review, and permission workspaces, backed by a Cloud Run function.">
+  <title>Dina Agent for Salesforce | Chrome Side-Panel AI Assistant</title>
+  <meta name="description" data-content-en="Dina Agent for Salesforce is an independent Chrome side-panel assistant for Salesforce administrators, developers, and consultants. View features, USD pricing, support, and legal information." data-content-ja="Dina Agent for Salesforce は、Salesforce の管理者、開発者、コンサルタント向けの独立した Chrome サイドパネルアシスタントです。機能、米ドル価格、サポート、法的情報をご確認ください。" content="Dina Agent for Salesforce is an independent Chrome side-panel assistant for Salesforce administrators, developers, and consultants. View features, USD pricing, support, and legal information.">
   <link rel="canonical" href="https://dina.jp/apps/salesforce-agentic-bot/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/dinalab.css">
   <script src="../../assets/site-theme.js"></script>
 </head>
-<body class="doc-page">
+<body class="doc-page agent-product-page">
+  <a class="skip-link" href="#overview" data-en="Skip to product overview" data-ja="製品概要へ移動">Skip to product overview</a>
+
   <main class="shell narrow">
-    <nav class="nav" aria-label="Page navigation">
+    <nav class="nav" aria-label="Site navigation" data-aria-en="Site navigation" data-aria-ja="サイトナビゲーション">
       <a class="brand" href="../../">
-        <span class="brand-mark">D</span>
+        <img class="brand-mark" src="../../assets/dinalab-logo-light.png" alt="" width="36" height="36">
         <span>DinaLab</span>
       </a>
       <span class="nav-actions">
-        <a href="../../">Back to home</a>
-        <button type="button" id="siteLangToggle" class="lang-toggle" aria-label="日本語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg><span class="lang-label">日本語</span></button>
+        <a href="../../" data-en="Business home" data-ja="ビジネスホーム">Business home</a>
+        <a href="../../blog/" data-en="Guides" data-ja="ガイド">Guides</a>
+        <button type="button" id="siteLangToggle" class="lang-toggle" data-language-toggle aria-label="View in Japanese" data-aria-en="View in Japanese" data-aria-ja="英語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg><span class="lang-label">日本語</span></button>
         <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"></path></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
       </span>
     </nav>
 
-    <header class="hero">
+    <nav class="product-section-nav" aria-label="Product sections" data-aria-en="Product sections" data-aria-ja="製品セクション">
+      <a href="#overview" data-en="Overview" data-ja="概要">Overview</a>
+      <a href="#features" data-en="Features" data-ja="機能">Features</a>
+      <a href="#pricing" data-en="Pricing" data-ja="料金">Pricing</a>
+      <a href="#support" data-en="Support" data-ja="サポート">Support</a>
+      <a href="#legal" data-en="Legal" data-ja="法的情報">Legal</a>
+    </nav>
+
+    <header class="hero agent-product-hero" id="overview">
       <div>
-        <span class="release-pill">In development: 0.4.0</span>
+        <span class="release-pill" data-en="Coming soon · Closed pilot" data-ja="近日提供予定 · クローズドパイロット">Coming soon · Closed pilot</span>
+        <p class="eyebrow" data-en="Independent Chrome extension" data-ja="独立した Chrome 拡張機能">Independent Chrome extension</p>
         <h1>Dina Agent for Salesforce</h1>
-        <p class="lead">
-          Dina Agent for Salesforce is an independent Chrome extension in development for Salesforce administrators and developers. It adds a side-panel assistant that can use selected Salesforce org context, routes chat requests through a Cloud Run function backend, and now carries its own copy of the Admin Toolkit workspaces with a feature-specific AI panel inside each one.
-        </p>
-        <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+        <p class="lead" data-en="An independent Chrome side-panel assistant for Salesforce administrators, developers, and consultants. Chat with AI, read the org context you choose, and run Salesforce tools only with your permission." data-ja="Salesforce の管理者、開発者、コンサルタント向けの独立した Chrome サイドパネルアシスタントです。AI とチャットし、選択した組織コンテキストを読み取り、ユーザーが許可した場合にのみ Salesforce ツールを実行します。">An independent Chrome side-panel assistant for Salesforce administrators, developers, and consultants. Chat with AI, read the org context you choose, and run Salesforce tools only with your permission.</p>
+        <p class="notice" data-en="Dina Agent is in a closed pilot. Paid billing is not live and no public subscription is currently available." data-ja="Dina Agent はクローズドパイロット中です。有料課金は稼働しておらず、現在は一般向けサブスクリプションを提供していません。">Dina Agent is in a closed pilot. Paid billing is not live and no public subscription is currently available.</p>
+        <div class="button-row">
+          <a class="button" href="#pricing" data-en="View planned pricing" data-ja="予定料金を見る">View planned pricing</a>
+          <a class="button secondary" href="#support" data-en="Contact support" data-ja="サポートに連絡">Contact support</a>
+        </div>
       </div>
       <img class="logo" src="logo.svg" alt="Dina Agent for Salesforce icon">
     </header>
 
     <div class="content">
-      <section aria-labelledby="features-title">
-        <h2 id="features-title">What You Can Do</h2>
-        <ul>
-          <li>Open a Chrome side panel on supported Salesforce pages.</li>
-          <li>Detect the active Salesforce tab title and URL.</li>
-          <li>Read org and user summary information from the signed-in Salesforce org.</li>
-          <li>Chat with an assistant backed by a Cloud Run function.</li>
-          <li>Send selected Salesforce context with chat requests.</li>
-          <li>Let the assistant use compact live object context, pinned Metadata API schema context, metadata text search, and read-only SOQL query-plan validation.</li>
-          <li>Work in the extension's own copy of Metadata Admin, SheetD, Org Review, Object Schema, and Permission Explorer, plus a Query Data Bot for multi-tab SOQL sheets.</li>
-          <li>Use the REST API, Data Export, Document Folders, Run Apex, Setup Audit Trail, API Usage, Login History, Event Logs, and manual tools.</li>
-          <li>Ask the advisory Dina AI panel inside any copied app or tool, with bounded visible context that can be turned off and is only sent after Send is pressed.</li>
-          <li>Sign in once with a Google account, which owns the trial allowance and aggregate AI usage across every Salesforce org.</li>
-          <li>Keep the OpenAI API key out of the browser by storing it in the Cloud Run function environment.</li>
-        </ul>
+      <section id="features" aria-labelledby="features-title">
+        <p class="eyebrow" data-en="Features" data-ja="機能">Features</p>
+        <h2 id="features-title" data-en="A focused assistant beside Salesforce" data-ja="Salesforce のそばで使える専用アシスタント">A focused assistant beside Salesforce</h2>
+        <p data-en="Dina Agent stays in the Chrome side panel while you work in Salesforce. It helps you understand the current org, ask informed questions, and use approved tools without turning the AI into an autonomous administrator." data-ja="Dina Agent は Salesforce での作業中、Chrome サイドパネルに表示されます。現在の組織を理解し、状況に沿った質問を行い、AI を自律的な管理者にすることなく、承認されたツールを利用できます。">Dina Agent stays in the Chrome side panel while you work in Salesforce. It helps you understand the current org, ask informed questions, and use approved tools without turning the AI into an autonomous administrator.</p>
+        <div class="feature-grid agent-feature-grid">
+          <article class="feature"><h3 data-en="AI chat" data-ja="AI チャット">AI chat</h3><p data-en="Ask questions, investigate an issue, and get explanations while remaining in the Salesforce workflow." data-ja="Salesforce の作業画面を離れずに、質問、課題調査、説明の取得ができます。">Ask questions, investigate an issue, and get explanations while remaining in the Salesforce workflow.</p></article>
+          <article class="feature"><h3 data-en="Selected org context" data-ja="選択した組織コンテキスト">Selected org context</h3><p data-en="Use the active Salesforce page and the org, object, schema, or metadata context you choose for more relevant assistance." data-ja="アクティブな Salesforce ページと、選択した組織、オブジェクト、スキーマ、メタデータのコンテキストを使って、より適切な支援を受けられます。">Use the active Salesforce page and the org, object, schema, or metadata context you choose for more relevant assistance.</p></article>
+          <article class="feature"><h3 data-en="User-permitted tools" data-ja="ユーザーが許可したツール">User-permitted tools</h3><p data-en="Run supported Salesforce tools only after the user allows the requested action. Existing review and confirmation steps remain in control." data-ja="ユーザーが要求された操作を許可した後にのみ、対応する Salesforce ツールを実行します。既存のレビューと確認手順が引き続き最終判断となります。">Run supported Salesforce tools only after the user allows the requested action. Existing review and confirmation steps remain in control.</p></article>
+          <article class="feature"><h3 data-en="Professional workflows" data-ja="プロフェッショナル向けワークフロー">Professional workflows</h3><p data-en="Support investigation and review work across metadata, data, org configuration, permissions, APIs, exports, and monitoring." data-ja="メタデータ、データ、組織設定、権限、API、エクスポート、監視に関する調査とレビューを支援します。">Support investigation and review work across metadata, data, org configuration, permissions, APIs, exports, and monitoring.</p></article>
+        </div>
+        <div class="callout"><p data-en="Salesforce authentication credentials are not included in AI chat requests. Consequential Salesforce actions remain subject to user review and permission." data-ja="Salesforce の認証情報は AI チャットリクエストに含まれません。重要な Salesforce 操作には、引き続きユーザーのレビューと許可が必要です。">Salesforce authentication credentials are not included in AI chat requests. Consequential Salesforce actions remain subject to user review and permission.</p></div>
       </section>
 
-      <section aria-labelledby="architecture-title">
-        <h2 id="architecture-title">Architecture</h2>
-        <p>Dina Agent for Salesforce separates the browser extension from the OpenAI transport layer.</p>
-        <ol>
-          <li>The extension reads the active Salesforce org session in the browser.</li>
-          <li>The side-panel chat sends chat history, selected Salesforce context, current tab context, and extension tool results to the configured Cloud Run function endpoint, together with the signed-in Google account's access token.</li>
-          <li>Salesforce session IDs and authentication credentials are not included in AI chat requests. Salesforce API tools run inside the extension.</li>
-          <li>The Cloud Run function verifies the Google token and reserves the account's Send and cost allowance before calling OpenAI with its function-level <code>OPENAI_API_KEY</code>.</li>
-          <li>The Cloud Run function returns the assistant's response to the extension.</li>
-        </ol>
-        <p>Firestore holds the account record and aggregate Send, token, and cost counters. It does not hold Salesforce sessions, Salesforce records, prompts, or transcripts.</p>
+      <section id="pricing" aria-labelledby="pricing-title">
+        <p class="eyebrow" data-en="Pricing in USD" data-ja="米ドル料金">Pricing in USD</p>
+        <h2 id="pricing-title" data-en="Simple monthly plans, with no overage charges" data-ja="超過料金のないシンプルな月額プラン">Simple monthly plans, with no overage charges</h2>
+        <p data-en="The prices below are planned subscription prices. Billing is not live, and the plans cannot currently be purchased by the public." data-ja="以下は予定しているサブスクリプション価格です。課金はまだ稼働しておらず、現在一般のお客様は購入できません。">The prices below are planned subscription prices. Billing is not live, and the plans cannot currently be purchased by the public.</p>
+        <div class="pricing-grid">
+          <article class="pricing-card"><span class="plan-status" data-en="Coming soon" data-ja="近日提供予定">Coming soon</span><h3>Plus</h3><p class="plan-price"><strong>$9</strong> <span>USD / month</span></p><ul><li data-en="Monthly subscription" data-ja="月額サブスクリプション">Monthly subscription</li><li data-en="No overage charges" data-ja="超過料金なし">No overage charges</li><li data-en="Not currently available for purchase" data-ja="現在購入不可">Not currently available for purchase</li></ul></article>
+          <article class="pricing-card featured-plan"><span class="plan-status" data-en="Closed pilot" data-ja="クローズドパイロット">Closed pilot</span><h3>Pro</h3><p class="plan-price"><strong>$29</strong> <span>USD / month</span></p><ul><li data-en="Monthly subscription" data-ja="月額サブスクリプション">Monthly subscription</li><li data-en="No overage charges" data-ja="超過料金なし">No overage charges</li><li data-en="Access limited to invited pilot participants" data-ja="招待されたパイロット参加者のみ利用可能">Access limited to invited pilot participants</li></ul></article>
+          <article class="pricing-card unavailable-plan"><span class="plan-status muted-status" data-en="Not for sale" data-ja="販売していません">Not for sale</span><h3>Max</h3><p class="plan-price"><strong data-en="Not sold" data-ja="販売なし">Not sold</strong></p><ul><li data-en="No public price" data-ja="公開価格なし">No public price</li><li data-en="No checkout or subscription available" data-ja="チェックアウトまたはサブスクリプションなし">No checkout or subscription available</li><li data-en="Not accepting orders" data-ja="注文受付なし">Not accepting orders</li></ul></article>
+        </div>
+        <div class="subscription-details" aria-labelledby="subscription-title">
+          <h3 id="subscription-title" data-en="Subscription and payment" data-ja="サブスクリプションと支払い">Subscription and payment</h3>
+          <ul>
+            <li data-en="When paid enrollment opens, payment will be handled securely through Stripe Checkout." data-ja="有料登録の受付開始後、支払いは Stripe Checkout を通じて安全に処理されます。">When paid enrollment opens, payment will be handled securely through Stripe Checkout.</li>
+            <li data-en="Subscribers will be able to manage or cancel their subscription through the Stripe Customer Portal." data-ja="加入者は Stripe Customer Portal からサブスクリプションを管理または解約できます。">Subscribers will be able to manage or cancel their subscription through the Stripe Customer Portal.</li>
+            <li><span data-en="Refund policy:" data-ja="返金ポリシー：">Refund policy:</span> <span class="owner-placeholder">[OWNER DECISION REQUIRED]</span></li>
+          </ul>
+          <p class="notice" data-en="There is no active public checkout link on this page. DinaLab will update this page before paid subscriptions become available." data-ja="このページには現在、有効な一般向けチェックアウトリンクはありません。有料サブスクリプションの提供開始前に、DinaLab が本ページを更新します。">There is no active public checkout link on this page. DinaLab will update this page before paid subscriptions become available.</p>
+        </div>
       </section>
 
-      <section aria-labelledby="configuration-title">
-        <h2 id="configuration-title">Configuration</h2>
-        <p>Set the Cloud Run function URL in the extension's <code>api.js</code>, and match its hostname in <code>manifest.json</code>:</p>
-        <pre><code>export const GCF_ENDPOINT_URL = "https://YOUR_REGION-YOUR_PROJECT.cloudfunctions.net/agenticBot";</code></pre>
-        <p>Create a Google OAuth client of type <strong>Chrome extension</strong> for the extension's ID, and put its public client ID in <code>manifest.json</code> and in the backend's <code>GOOGLE_OAUTH_CLIENT_ID</code>. Then load the extension locally:</p>
-        <ol>
-          <li>Open <code>chrome://extensions</code>.</li>
-          <li>Enable Developer mode.</li>
-          <li>Choose <code>Load unpacked</code>.</li>
-          <li>Select the extension source folder.</li>
-          <li>Open a Salesforce tab and launch the extension.</li>
-        </ol>
+      <section id="support" aria-labelledby="support-title">
+        <p class="eyebrow" data-en="Support" data-ja="サポート">Support</p>
+        <h2 id="support-title" data-en="Contact the seller" data-ja="販売者へのお問い合わせ">Contact the seller</h2>
+        <p data-en="Use these contacts for product access, account, subscription, cancellation, or billing questions. Valid owner-provided details must replace the placeholders before sales open." data-ja="製品アクセス、アカウント、サブスクリプション、解約、請求に関するお問い合わせには、以下の連絡先をご利用ください。販売開始前に、所有者が提供する有効な情報へ置き換える必要があります。">Use these contacts for product access, account, subscription, cancellation, or billing questions. Valid owner-provided details must replace the placeholders before sales open.</p>
+        <dl class="contact-list"><div><dt data-en="Support email" data-ja="サポートメール">Support email</dt><dd class="owner-placeholder">[OWNER INPUT REQUIRED: SUPPORT EMAIL]</dd></div><div><dt data-en="Support phone" data-ja="サポート電話番号">Support phone</dt><dd class="owner-placeholder">[OWNER INPUT REQUIRED: SUPPORT PHONE]</dd></div></dl>
       </section>
 
-      <section aria-labelledby="gcf-title">
-        <h2 id="gcf-title">Cloud Run Function</h2>
-        <p>Deploy the Cloud Run function broker from:</p>
-        <pre><code>gcf/agentic-bot/index.js</code></pre>
-        <p>Required environment variable: <code>OPENAI_API_KEY</code>. Required account configuration: <code>GOOGLE_OAUTH_CLIENT_ID</code>.</p>
-        <p>Optional runtime settings: <code>OPENAI_MODEL</code>, <code>OPENAI_MAX_OUTPUT_TOKENS</code>, whose default of <code>1000</code> is also its hard maximum, and <code>OPENAI_COMPACT_THRESHOLD</code>.</p>
+      <section id="legal" aria-labelledby="legal-title">
+        <p class="eyebrow" data-en="Legal" data-ja="法的情報">Legal</p>
+        <h2 id="legal-title" data-en="Policies and seller disclosure" data-ja="ポリシーと販売者情報">Policies and seller disclosure</h2>
+        <div class="legal-link-grid">
+          <a class="legal-link-card" href="PRIVACY_POLICY.html"><span data-en="Privacy Policy" data-ja="プライバシーポリシー">Privacy Policy</span><small data-en="How Dina Agent handles product and account data" data-ja="Dina Agent における製品データとアカウントデータの取り扱い">How Dina Agent handles product and account data</small></a>
+          <a class="legal-link-card" href="TOKUSHOHO.html"><span>特定商取引法に基づく表記</span><small data-en="Seller, pricing, payment, delivery, cancellation, and refund information" data-ja="販売者、価格、支払い、提供時期、解約、返金に関する情報">Seller, pricing, payment, delivery, cancellation, and refund information</small></a>
+        </div>
+        <p class="notice" data-en="Owner identity, address, phone, email, delivery timing, cancellation timing, and refund decisions must be completed before public sales." data-ja="一般販売を開始する前に、所有者情報、住所、電話番号、メール、提供時期、解約時期、返金方針を確定する必要があります。">Owner identity, address, phone, email, delivery timing, cancellation timing, and refund decisions must be completed before public sales.</p>
       </section>
-
-      <section aria-labelledby="privacy-title">
-        <h2 id="privacy-title">Privacy</h2>
-        <p>
-          The extension stores UI settings, chat history, previous response IDs, workspace state, retrieved Salesforce schema metadata, query sheets, pending metadata edits, and bounded operation receipts locally in the browser. AI chat requests send chat messages, selected Salesforce context, optional bounded visible context, current tab context, and extension tool results to the configured Cloud Run function endpoint, but do not include Salesforce session IDs, instance URLs, access tokens, or authorization headers.
-        </p>
-        <p>Signing in identifies the account by its Google email address. The backend keeps that account record and aggregate usage counters in Firestore; it does not keep Salesforce sessions, Salesforce records, prompts, or transcripts.</p>
-        <p>The extension does not store an OpenAI API key in the browser and does not call OpenAI directly from the extension.</p>
-        <p>Read the full policy: <a href="PRIVACY_POLICY.html">Privacy Policy</a></p>
-      </section>
-
-      <section aria-labelledby="status-title">
-        <h2 id="status-title">Status</h2>
-        <p>Dina Agent for Salesforce is at version 0.4.0. It is currently in development and is not publicly released. The current build starts a limited trial allowance at the first AI Send; billing and paid plans are not part of this release.</p>
-      </section>
-
-      <p class="notice">Salesforce is a trademark of Salesforce, Inc. Dina Agent for Salesforce is not affiliated with, endorsed by, or sponsored by Salesforce. The OpenAI name identifies the configured AI service; no affiliation with or endorsement by OpenAI is implied.</p>
     </div>
+
+    <footer class="product-footer">
+      <nav aria-label="Legal links" data-aria-en="Legal links" data-aria-ja="法的リンク"><a href="PRIVACY_POLICY.html" data-en="Privacy Policy" data-ja="プライバシーポリシー">Privacy Policy</a><a href="TOKUSHOHO.html">特定商取引法に基づく表記</a></nav>
+      <p data-en="Salesforce is a trademark of Salesforce, Inc. DinaLab and Dina Agent for Salesforce are independent and are not affiliated with, sponsored by, endorsed by, or certified by Salesforce." data-ja="Salesforce は Salesforce, Inc. の商標です。DinaLab および Dina Agent for Salesforce は独立した製品であり、Salesforce との提携、Salesforce による後援、承認、認定を受けていません。">Salesforce is a trademark of Salesforce, Inc. DinaLab and Dina Agent for Salesforce are independent and are not affiliated with, sponsored by, endorsed by, or certified by Salesforce.</p>
+      <p>© 2026 DinaLab</p>
+    </footer>
   </main>
-  <script src="../../assets/site-language.js"></script>
+  <script src="../../assets/page-language.js"></script>
 </body>
 </html>

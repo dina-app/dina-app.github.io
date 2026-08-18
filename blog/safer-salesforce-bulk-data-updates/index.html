@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-title-en="Safer Salesforce Bulk Data Updates | DinaLab" data-title-ja="Salesforce データを安全に一括更新する方法 | DinaLab">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Safer Salesforce Bulk Data Updates | DinaLab</title>
+  <meta name="description" content="A controlled workflow for selecting, reviewing, executing, verifying, and preparing rollback for bulk Salesforce data updates.">
+  <link rel="canonical" href="https://dina.jp/blog/safer-salesforce-bulk-data-updates/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/dinalab.css">
+  <script src="../../assets/site-theme.js"></script>
+</head>
+<body class="article-page">
+  <main class="article-shell">
+    <nav class="nav" aria-label="Page navigation" data-aria-en="Page navigation" data-aria-ja="ページナビゲーション">
+      <a class="brand" href="../../"><img class="brand-mark" src="../../assets/dinalab-logo-light.png" alt="" width="36" height="36"><span>DinaLab</span></a>
+      <span class="nav-actions"><a href="../" data-en="All guides" data-ja="すべてのガイド">All guides</a><button type="button" id="siteLangToggle" class="lang-toggle" data-language-toggle aria-label="View in Japanese" data-aria-en="View in Japanese" data-aria-ja="英語で表示"><span class="lang-label">日本語</span></button><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"></path></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg></button></span>
+    </nav>
+
+    <header class="article-header">
+      <p class="eyebrow" data-en="Data operations" data-ja="データ運用">Data operations</p>
+      <h1 data-en="A safer workflow for bulk Salesforce data updates" data-ja="Salesforce データを安全に一括更新するワークフロー">A safer workflow for bulk Salesforce data updates</h1>
+      <p class="article-meta" data-en="August 18, 2026 · 7 minute read" data-ja="2026年8月18日 · 読了 7 分">August 18, 2026 · 7 minute read</p>
+      <p class="article-lead" data-en="Bulk editing is valuable because it is fast. It is risky for exactly the same reason. The solution is not to remove spreadsheet speed, but to put clear control points around selection, review, execution, and recovery." data-ja="一括編集の価値は速さにあります。そして、その速さこそがリスクでもあります。必要なのはスプレッドシートの速さを失うことではなく、対象選択、レビュー、実行、復旧の周囲に明確な統制点を置くことです。">Bulk editing is valuable because it is fast. It is risky for exactly the same reason. The solution is not to remove spreadsheet speed, but to put clear control points around selection, review, execution, and recovery.</p>
+    </header>
+
+    <article class="article-content">
+      <section>
+        <h2 data-en="1. Define the business selection" data-ja="1. 業務上の対象条件を定義する">1. Define the business selection</h2>
+        <p data-en="Start with the business condition, then translate it into a query. Record the object, filter logic, expected row count, owner, purpose, and time window. A query is not approved merely because it runs successfully." data-ja="まず業務条件を定義し、それをクエリに変換します。オブジェクト、絞り込み条件、想定件数、担当者、目的、対象期間を記録します。クエリが正常に実行できることと、承認されていることは別です。">Start with the business condition, then translate it into a query. Record the object, filter logic, expected row count, owner, purpose, and time window. A query is not approved merely because it runs successfully.</p>
+        <p data-en="Include only the record ID, fields needed to decide eligibility, fields being changed, and fields needed to verify the outcome. Fewer columns make review easier and reduce accidental edits." data-ja="レコード ID、対象判定に必要な項目、変更対象項目、結果確認に必要な項目だけを含めます。列を減らすことでレビューが容易になり、誤編集も減らせます。">Include only the record ID, fields needed to decide eligibility, fields being changed, and fields needed to verify the outcome. Fewer columns make review easier and reduce accidental edits.</p>
+      </section>
+
+      <section>
+        <h2 data-en="2. Export the baseline before editing" data-ja="2. 編集前に基準データを出力する">2. Export the baseline before editing</h2>
+        <p data-en="Save an immutable export of the selected records before making any changes. Record the query, timestamp, org identity, row count, and file checksum or controlled storage location. This is both review evidence and the source for a possible rollback file." data-ja="変更前に対象レコードの変更不可な出力を保存します。クエリ、日時、組織 ID、件数、ファイルチェックサムまたは管理された保存場所を記録します。これはレビュー証跡であり、必要に応じてロールバックファイルの元にもなります。">Save an immutable export of the selected records before making any changes. Record the query, timestamp, org identity, row count, and file checksum or controlled storage location. This is both review evidence and the source for a possible rollback file.</p>
+        <div class="article-callout"><p data-en="Do not call a baseline a backup until you have verified that it contains every field required to restore the previous state and that the team has permission and a tested method to write it back." data-ja="以前の状態を戻すために必要な項目がすべて含まれ、チームに書き戻す権限と検証済み手順があることを確認するまでは、基準データをバックアップと呼ばないでください。">Do not call a baseline a backup until you have verified that it contains every field required to restore the previous state and that the team has permission and a tested method to write it back.</p></div>
+      </section>
+
+      <section>
+        <h2 data-en="3. Review changed fields, not only changed rows" data-ja="3. 変更行だけでなく変更項目を確認する">3. Review changed fields, not only changed rows</h2>
+        <p data-en="The most useful review view shows the record ID, field API name, previous value, proposed value, and validation result. A row-level “modified” label hides too much. Field-level evidence makes accidental blanks, formatting changes, and unintended columns visible." data-ja="最も有用なレビュー表示は、レコード ID、項目 API 名、変更前の値、変更後の値、検証結果を示します。行単位の「変更済み」表示だけでは情報が不足します。項目単位の証跡により、意図しない空欄、形式変更、不要な列の編集が見えるようになります。">The most useful review view shows the record ID, field API name, previous value, proposed value, and validation result. A row-level “modified” label hides too much. Field-level evidence makes accidental blanks, formatting changes, and unintended columns visible.</p>
+        <p data-en="Use a second reviewer for high-impact fields such as owner, status, amount, entitlement, opt-out, integration key, or fields that trigger automation." data-ja="所有者、ステータス、金額、権利、オプトアウト、連携キー、自動化を起動する項目など影響の大きい項目は、別の担当者が確認します。">Use a second reviewer for high-impact fields such as owner, status, amount, entitlement, opt-out, integration key, or fields that trigger automation.</p>
+      </section>
+
+      <section>
+        <h2 data-en="4. Execute in a controlled batch" data-ja="4. 統制されたバッチで実行する">4. Execute in a controlled batch</h2>
+        <p data-en="Test the exact update pattern on a small representative set when the business process allows it. Confirm validation rules, flows, triggers, duplicate rules, sharing effects, and integration behavior before increasing the batch size." data-ja="業務プロセスが許す場合、代表的な少数レコードで同じ更新パターンをテストします。バッチを拡大する前に、入力規則、フロー、トリガー、重複ルール、共有への影響、連携動作を確認します。">Test the exact update pattern on a small representative set when the business process allows it. Confirm validation rules, flows, triggers, duplicate rules, sharing effects, and integration behavior before increasing the batch size.</p>
+        <p data-en="Keep the execution receipt: org, user, time, selected count, attempted count, success count, failure count, per-record errors, and the reviewed change set. A green success total without failed-row details is not sufficient evidence." data-ja="実行記録として、組織、ユーザー、日時、選択件数、実行件数、成功件数、失敗件数、レコード別エラー、レビュー済み変更セットを残します。失敗行の詳細がない成功件数だけでは、十分な証跡になりません。">Keep the execution receipt: org, user, time, selected count, attempted count, success count, failure count, per-record errors, and the reviewed change set. A green success total without failed-row details is not sufficient evidence.</p>
+      </section>
+
+      <section>
+        <h2 data-en="5. Verify the business outcome and prepare rollback" data-ja="5. 業務結果を確認し、ロールバックを準備する">5. Verify the business outcome and prepare rollback</h2>
+        <p data-en="Re-query the updated records using the original selection logic plus outcome checks. Verify downstream reports, automation, and integrations where relevant. Decide in advance which result triggers rollback, partial correction, or acceptance with follow-up." data-ja="元の対象条件に結果確認を加えて更新済みレコードを再検索します。必要に応じて、下流レポート、自動化、連携も確認します。どの結果でロールバック、部分修正、追跡付き承認を選ぶか、事前に決めます。">Re-query the updated records using the original selection logic plus outcome checks. Verify downstream reports, automation, and integrations where relevant. Decide in advance which result triggers rollback, partial correction, or acceptance with follow-up.</p>
+        <div class="article-checklist"><h3 data-en="Pre-update checklist" data-ja="更新前チェックリスト">Pre-update checklist</h3><ul>
+          <li data-en="Business selection and expected count approved." data-ja="業務上の対象条件と想定件数が承認済み。">Business selection and expected count approved.</li>
+          <li data-en="Baseline export stored and restoration fields verified." data-ja="基準データを保存し、復元項目を確認済み。">Baseline export stored and restoration fields verified.</li>
+          <li data-en="Every changed field reviewed, including blanks." data-ja="空欄を含むすべての変更項目を確認済み。">Every changed field reviewed, including blanks.</li>
+          <li data-en="Automation and integration effects understood." data-ja="自動化と連携への影響を理解済み。">Automation and integration effects understood.</li>
+          <li data-en="Execution owner, verifier, stop condition, and rollback owner named." data-ja="実行担当、検証担当、中止条件、ロールバック担当を指定済み。">Execution owner, verifier, stop condition, and rollback owner named.</li>
+        </ul></div>
+      </section>
+
+      <section>
+        <h2 data-en="Where DinaSheet fits" data-ja="DinaSheet の役割">Where DinaSheet fits</h2>
+        <p data-en="DinaSheet for Salesforce supports spreadsheet-style selection and editing, changed-field review before confirmed updates, exports, and bounded local audit history. Those controls support the workflow; they do not replace business approval, tested recovery, or production monitoring." data-ja="DinaSheet for Salesforce は、スプレッドシート形式の対象選択と編集、確定更新前の変更項目レビュー、出力、端末内に限定した監査履歴を提供します。これらはワークフローを支援しますが、業務承認、検証済み復旧、​​本番監視の代わりにはなりません。">DinaSheet for Salesforce supports spreadsheet-style selection and editing, changed-field review before confirmed updates, exports, and bounded local audit history. Those controls support the workflow; they do not replace business approval, tested recovery, or production monitoring.</p>
+        <p><a class="text-link" href="../../apps/dinasheet-for-salesforce/" data-en="Explore DinaSheet for Salesforce" data-ja="DinaSheet for Salesforce の詳細">Explore DinaSheet for Salesforce</a></p>
+      </section>
+
+      <p class="article-next"><a class="text-link" href="../ai-salesforce-without-sharing-credentials/" data-en="Next guide: AI without sharing Salesforce credentials" data-ja="次のガイド：Salesforce 認証情報を共有しない AI">Next guide: AI without sharing Salesforce credentials</a></p>
+    </article>
+  </main>
+  <script src="../../assets/page-language.js"></script>
+</body>
+</html>

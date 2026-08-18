@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-title-en="Business Guides | DinaLab" data-title-ja="業務ガイド | DinaLab">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Business Guides | DinaLab</title>
+  <meta name="description" content="Practical DinaLab guides for Salesforce administration, release governance, data operations, and responsible AI adoption.">
+  <link rel="canonical" href="https://dina.jp/blog/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/dinalab.css">
+  <script src="../assets/site-theme.js"></script>
+</head>
+<body class="blog-page">
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation" data-aria-en="Page navigation" data-aria-ja="ページナビゲーション">
+      <a class="brand" href="../"><img class="brand-mark" src="../assets/dinalab-logo-light.png" alt="" width="36" height="36"><span>DinaLab</span></a>
+      <span class="nav-actions">
+        <a href="../" data-en="Business home" data-ja="ビジネスホーム">Business home</a>
+        <a href="../#products" data-en="Products" data-ja="製品">Products</a>
+        <button type="button" id="siteLangToggle" class="lang-toggle" data-language-toggle aria-label="View in Japanese" data-aria-en="View in Japanese" data-aria-ja="英語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg><span class="lang-label">日本語</span></button>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"></path></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
+      </span>
+    </nav>
+
+    <header class="blog-hero">
+      <p class="eyebrow" data-en="DinaLab business blog" data-ja="DinaLab ビジネスブログ">DinaLab business blog</p>
+      <h1 data-en="Guidance for controlled Salesforce operations." data-ja="統制された Salesforce 運用のためのガイド。">Guidance for controlled Salesforce operations.</h1>
+      <p class="lead" data-en="Practical playbooks for administrators, operations teams, and technical leads. The guides focus on decisions, evidence, review boundaries, and repeatable work — not only product clicks." data-ja="管理者、運用チーム、技術責任者向けの実践プレイブックです。製品のクリック操作だけでなく、判断、証跡、レビュー境界、再現可能な業務に重点を置いています。">Practical playbooks for administrators, operations teams, and technical leads. The guides focus on decisions, evidence, review boundaries, and repeatable work — not only product clicks.</p>
+    </header>
+
+    <section class="blog-list" aria-label="Business guides" data-aria-en="Business guides" data-aria-ja="業務ガイド">
+      <article class="guide">
+        <p class="eyebrow" data-en="Release governance · 8 min" data-ja="リリース管理 · 8 分">Release governance · 8 min</p>
+        <h2 data-en="A practical Salesforce org review before release" data-ja="リリース前に行う実践的な Salesforce 組織レビュー">A practical Salesforce org review before release</h2>
+        <p data-en="Create a compact evidence pack for system limits, security posture, automation, permissions, and the metadata moving between orgs." data-ja="システム制限、セキュリティ、自動化、権限、組織間で移動するメタデータの証跡パックを作成します。">Create a compact evidence pack for system limits, security posture, automation, permissions, and the metadata moving between orgs.</p>
+        <p class="guide-foot"><a class="text-link" href="salesforce-org-review-before-release/" data-en="Read the guide" data-ja="ガイドを読む">Read the guide</a></p>
+      </article>
+      <article class="guide">
+        <p class="eyebrow" data-en="Data operations · 7 min" data-ja="データ運用 · 7 分">Data operations · 7 min</p>
+        <h2 data-en="A safer workflow for bulk Salesforce data updates" data-ja="Salesforce データを安全に一括更新するワークフロー">A safer workflow for bulk Salesforce data updates</h2>
+        <p data-en="Separate selection, baseline export, editing, field-level review, execution, and rollback preparation so speed does not remove control." data-ja="対象選択、基準データ出力、編集、項目単位レビュー、実行、ロールバック準備を分離し、速さと統制を両立します。">Separate selection, baseline export, editing, field-level review, execution, and rollback preparation so speed does not remove control.</p>
+        <p class="guide-foot"><a class="text-link" href="safer-salesforce-bulk-data-updates/" data-en="Read the guide" data-ja="ガイドを読む">Read the guide</a></p>
+      </article>
+      <article class="guide">
+        <p class="eyebrow" data-en="AI governance · 9 min" data-ja="AI ガバナンス · 9 分">AI governance · 9 min</p>
+        <h2 data-en="How to use AI with Salesforce without sharing session credentials" data-ja="Salesforce のセッション認証情報を共有せずに AI を使う方法">How to use AI with Salesforce without sharing session credentials</h2>
+        <p data-en="Design a clear boundary between extension-local Salesforce access, selected AI context, backend transport, and final user confirmation." data-ja="拡張機能内の Salesforce アクセス、選択された AI コンテキスト、バックエンド通信、最終確認の境界を明確に設計します。">Design a clear boundary between extension-local Salesforce access, selected AI context, backend transport, and final user confirmation.</p>
+        <p class="guide-foot"><a class="text-link" href="ai-salesforce-without-sharing-credentials/" data-en="Read the guide" data-ja="ガイドを読む">Read the guide</a></p>
+      </article>
+    </section>
+  </main>
+  <footer class="footer"><span data-en="DinaLab publishes practical guidance for independent Salesforce-compatible business tools." data-ja="DinaLab は、Salesforce と互換性のある独立した業務ツールの実践ガイドを公開しています。">DinaLab publishes practical guidance for independent Salesforce-compatible business tools.</span></footer>
+  <script src="../assets/page-language.js"></script>
+</body>
+</html>

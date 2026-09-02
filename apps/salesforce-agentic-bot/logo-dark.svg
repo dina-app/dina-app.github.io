@@ -21,9 +21,6 @@
   </defs>
 
 
-  <rect width="256" height="256" rx="56" fill="#02040f"/>
-  <rect width="256" height="256" rx="56" fill="url(#glow)"/>
-
 
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
     <g stroke="url(#neon)" opacity=".55" filter="url(#bloom)">

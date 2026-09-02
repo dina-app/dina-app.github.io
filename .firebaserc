@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "gen-lang-client-0492217856"
+  },
+  "targets": {
+    "gen-lang-client-0492217856": {
+      "hosting": {
+        "homepage": [
+          "dina-home"
+        ]
+      }
+    }
+  }
+}

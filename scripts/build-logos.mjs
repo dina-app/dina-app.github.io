@@ -58,13 +58,25 @@ const TRANSPARENT_PASSES = [
   { width: 2, stroke: 'var(--core)', opacity: '.88', filter: '' },
 ];
 
+// Light-mode marks trade bloom for darker, sharper strokes. Keep the original
+// body/core widths so switching themes does not change the apparent geometry.
+const LIGHT_TILE_PASSES = [
+  { width: 7, stroke: 'url(#neon)', opacity: '1', filter: '' },
+  { width: 2.4, stroke: 'var(--core)', opacity: '1', filter: '' },
+];
+
+const LIGHT_TRANSPARENT_PASSES = [
+  { width: 8.5, stroke: 'url(#neon)', opacity: '1', filter: '' },
+  { width: 2, stroke: 'var(--core)', opacity: '1', filter: '' },
+];
+
 // ---------------------------------------------------------------------------
 // Palettes. `neon` is the gradient (light → saturated → light), `core` the hot
 // centre line. Shared hue means shared product family.
 // ---------------------------------------------------------------------------
 
 const PALETTES = {
-  brand: { neon: ['#7fdcff', '#0a63ff', '#5ec8ff'], core: '#eaf7ff' },
+  brand: { neon: ['#67e8f9', '#2563eb', '#c084fc'], core: '#f8fbff' },
   gold: { neon: ['#ffe9a8', '#f5a524', '#ffd166'], core: '#fff6e0' },
   emerald: { neon: ['#a8ffd8', '#12c974', '#5ef2a4'], core: '#e6fff4' },
   violet: { neon: ['#d8c7ff', '#7c3aed', '#a78bfa'], core: '#f3ecff' },
@@ -72,6 +84,17 @@ const PALETTES = {
   sky: { neon: ['#bfe9ff', '#0a84e0', '#7dd3fc'], core: '#eaf7ff' },
   magenta: { neon: ['#ffc9f5', '#c026d3', '#f0abfc'], core: '#fdeaff' },
   coral: { neon: ['#ffd2c2', '#f43f5e', '#fb9c8a'], core: '#ffece6' },
+};
+
+const LIGHT_PALETTES = {
+  brand: { neon: ['#075985', '#2563eb', '#6d28d9'], core: '#0b3f72' },
+  gold: { neon: ['#7a3d00', '#bd6800', '#8a4b00'], core: '#4f2a00' },
+  emerald: { neon: ['#005f38', '#0a9256', '#006a3e'], core: '#004b2d' },
+  violet: { neon: ['#42158f', '#7040c5', '#5422a6'], core: '#351074' },
+  teal: { neon: ['#006257', '#078578', '#006d61'], core: '#004b43' },
+  sky: { neon: ['#075b91', '#087fc1', '#096ba4'], core: '#06466f' },
+  magenta: { neon: ['#7c176f', '#ad239a', '#8c1b7d'], core: '#601255' },
+  coral: { neon: ['#9b263b', '#cf314c', '#ad2a41'], core: '#761d2d' },
 };
 
 // ---------------------------------------------------------------------------
@@ -160,6 +183,7 @@ const MARKS = [
     desc: 'The DinaLab neon D in gold, with a hexagon in the frame gap.',
     palette: 'gold',
     glyph: 'hex',
+    transparent: false,
   },
   {
     file: 'apps/dinasheet-for-salesforce/logo.svg',
@@ -167,41 +191,47 @@ const MARKS = [
     desc: 'The DinaLab neon D in emerald, with a spreadsheet grid in the frame gap.',
     palette: 'emerald',
     glyph: 'grid',
+    transparent: false,
   },
   {
     file: 'apps/salesforce-agentic-bot/logo.svg',
-    title: 'Dina Agent for Salesforce',
+    title: 'Agent for Salesforce',
     desc: 'The DinaLab neon D in violet, with a linked node cluster in the frame gap.',
     palette: 'violet',
     glyph: 'node',
+    transparent: false,
   },
   {
     file: 'apps/dinadevops-for-salesforce/logo.svg',
-    title: 'DinaDevOps for Salesforce',
+    title: 'DevOps for Salesforce',
     desc: 'The DinaLab neon D in teal, with two linked rings in the frame gap.',
     palette: 'teal',
     glyph: 'loop',
+    transparent: true,
   },
   {
     file: 'apps/dina-dock-for-salesforce/logo.svg',
-    title: 'Dina Dock for Salesforce',
+    title: 'Dock for Salesforce',
     desc: 'The DinaLab neon D in sky blue, with a dock of three lights in the frame gap.',
     palette: 'sky',
     glyph: 'dock',
+    transparent: true,
   },
   {
     file: 'apps/salesforce-prompter/logo.svg',
-    title: 'Salesforce Prompter',
+    title: 'Prompter for Salesforce',
     desc: 'The DinaLab neon D in magenta, with a prompt chevron and caret in the frame gap.',
     palette: 'magenta',
     glyph: 'prompt',
+    transparent: true,
   },
   {
     file: 'apps/force-connect-voice/logo.svg',
-    title: 'Force Connect Voice',
+    title: 'Voice for Salesforce',
     desc: 'The DinaLab neon D in coral, with a voice waveform in the frame gap.',
     palette: 'coral',
     glyph: 'wave',
+    transparent: true,
   },
   // Shares Dina Agent's violet: it is the same assistant on iOS.
   {
@@ -210,6 +240,7 @@ const MARKS = [
     desc: 'The DinaLab neon D in violet, with a bot head in the frame gap.',
     palette: 'violet',
     glyph: 'bot',
+    transparent: true,
   },
   // Shares Dina Agent's violet: it is the same assistant on iOS.
   {
@@ -218,6 +249,7 @@ const MARKS = [
     desc: 'The DinaLab neon D in violet, with a phone in the frame gap.',
     palette: 'violet',
     glyph: 'phone',
+    transparent: true,
   },
   // Shares DinaSheet's emerald: same product, different host.
   {
@@ -226,22 +258,34 @@ const MARKS = [
     desc: 'The DinaLab neon D in emerald, with a sheet document in the frame gap.',
     palette: 'emerald',
     glyph: 'doc',
+    transparent: true,
   },
 ];
+
+const HOME_MARK = {
+  title: 'Dina App',
+  desc: 'The Dina open D in blue, with two sparkles in the frame gap.',
+  palette: 'brand',
+  glyph: 'sparkles',
+  transparent: true,
+};
 
 // ---------------------------------------------------------------------------
 
 const round = (n) => Number(n.toFixed(2));
 
-function render({ title, desc, palette, glyph, transparent = false }) {
-  const { neon, core } = PALETTES[palette];
+function render({ title, desc, palette, glyph, transparent = false }, theme = 'legacy') {
+  const isLight = theme === 'light';
+  const { neon, core } = (isLight ? LIGHT_PALETTES : PALETTES)[palette];
   const { strokes = [], fills = [] } = GLYPHS[glyph];
   const shapes = [
     { d: FRAME, scale: 1, master: true },
     { d: LETTER, scale: 1, master: true },
     ...strokes,
   ];
-  const passes = transparent ? TRANSPARENT_PASSES : PASSES;
+  const passes = isLight
+    ? (transparent ? LIGHT_TRANSPARENT_PASSES : LIGHT_TILE_PASSES)
+    : (transparent ? TRANSPARENT_PASSES : PASSES);
   const sparkleBloom = transparent ? 'url(#markBloom)' : 'url(#bloom)';
   const viewBox = transparent ? '18 18 220 220' : '0 0 256 256';
 
@@ -262,13 +306,14 @@ function render({ title, desc, palette, glyph, transparent = false }) {
   const sparks = fills.length
     ? '\n' +
       `  <g fill="${neon[2]}">\n` +
-      fills.map((d) => `    <path d="${d}" fill="${neon[1]}" opacity=".45" filter="${sparkleBloom}"/>`).join('\n') +
-      '\n' +
+      (isLight
+        ? ''
+        : fills.map((d) => `    <path d="${d}" fill="${neon[1]}" opacity=".45" filter="${sparkleBloom}"/>`).join('\n') + '\n') +
       fills.map((d) => `    <path d="${d}" fill="${core}"/>`).join('\n') +
       '\n  </g>'
     : '';
 
-  const tile = transparent
+  const tile = transparent || theme !== 'legacy'
     ? ''
     : `
   <rect width="256" height="256" rx="56" fill="#02040f"/>
@@ -311,4 +356,16 @@ for (const mark of MARKS) {
   await mkdir(dirname(out), { recursive: true });
   await writeFile(out, render(mark));
   console.log(`wrote ${mark.file}`);
+
+  for (const theme of ['light', 'dark']) {
+    const themedFile = mark.file.replace(/logo\.svg$/, `logo-${theme}.svg`);
+    await writeFile(join(root, themedFile), render(mark, theme));
+    console.log(`wrote ${themedFile}`);
+  }
+}
+
+for (const theme of ['light', 'dark']) {
+  const file = `assets/dina-app-logo-${theme}.svg`;
+  await writeFile(join(root, file), render(HOME_MARK, theme));
+  console.log(`wrote ${file}`);
 }

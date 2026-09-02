@@ -7,7 +7,7 @@ Prepared: July 31, 2026. Last synced with `dina-app`: August 18, 2026.
 - DinaLab homepage
 - Admin Toolkit for Salesforce product page, privacy policy, and EN/JP manual
 - DinaSheet for Salesforce release-candidate page and privacy policy
-- Dina Agent for Salesforce product page and privacy policy
+- Agent for Salesforce product page and privacy policy
 - Business guides blog
 - Common Tools
 - Legacy URL redirects
@@ -17,13 +17,13 @@ Prepared: July 31, 2026. Last synced with `dina-app`: August 18, 2026.
 - [x] Replace the Admin Toolkit and Dina Agent raster logos with the current vector marks from `dina-app`, and drop the duplicate `assets/salesforce-agentic-bot-icon.jpg` reference.
 - [x] Rebuild all ten business app marks from the exact frame and D geometry in `assets/dinalab-logo.svg`, with a distinct palette and functional glyph for each product.
 - [x] Rewrite the homepage as a business product site organized around Salesforce administration, data operations, governance, and context-aware AI.
-- [x] Keep only business-related roadmap apps on the homepage: DinaDevOps, Dina Dock, Salesforce Prompter, Force Connect Voice, Dina Bot for Salesforce, Dina Agent for iOS, and DinaSheet for Google Sheets.
+- [x] Keep only the current business roadmap apps on the homepage: DevOps for Salesforce, Dock for Salesforce, Prompter for Salesforce, and Voice for Salesforce.
 - [x] Sync Dina Agent homepage, product, status, and privacy content with version 0.5.0 in the `dina-app` source.
 - [x] Add a business blog hub with guides for release org review, safer bulk data updates, and AI credential boundaries.
 - [x] Add a dedicated business social-preview image and Open Graph/X metadata.
 - [ ] Confirm the new business homepage, Dina Agent, and blog copy reads correctly in Japanese; the strings are newly written and have not received native-language review.
-- [ ] Confirm each business roadmap status is still accurate at publish time: DinaDevOps beta 0.1.0, Dina Dock in development 0.1.0, Salesforce Prompter in development 0.1.0, Force Connect Voice prototype 0.1.1, Dina Bot early build 0.1.0, Dina Agent for iOS early build 0.1.0, and DinaSheet for Google Sheets in development.
-- [ ] Decide whether Dina Bot for Salesforce and Dina Agent for iOS should both stay listed. They are separate projects in `dina-app` — one voice-first, one text-first — and both are mobile companions to the same extension.
+- [ ] Confirm each business roadmap status is still accurate at publish time: DevOps for Salesforce beta 0.1.0, Dock for Salesforce in development 0.1.0, Prompter for Salesforce in development 0.1.0, and Voice for Salesforce prototype 0.1.1.
+- [x] Remove Dina Bot for Salesforce, Dina Agent for iOS, and DinaSheet for Google Sheets from the homepage while retaining their legacy asset folders.
 - [x] Remove consumer and creative apps from the business homepage. Their legacy folders and assets remain untouched because they may still serve direct or external URLs.
 - [ ] Confirm Admin Toolkit 0.9.1 and DinaSheet 0.3.2 store status before publish. Both are validated release candidates in `dina-app` awaiting upload, and the pages frame them as the next release; the published Store items are still 0.9.0 and the earlier DinaSheet build.
 - [x] Correct the Admin Toolkit product page against the 0.9.1 source: Metadata Admin is view-only rather than locally editable, the extension requests only `cookies` and `storage`, and Org Differences is now a sixth app.
@@ -61,7 +61,7 @@ Prepared: July 31, 2026. Last synced with `dina-app`: August 18, 2026.
 - [ ] Confirm the Chrome Web Store privacy declarations exactly match the current extension behavior and the published privacy policy.
 - [ ] Confirm the Store single-purpose statement describes one narrow focus area: Salesforce administration and development workflows.
 - [ ] Verify the developer support email and privacy-policy URL in the Chrome Web Store dashboard.
-- [x] Rename the draft assistant in its source repository to `Dina Agent for Salesforce` before any public submission.
+- [x] Rename the draft assistant in its source repository to `Agent for Salesforce` before any public submission.
 - [x] Exclude Salesforce session IDs, access tokens, cookies, authorization headers, and other Salesforce authentication credentials from AI chat requests; keep Salesforce tool execution inside the extension.
 - [ ] Reverify the complete live backend payload, logging, Firestore retention, and OpenAI transport boundaries before releasing Dina Agent.
 

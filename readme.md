@@ -6,17 +6,14 @@ Public product pages:
 
 - [Admin Toolkit for Salesforce](apps/salesforce-admin-toolkit/index.html), an independent Chrome extension compatible with Salesforce.
 - [DinaSheet for Salesforce](apps/dinasheet-for-salesforce/index.html), a spreadsheet workspace for Salesforce data currently prepared as a release candidate, with an [English](apps/dinasheet-for-salesforce/manual/index.html) and [Japanese](apps/dinasheet-for-salesforce/manual/jp/index.html) screenshot manual.
-- [Dina Agent for Salesforce](apps/salesforce-agentic-bot/index.html), an independent assistant in development for Salesforce workflows.
+- [Agent for Salesforce](apps/salesforce-agentic-bot/index.html), an independent assistant in development for Salesforce workflows.
 - [Common Tools](tools/index.html), a browser-only developer and administrator workbench.
 
-Thirteen earlier-stage apps are listed on the homepage under "In the workshop"
-with a logo, one line, and an honest status. They have no product page yet, so
-their folders under `apps/` hold only a logo: `dinadevops-for-salesforce`,
-`dina-dock-for-salesforce`, `salesforce-prompter`, and `force-connect-voice` as
-`logo.svg`, and the iOS apps `dina`, `dina-3d`, `dina-bloom`, `dina-draw`, and
-`dina-snap` as `logo.png`. Dina Bot for Salesforce, Dina Agent for iOS, and Dina
-Shiori have no icon drawn yet and fall back to `.lab-mark` monograms; DinaSheet
-for Google Sheets reuses the DinaSheet mark.
+Four earlier-stage apps are listed on the homepage under "In the workshop"
+with a logo, one line, and an honest status: DevOps for Salesforce, Dina Dock
+for Salesforce, Prompter for Salesforce, and Voice for Salesforce. They have
+no product page yet, so their folders under `apps/` hold only logo assets.
+Legacy asset folders for apps no longer listed on the homepage remain untouched.
 
 Logos are copied from the app sources in the sibling `dina-app` repository —
 `<App>/icon.svg` for the newer extensions, `<App>/logo.svg` for Admin Toolkit and

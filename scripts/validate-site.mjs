@@ -7,7 +7,7 @@ const warnings = [];
 
 function filesUnder(dir, result = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name === ".git") continue;
+    if ([".git", ".firebase", ".firebase-public"].includes(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) filesUnder(full, result);
     else result.push(full);

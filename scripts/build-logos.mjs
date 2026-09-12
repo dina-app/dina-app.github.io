@@ -178,16 +178,8 @@ const GLYPHS = {
 
 const MARKS = [
   {
-    file: 'apps/salesforce-admin-toolkit/logo.svg',
-    title: 'Admin Toolkit for Salesforce',
-    desc: 'The DinaLab neon D in gold, with a hexagon in the frame gap.',
-    palette: 'gold',
-    glyph: 'hex',
-    transparent: false,
-  },
-  {
     file: 'apps/dinasheet-for-salesforce/logo.svg',
-    title: 'DinaSheet for Salesforce',
+    title: 'Sheet for Salesforce',
     desc: 'The DinaLab neon D in emerald, with a spreadsheet grid in the frame gap.',
     palette: 'emerald',
     glyph: 'grid',
@@ -251,7 +243,7 @@ const MARKS = [
     glyph: 'phone',
     transparent: true,
   },
-  // Shares DinaSheet's emerald: same product, different host.
+  // Shares Sheet for Salesforce's emerald: the same spreadsheet product on another host.
   {
     file: 'apps/dinasheet-for-google-sheets/logo.svg',
     title: 'DinaSheet for Google Sheets',

@@ -20,9 +20,8 @@
 
     <article>
       <h1>Privacy Policy for Admin Toolkit for Salesforce</h1>
-      <p class="updated">Last updated: August 2, 2026</p>
+      <p class="updated">Last updated: September 11, 2026</p>
       <p>Admin Toolkit for Salesforce is an independent Chrome extension for Salesforce metadata administration. It is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
-
       <h2>Data the Extension Handles</h2>
       <p>The extension may handle:</p>
       <ul>
@@ -32,41 +31,36 @@
         <li>Salesforce object schema data used by Object Schema, including global describe results, installed-package namespaces, object and field describes, active picklist values, formulas, and reference targets.</li>
         <li>User-entered Apex, SOQL, SOSL, REST paths, request bodies, metadata search terms, workspace selections, and local edits.</li>
         <li>Salesforce list view and report definitions shown in SheetD's file details, including the list view's generated SOQL and a report's format, report type, scope, filters, and created/last-modified user names, together with the rows those list views and reports return. When a report's results exceed the 2,000-row limit of Salesforce's report API, the extension requests the same report as a workbook export from that same Salesforce endpoint over the existing session.</li>
+        <li>Salesforce configuration and security-posture data read by Org Review, including org limits, license counts, Health Check score and risk settings, security settings metadata such as password and session policy, permission set and permission set group assignments, object and field permissions, authentication providers, OAuth token metadata (app name, user, last-used date), certificate labels and expiration dates, installed package versions, Apex class source and test coverage, flow and trigger inventories, failed job records, and the names of connected apps and named credentials together with named-credential and remote-site endpoint URLs. Org Review does not request credential values, certificate private keys, or OAuth token values.</li>
         <li>Local extension preferences and state such as language, selected workspace folders, selected namespaces, search settings, UI settings, recent/favorite tools, and sanitized operation history or receipts.</li>
       </ul>
-
       <h2>How Data Is Used</h2>
       <p>The extension uses this data only to provide the user-facing extension features:</p>
       <ul>
-        <li>Browse, find, search, edit, download, and deploy Salesforce metadata.</li>
+        <li>Browse, find, search, inspect, and download Salesforce metadata.</li>
         <li>Build package.xml selections.</li>
         <li>Run Salesforce REST, SOQL, SOSL, data export, and anonymous Apex actions initiated by the user.</li>
         <li>View Salesforce setup audit trail, event log files, login history, org summary, and limits.</li>
         <li>Build an interactive object relationship map and display field details selected by the user.</li>
-        <li>Open Salesforce list views, reports, and CSV/XLSX imports in a spreadsheet grid and—only for rows that carry a record Id resolving to one Salesforce object, and only after review and confirmation—update those Salesforce records.</li>
+        <li>Open Salesforce list views, reports, and CSV/XLSX imports in a spreadsheet grid and — only for rows that carry a record Id resolving to one Salesforce object, and only after review and confirmation — update those Salesforce records.</li>
         <li>Store bounded, organization-specific SheetD update receipts locally so users can select recorded prior values and submit an explicitly reviewed rollback update.</li>
+        <li>Record the user's own review decisions for Winter '27 release notes locally so they persist between visits.</li>
+        <li>In Org Review's cleanup workflow, and only in a Salesforce sandbox org, delete one permission set assignment the user has previewed and confirmed by typing its record Id. The extension refuses this action in a production org, re-checks the assignment immediately before sending, and records the outcome locally. No other Org Review action writes to Salesforce.</li>
       </ul>
-
       <h2>Data Sharing and Transfers</h2>
-      <p>Browser API requests containing Salesforce data, identity data, authentication information, and user-entered requests are sent only to the Salesforce org selected by the user. The extension does not transfer this data to developer-operated servers.</p>
+      <p>Browser API requests containing Salesforce data, identity data, authentication information, and user-entered requests are sent only to the Salesforce org selected by the user. The extension does not transfer this data to developer-operated servers. One exception to the single-org rule: Org Review reads the public Salesforce Trust status for the org's instance from <code>api.status.salesforce.com</code>. That request carries no credentials and no org data — only the instance name — and its response is shown in the report.</p>
       <p>The extension does not sell user data, does not use user data for advertising, does not use user data for credit-worthiness or lending purposes, and does not share user data with data brokers or advertising platforms.</p>
       <p>The extension does not include usage analytics or telemetry.</p>
-
       <h2>Local Storage</h2>
-      <p>Workspace preferences, search data, pending edits, recent/favorite tools, sanitized operation history, and bounded SheetD update receipts may be stored locally in Chrome browser storage on the user's device. SheetD workbooks are not persisted. SheetD receipts contain only the successful update time, Salesforce object, record IDs, changed field names, and prior and updated values; they are limited to the newest 50 events and 2 MB per Salesforce organization. Operation history is limited to the most recent 100 entries and excludes session tokens and authorization headers. Files find is scoped to the loaded workspace tree. Users can clear feature-specific saved data from the extension UI where offered; removing the extension clears its Chrome-managed local storage.</p>
-
+      <p>Workspace preferences, search data, pending edits, recent/favorite tools, sanitized operation history, and bounded SheetD update receipts may be stored locally in Chrome browser storage on the user's device. SheetD workbooks are not persisted. SheetD receipts contain only the successful update time, Salesforce object, record IDs, changed field names, and prior and updated values; they are limited to the newest 50 events and 2 MB per Salesforce organization. Operation history is limited to the most recent 100 entries and excludes session tokens and authorization headers. Files find is scoped to the loaded workspace tree. Org Review keeps a bounded local record per Salesforce org and user: the last run's redacted summary, a baseline of finding signals for change detection (at most 1,000 groups), cleanup tasks the user creates (at most 200, each with bounded notes), and a log of sandbox cleanup actions (at most 200 entries holding record Ids, timestamps, and outcome only — no names or credentials). The rendered report itself is not persisted and is rebuilt on each run. Winter '27 Release Note Review keeps the user's own review decisions per release note — status, applicability, a comment of at most 10,000 characters, and the note revision reviewed — in browser storage keyed by Salesforce host; no Salesforce data is stored by that page. Users can clear feature-specific saved data from the extension UI where offered; removing the extension clears its Chrome-managed local storage.</p>
       <h2>Remote Code</h2>
       <p>The extension does not load or execute remotely hosted JavaScript or WebAssembly. Extension JavaScript, HTML, CSS, and third-party spreadsheet code are packaged with the Chrome extension. Responses from the selected Salesforce org are treated as data and are not executed as code.</p>
-
       <h2>Human Access</h2>
       <p>The developer does not have access to Salesforce data handled locally by the extension. The extension does not send this data to developer-operated infrastructure.</p>
-
       <h2>Chrome Web Store Limited Use Disclosure</h2>
       <p>The use of information received from Google APIs will adhere to the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
-
       <h2>Contact</h2>
       <p>For privacy questions or support, use the support contact provided on the Chrome Web Store listing.</p>
-
     </article>
   </main>
 </body>

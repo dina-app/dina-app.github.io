@@ -777,9 +777,12 @@ figcaption {
 }
 
 /* App cards */
+/* Two up rather than auto-fit: the band is capped at 1120px, so four cards can
+   never make a fourth column and auto-fit would leave the last one stranded on
+   a row of its own. */
 .app-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--gap);
 }
 
@@ -794,11 +797,22 @@ figcaption {
   box-shadow: inset 0 3px 0 var(--app-accent), var(--shadow-sm);
 }
 
+/* Accents follow the card order on the homepage, and each one is taken from its
+   own mark: Admin Toolkit's fan indigo, Sheet for Salesforce's neon emerald,
+   SheetConnect's fan emerald, then Agent's violet. */
+.app-card:nth-child(1) {
+  --app-accent: #2540c8;
+}
+
 .app-card:nth-child(2) {
   --app-accent: #12c974;
 }
 
 .app-card:nth-child(3) {
+  --app-accent: #0a9256;
+}
+
+.app-card:nth-child(4) {
   --app-accent: #7c3aed;
 }
 
@@ -1031,7 +1045,7 @@ figcaption {
   box-shadow: var(--shadow-md);
 }
 
-/* DinaSheet leads with a screenshot instead of a logo. */
+/* Sheet for Salesforce leads with a screenshot instead of a logo. */
 .doc-page .hero.wide-shot {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
 }

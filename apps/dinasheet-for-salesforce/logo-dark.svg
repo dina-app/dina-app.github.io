@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="t d">
   <!-- Generated from assets/dinalab-logo.svg by scripts/build-logos.mjs. -->
-  <title id="t">DinaSheet for Salesforce</title>
+  <title id="t">Sheet for Salesforce</title>
   <desc id="d">The DinaLab neon D in emerald, with a spreadsheet grid in the frame gap.</desc>
   <defs>
     <linearGradient id="neon" x1="40" y1="216" x2="216" y2="40" gradientUnits="userSpaceOnUse">

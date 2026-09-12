@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DinaSheet for Salesforce | Spreadsheet Workspace</title>
-  <meta name="description" content="DinaSheet for Salesforce 0.3.2 is an independent Chrome spreadsheet workspace with saved SOQL files, Favorites, downloads, reports, reviewed updates, and rollback.">
+  <title>Sheet for Salesforce | Spreadsheet Workspace</title>
+  <meta name="description" content="Sheet for Salesforce 0.3.2 is an independent Chrome spreadsheet workspace with saved SOQL files, Favorites, downloads, reports, reviewed updates, and rollback.">
   <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/">
   <link rel="alternate" hreflang="ja" href="https://dina.jp/apps/dinasheet-for-salesforce/jp/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -26,16 +26,16 @@
     <header class="hero wide-shot">
       <div>
         <span class="release-pill">Available on the Chrome Web Store · next release 0.3.2</span>
-        <h1>DinaSheet for Salesforce</h1>
+        <h1>Sheet for Salesforce</h1>
         <p class="lead">A focused spreadsheet workspace for Salesforce data. Save SOQL files in folders, organize query, list-view, and report shortcuts in Favorites, download results, and review exact changes before sending a confirmed update.</p>
-        <p class="notice">DinaSheet is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+        <p class="notice">Sheet for Salesforce is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
         <div class="button-row">
           <a class="button" href="https://chromewebstore.google.com/detail/dinasheet-for-salesforce/bclfoieebdchpaplhlgnobcmpjhepgal" target="_blank" rel="noopener">Install from Chrome Web Store</a>
           <a class="button secondary" href="manual/">Read the user manual</a>
           <a class="button secondary" href="PRIVACY_POLICY.html">Privacy Policy</a>
         </div>
       </div>
-      <img class="hero-shot" src="img/01-query-and-grid.png" width="1280" height="800" alt="DinaSheet displaying Salesforce Account records returned by a SOQL query">
+      <img class="hero-shot" src="img/01-query-and-grid.png" width="1280" height="800" alt="Sheet for Salesforce displaying Salesforce Account records returned by a SOQL query">
     </header>
 
     <div class="content">
@@ -59,18 +59,18 @@
         <div class="step-grid">
           <article class="step"><h3>Load</h3><p>Open a saved query, favorite, list view, report, or local CSV or Excel file.</p></article>
           <article class="step"><h3>Review</h3><p>Edit supported rows and inspect every changed field in the review card.</p></article>
-          <article class="step"><h3>Confirm</h3><p>Confirm the exact records and values before DinaSheet sends the update to Salesforce.</p></article>
+          <article class="step"><h3>Confirm</h3><p>Confirm the exact records and values before Sheet for Salesforce sends the update to Salesforce.</p></article>
         </div>
       </section>
 
       <section aria-labelledby="screenshots-title">
-        <h2 id="screenshots-title">See DinaSheet in action</h2>
+        <h2 id="screenshots-title">See Sheet for Salesforce in action</h2>
         <div class="gallery">
-          <figure class="wide"><img src="img/00-org-launcher.png" width="1280" height="800" decoding="async" alt="DinaSheet popup showing the current Salesforce tab and two other signed-in orgs"><figcaption>Choose the current tab or another detected Salesforce org before opening DinaSheet.</figcaption></figure>
+          <figure class="wide"><img src="img/00-org-launcher.png" width="1280" height="800" decoding="async" alt="Sheet for Salesforce popup showing the current Salesforce tab and two other signed-in orgs"><figcaption>Choose the current tab or another detected Salesforce org before opening Sheet for Salesforce.</figcaption></figure>
           <figure><img src="img/02-safe-update-review.png" width="1280" height="800" decoding="async" alt="Changed fields card and confirmation dialog for one Salesforce record"><figcaption>Changed fields remain visible through the final confirmation.</figcaption></figure>
           <figure><img src="img/03-update-audit-rollback.png" width="1280" height="800" decoding="async" alt="Update Audit Log with one selected rollback row"><figcaption>Successful updates create bounded receipts that can prepare prior values for rollback.</figcaption></figure>
-          <figure><img src="img/04-csv-import-details.png" width="1280" height="800" decoding="async" alt="CSV data opened in DinaSheet with import details"><figcaption>CSV and Excel files are parsed locally and opened as editable static cells.</figcaption></figure>
-          <figure><img src="img/05-report-data-only.png" width="1280" height="800" decoding="async" alt="Salesforce report data displayed in DinaSheet"><figcaption>Reports open with useful source and filter details beside the data grid.</figcaption></figure>
+          <figure><img src="img/04-csv-import-details.png" width="1280" height="800" decoding="async" alt="CSV data opened in Sheet for Salesforce with import details"><figcaption>CSV and Excel files are parsed locally and opened as editable static cells.</figcaption></figure>
+          <figure><img src="img/05-report-data-only.png" width="1280" height="800" decoding="async" alt="Salesforce report data displayed in Sheet for Salesforce"><figcaption>Reports open with useful source and filter details beside the data grid.</figcaption></figure>
         </div>
         <div class="button-row"><a class="button secondary" href="manual/">Open the screenshot manual</a></div>
       </section>
@@ -78,7 +78,7 @@
       <section aria-labelledby="runtime-title">
         <h2 id="runtime-title">Local by design</h2>
         <ul>
-          <li>DinaSheet reads the active Salesforce session cookie locally and calls only the selected Salesforce organization over HTTPS.</li>
+          <li>Sheet for Salesforce reads the active Salesforce session cookie locally and calls only the selected Salesforce organization over HTTPS.</li>
           <li>The Salesforce session cookie, cookie domain, and authorization header never leave the extension.</li>
           <li>Preferences, per-org query definitions, bounded Favorites metadata, and bounded update receipts stay in Chrome storage; Salesforce result rows, imported file contents, and workbook snapshots are not persisted there.</li>
           <li>There are no ads, analytics, telemetry, remotely hosted executable code, external messaging, or developer-operated data servers.</li>
@@ -96,7 +96,7 @@
 
       <section aria-labelledby="status-title">
         <h2 id="status-title">Release status</h2>
-        <p>Version 0.3.2 is a validated release candidate awaiting Chrome Web Store upload. It keeps the persistent Query folders and SOQL files, Favorites folders for query files, list views, and reports, and the CSV, Excel, ZIP, or multi-sheet workbook downloads added in 0.3.0, and fixes three defects found while reviewing that Favorites work: a Favorites folder named <code>Default</code> is no longer discarded on the next load in Japanese, saving folder membership keeps a favorite in its drag-and-drop position, and the language picker's tooltip renders its text in both languages instead of a raw key. The current published DinaSheet is available to <a href="https://chromewebstore.google.com/detail/dinasheet-for-salesforce/bclfoieebdchpaplhlgnobcmpjhepgal" target="_blank" rel="noopener">install from the Chrome Web Store</a>.</p>
+        <p>Version 0.3.2 is a validated release candidate awaiting Chrome Web Store upload. It keeps the persistent Query folders and SOQL files, Favorites folders for query files, list views, and reports, and the CSV, Excel, ZIP, or multi-sheet workbook downloads added in 0.3.0, and fixes three defects found while reviewing that Favorites work: a Favorites folder named <code>Default</code> is no longer discarded on the next load in Japanese, saving folder membership keeps a favorite in its drag-and-drop position, and the language picker's tooltip renders its text in both languages instead of a raw key. It also renames the product from DinaSheet to <strong>Sheet for Salesforce</strong>; the Store listing, privacy policy, artwork, and screenshots use the new name, while internal source paths and compatibility identifiers stay as they were. The item currently on the Chrome Web Store is the earlier build and is still listed as DinaSheet until 0.3.2 uploads &mdash; it is the same product and the same item, and is available to <a href="https://chromewebstore.google.com/detail/dinasheet-for-salesforce/bclfoieebdchpaplhlgnobcmpjhepgal" target="_blank" rel="noopener">install from the Chrome Web Store</a>.</p>
       </section>
     </div>
     <p class="page-footer">Salesforce and Chrome are trademarks of their respective owners.</p>

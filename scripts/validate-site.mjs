@@ -50,6 +50,8 @@ const primaryPages = [
   "apps/dinasheet-for-salesforce/PRIVACY_POLICY.html",
   "apps/dinasheet-for-salesforce/manual/index.html",
   "apps/dinasheet-for-salesforce/manual/jp/index.html",
+  "apps/sheetconnect-for-salesforce/index.html",
+  "apps/sheetconnect-for-salesforce/PRIVACY_POLICY.html",
   "apps/salesforce-agentic-bot/index.html",
   "apps/salesforce-agentic-bot/PRIVACY_POLICY.html",
   "apps/salesforce-agentic-bot/TOKUSHOHO.html",
@@ -66,13 +68,17 @@ for (const relative of primaryPages) {
   if (!/<link rel="canonical" href="https:\/\/dina\.jp\//.test(html)) errors.push(`${relative}: missing dina.jp canonical URL`);
 }
 
-for (const relative of [
-  "apps/salesforce-admin-toolkit/PRIVACY_POLICY.html",
-  "apps/dinasheet-for-salesforce/PRIVACY_POLICY.html",
-  "apps/salesforce-agentic-bot/PRIVACY_POLICY.html",
+// SheetConnect also touches Google user data, so its disclosure names the Google
+// API Services policy between the Chrome Web Store one and the Limited Use
+// clause. Its wording is the source of record in `dina-app` and must not drift.
+for (const [relative, disclosure] of [
+  ["apps/salesforce-admin-toolkit/PRIVACY_POLICY.html", "Chrome Web Store User Data Policy, including the Limited Use requirements"],
+  ["apps/dinasheet-for-salesforce/PRIVACY_POLICY.html", "Chrome Web Store User Data Policy, including the Limited Use requirements"],
+  ["apps/salesforce-agentic-bot/PRIVACY_POLICY.html", "Chrome Web Store User Data Policy, including the Limited Use requirements"],
+  ["apps/sheetconnect-for-salesforce/PRIVACY_POLICY.html", "Google API Services User Data Policy</a>, including the Limited Use requirements"],
 ]) {
   const html = fs.readFileSync(path.join(root, relative), "utf8");
-  if (!html.includes("Chrome Web Store User Data Policy, including the Limited Use requirements")) {
+  if (!html.includes(disclosure)) {
     errors.push(`${relative}: missing Limited Use disclosure`);
   }
 }
@@ -149,7 +155,11 @@ for (const file of staleNameFiles) {
   if (path.basename(file) === "404.html") continue;
   if (file === import.meta.filename) continue;
   const text = fs.readFileSync(file, "utf8");
-  if (/DinaLab Admin Toolkit|DinaLab Agent Assistant|Salesforce Agentic Bot|Salesforce Metadata Adminitrator/.test(text)) {
+  // Retired full product names. Matching the full name rather than the bare word
+  // leaves room for the pages that legitimately explain a rename, and leaves the
+  // lowercase URL slug `dinasheet-for-salesforce` (the live Store item and this
+  // site's own paths) and `DinaSheet for Google Sheets` (never renamed) alone.
+  if (/DinaLab Admin Toolkit|DinaLab Agent Assistant|Salesforce Agentic Bot|Salesforce Metadata Adminitrator|DinaSheet for Salesforce|DinaConnect for Salesforce/.test(text)) {
     errors.push(`${path.relative(root, file)}: stale product name`);
   }
 }

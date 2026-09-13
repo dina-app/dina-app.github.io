@@ -36,6 +36,7 @@ function buildPage(lang) {
   const imgDirAbs = path.join(manualRoot, "img", lang);
   const imgPrefix = isEN ? `img/${lang}/` : `../img/${lang}/`;
   const homeHref = isEN ? "../../../" : "../../../../";
+  const markHref = `${homeHref}assets/dinalab-mark.svg`;
   const assetHref = isEN ? "../../../assets/" : "../../../../assets/";
   const overviewHref = isEN ? "../" : "../../";
   const privacyHref = isEN ? "../PRIVACY_POLICY.html" : "../../PRIVACY_POLICY.html";
@@ -95,7 +96,7 @@ function buildPage(lang) {
   <main class="shell">
     <nav class="nav" aria-label="${t("Page navigation", "ページナビゲーション")}">
       <a class="brand" href="${homeHref}">
-        <span class="brand-mark">D</span>
+        <img class="brand-mark" src="${markHref}" alt="" width="36" height="36">
         <span>DinaLab</span>
       </a>
       <span class="nav-links">

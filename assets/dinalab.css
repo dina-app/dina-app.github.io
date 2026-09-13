@@ -393,18 +393,22 @@ pre code {
 /* The light mark is the default source; dark mode swaps to the prismatic mark.
    Both carry transparent corners, so the shadow follows their alpha instead of
    drawing a square around the image canvas. */
+/* The house mark is the Solar tile: one solid drawing that carries its own
+   ground, so it needs no per-theme variant and no plate behind it. It is the only
+   light tile in the family, which is the point — brightness is what marks the
+   parent — so the glow under it is warm rather than tinted to a product hue. */
 img.brand-mark {
   display: block;
   background: none;
   object-fit: contain;
   border: 0;
+  border-radius: 10px;
   box-shadow: none;
-  filter: drop-shadow(0 2px 5px rgba(10, 99, 255, 0.22));
+  filter: drop-shadow(0 2px 5px rgba(150, 106, 0, 0.3));
 }
 
 :root[data-theme="dark"] img.brand-mark {
-  content: url("dina-app-logo-dark.svg");
-  filter: drop-shadow(0 2px 7px rgba(10, 99, 255, 0.4));
+  filter: drop-shadow(0 2px 8px rgba(250, 199, 0, 0.34));
 }
 
 .nav-links,
@@ -797,9 +801,10 @@ figcaption {
   box-shadow: inset 0 3px 0 var(--app-accent), var(--shadow-sm);
 }
 
-/* Accents follow the card order on the homepage, and each one is taken from its
-   own mark: Admin Toolkit's fan indigo, Sheet for Salesforce's neon emerald,
-   SheetConnect's fan emerald, then Agent's violet. */
+/* Accents follow the card order on the homepage, each taken from its own mark's
+   mid-tone: Admin Toolkit indigo, Sheet for Salesforce's neon emerald (the one
+   product with no brand-manifest entry, so still a generated mark), SheetConnect
+   emerald, then Agent violet. */
 .app-card:nth-child(1) {
   --app-accent: #2540c8;
 }
@@ -813,7 +818,7 @@ figcaption {
 }
 
 .app-card:nth-child(4) {
-  --app-accent: #7c3aed;
+  --app-accent: #7040c5;
 }
 
 .app-media {
@@ -911,20 +916,22 @@ figcaption {
   box-shadow: inset 0 3px 0 var(--lab-accent), var(--shadow-sm);
 }
 
+/* Same rule in the workshop band: DevOps slate teal, Dock sky, Prompter magenta,
+   Voice coral, each the mid-tone of its brand mark. */
 .lab-card:nth-child(1) {
-  --lab-accent: #0ea5c4;
+  --lab-accent: #287675;
 }
 
 .lab-card:nth-child(2) {
-  --lab-accent: #0a84e0;
+  --lab-accent: #087fc1;
 }
 
 .lab-card:nth-child(3) {
-  --lab-accent: #c026d3;
+  --lab-accent: #ad239a;
 }
 
 .lab-card:nth-child(4) {
-  --lab-accent: #f43f5e;
+  --lab-accent: #cf314c;
 }
 
 .lab-card:nth-child(5),

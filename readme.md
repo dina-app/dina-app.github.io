@@ -24,32 +24,54 @@ Salesforce, Prompter for Salesforce, and Voice for Salesforce. They have
 no product page yet, so their folders under `apps/` hold only logo assets.
 Legacy asset folders for apps no longer listed on the homepage remain untouched.
 
-Most `apps/*/logo.svg` files, with their `logo-light.svg` / `logo-dark.svg`
-pairs, are output from [`scripts/build-logos.mjs`](scripts/build-logos.mjs),
-which draws each mark from the frame and D geometry in `assets/dinalab-logo.svg`
-and varies only the neon hue and the glyph in the frame gap. Change one of those
-by editing that script's `MARKS` list and rerunning it, not by editing the SVGs:
+The DinaLab house mark is [`assets/dinalab-mark.svg`](assets/dinalab-mark.svg):
+**Solar**, the `resolved` entry in `Dina Brand PM/logo-master/manifest.json` in
+`dina-app`, picked there over eight recorded rounds. It is the same squircle and
+three-band fan as a product mark, in a bright gold no product uses, and it carries
+no glyph — the empty counter is the parent signal. The reasoning is in the
+manifest: brightness is the one axis the eight products leave free, so the only
+light tile in the row is what reads as their parent.
+
+Its white D sits at 1.59 contrast on that gold, below the family's own 3.99 floor.
+The manifest calls that deliberate and names the cost — the D goes soft at 16px —
+and ships `dina-master-ink`, a dark-D variant, for where 16px crispness matters
+more than matching the eight. `favicon.svg` is that case, so the tab icon uses the
+ink letterform, drawn full-bleed, and every other placement uses the white one.
+`scripts/sync-brand-marks.mjs` writes both, so edit neither by hand.
+
+Product marks come from two places, and a product belongs to exactly one of them.
+
+Most of them are the approved **three-tone fan** set, copied from
+`Dina Brand PM/logo-final/` in `dina-app` by
+[`scripts/sync-brand-marks.mjs`](scripts/sync-brand-marks.mjs). Each is a
+self-contained rounded tile that works on either background, so it has no
+light/dark pair and the markup points a single `<img>` at it. The same artwork
+renders each product's packaged extension icon and its Chrome Web Store icon, so
+site, extension and listing match. Re-run after `dina-app` regenerates the set:
+
+```sh
+node scripts/sync-brand-marks.mjs          # copy
+node scripts/sync-brand-marks.mjs --check  # verify only, fails on drift
+```
+
+The rest are the older **neon D** marks, drawn from the frame and D geometry in
+`assets/dinalab-logo.svg` by [`scripts/build-logos.mjs`](scripts/build-logos.mjs),
+which varies only the neon hue and the glyph in the frame gap. These do carry a
+`logo-light.svg` / `logo-dark.svg` pair. Change one by editing that script's
+`MARKS` list and rerunning it, not by editing the SVGs:
 
 ```sh
 node scripts/build-logos.mjs
 ```
 
-Two sets of marks are deliberately outside that generator, so rerunning it leaves
-them alone:
+The two never overlap: a product in `sync-brand-marks.mjs` must not also appear
+in `build-logos.mjs`, or whichever ran last would win. Sheet for Salesforce is
+the notable neon-D holdout — the brand manifest has no entry for it, because its
+emerald grid slot was reassigned to SheetConnect when that product was named.
 
-- The products that have moved to the **three-tone fan** identity carry their
-  shipping mark instead, copied from `dina-app`: Admin Toolkit from
-  `Admin Toolkit for Salesforce/logo.svg`, SheetConnect from
-  `SheetConnect for Salesforce Store Assets/source/brand-mark-master.svg`. The
-  same artwork renders each one's packaged extension icon and Chrome Web Store
-  icon, so the site, the extension and the listing match. Each is a
-  self-contained tile that works on either background, so it has no light/dark
-  pair and the homepage card points a single `<img>` at it. Re-copy from the
-  master when it changes. The rest of the family still ships the neon D and is
-  still generated, which is why the homepage currently shows both.
-- The iOS marks come from each project's `Assets.xcassets/AppIcon.appiconset`,
-  downscaled to 128px and corner-rounded by `scripts/build-ios-app-marks.py`
-  because the store icons ship as hard squares.
+The iOS marks are separate again: they come from each project's
+`Assets.xcassets/AppIcon.appiconset`, downscaled to 128px and corner-rounded by
+`scripts/build-ios-app-marks.py` because the store icons ship as hard squares.
 
 ## Design system
 

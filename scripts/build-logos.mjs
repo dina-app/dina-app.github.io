@@ -7,7 +7,11 @@
 // the glyph that sits in the frame's gap. Products in the same family share a
 // hue.
 //
-// Regenerate every mark with:  node scripts/build-logos.mjs
+// This generator now covers only the products with no entry in the dina-app brand
+// manifest. Everything else, including the DinaLab house mark, is copied from
+// there by scripts/sync-brand-marks.mjs — never add those back here.
+//
+// Regenerate with:  node scripts/build-logos.mjs
 //
 // Edit this file rather than the SVGs — the SVGs are output.
 
@@ -185,47 +189,7 @@ const MARKS = [
     glyph: 'grid',
     transparent: false,
   },
-  {
-    file: 'apps/salesforce-agentic-bot/logo.svg',
-    title: 'Agent for Salesforce',
-    desc: 'The DinaLab neon D in violet, with a linked node cluster in the frame gap.',
-    palette: 'violet',
-    glyph: 'node',
-    transparent: false,
-  },
-  {
-    file: 'apps/dinadevops-for-salesforce/logo.svg',
-    title: 'DevOps for Salesforce',
-    desc: 'The DinaLab neon D in teal, with two linked rings in the frame gap.',
-    palette: 'teal',
-    glyph: 'loop',
-    transparent: true,
-  },
-  {
-    file: 'apps/dina-dock-for-salesforce/logo.svg',
-    title: 'Dock for Salesforce',
-    desc: 'The DinaLab neon D in sky blue, with a dock of three lights in the frame gap.',
-    palette: 'sky',
-    glyph: 'dock',
-    transparent: true,
-  },
-  {
-    file: 'apps/salesforce-prompter/logo.svg',
-    title: 'Prompter for Salesforce',
-    desc: 'The DinaLab neon D in magenta, with a prompt chevron and caret in the frame gap.',
-    palette: 'magenta',
-    glyph: 'prompt',
-    transparent: true,
-  },
-  {
-    file: 'apps/force-connect-voice/logo.svg',
-    title: 'Voice for Salesforce',
-    desc: 'The DinaLab neon D in coral, with a voice waveform in the frame gap.',
-    palette: 'coral',
-    glyph: 'wave',
-    transparent: true,
-  },
-  // Shares Dina Agent's violet: it is the same assistant on iOS.
+  // Violet is Agent's hue: this is the same assistant on iOS.
   {
     file: 'apps/dina-bot-for-salesforce/logo.svg',
     title: 'Dina Bot for Salesforce',
@@ -234,7 +198,7 @@ const MARKS = [
     glyph: 'bot',
     transparent: true,
   },
-  // Shares Dina Agent's violet: it is the same assistant on iOS.
+  // Violet is Agent's hue: this is the same assistant on iOS.
   {
     file: 'apps/dina-agent-ios/logo.svg',
     title: 'Dina Agent for iOS',
@@ -253,14 +217,6 @@ const MARKS = [
     transparent: true,
   },
 ];
-
-const HOME_MARK = {
-  title: 'Dina App',
-  desc: 'The Dina open D in blue, with two sparkles in the frame gap.',
-  palette: 'brand',
-  glyph: 'sparkles',
-  transparent: true,
-};
 
 // ---------------------------------------------------------------------------
 
@@ -354,10 +310,4 @@ for (const mark of MARKS) {
     await writeFile(join(root, themedFile), render(mark, theme));
     console.log(`wrote ${themedFile}`);
   }
-}
-
-for (const theme of ['light', 'dark']) {
-  const file = `assets/dina-app-logo-${theme}.svg`;
-  await writeFile(join(root, file), render(HOME_MARK, theme));
-  console.log(`wrote ${file}`);
 }

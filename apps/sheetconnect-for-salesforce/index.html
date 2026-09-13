@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SheetConnect for Salesforce | Google Sheets Side Panel</title>
-  <meta name="description" content="SheetConnect for Salesforce 0.1.0 is an independent Chrome side panel that imports Salesforce objects, list views, queries, and reports into Google Sheets and sends confirmed record changes back. English and Japanese.">
+  <meta name="description" content="SheetConnect for Salesforce 0.3.0 is an independent Chrome side panel that imports Salesforce objects, list views, queries, and reports into Google Sheets and sends confirmed record changes back. English and Japanese.">
   <link rel="canonical" href="https://dina.jp/apps/sheetconnect-for-salesforce/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/dinalab.css">
@@ -23,7 +23,7 @@
 
     <header class="hero wide-shot">
       <div>
-        <span class="release-pill">Release candidate 0.1.0 · not yet on the Chrome Web Store</span>
+        <span class="release-pill">Release candidate 0.3.0 · not yet on the Chrome Web Store</span>
         <h1>SheetConnect for Salesforce</h1>
         <p class="lead">A side panel for the Google Sheets™ spreadsheet you already have open, connected to the Salesforce organization you are already signed in to. Import objects, list views, your own SOQL, and reports into a worksheet, then send confirmed record changes back. There is no developer-operated backend and no Apps Script to install.</p>
         <p class="notice">SheetConnect is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce or Google.</p>
@@ -79,7 +79,7 @@
         <ul>
           <li>The Salesforce session cookie is read locally, sent only to that same organization, never copied into extension storage, and never passed to the side panel.</li>
           <li>Google access is requested only when you choose Connect Google, and the token stays in Chrome's own token cache.</li>
-          <li>There is no developer-operated server. Requests go to the Salesforce org you selected and to the Google Sheets and Drive APIs for the spreadsheet you have open.</li>
+          <li>There is no developer-operated server. Requests go to the Salesforce org you selected and to the Google Sheets API for the spreadsheet you have open.</li>
           <li>No ads, no analytics, no telemetry, and no remotely hosted executable code.</li>
         </ul>
       </section>
@@ -89,23 +89,23 @@
         <p>Installing grants Salesforce access only. Google access is a separate, later decision.</p>
         <ul>
           <li><code>cookies</code>: reads the existing Salesforce <code>sid</code> cookie locally to list the orgs you are signed in to and authenticate the API calls you request.</li>
-          <li><code>identity</code>: obtains a Chrome-managed Google OAuth token for the Sheets and Drive APIs, only after you select Connect Google.</li>
+          <li><code>identity</code>: obtains a Chrome-managed Google OAuth token for the Google Sheets API, only after you select Connect Google. The only Google OAuth scope requested is <code style="overflow-wrap: anywhere">https://www.googleapis.com/auth/spreadsheets</code>.</li>
           <li><code>sidePanel</code>: presents the interface beside the open spreadsheet.</li>
           <li><code>storage</code>: remembers the selected org, the per-org and per-worksheet source mapping (80 most recent), Bulk API job records (20 most recent, with no field values), and SHA-256 fingerprints of sessions you chose to hide (at most 50).</li>
           <li><code>tabs</code>: enables the toolbar action only on Google Sheets tabs, and confirms before every read or write that the worksheet is still the one open in the active tab.</li>
           <li>Salesforce host access: discovers signed-in orgs and calls their documented APIs for schema, list views, SOQL, reports, and confirmed record operations.</li>
-          <li>Google host access <strong>is optional and is not requested at install</strong>. The extension asks only when you select Connect Google, and does nothing with Google until you grant it; declining leaves the panel on its connect prompt. It covers the documented Sheets API for the worksheet you selected, and the Drive API to read <code>capabilities.canEdit</code> before a write. No file content is read through Drive.</li>
+          <li>Google host access <strong>is optional and is not requested at install</strong>. The extension asks only when you select Connect Google, and does nothing with Google until you grant it; declining leaves the panel on its connect prompt. It covers the documented Google Sheets API for the worksheet you selected. The extension uses only the Google Sheets API for Google data access.</li>
         </ul>
       </section>
 
       <section id="status" aria-labelledby="status-title">
         <h2 id="status-title">Release status</h2>
-        <p>Version 0.1.0 is a validated release candidate. The package builds reproducibly, 117 unit and policy checks pass, the archive matches its source file for file, and the store listing copy and artwork are ready. A draft item exists, but nothing has been published.</p>
-        <p>The Google OAuth client is now bound to the extension ID, verified in the Cloud Console on September 12, 2026, so authorization is no longer blocking. What remains still needs an account or a console rather than code: publishing this privacy policy at its public URL, verifying the Google Cloud project and starting OAuth verification for the sensitive <code>spreadsheets</code> scope, and one live end-to-end test against a disposable sandbox org. The <code>spreadsheets</code> scope review is the long pole, so a listing date is not being promised here.</p>
+        <p>Version 0.3.0 is a release candidate that has passed 125 unit tests, source validation, and ZIP validation. Live sign-in, import, and Salesforce CRUD operations have not yet been tested with the new OAuth client. The extension has not been released on the Chrome Web Store.</p>
+        <p>The Google OAuth consent screen is <strong>In production</strong>, but the app branding and the <code style="overflow-wrap: anywhere">https://www.googleapis.com/auth/spreadsheets</code> scope have not yet been verified by Google. In production is the OAuth publishing status; it does not mean the app is Google-verified or released on the Chrome Web Store. The <a href="PRIVACY_POLICY.html">privacy policy is already publicly available</a>. Google OAuth verification and live end-to-end testing with the new OAuth client remain outstanding; no store release date is promised.</p>
         <p>This product was called DinaConnect during development and was renamed to SheetConnect before release. The draft store item was created under the old name; uploading the package renames it in place, because the manifest key pins the extension ID.</p>
       </section>
     </div>
-    <p class="page-footer">Salesforce, Google Sheets, Google Drive, and Chrome are trademarks of their respective owners.</p>
+    <p class="page-footer">Salesforce, Google Sheets, and Chrome are trademarks of their respective owners.</p>
   </main>
 </body>
 </html>

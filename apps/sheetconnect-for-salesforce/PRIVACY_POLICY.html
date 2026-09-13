@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy for SheetConnect for Salesforce</title>
-  <meta name="description" content="Privacy policy for the SheetConnect for Salesforce Chrome extension, covering Salesforce sessions, Google Sheets and Drive access, storage, and Limited Use.">
+  <meta name="description" content="Privacy policy for the SheetConnect for Salesforce Chrome extension, covering Salesforce sessions, Google Sheets API access, storage, and Limited Use.">
   <link rel="canonical" href="https://dina.jp/apps/sheetconnect-for-salesforce/PRIVACY_POLICY.html">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/dinalab.css">
@@ -24,7 +24,7 @@
   <li><strong>Authentication information:</strong> the Salesforce <code>sid</code> session cookie for organizations where the user is already signed in, read locally to authenticate requests to those same organizations; and a Google OAuth access token obtained through Chrome when the user selects <code>Connect Google</code>.</li>
   <li><strong>Salesforce account and identity data:</strong> the selected Salesforce host, organization ID, user ID, and the username and display name returned by Salesforce APIs.</li>
   <li><strong>Salesforce website and API content:</strong> object and field metadata, list view definitions and queries, report metadata and results, query results, record IDs and field values, and the results of user-confirmed record changes. This content may include personal data if the user's Salesforce organization stores such data and the user chooses to retrieve or update it.</li>
-  <li><strong>Google account and spreadsheet data:</strong> the spreadsheet ID and title, worksheet titles and IDs, and the <code>capabilities.canEdit</code> flag for the open spreadsheet; and the cell values of the worksheet the user selects, read as the input table for update and conversion tools or replaced by an import.</li>
+  <li><strong>Google account and spreadsheet data:</strong> the spreadsheet ID and title, worksheet titles and IDs, and the cell values of the worksheet the user selects, read as the input table for update and conversion tools or replaced by an import.</li>
   <li><strong>User-provided content:</strong> SOQL query text, the selected object, list view or report, data and header ranges, and header-to-field mappings.</li>
   <li><strong>Local preferences and job records:</strong> the selected Salesforce organization, per-organization and per-worksheet source mappings, and Bulk API job records.</li>
   </ul>
@@ -34,7 +34,7 @@
   <p>Data is used only to run what the user asks for: listing the Salesforce organizations the user is signed in to, listing objects, list views, reports and fields, running the selected query or report, writing the results into the selected worksheet, reading the selected worksheet to validate and submit record changes, and looking up Salesforce records to convert values. Salesforce writes and worksheet replacements require the user to confirm a summary naming the organization, object, worksheet and record count first.</p>
 
   <h2>Data sharing and transfers</h2>
-  <p>Requests go only to the Salesforce organization the user selected and to the Google Sheets and Google Drive APIs for the spreadsheet the user has open. The developer operates no server and receives no user data. Salesforce data is transferred to the user's own Google spreadsheet, and worksheet data is transferred to the user's own Salesforce organization, in both cases only as the user directs. Data is not sold, and is not used for advertising or for training generalized models.</p>
+  <p>Requests go only to the Salesforce organization the user selected and to the Google Sheets API for the spreadsheet the user has open. For Google data access, the extension uses only the Google Sheets API and requests only the <code style="overflow-wrap: anywhere">https://www.googleapis.com/auth/spreadsheets</code> OAuth scope. The developer operates no server and receives no user data. Salesforce data is transferred to the user's own Google spreadsheet, and worksheet data is transferred to the user's own Salesforce organization, in both cases only as the user directs. Data is not sold, and is not used for advertising or for training generalized models.</p>
 
   <h2>Storage and retention</h2>
   <ul>
@@ -56,7 +56,7 @@
   <p>SheetConnect for Salesforce's use of information received from Google APIs adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/policies" target="_blank" rel="noopener">Chrome Web Store User Data Policy</a> and the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements. Data is used only to provide the disclosed user-facing import, update and conversion features, is not used for advertising, is not sold, is not used to train generalized AI models, and is not made available for human reading except with the user's affirmative agreement for support, when necessary for security, to comply with applicable law, or after aggregation and anonymization for internal operations. The extension performs no developer-operated analytics or telemetry.</p>
 
   <h2>Independent product</h2>
-  <p>SheetConnect for Salesforce is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce or Google. Salesforce, Google Sheets, Google Drive and Chrome are trademarks of their respective owners.</p>
+  <p>SheetConnect for Salesforce is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce or Google. Salesforce, Google Sheets and Chrome are trademarks of their respective owners.</p>
 
   <h2>Contact</h2>
   <p>For privacy questions, contact the publisher using the verified contact email shown on the Chrome Web Store listing.</p>

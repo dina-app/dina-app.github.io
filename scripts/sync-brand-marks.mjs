@@ -21,8 +21,12 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const master = resolve(root, '../dina-app/Dina Brand PM/logo-final/colour/svg');
-const houseMaster = resolve(root, '../dina-app/Dina Brand PM/logo-master/svg');
+// Worktrees can point at the product checkout with DINA_APP_ROOT.
+const sourceRoot = process.env.DINA_APP_ROOT
+  ? resolve(process.env.DINA_APP_ROOT)
+  : resolve(root, '../dina-app');
+const master = join(sourceRoot, 'Dina Brand PM/logo-final/colour/svg');
+const houseMaster = join(sourceRoot, 'Dina Brand PM/logo-master/svg');
 
 // The house mark. `logo-master/manifest.json` records eight rounds of decisions
 // and names the winner in its `resolved` block: `dina-master`, "Solar" — the same
@@ -50,9 +54,12 @@ const MARKS = [
   { id: 'prompter', dir: 'apps/salesforce-prompter', title: 'Prompter for Salesforce', hue: 'magenta', glyph: 'a prompt chevron and caret' },
 ];
 
-// Sheet for Salesforce is deliberately absent: the brand manifest has no entry
-// for it. Its emerald grid slot was reassigned to SheetConnect, so there is no
-// approved fan mark to copy and it stays on the generated neon D.
+// Sheet for Salesforce has its own canonical dimensional mark in Store Assets.
+// It is distinct from SheetConnect's emerald fan; copy the transparent PNG intact.
+const SHEET = {
+  source: 'DinaSheet for Salesforce Store Assets/brand-mark-master.png',
+  file: 'apps/dinasheet-for-salesforce/logo.png',
+};
 
 const check = process.argv.includes('--check');
 const drift = [];
@@ -83,13 +90,22 @@ function artworkOf(svg) {
 
 function emit(target, out) {
   const path = join(root, target);
-  const current = existsSync(path) ? readFileSync(path, 'utf8') : null;
-  if (current === out) return;
+  const current = existsSync(path) ? readFileSync(path) : null;
+  const bytes = Buffer.isBuffer(out) ? out : Buffer.from(out);
+  if (current?.equals(bytes)) return;
   drift.push(target);
   if (!check) {
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, out);
   }
+}
+
+const sheetSource = join(sourceRoot, SHEET.source);
+if (!existsSync(sheetSource)) {
+  console.error(`missing Sheet master mark: ${sheetSource}`);
+  process.exitCode = 1;
+} else {
+  emit(SHEET.file, readFileSync(sheetSource));
 }
 
 for (const { id, dir, title, hue, glyph } of MARKS) {
@@ -150,15 +166,17 @@ for (const { id, file, title, desc, bleed } of houseVariants) {
 }
 
 if (check) {
-  if (drift.length) {
+  if (process.exitCode) {
+    console.error('Brand mark check incomplete: one or more masters are missing.');
+  } else if (drift.length) {
     console.error(`Brand marks are out of date:\n${drift.map((f) => `- ${f}`).join('\n')}`);
     console.error('Run: node scripts/sync-brand-marks.mjs');
     process.exitCode = 1;
   } else {
-    console.log(`Brand marks match dina-app: ${MARKS.length + houseVariants.length} checked.`);
+    console.log(`Brand marks match dina-app: ${MARKS.length + houseVariants.length + 1} checked.`);
   }
 } else if (drift.length) {
   drift.forEach((f) => console.log(`wrote ${f}`));
 } else {
-  console.log(`Brand marks already match dina-app: ${MARKS.length + houseVariants.length} checked.`);
+  console.log(`Brand marks already match dina-app: ${MARKS.length + houseVariants.length + 1} checked.`);
 }

@@ -7,8 +7,7 @@
 // the glyph that sits in the frame's gap. Products in the same family share a
 // hue.
 //
-// This generator now covers only the products with no entry in the dina-app brand
-// manifest. Everything else, including the DinaLab house mark, is copied from
+// This generator covers legacy marks with no dedicated master source. Everything else, including the DinaLab house mark, is copied from
 // there by scripts/sync-brand-marks.mjs — never add those back here.
 //
 // Regenerate with:  node scripts/build-logos.mjs
@@ -181,14 +180,6 @@ const GLYPHS = {
 // ---------------------------------------------------------------------------
 
 const MARKS = [
-  {
-    file: 'apps/dinasheet-for-salesforce/logo.svg',
-    title: 'Sheet for Salesforce',
-    desc: 'The DinaLab neon D in emerald, with a spreadsheet grid in the frame gap.',
-    palette: 'emerald',
-    glyph: 'grid',
-    transparent: false,
-  },
   // Violet is Agent's hue: this is the same assistant on iOS.
   {
     file: 'apps/dina-bot-for-salesforce/logo.svg',

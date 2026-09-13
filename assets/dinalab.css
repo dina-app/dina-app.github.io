@@ -802,9 +802,8 @@ figcaption {
 }
 
 /* Accents follow the card order on the homepage, each taken from its own mark's
-   mid-tone: Admin Toolkit indigo, Sheet for Salesforce's neon emerald (the one
-   product with no brand-manifest entry, so still a generated mark), SheetConnect
-   emerald, then Agent violet. */
+   palette: Admin Toolkit indigo, Sheet for Salesforce's dimensional green mark,
+   SheetConnect emerald, then Agent violet. */
 .app-card:nth-child(1) {
   --app-accent: #2540c8;
 }

@@ -39,7 +39,7 @@ more than matching the eight. `favicon.svg` is that case, so the tab icon uses t
 ink letterform, drawn full-bleed, and every other placement uses the white one.
 `scripts/sync-brand-marks.mjs` writes both, so edit neither by hand.
 
-Product marks come from two places, and a product belongs to exactly one of them.
+Each product mark has one source, maintained by one script.
 
 Most of them are the approved **three-tone fan** set, copied from
 `Dina Brand PM/logo-final/` in `dina-app` by
@@ -54,7 +54,14 @@ node scripts/sync-brand-marks.mjs          # copy
 node scripts/sync-brand-marks.mjs --check  # verify only, fails on drift
 ```
 
-The rest are the older **neon D** marks, drawn from the frame and D geometry in
+Sheet for Salesforce uses its own **dimensional green D and spreadsheet** master,
+`DinaSheet for Salesforce Store Assets/brand-mark-master.png` in `dina-app`.
+The sync script copies it byte-for-byte to `apps/dinasheet-for-salesforce/logo.png`;
+its transparency works in both themes. This is separate from SheetConnect's fan mark.
+In a worktree without the sibling checkout, set `DINA_APP_ROOT` to the absolute
+path of the product repository when running either sync command.
+
+The remaining legacy assets are the older **neon D** marks, drawn from the frame and D geometry in
 `assets/dinalab-logo.svg` by [`scripts/build-logos.mjs`](scripts/build-logos.mjs),
 which varies only the neon hue and the glyph in the frame gap. These do carry a
 `logo-light.svg` / `logo-dark.svg` pair. Change one by editing that script's
@@ -65,9 +72,8 @@ node scripts/build-logos.mjs
 ```
 
 The two never overlap: a product in `sync-brand-marks.mjs` must not also appear
-in `build-logos.mjs`, or whichever ran last would win. Sheet for Salesforce is
-the notable neon-D holdout — the brand manifest has no entry for it, because its
-emerald grid slot was reassigned to SheetConnect when that product was named.
+in `build-logos.mjs`, or whichever ran last would win. This includes Sheet for
+Salesforce: its dedicated Store Assets master takes precedence over the old generator.
 
 The iOS marks are separate again: they come from each project's
 `Assets.xcassets/AppIcon.appiconset`, downscaled to 128px and corner-rounded by

@@ -159,7 +159,9 @@ for (const file of staleNameFiles) {
   // leaves room for the pages that legitimately explain a rename, and leaves the
   // lowercase URL slug `dinasheet-for-salesforce` (the live Store item and this
   // site's own paths) and `DinaSheet for Google Sheets` (never renamed) alone.
-  if (/DinaLab Admin Toolkit|DinaLab Agent Assistant|Salesforce Agentic Bot|Salesforce Metadata Adminitrator|DinaSheet for Salesforce|DinaConnect for Salesforce/.test(text)) {
+  // Canonical asset directory keeps its compatibility name after the rename.
+  const displayText = text.replaceAll("DinaSheet for Salesforce Store Assets/", "");
+  if (/DinaLab Admin Toolkit|DinaLab Agent Assistant|Salesforce Agentic Bot|Salesforce Metadata Adminitrator|DinaSheet for Salesforce|DinaConnect for Salesforce/.test(displayText)) {
     errors.push(`${path.relative(root, file)}: stale product name`);
   }
 }

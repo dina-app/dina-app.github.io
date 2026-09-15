@@ -19,26 +19,217 @@
   already visible in the user's own tab.
 -->
 <style>
-  :root { color-scheme: light; }
-  body {
-    margin: 0; min-height: 100vh; display: grid; place-items: center;
-    background: #f5f7fa; color: #1b1b1f;
-    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  :root {
+    color-scheme: light;
+    --ink: #1d252c;
+    --muted: #66707a;
+    --gold: #bd6800;
+    --gold-bright: #e48b3b;
+    --gold-soft: #fff5e8;
+    --line: #e8dfd1;
+    --surface: rgba(255, 255, 255, .94);
+    font-family: Inter, "Hiragino Sans", "Yu Gothic", -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
-  main { max-width: 34rem; padding: 2rem 1.5rem; text-align: center; }
-  h1 { margin: 0 0 .5rem; font-size: 1.25rem; }
-  p { margin: 0 0 1rem; color: #5a5f6a; }
-  .error { color: #8a3410; font-weight: 600; }
-  code { background: #eef1f5; padding: .1em .35em; border-radius: 4px; font-size: .9em; }
+  * { box-sizing: border-box; }
+  html { min-width: 320px; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding: 32px;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 18% 16%, rgba(228, 139, 59, .20), transparent 32rem),
+      radial-gradient(circle at 86% 82%, rgba(189, 104, 0, .12), transparent 30rem),
+      linear-gradient(145deg, #fbfaf6 0%, #f2ede3 100%);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    width: 28rem;
+    height: 28rem;
+    border: 1px solid rgba(189, 104, 0, .10);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  body::before { top: -18rem; right: -11rem; }
+  body::after { bottom: -20rem; left: -8rem; }
+  main {
+    position: relative;
+    width: min(100%, 35rem);
+    padding: 30px;
+    overflow: hidden;
+    border: 1px solid rgba(199, 187, 169, .72);
+    border-radius: 26px;
+    background: var(--surface);
+    box-shadow: 0 28px 70px rgba(61, 45, 24, .14), 0 2px 8px rgba(61, 45, 24, .06);
+    backdrop-filter: blur(18px);
+  }
+  main::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, #8d4d02, var(--gold), var(--gold-bright));
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 34px;
+  }
+  .brand img {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(141, 77, 2, .20);
+  }
+  .brand-copy { display: grid; gap: 1px; }
+  .brand-name { font-size: 15px; font-weight: 760; letter-spacing: -.01em; }
+  .brand-meta {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .status-icon {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 22px;
+    border-radius: 18px;
+    color: var(--gold);
+    background: var(--gold-soft);
+  }
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 2.5px solid rgba(189, 104, 0, .20);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  .state-symbol { display: none; width: 27px; height: 27px; }
+  main[data-state="done"] .status-icon { color: #177052; background: #eaf6f0; }
+  main[data-state="error"] .status-icon { color: #a8382f; background: #fbeae7; }
+  main[data-state="done"] .spinner,
+  main[data-state="error"] .spinner { display: none; }
+  main[data-state="done"] .success-symbol,
+  main[data-state="error"] .error-symbol { display: block; }
+  .kicker {
+    margin: 0 0 7px;
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 780;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+  }
+  h1 {
+    margin: 0 0 10px;
+    font-size: clamp(24px, 4vw, 31px);
+    line-height: 1.18;
+    letter-spacing: -.035em;
+  }
+  #detail { margin: 0; color: var(--muted); font-size: 15px; }
+  .permission-note {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 26px;
+    padding: 15px 16px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: #fbf9f4;
+  }
+  .permission-note svg {
+    width: 22px;
+    height: 22px;
+    color: var(--gold);
+    justify-self: center;
+  }
+  .permission-note strong,
+  .permission-note span { display: block; }
+  .permission-note strong { font-size: 13px; }
+  .permission-note span { margin-top: 2px; color: var(--muted); font-size: 12px; }
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 22px;
+    color: #7b817f;
+    font-size: 11px;
+  }
+  .secure { display: inline-flex; align-items: center; gap: 6px; }
+  .secure svg { width: 14px; height: 14px; color: #177052; }
+  button {
+    appearance: none;
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 15px;
+    color: #fff;
+    background: var(--ink);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button:hover { background: #343d44; }
+  button:focus-visible { outline: 3px solid rgba(189, 104, 0, .30); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 560px) {
+    body { padding: 18px; }
+    main { padding: 24px; border-radius: 22px; }
+    .brand { margin-bottom: 28px; }
+    .footer { align-items: flex-start; flex-direction: column; }
+  }
+  @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1.8s; } }
 </style>
-<main>
-  <h1 id="heading">Opening the Google Picker…</h1>
-  <p id="detail">Choose the spreadsheet you want SheetConnect to work with. It is granted one file at a time, and only the files you pick here.</p>
+<main id="status-card" data-state="loading" aria-live="polite">
+  <div class="brand">
+    <img src="./logo.svg" width="46" height="46" alt="">
+    <div class="brand-copy">
+      <span class="brand-name">SheetConnect for Salesforce</span>
+      <span class="brand-meta">DinaLab</span>
+    </div>
+  </div>
+  <div class="status-icon" aria-hidden="true">
+    <span class="spinner"></span>
+    <svg class="state-symbol success-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+    <svg class="state-symbol error-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+  </div>
+  <p class="kicker">Google Sheets access</p>
+  <h1 id="heading">Preparing Google Picker…</h1>
+  <p id="detail">Choose the spreadsheet you want SheetConnect to work with. Access is granted one file at a time.</p>
+  <div class="permission-note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="11" x="5" y="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+    <div>
+      <strong>Only the file you select</strong>
+      <span>Other spreadsheets stay outside SheetConnect until you grant them separately.</span>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="secure">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8Z"/><path d="m9 12 2 2 4-4"/></svg>
+      Secure access through Google Picker
+    </span>
+    <button id="retry" type="button" hidden>Try again</button>
+  </div>
 </main>
 <script src="https://apis.google.com/js/api.js" async defer onload="onApiLoad()" onerror="fail('Google’s Picker library could not be loaded. Check the network connection and reload.')"></script>
 <script>
-  // The published extension. A build loaded unpacked has a different id and will not
-  // be able to talk to this page — that is deliberate, not a bug to work around.
+  // The Store build and release candidates loaded unpacked share this fixed id
+  // through manifest.key. Builds with any other id cannot talk to this page.
   const EXTENSION_ID = "ndlelhglddfgjelpgfhledjnhppflibc";
 
   // Picker API key (a developer key, not an OAuth client), created 2026-09-15 in
@@ -62,17 +253,23 @@
 
   const heading = document.getElementById("heading");
   const detail = document.getElementById("detail");
+  const statusCard = document.getElementById("status-card");
+  const retry = document.getElementById("retry");
+
+  retry.addEventListener("click", () => location.reload());
 
   function fail(message) {
+    statusCard.dataset.state = "error";
     heading.textContent = "Could not open the picker";
-    heading.classList.add("error");
     detail.textContent = message;
+    retry.hidden = false;
   }
 
   function done(message) {
+    statusCard.dataset.state = "done";
     heading.textContent = "Access granted";
-    heading.classList.remove("error");
     detail.textContent = message;
+    retry.hidden = true;
   }
 
   // The spreadsheet the user already had open, so the picker can start on it rather
@@ -133,6 +330,11 @@
     // user's tab, so granting it is one click instead of a search.
     if (fileId) view.setFileIds(fileId);
 
+    const pickerWidth = Math.min(840, Math.max(566, window.innerWidth - 48));
+    const pickerHeight = Math.min(560, Math.max(350, window.innerHeight - 48));
+    heading.textContent = "Choose this spreadsheet";
+    detail.textContent = "Google Picker is ready. Select the spreadsheet shown and confirm access.";
+
     new google.picker.PickerBuilder()
       .setOAuthToken(token)
       .setDeveloperKey(PICKER_API_KEY)
@@ -140,6 +342,7 @@
       .addView(view)
       .setCallback(onPicked)
       .setTitle("Grant SheetConnect access to this spreadsheet")
+      .setSize(pickerWidth, pickerHeight)
       .build()
       .setVisible(true);
   }

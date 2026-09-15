@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SheetConnect for Salesforce | Google Sheets Side Panel</title>
-  <meta name="description" content="SheetConnect for Salesforce 0.3.0 is an independent Chrome side panel that imports Salesforce objects, list views, queries, and reports into Google Sheets and sends confirmed record changes back. English and Japanese.">
+  <meta name="description" content="SheetConnect for Salesforce is an independent Chrome side panel that imports Salesforce objects, list views, queries, and reports into Google Sheets and sends confirmed record changes back. English and Japanese.">
   <link rel="canonical" href="https://dina.jp/apps/sheetconnect-for-salesforce/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../assets/dinalab.css">
@@ -23,12 +23,13 @@
 
     <header class="hero wide-shot">
       <div>
-        <span class="release-pill">Release candidate 0.3.0 · not yet on the Chrome Web Store</span>
+        <span class="release-pill">Version 0.4.3 · on the Chrome Web Store</span>
         <h1>SheetConnect for Salesforce</h1>
         <p class="lead">A side panel for the Google Sheets™ spreadsheet you already have open, connected to the Salesforce organization you are already signed in to. Import objects, list views, your own SOQL, and reports into a worksheet, then send confirmed record changes back. There is no developer-operated backend and no Apps Script to install.</p>
         <p class="notice">SheetConnect is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce or Google.</p>
         <div class="button-row">
-          <a class="button" href="#status">Read the release status</a>
+          <a class="button" href="https://chromewebstore.google.com/detail/sheetconnect-for-salesfor/ndlelhglddfgjelpgfhledjnhppflibc" target="_blank" rel="noopener">Install free</a>
+          <a class="button secondary" href="#status">Read the release status</a>
           <a class="button secondary" href="PRIVACY_POLICY.html">Privacy Policy</a>
         </div>
       </div>
@@ -100,8 +101,9 @@
 
       <section id="status" aria-labelledby="status-title">
         <h2 id="status-title">Release status</h2>
-        <p>Version 0.3.0 is a release candidate that has passed 125 unit tests, source validation, and ZIP validation. Live sign-in, import, and Salesforce CRUD operations have not yet been tested with the new OAuth client. The extension has not been released on the Chrome Web Store.</p>
-        <p>The Google OAuth consent screen is <strong>In production</strong>, but the app branding and the <code style="overflow-wrap: anywhere">https://www.googleapis.com/auth/spreadsheets</code> scope have not yet been verified by Google. In production is the OAuth publishing status; it does not mean the app is Google-verified or released on the Chrome Web Store. The <a href="PRIVACY_POLICY.html">privacy policy is already publicly available</a>. Google OAuth verification and live end-to-end testing with the new OAuth client remain outstanding; no store release date is promised.</p>
+        <p><strong>Version 0.4.3 is published on the Chrome Web Store</strong> and anyone can install it. Every released build passes its unit tests, source validation, and archive validation before it is packaged. Sign-in, import, and Salesforce record updates have been run end to end against a real Salesforce organization and a real Google account.</p>
+        <p>The Google OAuth consent screen is <strong>In production</strong>, and <strong>Google&rsquo;s verification of the requested scope is still open</strong>. In production is the OAuth publishing status; it does not by itself mean the app is Google-verified. Until verification completes you will see Google&rsquo;s unverified-app screen when you connect your Google account, and the number of accounts that can authorize is capped. The <a href="PRIVACY_POLICY.html">privacy policy is publicly available</a>.</p>
+        <p>The Google authorization is being narrowed from <code style="overflow-wrap: anywhere">https://www.googleapis.com/auth/spreadsheets</code>, which reaches every spreadsheet in your Drive, to <code style="overflow-wrap: anywhere">https://www.googleapis.com/auth/drive.file</code>, which reaches only the spreadsheets you hand over yourself through Google&rsquo;s own file picker. That is a reduction in what the extension can see, not an addition.</p>
         <p>This product was called DinaConnect during development and was renamed to SheetConnect before release. The draft store item was created under the old name; uploading the package renames it in place, because the manifest key pins the extension ID.</p>
       </section>
     </div>

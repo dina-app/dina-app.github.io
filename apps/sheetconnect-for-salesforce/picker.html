@@ -1,0 +1,168 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Grant access — SheetConnect for Salesforce</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<!--
+  Published to https://dina.jp/apps/sheetconnect-for-salesforce/picker.html from the
+  dina-app/dina-app.github.io repository. It is not part of the extension archive.
+
+  Why a hosted page exists at all: under the drive.file scope the extension can only
+  touch files the user has handed it through the Google Picker, and the Picker ships
+  as remote code from apis.google.com. Manifest V3 forbids an extension from loading
+  remote code, so the Picker cannot run inside the side panel. It runs here instead,
+  and talks to the extension over externally_connectable.
+
+  The access token is never put in the URL. This page asks the extension for one
+  after it loads, so the token stays out of the address bar, out of history and out
+  of any referrer. The only thing the fragment carries is a spreadsheet id, which is
+  already visible in the user's own tab.
+-->
+<style>
+  :root { color-scheme: light; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center;
+    background: #f5f7fa; color: #1b1b1f;
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 34rem; padding: 2rem 1.5rem; text-align: center; }
+  h1 { margin: 0 0 .5rem; font-size: 1.25rem; }
+  p { margin: 0 0 1rem; color: #5a5f6a; }
+  .error { color: #8a3410; font-weight: 600; }
+  code { background: #eef1f5; padding: .1em .35em; border-radius: 4px; font-size: .9em; }
+</style>
+<main>
+  <h1 id="heading">Opening the Google Picker…</h1>
+  <p id="detail">Choose the spreadsheet you want SheetConnect to work with. It is granted one file at a time, and only the files you pick here.</p>
+</main>
+<script src="https://apis.google.com/js/api.js" async defer onload="onApiLoad()" onerror="fail('Google’s Picker library could not be loaded. Check the network connection and reload.')"></script>
+<script>
+  // The published extension. A build loaded unpacked has a different id and will not
+  // be able to talk to this page — that is deliberate, not a bug to work around.
+  const EXTENSION_ID = "ndlelhglddfgjelpgfhledjnhppflibc";
+
+  // Picker API key (a developer key, not an OAuth client), created 2026-09-15 in
+  // sheetconnect-salesforce and restricted there to the Google Picker API and an
+  // HTTP referrer of https://dina.jp/*.
+  //
+  // It is public because it has to be: the Picker reads it from the page. Treat the
+  // restrictions as hygiene rather than as the security boundary — a Referer header
+  // can be forged. What actually protects the user is that this key on its own does
+  // nothing: every file the Picker returns was chosen by a signed-in person, against
+  // their own OAuth token, and drive.file grants only what they picked.
+  const PICKER_API_KEY = "AIzaSyC4W2PP7aRnJF_pFmd8Gg-UCQ5nirijRSQ";
+
+  // The Cloud project number — "the Id of the application needing to access the
+  // user's files via the Drive API", in the Picker's own words. This is what a
+  // drive.file grant attaches to, so it has to be the project that issued the
+  // access token: the same project as the extension's oauth2.client_id, whose
+  // leading digits are this number. Get it wrong and the user picks a file, the
+  // picker reports success, and every later read still returns 404.
+  const CLOUD_PROJECT_NUMBER = "472463652740";
+
+  const heading = document.getElementById("heading");
+  const detail = document.getElementById("detail");
+
+  function fail(message) {
+    heading.textContent = "Could not open the picker";
+    heading.classList.add("error");
+    detail.textContent = message;
+  }
+
+  function done(message) {
+    heading.textContent = "Access granted";
+    heading.classList.remove("error");
+    detail.textContent = message;
+  }
+
+  // The spreadsheet the user already had open, so the picker can start on it rather
+  // than making them hunt through Drive. Anything else in the fragment is ignored.
+  function targetFileId() {
+    const id = decodeURIComponent(location.hash.replace(/^#/, "")).trim();
+    return /^[A-Za-z0-9_-]{10,}$/.test(id) ? id : "";
+  }
+
+  function askExtension(message) {
+    return new Promise((resolve, reject) => {
+      if (!window.chrome?.runtime?.sendMessage) {
+        reject(new Error("Open this page from the SheetConnect side panel — it cannot grant access on its own."));
+        return;
+      }
+      chrome.runtime.sendMessage(EXTENSION_ID, message, (response) => {
+        const failure = chrome.runtime.lastError;
+        if (failure) {
+          reject(new Error("SheetConnect did not answer. Make sure the extension is installed and enabled, then try again."));
+          return;
+        }
+        if (!response?.ok) {
+          reject(new Error(response?.error || "SheetConnect could not start the picker."));
+          return;
+        }
+        resolve(response);
+      });
+    });
+  }
+
+  async function onApiLoad() {
+    // Catches a key that was cleared, half-pasted or replaced with a placeholder.
+    // Without it the Picker fails with a blank window and no explanation.
+    if (!/^AIza[\w-]{30,}$/.test(PICKER_API_KEY)) {
+      fail("This page has no usable Picker API key. Create one in Google Cloud Console under the same project as the OAuth client, restrict it to the Picker API and the dina.jp referrer, and publish it here.");
+      return;
+    }
+    let token;
+    try {
+      ({ token } = await askExtension({ type: "picker-token" }));
+    } catch (error) {
+      fail(error.message);
+      return;
+    }
+    gapi.load("picker", () => {
+      try {
+        showPicker(token);
+      } catch (error) {
+        fail(`The picker failed to open: ${error.message}`);
+      }
+    });
+  }
+
+  function showPicker(token) {
+    const view = new google.picker.DocsView(google.picker.ViewId.SPREADSHEETS).setMode(google.picker.DocsViewMode.LIST);
+    const fileId = targetFileId();
+    // setFileIds pre-navigates the picker to the spreadsheet already open in the
+    // user's tab, so granting it is one click instead of a search.
+    if (fileId) view.setFileIds(fileId);
+
+    new google.picker.PickerBuilder()
+      .setOAuthToken(token)
+      .setDeveloperKey(PICKER_API_KEY)
+      .setAppId(CLOUD_PROJECT_NUMBER)
+      .addView(view)
+      .setCallback(onPicked)
+      .setTitle("Grant SheetConnect access to this spreadsheet")
+      .build()
+      .setVisible(true);
+  }
+
+  async function onPicked(data) {
+    if (data.action === google.picker.Action.CANCEL) {
+      fail("No spreadsheet was granted. SheetConnect cannot read this file until you pick it here.");
+      return;
+    }
+    if (data.action !== google.picker.Action.PICKED) return;
+    const picked = (data.docs || []).map((doc) => ({ id: doc.id, name: doc.name })).filter((doc) => doc.id);
+    if (!picked.length) {
+      fail("The picker returned no file.");
+      return;
+    }
+    try {
+      await askExtension({ type: "picker-granted", files: picked });
+      done(`SheetConnect can now use ${picked.map((doc) => doc.name || doc.id).join(", ")}. You can close this tab.`);
+      // The panel reopens on its own; closing is a convenience, and is silently
+      // refused when the tab was not opened by script.
+      setTimeout(() => window.close(), 1200);
+    } catch (error) {
+      fail(error.message);
+    }
+  }
+</script>

@@ -812,8 +812,11 @@ figcaption {
   --app-accent: #12c974;
 }
 
+/* SheetConnect. Gold since 2026-09-15, when Google refused the green mark in OAuth
+   verification for reading as Google Sheets. The card accent has to move with it —
+   the logo beside it is the same file the reviewer sees. */
 .app-card:nth-child(3) {
-  --app-accent: #0a9256;
+  --app-accent: #bd6800;
 }
 
 .app-card:nth-child(4) {

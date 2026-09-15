@@ -46,7 +46,7 @@ const FAVICON = { id: 'dina-master-ink', file: 'favicon.svg' };
 // keeps its original slug even where the product has since been renamed.
 const MARKS = [
   { id: 'admin-toolkit', dir: 'apps/salesforce-admin-toolkit', title: 'Admin Toolkit for Salesforce', hue: 'indigo', glyph: 'a hexagon' },
-  { id: 'google-sheet', dir: 'apps/sheetconnect-for-salesforce', title: 'SheetConnect for Salesforce', hue: 'emerald', glyph: 'a spreadsheet grid' },
+  { id: 'google-sheet', dir: 'apps/sheetconnect-for-salesforce', title: 'SheetConnect for Salesforce', hue: 'gold', glyph: 'a two-way exchange arrow' },
   { id: 'dina-agent', dir: 'apps/salesforce-agentic-bot', title: 'Agent for Salesforce', hue: 'violet', glyph: 'a linked node cluster' },
   { id: 'dina-dock', dir: 'apps/dina-dock-for-salesforce', title: 'Dock for Salesforce', hue: 'sky blue', glyph: 'a dock of three lights' },
   { id: 'dinadevops', dir: 'apps/dinadevops-for-salesforce', title: 'DevOps for Salesforce', hue: 'slate teal', glyph: 'two linked rings' },
@@ -55,7 +55,7 @@ const MARKS = [
 ];
 
 // Sheet for Salesforce has its own canonical dimensional mark in Store Assets.
-// It is distinct from SheetConnect's emerald fan; copy the transparent PNG intact.
+// It is distinct from SheetConnect's gold fan; copy the transparent PNG intact.
 const SHEET = {
   source: 'DinaSheet for Salesforce Store Assets/brand-mark-master.png',
   file: 'apps/dinasheet-for-salesforce/logo.png',

@@ -1178,9 +1178,11 @@ figcaption {
 }
 
 
+/* auto-fit, not a fixed pair: the grid held two cards while a commercial
+   disclosure existed and holds one now. */
 .legal-link-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 14px;
   margin-top: 22px;
 }
@@ -1229,46 +1231,6 @@ figcaption {
 .product-footer p {
   max-width: 82ch;
   margin: 0;
-}
-
-.legal-disclosure-page article {
-  overflow: hidden;
-}
-
-.legal-disclosure-table {
-  margin: 28px 0;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-}
-
-.legal-disclosure-row {
-  display: grid;
-  grid-template-columns: minmax(190px, 0.34fr) minmax(0, 1fr);
-  border-bottom: 1px solid var(--line);
-}
-
-.legal-disclosure-row:last-child {
-  border-bottom: 0;
-}
-
-.legal-disclosure-row > div {
-  min-width: 0;
-  padding: 16px 18px;
-}
-
-.legal-disclosure-row > [role="rowheader"] {
-  background: var(--surface-inset);
-  color: var(--ink-soft);
-  font-weight: 800;
-}
-
-.legal-disclosure-row > [role="cell"] {
-  border-left: 1px solid var(--line);
-}
-
-.legal-disclosure-row :last-child {
-  margin-bottom: 0;
 }
 
 .feature {
@@ -1464,8 +1426,7 @@ figcaption {
   .feature-grid,
   .step-grid,
   .gallery,
-  .legal-link-grid,
-  .legal-disclosure-row {
+  .legal-link-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1476,11 +1437,6 @@ figcaption {
 
   .product-section-nav a {
     flex: 0 0 auto;
-  }
-
-  .legal-disclosure-row > [role="cell"] {
-    border-top: 1px solid var(--line);
-    border-left: 0;
   }
 
   .manual-page .toc ol {

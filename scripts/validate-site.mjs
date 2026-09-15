@@ -54,7 +54,6 @@ const primaryPages = [
   "apps/sheetconnect-for-salesforce/PRIVACY_POLICY.html",
   "apps/salesforce-agentic-bot/index.html",
   "apps/salesforce-agentic-bot/PRIVACY_POLICY.html",
-  "apps/salesforce-agentic-bot/TOKUSHOHO.html",
   "blog/index.html",
   "blog/salesforce-org-review-before-release/index.html",
   "blog/safer-salesforce-bulk-data-updates/index.html",
@@ -95,7 +94,6 @@ for (const [label, fragment] of [
   ["no-payment-details disclosure", "No payment details are collected"],
   ["open-source intent stated as a direction", "not a commitment"],
   ["privacy policy link", "href=\"PRIVACY_POLICY.html\""],
-  ["commercial disclosure link", "href=\"TOKUSHOHO.html\""],
   ["Salesforce certification disclaimer", "certified by Salesforce"],
 ]) {
   if (!agentProduct.includes(fragment)) errors.push(`${agentProductPath}: missing ${label}`);
@@ -106,11 +104,10 @@ for (const section of ["overview", "features", "free", "support", "legal"]) {
   if (!agentProduct.includes(`id=\"${section}\"`)) errors.push(`${agentProductPath}: missing ${section} section`);
 }
 
-// Nothing on this site is sold. These guard the claim rather than the old paid
-// model: a price, a plan, a checkout or a leftover owner placeholder appearing
-// again means a page and reality have diverged.
-const agentLegalPath = "apps/salesforce-agentic-bot/TOKUSHOHO.html";
-const commercialFree = [agentProductPath, agentLegalPath, "index.html"];
+// Nothing on this site is sold. These guard the claim: a price, a checkout or a
+// leftover owner placeholder appearing again means a page and reality have
+// diverged.
+const commercialFree = [agentProductPath, "index.html", "apps/salesforce-agentic-bot/PRIVACY_POLICY.html"];
 for (const relative of commercialFree) {
   const text = fs.readFileSync(path.join(root, relative), "utf8");
   if (/\$\s?\d+(?:\.\d+)?\s*(?:USD|\/\s*month|／月)/i.test(text)) {
@@ -124,18 +121,24 @@ for (const relative of commercialFree) {
   }
 }
 
-const agentLegal = fs.readFileSync(path.join(root, agentLegalPath), "utf8");
-for (const [label, fragment] of [
-  ["no-sales statement", "販売を行っていません"],
-  ["free-of-charge statement", "無料で提供"],
-  ["no applicable disclosure items", "該当するものはありません"],
-  ["commitment to disclose before any future sale", "記載のないまま販売を行うことはありません"],
-  ["English summary", "DinaLab does not sell any of the products"],
-]) {
-  if (!agentLegal.includes(fragment)) errors.push(`${agentLegalPath}: missing ${label}`);
+// The Japan commercial-transaction disclosure was removed with the sales it
+// described. It was a published URL, so it redirects rather than 404s; if the
+// page ever comes back, it must be linked and listed again deliberately.
+const retiredDisclosure = "apps/salesforce-agentic-bot/TOKUSHOHO.html";
+if (fs.existsSync(path.join(root, retiredDisclosure))) {
+  errors.push(`${retiredDisclosure}: retired page is back — relink it and restore its sitemap entry, or delete it`);
+}
+for (const [relative, text] of allFiles
+  .filter((file) => /\.(?:html|xml)$/.test(file))
+  .map((file) => [path.relative(root, file), fs.readFileSync(file, "utf8")])) {
+  if (relative === "404.html") continue;
+  if (text.includes("TOKUSHOHO.html")) errors.push(`${relative}: links to the retired ${retiredDisclosure}`);
+}
+if (!fs.readFileSync(path.join(root, "404.html"), "utf8").includes('"/apps/salesforce-agentic-bot/TOKUSHOHO.html"')) {
+  errors.push(`404.html: missing the redirect for the retired ${retiredDisclosure}`);
 }
 
-for (const relative of [agentProductPath, "apps/salesforce-agentic-bot/PRIVACY_POLICY.html", agentLegalPath]) {
+for (const relative of [agentProductPath, "apps/salesforce-agentic-bot/PRIVACY_POLICY.html"]) {
   const text = fs.readFileSync(path.join(root, relative), "utf8");
   if (/(?:sk|rk)_(?:live|test)_[A-Za-z0-9]+|whsec_[A-Za-z0-9]+|STRIPE_SECRET_KEY|OPENAI_API_KEY/i.test(text)) {
     errors.push(`${relative}: contains a secret or secret-key identifier`);

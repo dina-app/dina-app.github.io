@@ -90,19 +90,10 @@ for (const [label, fragment] of [
   ["administrator audience", "Salesforce administrators"],
   ["developer audience", "developers"],
   ["consultant audience", "consultants"],
-  ["Plus USD price", "$9"],
-  ["Pro USD price", "$29"],
-  ["monthly USD price unit", "USD / month"],
-  ["no-overage disclosure", "No overage charges"],
-  ["non-live billing disclosure", "Billing is not live"],
-  ["Plus availability", "Coming soon"],
-  ["Pro availability", "Closed pilot"],
-  ["Max unavailable status", "Not for sale"],
-  ["Stripe Checkout disclosure", "Stripe Checkout"],
-  ["Stripe Customer Portal disclosure", "Stripe Customer Portal"],
-  ["refund owner decision placeholder", "[OWNER DECISION REQUIRED]"],
-  ["support email placeholder", "[OWNER INPUT REQUIRED: SUPPORT EMAIL]"],
-  ["support phone placeholder", "[OWNER INPUT REQUIRED: SUPPORT PHONE]"],
+  ["free-to-use statement", "free to use"],
+  ["no-paid-plans disclosure", "no paid plans"],
+  ["no-payment-details disclosure", "No payment details are collected"],
+  ["open-source intent stated as a direction", "not a commitment"],
   ["privacy policy link", "href=\"PRIVACY_POLICY.html\""],
   ["commercial disclosure link", "href=\"TOKUSHOHO.html\""],
   ["Salesforce certification disclaimer", "certified by Salesforce"],
@@ -110,35 +101,36 @@ for (const [label, fragment] of [
   if (!agentProduct.includes(fragment)) errors.push(`${agentProductPath}: missing ${label}`);
 }
 
-for (const section of ["overview", "features", "pricing", "support", "legal"]) {
+for (const section of ["overview", "features", "free", "support", "legal"]) {
   if (!agentProduct.includes(`href=\"#${section}\"`)) errors.push(`${agentProductPath}: missing ${section} navigation link`);
   if (!agentProduct.includes(`id=\"${section}\"`)) errors.push(`${agentProductPath}: missing ${section} section`);
 }
 
-if (/checkout\.stripe\.com|buy\.stripe\.com/i.test(agentProduct)) {
-  errors.push(`${agentProductPath}: contains an active Stripe checkout URL while billing is not live`);
+// Nothing on this site is sold. These guard the claim rather than the old paid
+// model: a price, a plan, a checkout or a leftover owner placeholder appearing
+// again means a page and reality have diverged.
+const agentLegalPath = "apps/salesforce-agentic-bot/TOKUSHOHO.html";
+const commercialFree = [agentProductPath, agentLegalPath, "index.html"];
+for (const relative of commercialFree) {
+  const text = fs.readFileSync(path.join(root, relative), "utf8");
+  if (/\$\s?\d+(?:\.\d+)?\s*(?:USD|\/\s*month|／月)/i.test(text)) {
+    errors.push(`${relative}: contains a price while nothing is sold`);
+  }
+  if (/checkout\.stripe\.com|buy\.stripe\.com|Stripe Checkout|Stripe Customer Portal/i.test(text)) {
+    errors.push(`${relative}: contains a checkout or billing flow while nothing is sold`);
+  }
+  if (/\[OWNER (?:INPUT|DECISION) REQUIRED/.test(text)) {
+    errors.push(`${relative}: contains an unresolved owner placeholder`);
+  }
 }
 
-const agentLegalPath = "apps/salesforce-agentic-bot/TOKUSHOHO.html";
 const agentLegal = fs.readFileSync(path.join(root, agentLegalPath), "utf8");
 for (const [label, fragment] of [
-  ["seller field", "販売業者・法人名"],
-  ["address field", "所在地"],
-  ["phone field", "電話番号"],
-  ["email field", "メールアドレス"],
-  ["price field", "販売価格"],
-  ["payment timing field", "支払時期"],
-  ["service delivery field", "サービス提供時期"],
-  ["cancellation field", "解約"],
-  ["refund field", "返品・返金"],
-  ["seller placeholder", "[OWNER INPUT REQUIRED: SELLER / LEGAL NAME]"],
-  ["address placeholder", "[OWNER INPUT REQUIRED: BUSINESS ADDRESS]"],
-  ["refund decision placeholder", "[OWNER DECISION REQUIRED]"],
-  ["Plus USD price", "$9 USD"],
-  ["Pro USD price", "$29 USD"],
-  ["Max not sold disclosure", "Max：販売していません"],
-  ["Stripe Checkout disclosure", "Stripe Checkout"],
-  ["Stripe Customer Portal disclosure", "Stripe Customer Portal"],
+  ["no-sales statement", "販売を行っていません"],
+  ["free-of-charge statement", "無料で提供"],
+  ["no applicable disclosure items", "該当するものはありません"],
+  ["commitment to disclose before any future sale", "記載のないまま販売を行うことはありません"],
+  ["English summary", "DinaLab does not sell any of the products"],
 ]) {
   if (!agentLegal.includes(fragment)) errors.push(`${agentLegalPath}: missing ${label}`);
 }

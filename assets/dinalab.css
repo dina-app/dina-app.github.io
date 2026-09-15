@@ -1177,117 +1177,6 @@ figcaption {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 24px;
-}
-
-.pricing-card {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  padding: 22px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--surface-soft);
-}
-
-.pricing-card.featured-plan {
-  border-color: var(--green);
-  box-shadow: inset 0 3px 0 var(--green);
-}
-
-.pricing-card.unavailable-plan {
-  background: var(--surface-inset);
-}
-
-.plan-status {
-  align-self: flex-start;
-  padding: 4px 9px;
-  border-radius: var(--r-pill);
-  background: var(--green-soft);
-  color: var(--green-ink);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.plan-status.muted-status {
-  background: var(--surface);
-  color: var(--muted);
-}
-
-.pricing-card h3 {
-  margin: 18px 0 4px;
-  font-size: 24px;
-}
-
-.plan-price {
-  min-height: 64px;
-  margin: 0 0 18px;
-  color: var(--muted);
-}
-
-.plan-price strong {
-  color: var(--ink);
-  font-size: clamp(30px, 4vw, 42px);
-  line-height: 1.2;
-}
-
-.plan-price span {
-  white-space: nowrap;
-}
-
-.pricing-card ul {
-  margin-top: auto;
-  margin-bottom: 0;
-  padding-left: 20px;
-}
-
-.subscription-details {
-  margin-top: 22px;
-  padding: 22px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  background: var(--surface-soft);
-}
-
-.owner-placeholder {
-  overflow-wrap: anywhere;
-  color: var(--accent-ink);
-  font-family: var(--mono);
-  font-size: 0.88em;
-  font-weight: 800;
-}
-
-.contact-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin: 22px 0 0;
-}
-
-.contact-list > div {
-  min-width: 0;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  background: var(--surface-soft);
-}
-
-.contact-list dt {
-  margin-bottom: 6px;
-  color: var(--muted);
-  font-size: var(--fs-sm);
-  font-weight: 800;
-}
-
-.contact-list dd {
-  margin: 0;
-}
 
 .legal-link-grid {
   display: grid;
@@ -1575,8 +1464,6 @@ figcaption {
   .feature-grid,
   .step-grid,
   .gallery,
-  .pricing-grid,
-  .contact-list,
   .legal-link-grid,
   .legal-disclosure-row {
     grid-template-columns: 1fr;

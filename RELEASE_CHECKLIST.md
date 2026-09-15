@@ -1,6 +1,6 @@
 # Website release checklist
 
-Prepared: July 31, 2026. Last synced with `dina-app`: September 12, 2026.
+Prepared: July 31, 2026. Last synced with `dina-app`: September 15, 2026.
 
 ## Release scope
 
@@ -14,6 +14,14 @@ Prepared: July 31, 2026. Last synced with `dina-app`: September 12, 2026.
 - Legacy URL redirects
 
 ## Completed in this release
+
+- [x] **Nothing on this site is sold.** Removed the Agent for Salesforce pricing plans ($9 Plus, $29 Pro, Max not-for-sale), the Stripe Checkout and Customer Portal disclosures, and the refund placeholder, replacing them with a Free section: every product is free, there is no checkout, and no payment details are collected. The homepage says so in the products band and carries it as a fifth working principle.
+- [x] Stated the open-source intent the way the site states everything else — as a direction, not a date: some products are intended to be open-sourced once they run smoothly in real use.
+- [x] Rewrote `特定商取引法に基づく表記` for a no-sales position. The disclosure applies to businesses that sell, so with no transactions there are no seller, price, payment, delivery, cancellation or refund items; the page now says that in Japanese and English and commits to publishing all of them before any future sale. Its URL is unchanged.
+- [x] Cleared every published `[OWNER INPUT REQUIRED]` and `[OWNER DECISION REQUIRED]` placeholder. Those were live on dina.jp — two in the Agent privacy policy, two in its support section, and several in the disclosure page. Support now points at the Chrome Web Store verified contact, as the other privacy policies already did.
+- [x] Turned the site validator's Agent checks around: instead of asserting the paid model, it now fails if a price, a Stripe checkout or portal reference, or an owner placeholder appears on the homepage, the Agent page or the disclosure page.
+- [x] Removed 111 lines of pricing-card, plan, subscription and contact-list CSS that no markup used any more.
+- [ ] If paid sales are ever reintroduced, restore the seller identity, address, phone, email, delivery timing, cancellation terms and refund policy in `特定商取引法に基づく表記` **before** any checkout goes live, and reverse the validator guards added above.
 
 - [x] Full sync against `dina-app` on September 12, 2026: every extension's manifest name and version checked against the site, plus its shipping mark and privacy policy. Findings below.
 - [x] Admin Toolkit 0.9.1 to **0.10.0**: product page, homepage card, and current-focus board updated; Winter '27 Release Review added as the seventh app; Org Review rewritten as a composed pipeline; the new sandbox-only permission-set-assignment write path and the `api.status.salesforce.com` Trust-status read disclosed; privacy policy rebuilt from the September 11 source of record, which the site's copy predated by five weeks.
@@ -53,9 +61,9 @@ Prepared: July 31, 2026. Last synced with `dina-app`: September 12, 2026.
 - [ ] Confirm Admin Toolkit 0.10.0 and Sheet for Salesforce 0.3.2 store status before publish. Both are validated release candidates in `dina-app` awaiting upload, and the pages frame them as the next release; the published Store items are still 0.9.0 and the earlier Sheet for Salesforce build.
 - [x] Correct the Admin Toolkit product page against the 0.9.1 source: Metadata Admin is view-only rather than locally editable, the extension requests only `cookies` and `storage`, and Org Differences is now a sixth app.
 - [x] Rewrite the Dina Agent product page for 0.5.0, covering the combined business workspaces, advisory AI panel, extension-local Salesforce tools, bounded context, Google account, and honest paid-production gates.
-- [x] Expand the Dina Agent route into a Stripe Japan review-oriented business page with clear audience, product scope, USD pricing, non-live sales status, Stripe Checkout and Customer Portal disclosures, support placeholders, and legal navigation.
-- [x] Add a dedicated `特定商取引法に基づく表記` page covering seller, address, phone, email, pricing, payment timing, delivery, cancellation, and refund fields without inventing owner information.
-- [ ] Replace every Dina Agent `[OWNER INPUT REQUIRED]` and `[OWNER DECISION REQUIRED]` placeholder with owner-approved seller, contact, tax, delivery, cancellation, and refund information before paid sales open.
+- [x] ~~Superseded September 15, 2026 by the free-of-charge decision above.~~ Expand the Dina Agent route into a Stripe Japan review-oriented business page with clear audience, product scope, USD pricing, non-live sales status, Stripe Checkout and Customer Portal disclosures, support placeholders, and legal navigation.
+- [x] ~~Superseded September 15, 2026: the page now records that nothing is sold.~~ Add a dedicated `特定商取引法に基づく表記` page covering seller, address, phone, email, pricing, payment timing, delivery, cancellation, and refund fields without inventing owner information.
+- [x] ~~Superseded September 15, 2026: the placeholders are gone along with the sales they were for.~~ Replace every Dina Agent `[OWNER INPUT REQUIRED]` and `[OWNER DECISION REQUIRED]` placeholder with owner-approved seller, contact, tax, delivery, cancellation, and refund information before paid sales open.
 - [x] Reconcile `manual/_build` with the published manual. The generator had drifted back to 0.8.0 content — section 5 was still GitHub Metadata Sync and the 0.9.0 release notes were missing — so the documented regenerate command would have reverted the manual. It now reproduces the published pages exactly, and section intros can carry a callout.
 - [ ] Give the manual a 0.9.1 pass once that release ships: Org Differences as its own app chapter, Metadata Admin change-set retrieval, a six-app popup capture, and the 0.9.1 release notes. The manual currently documents 0.9.0, which is what the Store serves.
 - [x] Move every page onto one design system (`assets/dinalab.css`), replacing the three divergent palettes previously inlined per page.

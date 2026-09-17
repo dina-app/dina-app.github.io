@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Redirect | DinaLab</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/dinalab.css">
+  <script src="/assets/site-theme.js"></script>
+  <style>
+    body {
+      display: grid;
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      place-items: center;
+    }
+
+    .not-found {
+      width: min(620px, 100%);
+    }
+
+    .not-found h1 {
+      font-size: var(--fs-h3);
+    }
+
+    .not-found ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+  </style>
+  <script>
+    const legacyRoutes = new Map([
+      ["/salesforce-metadata-adminitrator.md", "/apps/salesforce-admin-toolkit/"],
+      ["/salesforce-metadata-adminitrator/", "/apps/salesforce-admin-toolkit/"],
+      ["/salesforce-metadata-adminitrator/PRIVACY_POLICY.md", "/apps/salesforce-admin-toolkit/PRIVACY_POLICY.html"],
+      ["/salesforce-metadata-adminitrator/PRIVACY_POLICY.html", "/apps/salesforce-admin-toolkit/PRIVACY_POLICY.html"],
+      ["/Salesforce%20Metadata%20Adminitrator", "/apps/salesforce-admin-toolkit/"],
+      ["/Salesforce Metadata Adminitrator", "/apps/salesforce-admin-toolkit/"],
+      ["/Salesforce%20Metadata%20Adminitrator/", "/apps/salesforce-admin-toolkit/"],
+      ["/Salesforce Metadata Adminitrator/", "/apps/salesforce-admin-toolkit/"],
+      ["/Salesforce%20Metadata%20Adminitrator/README.md", "/apps/salesforce-admin-toolkit/"],
+      ["/Salesforce Metadata Adminitrator/README.md", "/apps/salesforce-admin-toolkit/"],
+      ["/salesforce-agentic-bot.md", "/apps/salesforce-agentic-bot/"],
+      ["/Salesforce%20Agentic%20Bot", "/apps/salesforce-agentic-bot/"],
+      ["/Salesforce Agentic Bot", "/apps/salesforce-agentic-bot/"],
+      ["/Salesforce%20Agentic%20Bot/README.md", "/apps/salesforce-agentic-bot/"],
+      ["/Salesforce Agentic Bot/README.md", "/apps/salesforce-agentic-bot/"],
+      ["/Salesforce%20Agentic%20Bot/", "/apps/salesforce-agentic-bot/"],
+      ["/Salesforce Agentic Bot/", "/apps/salesforce-agentic-bot/"],
+      ["/apps/salesforce-agentic-bot/TOKUSHOHO.html", "/apps/salesforce-agentic-bot/"]
+    ]);
+
+    const rawPath = window.location.pathname;
+    let decodedPath = rawPath;
+
+    try {
+      decodedPath = decodeURIComponent(rawPath);
+    } catch (error) {
+      decodedPath = rawPath;
+    }
+
+    const target = legacyRoutes.get(rawPath) || legacyRoutes.get(decodedPath);
+
+    if (target) {
+      window.location.replace(target);
+    }
+  </script>
+</head>
+<body class="doc-page">
+  <main class="card not-found">
+    <p class="eyebrow">404</p>
+    <h1>Page Not Found</h1>
+    <p class="notice">The app pages have moved to simpler public links.</p>
+    <ul class="meta-list">
+      <li><a href="/apps/salesforce-admin-toolkit/">Admin Toolkit for Salesforce</a></li>
+      <li><a href="/apps/dinasheet-for-salesforce/">Sheet for Salesforce</a></li>
+      <li><a href="/apps/sheetconnect-for-salesforce/">SheetConnect for Salesforce</a></li>
+      <li><a href="/apps/salesforce-agentic-bot/">Agent for Salesforce</a></li>
+      <li><a href="/blog/">Business Guides</a></li>
+      <li><a href="/tools/">Common Tools</a></li>
+      <li><a href="/">DinaLab home</a></li>
+    </ul>
+  </main>
+</body>
+</html>

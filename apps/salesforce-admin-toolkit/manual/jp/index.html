@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ユーザーマニュアル | Admin Toolkit for Salesforce</title>
+  <meta name="description" content="Admin Toolkit for Salesforce のスクリーンショット付きユーザーマニュアル。">
+  <link rel="canonical" href="https://dina.jp/apps/salesforce-admin-toolkit/manual/jp/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../assets/dinalab.css">
+  <script src="../../../../assets/site-theme.js"></script>
+  <script>
+    (function () {
+      try { if (localStorage.getItem("dinalab-lang") === "en") { location.replace("../"); } } catch (error) {}
+    })();
+  </script>
+</head>
+<body class="doc-page manual-page">
+  <main class="shell">
+    <nav class="nav" aria-label="ページナビゲーション">
+      <a class="brand" href="../../../../">
+        <img class="brand-mark" src="../../../../assets/dinalab-mark.svg" alt="" width="36" height="36">
+        <span>DinaLab</span>
+      </a>
+      <span class="nav-links">
+        <a href="../../">Admin Toolkit for Salesforce に戻る</a>
+        <a class="lang-toggle" href="../" hreflang="en" lang="en" aria-label="View this manual in English / 英語で表示" title="View this manual in English / 英語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17"/><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"/></svg><span>EN</span></a>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="ダークテーマを切り替え" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      </span>
+    </nav>
+
+    <header class="intro">
+      <span class="release-pill">リリース 0.9.0 対応マニュアル</span>
+      <h1>Admin Toolkit for Salesforce ユーザーマニュアル</h1>
+      <p class="lead">インストールから、ポップアップでのアプリ起動、各ワークスペース・ツールの使い方まで、44 枚のスクリーンショットで解説します。</p>
+      <p class="notice">スクリーンショットは Salesforce Developer Edition 組織で撮影し、組織を特定できる情報（ホスト名、組織名・ユーザー名、ID、アドレス）はサンプル値に置き換えています。Salesforce は Salesforce, Inc. の商標です。本拡張機能は Salesforce の提携・承認・後援を受けていません。</p>
+    </header>
+
+    <div class="content" style="margin-top:28px;">
+      <section class="toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">目次</h2>
+        <ol>
+          <li><a href="#getting-started">1. はじめに・ポップアップ</a></li>
+          <li><a href="#metadata-admin">2. Metadata Admin for Salesforce</a></li>
+          <li><a href="#force-sheet">3. SheetD</a></li>
+          <li><a href="#permission-explorer">4. Permission Explorer（権限エクスプローラー）</a></li>
+          <li><a href="#org-comparison">5. メタデータ組織比較</a></li>
+          <li><a href="#org-review">6. Org Review（組織レビュー）</a></li>
+          <li><a href="#object-schema">7. Object Schema（オブジェクトスキーマ）</a></li>
+          <li><a href="#document-folders">8. ドキュメントフォルダー</a></li>
+          <li><a href="#rest-explorer">9. REST Explorer</a></li>
+          <li><a href="#data-export">10. データエクスポート</a></li>
+          <li><a href="#run-apex">11. Apex 実行</a></li>
+          <li><a href="#monitoring">12. 制限値とモニタリング</a></li>
+          <li><a href="#builtin-manual">13. 内蔵マニュアル（英語/日本語）</a></li>
+          <li><a href="#release-notes">14. リリースノート</a></li>
+        </ol>
+      </section>
+
+      <section id="getting-started" aria-labelledby="getting-started-title">
+        <h2 id="getting-started-title">1. はじめに・ポップアップ</h2>
+        <p>拡張機能をインストールし、任意の Salesforce タブからポップアップを開きます。サインイン済みのセッションをそのまま利用します。</p>
+        <ol>
+          <li><a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Chrome ウェブストアから Admin Toolkit for Salesforce をインストール</a>します。</li>
+          <li>任意の Salesforce タブを開いていつもどおりサインインします（別途ログインは不要）。</li>
+          <li>拡張機能のアイコンをクリックしてポップアップを開きます。</li>
+        </ol>
+        <figure class="narrow">
+          <img src="../img/jp/popup-apps.png" alt="ポップアップのアプリタブ" loading="lazy">
+          <figcaption>アプリタブは 5 つの主要ワークスペースを起動します。</figcaption>
+        </figure>
+        <figure class="narrow">
+          <img src="../img/jp/popup-tools.png" alt="ポップアップのツールタブ" loading="lazy">
+          <figcaption>ツールタブには単機能ページが並びます。</figcaption>
+        </figure>
+        <figure class="narrow">
+          <img src="../img/jp/popup-org.png" alt="ポップアップの組織タブ" loading="lazy">
+          <figcaption>組織タブは接続中の組織とユーザーの概要を表示します。</figcaption>
+        </figure>
+        <figure class="narrow">
+          <img src="../img/jp/popup-search.png" alt="ポップアップのメタデータ検索" loading="lazy">
+          <figcaption>API 参照名・ラベル・テキストで組織全体のメタデータを検索します。</figcaption>
+        </figure>
+      </section>
+
+      <section id="metadata-admin" aria-labelledby="metadata-admin-title">
+        <h2 id="metadata-admin-title">2. Metadata Admin for Salesforce</h2>
+        <p>組織のメタデータをコンパクトなソース形式ツリーで参照し、ドッキングされた詳細列でフォルダーやファイルを確認し、ワークスペース内の検索、ローカル編集の追跡、package.xml の組み立てができます。表示ツリーは <code>objects</code>、<code>classes</code>、<code>flows</code> などのメタデータフォルダーから直接始まりますが、実際の <code>force-app/main/default</code> ソースパスは変わりません。</p>
+        <figure>
+          <img src="../img/jp/metadata-tree.png" alt="メタデータのワークスペースツリー" loading="lazy">
+          <figcaption>読み込んだソース形式のメタデータワークスペース。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/metadata-folder-table.png" alt="フォルダーのレコード表" loading="lazy">
+          <figcaption>並べ替え可能な表で表示したフォルダー内レコード。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/metadata-file.png" alt="メタデータファイルの表示" loading="lazy">
+          <figcaption>確認・ローカル編集のために開いたファイル。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/metadata-search.png" alt="ワークスペース検索結果" loading="lazy">
+          <figcaption>名前・ラベル・内容スニペットにマッチします。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/metadata-namespaces.png" alt="ワークスペース名前空間メニュー" loading="lazy">
+          <figcaption>未管理／管理名前空間にワークスペースを絞り込みます。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/metadata-changed-files.png" alt="変更ファイルパネル" loading="lazy">
+          <figcaption>デプロイまたは破棄できるローカル変更ファイル。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/metadata-package-xml.png" alt="package.xml ビルダー" loading="lazy">
+          <figcaption>ツリーの選択から package.xml を組み立てます。</figcaption>
+        </figure>
+      </section>
+
+      <section id="force-sheet" aria-labelledby="force-sheet-title">
+        <h2 id="force-sheet-title">3. SheetD</h2>
+        <p>Salesforce データのためのマルチタブ・スプレッドシート。オブジェクトやレポートの参照、SOQL の実行、ファイル詳細の確認、対応オブジェクトレコードの編集、確定更新前の変更項目レビューができます。</p>
+        <figure>
+          <img src="../img/jp/force-sheet-query-editor.png" alt="SheetD の SOQL エディター" loading="lazy">
+          <figcaption>SOQL クエリエディター。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/force-sheet-query-results.png" alt="SOQL 結果グリッド" loading="lazy">
+          <figcaption>グリッドにストリーミングされたクエリ結果。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/force-sheet-report-tab.png" alt="SheetD のレポートタブ" loading="lazy">
+          <figcaption>組織のレポートをシートに展開します。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/force-sheet-upload-tab.png" alt="SheetD のアップロードタブ" loading="lazy">
+          <figcaption>CSV / XLSX ファイルを取り込みます。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/force-sheet-workspace.png" alt="SheetD のワークスペースツリー" loading="lazy">
+          <figcaption>Objects と Reports で整理されたスプレッドシートファイル。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/force-sheet-objects-tree.png" alt="Objects ツリー" loading="lazy">
+          <figcaption>リストビューを持つオブジェクト。</figcaption>
+        </figure>
+      </section>
+
+      <section id="permission-explorer" aria-labelledby="permission-explorer-title">
+        <h2 id="permission-explorer-title">4. Permission Explorer（権限エクスプローラー）</h2>
+        <p>有効なオブジェクト・項目アクセスを、付与元のプロファイル、権限セット、権限セットグループまで追跡し、返されたアクセスメタデータで 2 ユーザーを比較できます。</p>
+
+      </section>
+
+      <section id="org-comparison" aria-labelledby="org-comparison-title">
+        <h2 id="org-comparison-title">5. メタデータ組織比較</h2>
+        <p>Metadata Admin の <strong>Compare with</strong> を使い、現在のワークスペースと、このブラウザーですでにログイン済みの別 Salesforce 組織を比較します。Org Differences パネルを Different、Only here、Only in the compared org で絞り込み、ファイルを個別またはまとめて選択できます。候補ファイルを開くと両組織のソース本文を取得し、実際の変更を左右に並べて確認できます。</p>
+        <div class="callout warning"><p><strong>0.9.0 ではプレビューのみ：</strong>Deploy Selected Preview と Pull Selected Preview は読み取り専用の確認フローです。どちらの組織にもメタデータを書き込みません。</p></div>
+
+      </section>
+
+      <section id="org-review" aria-labelledby="org-review-title">
+        <h2 id="org-review-title">6. Org Review（組織レビュー）</h2>
+        <p>ページを開くと自動で実行される読み取り専用の組織健全性アセスメント。各セクションに根拠と改善ガイダンスが付き、PDF・Markdown・サマリー JSON・エビデンス JSON でエクスポートできます。</p>
+        <figure>
+          <img src="../img/jp/org-review-summary.png" alt="Org Review のエグゼクティブサマリー" loading="lazy">
+          <figcaption>健全性スコアカード付きの完了済みレビュー。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/org-review-collectors.png" alt="コレクターの進捗" loading="lazy">
+          <figcaption>レポートに寄与した読み取り専用コレクター。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/org-review-login-policy.png" alt="ログイン・セッションポリシー（D3）" loading="lazy">
+          <figcaption>セクション D3：ログイン・セッション・認証ポリシー。</figcaption>
+        </figure>
+      </section>
+
+      <section id="object-schema" aria-labelledby="object-schema-title">
+        <h2 id="object-schema-title">7. Object Schema（オブジェクトスキーマ）</h2>
+        <p>選択可能な任意のオブジェクトからインタラクティブなリレーションマップを作成し、その下の Fields スプレッドシートで選択可能な全オブジェクトの全項目を探索できます。</p>
+        <figure>
+          <img src="../img/jp/object-schema-start.png" alt="起動直後の Object Schema" loading="lazy">
+          <figcaption>コントロールと全オブジェクトの Fields シート。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/object-schema-suggestions.png" alt="オブジェクト名のサジェスト" loading="lazy">
+          <figcaption>Object Name は API 参照名とラベルを提案します。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/object-schema-packaged-menu.png" alt="Packaged Objects メニュー" loading="lazy">
+          <figcaption>組織ごとにパッケージ名前空間を絞り込みます。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/object-schema-map-fields.png" alt="マップと Fields シート" loading="lazy">
+          <figcaption>作成したマップ、リレーション詳細、Fields シート。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/object-schema-find-path.png" alt="オブジェクト検索のパス" loading="lazy">
+          <figcaption>ルートからの接続パスをハイライトします。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/object-schema-node-fields.png" alt="ノードで項目を絞り込み" loading="lazy">
+          <figcaption>ノードをクリックすると Fields シートが絞り込まれます。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/object-schema-fields-search.png" alt="グローバル項目検索" loading="lazy">
+          <figcaption>グローバル検索は一致セルをすべてハイライトします。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/object-schema-vertical.png" alt="縦型レイアウト" loading="lazy">
+          <figcaption>親が上、子が下。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/object-schema-relationship-table.png" alt="リレーション表" loading="lazy">
+          <figcaption>アクセシブルなリレーション表ビュー。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/object-schema-visible-filter.png" alt="表示オブジェクトフィルター" loading="lazy">
+          <figcaption>マップからオブジェクトを隠します。</figcaption>
+        </figure>
+      </section>
+
+      <section id="document-folders" aria-labelledby="document-folders-title">
+        <h2 id="document-folders-title">8. ドキュメントフォルダー</h2>
+        <p>Salesforce のライブラリとフォルダーを参照し、対応ファイルをプレビューし、フォルダーパスを保持した ZIP として選択内容をダウンロードできます。フォルダー選択は再帰的で、500 ファイル・250 MB まで、実行中にキャンセルできます。</p>
+        <figure>
+          <img src="../img/jp/document-folders-tree.png" alt="ドキュメントフォルダーツリー" loading="lazy">
+          <figcaption>ワークスペースとフォルダーの参照。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/document-folders-selection.png" alt="チェックボックス選択" loading="lazy">
+          <figcaption>フォルダーにチェックするとサブツリー全体を選択。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/document-folders-context-menu.png" alt="フォルダーのコンテキストメニュー" loading="lazy">
+          <figcaption>コンテキストメニューからのフォルダー操作。</figcaption>
+        </figure>
+      </section>
+
+      <section id="rest-explorer" aria-labelledby="rest-explorer-title">
+        <h2 id="rest-explorer-title">9. REST Explorer</h2>
+        <p>エンドポイントテンプレートで Salesforce REST API リクエストを組み立て、接続中の組織に送信し、JSON レスポンスを確認できます。リクエストはあなたが送信したときだけ実行されます。</p>
+        <figure>
+          <img src="../img/jp/rest-api.png" alt="REST リクエストビルダー" loading="lazy">
+          <figcaption>エンドポイントテンプレート付きのリクエストビルダー。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/rest-api-response.png" alt="REST の JSON レスポンス" loading="lazy">
+          <figcaption>JSON レスポンスの確認。</figcaption>
+        </figure>
+      </section>
+
+      <section id="data-export" aria-labelledby="data-export-title">
+        <h2 id="data-export-title">10. データエクスポート</h2>
+        <p>SOQL・SOSL・GraphQL クエリやレポートエクスポートを実行し、CSV グリッドまたは JSON でプレビューしてダウンロードできます。</p>
+        <figure>
+          <img src="../img/jp/data-export.png" alt="データエクスポートのソースとクエリ" loading="lazy">
+          <figcaption>エクスポート元とクエリの選択。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/data-export-results.png" alt="エクスポート結果グリッド" loading="lazy">
+          <figcaption>ダウンロード可能なエクスポート結果。</figcaption>
+        </figure>
+      </section>
+
+      <section id="run-apex" aria-labelledby="run-apex-title">
+        <h2 id="run-apex-title">11. Apex 実行</h2>
+        <p>匿名 Apex を実行し、コンパイル結果・実行ステータス・デバッグ出力を確認できます。</p>
+        <figure>
+          <img src="../img/jp/run-apex.png" alt="Apex 実行エディター" loading="lazy">
+          <figcaption>匿名 Apex エディター。</figcaption>
+        </figure>
+      </section>
+
+      <section id="monitoring" aria-labelledby="monitoring-title">
+        <h2 id="monitoring-title">12. 制限値とモニタリング</h2>
+        <p>組織の読み取り専用モニタリングページ：使用量バー付きの API 制限、設定変更履歴、ログイン履歴、イベントログファイル。</p>
+        <figure>
+          <img src="../img/jp/limits.png" alt="組織の制限値" loading="lazy">
+          <figcaption>使用量バー付きの組織制限値。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/setup-audit-trail.png" alt="設定変更履歴" loading="lazy">
+          <figcaption>最近の設定変更。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/login-history.png" alt="ログイン履歴" loading="lazy">
+          <figcaption>最近のログイン試行。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/event-logs.png" alt="イベントログファイル" loading="lazy">
+          <figcaption>利用可能なイベントログファイル。</figcaption>
+        </figure>
+      </section>
+
+      <section id="builtin-manual" aria-labelledby="builtin-manual-title">
+        <h2 id="builtin-manual-title">13. 内蔵マニュアル（英語/日本語）</h2>
+        <p>拡張機能には英語・日本語の内蔵マニュアルとバージョンごとのリリースノートが同梱されています。各ページのヘッダーに言語切り替えがあります。</p>
+        <figure>
+          <img src="../img/jp/builtin-manual.png" alt="内蔵マニュアルの概要" loading="lazy">
+          <figcaption>内蔵マニュアル。</figcaption>
+        </figure>
+        <figure>
+          <img src="../img/jp/builtin-manual-apps.png" alt="内蔵マニュアルのアプリの章" loading="lazy">
+          <figcaption>内蔵マニュアルのアプリの章。</figcaption>
+        </figure>
+      </section>
+
+      <section id="release-notes" aria-labelledby="release-notes-title">
+        <h2 id="release-notes-title">14. リリースノート</h2>
+        <p>最近のリリースの概要です。いずれのリリースでも、新しい Chrome 権限・ホスト権限・リモートコード・テレメトリー・広告・サードパーティのデータサービスは追加されていません。完全なバージョン別履歴は内蔵マニュアルに同梱されています。</p>
+        <h3>0.9.0（2026-08-05）</h3>
+        <ul>
+          <li>実際のソースパスを保持したまま Metadata Admin の表示ツリーをフラット化し、コンパクトな行、パンくず、見える行アクション、ドッキング式でサイズ変更可能な詳細パネルを追加。</li>
+          <li>ログイン済み Salesforce 組織間の読み取り専用比較を追加。差分フィルター、ツリーバッジ、フォルダー別件数、左右並列のソース確認に対応。</li>
+          <li>承認済み DinaLab グラデーションマークから拡張機能アイコンを再構築。Chrome 権限やブラウザーホスト権限の追加はありません。</li>
+        </ul>
+        <h3>0.8.0（2026-08-02）</h3>
+        <ul>
+          <li>SheetD を DinaSheet エンジンで再構築し、オブジェクトとレポートを編集可能なデータとして直接開き、更新前に保留中の項目変更を正確に確認できるようにしました。</li>
+          <li>Salesforce レポート API の行数上限を超える結果向けに、ワークブックフォールバックを追加。</li>
+          <li>未公開だった metadata-sync 機能を、パッケージ済み拡張機能、マニュアル、プライバシーポリシー、ブラウザー権限から削除。</li>
+        </ul>
+        <h3>0.7.0（2026-07-18）</h3>
+        <ul>
+          <li>有効なオブジェクト・項目アクセスをプロファイル、権限セット、権限セットグループまで追跡する Permission Explorer を追加。</li>
+        </ul>
+        <h3>0.6.2（2026-07-15）</h3>
+        <ul>
+          <li>ドキュメントフォルダー：フォルダー選択が遅延読み込みサブツリーを含めて再帰的・アトミックになり、重複ドキュメントもフォルダーパスを保持した ZIP パスで扱われます。</li>
+          <li>ドキュメントフォルダー：500 ファイル・250 MB の ZIP 上限、キャンセル可能なダウンロード、共有ドキュメント内容の一括取得を追加。</li>
+          <li>Object Schema：項目一覧をスプレッドシート化。ヘッダーフィルター、全体検索のハイライト、CSV エクスポート、全画面に対応。Packaged Objects は既定で「なし」、組織ごとに記憶。</li>
+          <li>Object Schema はポップアップのアプリタブ専用に。40px のコンパクトヘッダーを Metadata Admin と Org Review にも適用。</li>
+        </ul>
+        <h3>0.6.1（2026-07-14）</h3>
+        <ul>
+          <li>ドキュメントフォルダーのダウンロードをツリーのチェックボックス選択と選択済み項目パネル中心に再構築。</li>
+          <li>ポップアップのアプリタブに Object Schema を追加（サジェスト、パッケージ名前空間、マップ検索、ズーム、レイアウト）。</li>
+          <li>ツールページのナビゲーションから Org Review を削除。</li>
+          <li>同梱スプレッドシートエンジンの THIRD-PARTY-NOTICES.txt を追加。</li>
+        </ul>
+        <h3>0.6.0（2026-07-11）</h3>
+        <ul>
+          <li>健全性・制限値・設定変更・ログイン失敗を対象とする読み取り専用の Org Review を追加。</li>
+          <li>組織ごとの読み取り専用ロックと、Apex・データ変更・メタデータデプロイの一貫したリスク確認を追加。</li>
+          <li>SheetD のワークスペースファイルが最後のグリッドを共有する問題を修正。値と数式はファイル・組織ごとに分離。</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="more-title">
+        <h2 id="more-title">関連リンク</h2>
+        <ul>
+          <li><a href="../" hreflang="en">English version of this manual</a></li>
+          <li><a href="../../">Admin Toolkit for Salesforce の概要</a></li>
+          <li><a href="../../PRIVACY_POLICY.html">プライバシーポリシー</a></li>
+          <li><a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Chrome ウェブストアの掲載ページ</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <script>
+    (function () {
+      var link = document.querySelector(".lang-toggle");
+      if (!link) return;
+      link.addEventListener("click", function () {
+        try { localStorage.setItem("dinalab-lang", "en"); } catch (error) {}
+      });
+    })();
+  </script>
+</body>
+</html>

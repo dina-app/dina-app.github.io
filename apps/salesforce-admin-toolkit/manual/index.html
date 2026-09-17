@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Manual | Admin Toolkit for Salesforce</title>
+  <meta name="description" content="Step-by-step user manual for Admin Toolkit for Salesforce with screenshots.">
+  <link rel="canonical" href="https://dina.jp/apps/salesforce-admin-toolkit/manual/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../assets/dinalab.css">
+  <script src="../../../assets/site-theme.js"></script>
+  <script>
+    (function () {
+      try { if (localStorage.getItem("dinalab-lang") === "ja") { location.replace("jp/"); } } catch (error) {}
+    })();
+  </script>
+</head>
+<body class="doc-page manual-page">
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="../../../">
+        <img class="brand-mark" src="../../../assets/dinalab-mark.svg" alt="" width="36" height="36">
+        <span>DinaLab</span>
+      </a>
+      <span class="nav-links">
+        <a href="../">Back to Admin Toolkit for Salesforce</a>
+        <a class="lang-toggle" href="jp/" hreflang="ja" lang="ja" aria-label="日本語で表示 / View this manual in Japanese" title="日本語で表示 / View this manual in Japanese"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17"/><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"/></svg><span>日本語</span></a>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      </span>
+    </nav>
+
+    <header class="intro">
+      <span class="release-pill">Manual for release 0.9.0</span>
+      <h1>Admin Toolkit for Salesforce — User Manual</h1>
+      <p class="lead">How to install the toolkit, launch its apps from the popup, and use each workspace and tool — with 54 screenshots.</p>
+      <p class="notice">Screenshots were taken against a Salesforce Developer Edition org; org-identifying values (host, org and user names, IDs, addresses) are replaced with sample values. Salesforce is a trademark of Salesforce, Inc. This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+    </header>
+
+    <div class="content" style="margin-top:28px;">
+      <section class="toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">Contents</h2>
+        <ol>
+          <li><a href="#getting-started">1. Getting started &amp; popup</a></li>
+          <li><a href="#metadata-admin">2. Metadata Admin for Salesforce</a></li>
+          <li><a href="#force-sheet">3. SheetD</a></li>
+          <li><a href="#permission-explorer">4. Permission Explorer</a></li>
+          <li><a href="#org-comparison">5. Metadata org comparison</a></li>
+          <li><a href="#org-review">6. Org Review</a></li>
+          <li><a href="#object-schema">7. Object Schema</a></li>
+          <li><a href="#document-folders">8. Document Folders</a></li>
+          <li><a href="#rest-explorer">9. REST Explorer</a></li>
+          <li><a href="#data-export">10. Data Export</a></li>
+          <li><a href="#run-apex">11. Run Apex</a></li>
+          <li><a href="#monitoring">12. Limits &amp; monitoring</a></li>
+          <li><a href="#builtin-manual">13. Built-in manual (EN/JP)</a></li>
+          <li><a href="#release-notes">14. Release notes</a></li>
+        </ol>
+      </section>
+
+      <section id="getting-started" aria-labelledby="getting-started-title">
+        <h2 id="getting-started-title">1. Getting started &amp; popup</h2>
+        <p>Install the toolkit, then open the popup from any Salesforce tab — it reuses the session you are already signed in with.</p>
+        <ol>
+          <li>Install <a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Admin Toolkit for Salesforce from the Chrome Web Store</a>.</li>
+          <li>Open any Salesforce tab and sign in as usual — no separate login.</li>
+          <li>Click the extension icon to open the popup.</li>
+        </ol>
+        <figure class="narrow">
+          <img src="img/en/popup-apps.png" alt="Popup Apps tab" loading="lazy">
+          <figcaption>The Apps tab launches the five primary workspaces.</figcaption>
+        </figure>
+        <figure class="narrow">
+          <img src="img/en/popup-tools.png" alt="Popup Tools tab" loading="lazy">
+          <figcaption>The Tools tab lists every single-purpose page.</figcaption>
+        </figure>
+        <figure class="narrow">
+          <img src="img/en/popup-org.png" alt="Popup Org tab" loading="lazy">
+          <figcaption>The Org tab summarizes the connected org and user.</figcaption>
+        </figure>
+        <figure class="narrow">
+          <img src="img/en/popup-search.png" alt="Popup metadata search" loading="lazy">
+          <figcaption>Search metadata across the org by API name, label, or text.</figcaption>
+        </figure>
+        <figure class="narrow">
+          <img src="img/en/popup-search-suggestions.png" alt="Popup search suggestions" loading="lazy">
+          <figcaption>Type-ahead suggestions while searching.</figcaption>
+        </figure>
+      </section>
+
+      <section id="metadata-admin" aria-labelledby="metadata-admin-title">
+        <h2 id="metadata-admin-title">2. Metadata Admin for Salesforce</h2>
+        <p>Browse the org's metadata in a compact source-style tree, inspect folders and files in a docked details column, search the loaded workspace, track local edits, and build package.xml selections. The visual tree starts directly at metadata folders such as <code>objects</code>, <code>classes</code>, and <code>flows</code>; the real <code>force-app/main/default</code> source paths remain unchanged.</p>
+        <figure>
+          <img src="img/en/metadata-tree.png" alt="Metadata workspace tree" loading="lazy">
+          <figcaption>The loaded source-style metadata workspace.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-classes.png" alt="Apex classes folder" loading="lazy">
+          <figcaption>Apex classes in the tree.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-folder-table.png" alt="Folder record table" loading="lazy">
+          <figcaption>A folder's records in the sortable table.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-file.png" alt="Metadata file view" loading="lazy">
+          <figcaption>A file opened for inspection and local editing.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-triggers.png" alt="Apex triggers folder" loading="lazy">
+          <figcaption>Apex triggers in the tree.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-flows.png" alt="Flows folder" loading="lazy">
+          <figcaption>Flows in the tree.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-lwc.png" alt="Lightning Web Components folder" loading="lazy">
+          <figcaption>Lightning Web Components in the tree.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-objects.png" alt="Objects folder" loading="lazy">
+          <figcaption>Custom objects and fields in the tree.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-pages.png" alt="Visualforce pages folder" loading="lazy">
+          <figcaption>Visualforce pages in the tree.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-aura.png" alt="Aura components folder" loading="lazy">
+          <figcaption>Aura components in the tree.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-search.png" alt="Workspace search results" loading="lazy">
+          <figcaption>Search matches names, labels, and content snippets.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-search-suggestions.png" alt="Workspace search suggestions" loading="lazy">
+          <figcaption>Suggestions while typing a workspace search.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-namespaces.png" alt="Workspace namespaces menu" loading="lazy">
+          <figcaption>Scope the workspace to unmanaged or managed namespaces.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-changed-files.png" alt="Changed files panel" loading="lazy">
+          <figcaption>Locally changed files, ready to deploy or discard.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/metadata-package-xml.png" alt="package.xml builder" loading="lazy">
+          <figcaption>Assemble a package.xml from tree selections.</figcaption>
+        </figure>
+      </section>
+
+      <section id="force-sheet" aria-labelledby="force-sheet-title">
+        <h2 id="force-sheet-title">3. SheetD</h2>
+        <p>A multi-tab spreadsheet for Salesforce data: browse objects and reports, run SOQL, inspect file details, edit supported object records, and review exact changed fields before a confirmed update.</p>
+        <figure>
+          <img src="img/en/force-sheet-query-editor.png" alt="SheetD SOQL editor" loading="lazy">
+          <figcaption>The SOQL query editor.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/force-sheet-field-suggestions.png" alt="SOQL field suggestions" loading="lazy">
+          <figcaption>Field suggestions while composing SOQL.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/force-sheet-query-results.png" alt="SOQL results grid" loading="lazy">
+          <figcaption>Query results streamed into the grid.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/force-sheet-report-tab.png" alt="SheetD report tab" loading="lazy">
+          <figcaption>Open org reports into the sheet.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/force-sheet-upload-tab.png" alt="SheetD upload tab" loading="lazy">
+          <figcaption>Import CSV or XLSX files.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/force-sheet-workspace.png" alt="SheetD workspace tree" loading="lazy">
+          <figcaption>Spreadsheet files organized with Objects and Reports.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/force-sheet-objects-tree.png" alt="Objects tree" loading="lazy">
+          <figcaption>Objects that have list views.</figcaption>
+        </figure>
+      </section>
+
+      <section id="permission-explorer" aria-labelledby="permission-explorer-title">
+        <h2 id="permission-explorer-title">4. Permission Explorer</h2>
+        <p>Trace effective object and field access to the assigned profile, permission sets, and permission set groups that grant it, or compare two users across the returned access metadata.</p>
+
+      </section>
+
+      <section id="org-comparison" aria-labelledby="org-comparison-title">
+        <h2 id="org-comparison-title">5. Metadata org comparison</h2>
+        <p>Use <strong>Compare with</strong> in Metadata Admin to compare the current workspace with another Salesforce org already signed in to this browser. Filter the Org Differences panel by Different, Only here, or Only in the compared org; select files individually or together; and open a candidate to retrieve both source bodies and view actual changes side by side.</p>
+        <div class="callout warning"><p><strong>Preview only in 0.9.0:</strong> Deploy Selected Preview and Pull Selected Preview are read-only review flows. They do not write metadata to either org.</p></div>
+
+      </section>
+
+      <section id="org-review" aria-labelledby="org-review-title">
+        <h2 id="org-review-title">6. Org Review</h2>
+        <p>A read-only assessment of org health that runs automatically when opened. Each section carries evidence and remediation guidance; the report exports as PDF, Markdown, summary JSON, or evidence JSON.</p>
+        <figure>
+          <img src="img/en/org-review-summary.png" alt="Org Review executive summary" loading="lazy">
+          <figcaption>The completed review with the health scorecard.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/org-review-collectors.png" alt="Collector progress" loading="lazy">
+          <figcaption>Every read-only collector that fed the report.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/org-review-login-policy.png" alt="Login &amp; session policy (D3)" loading="lazy">
+          <figcaption>Section D3: login, session &amp; authentication policy.</figcaption>
+        </figure>
+      </section>
+
+      <section id="object-schema" aria-labelledby="object-schema-title">
+        <h2 id="object-schema-title">7. Object Schema</h2>
+        <p>Build an interactive relationship map for any pickable object, then explore every field of every selectable object in the Fields spreadsheet below it.</p>
+        <figure>
+          <img src="img/en/object-schema-start.png" alt="Object Schema on open" loading="lazy">
+          <figcaption>Controls plus the all-objects Fields sheet.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-suggestions.png" alt="Object name suggestions" loading="lazy">
+          <figcaption>Object Name suggests API names and labels.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-packaged-menu.png" alt="Packaged Objects menu" loading="lazy">
+          <figcaption>Scope packaged namespaces per org.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-map-fields.png" alt="Map with Fields sheet" loading="lazy">
+          <figcaption>The built map, relationship details, and the Fields sheet.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-find-path.png" alt="Find object path" loading="lazy">
+          <figcaption>Find highlights the connecting path from the root.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-node-fields.png" alt="Node focuses fields" loading="lazy">
+          <figcaption>Clicking a node filters the Fields sheet to it.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-fields-search.png" alt="Global fields search" loading="lazy">
+          <figcaption>Global search highlights every matching cell.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-vertical.png" alt="Vertical layout" loading="lazy">
+          <figcaption>Parents above, children below.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-relationship-table.png" alt="Relationship table" loading="lazy">
+          <figcaption>The accessible relationship table view.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/object-schema-visible-filter.png" alt="Visible objects filter" loading="lazy">
+          <figcaption>Hide objects from the map.</figcaption>
+        </figure>
+      </section>
+
+      <section id="document-folders" aria-labelledby="document-folders-title">
+        <h2 id="document-folders-title">8. Document Folders</h2>
+        <p>Browse Salesforce libraries and folders, preview supported files, and download selections as a ZIP that preserves folder paths. Folder selection is recursive; downloads are limited to 500 files and 250 MB and can be canceled mid-run.</p>
+        <figure>
+          <img src="img/en/document-folders-tree.png" alt="Document folders tree" loading="lazy">
+          <figcaption>Browsing workspaces and folders.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/document-folders-selection.png" alt="Checkbox selection" loading="lazy">
+          <figcaption>Checking a folder selects its whole subtree.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/document-folders-context-menu.png" alt="Folder context menu" loading="lazy">
+          <figcaption>Folder actions from the context menu.</figcaption>
+        </figure>
+      </section>
+
+      <section id="rest-explorer" aria-labelledby="rest-explorer-title">
+        <h2 id="rest-explorer-title">9. REST Explorer</h2>
+        <p>Compose Salesforce REST API requests with endpoint templates, send them against the connected org, and inspect the JSON response. Requests run only when you send them.</p>
+        <figure>
+          <img src="img/en/rest-api.png" alt="REST request builder" loading="lazy">
+          <figcaption>The request builder with endpoint templates.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/rest-api-response.png" alt="REST JSON response" loading="lazy">
+          <figcaption>Inspecting a JSON response.</figcaption>
+        </figure>
+      </section>
+
+      <section id="data-export" aria-labelledby="data-export-title">
+        <h2 id="data-export-title">10. Data Export</h2>
+        <p>Run SOQL, SOSL, and GraphQL queries or report exports, preview the result as a CSV grid or JSON, and download it.</p>
+        <figure>
+          <img src="img/en/data-export.png" alt="Data Export source &amp; query" loading="lazy">
+          <figcaption>Choosing the export source and query.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/data-export-results.png" alt="Export results grid" loading="lazy">
+          <figcaption>Export results ready to download.</figcaption>
+        </figure>
+      </section>
+
+      <section id="run-apex" aria-labelledby="run-apex-title">
+        <h2 id="run-apex-title">11. Run Apex</h2>
+        <p>Execute anonymous Apex and review the compile result, execution status, and debug output.</p>
+        <figure>
+          <img src="img/en/run-apex.png" alt="Run Apex editor" loading="lazy">
+          <figcaption>The anonymous Apex editor.</figcaption>
+        </figure>
+      </section>
+
+      <section id="monitoring" aria-labelledby="monitoring-title">
+        <h2 id="monitoring-title">12. Limits &amp; monitoring</h2>
+        <p>Read-only monitoring pages for the org: API limits with live usage bars, the setup audit trail, login history, and event log files.</p>
+        <figure>
+          <img src="img/en/limits.png" alt="Org limits" loading="lazy">
+          <figcaption>Org limits with live usage bars.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/setup-audit-trail.png" alt="Setup audit trail" loading="lazy">
+          <figcaption>Recent setup changes.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/login-history.png" alt="Login history" loading="lazy">
+          <figcaption>Recent login attempts.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/event-logs.png" alt="Event log files" loading="lazy">
+          <figcaption>Available event log files.</figcaption>
+        </figure>
+      </section>
+
+      <section id="builtin-manual" aria-labelledby="builtin-manual-title">
+        <h2 id="builtin-manual-title">13. Built-in manual (EN/JP)</h2>
+        <p>The extension ships with its own manual in English and Japanese, including per-version release notes. Every page has a language toggle in its header.</p>
+        <figure>
+          <img src="img/en/builtin-manual.png" alt="Built-in manual overview" loading="lazy">
+          <figcaption>The built-in manual.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/en/builtin-manual-apps.png" alt="Built-in manual Apps chapter" loading="lazy">
+          <figcaption>The Apps chapter of the built-in manual.</figcaption>
+        </figure>
+      </section>
+
+      <section id="release-notes" aria-labelledby="release-notes-title">
+        <h2 id="release-notes-title">14. Release notes</h2>
+        <p>Recent releases. No release has added new Chrome permissions, host permissions, remote code, telemetry, ads, or third-party data services. The full per-version history ships inside the extension's built-in manual.</p>
+        <h3>0.9.0 (2026-08-05)</h3>
+        <ul>
+          <li>Flattened the visible Metadata Admin tree while preserving real source paths, and added compact rows, breadcrumb navigation, visible row actions, and a docked resizable details panel.</li>
+          <li>Added read-only comparison between signed-in Salesforce orgs with difference filters, tree badges, folder counts, and side-by-side source review.</li>
+          <li>Rebuilt the extension icon from the approved DinaLab gradient mark. No Chrome permission or browser host permission was added.</li>
+        </ul>
+        <h3>0.8.0 (2026-08-02)</h3>
+        <ul>
+          <li>Rebuilt SheetD on the DinaSheet engine so objects and reports open directly as editable data and exact pending field changes are reviewed before update.</li>
+          <li>Added report workbook fallback for results beyond Salesforce's report API row limit.</li>
+          <li>Removed the unreleased metadata-sync feature from the packaged extension, manual, privacy policy, and browser permissions.</li>
+        </ul>
+        <h3>0.7.0 (2026-07-18)</h3>
+        <ul>
+          <li>Added Permission Explorer for tracing effective object and field access to profiles, permission sets, and permission set groups.</li>
+        </ul>
+        <h3>0.6.2 (2026-07-15)</h3>
+        <ul>
+          <li>Document Folders: folder selection is recursive and atomic across lazily loaded subtrees, with folder-preserving ZIP paths for duplicate document occurrences.</li>
+          <li>Document Folders: added 500-file and 250 MB ZIP limits, cancelable downloads, and one-time fetching of shared document content.</li>
+          <li>Object Schema: rebuilt the fields experience as a spreadsheet with native header filters, global search highlights, CSV export, and full screen; Packaged Objects defaults to none and is remembered per org.</li>
+          <li>Object Schema became a popup Apps-only page; the compact 40px app-session header now also applies to Metadata Admin and Org Review.</li>
+        </ul>
+        <h3>0.6.1 (2026-07-14)</h3>
+        <ul>
+          <li>Rebuilt Document Folders downloads around tree checkbox selection with a Selected Items panel.</li>
+          <li>Added Object Schema to the popup Apps tab with suggestions, packaged-namespace controls, map search, zoom, and layouts.</li>
+          <li>Removed Org Review from the tools-page navigation.</li>
+          <li>Added THIRD-PARTY-NOTICES.txt for the bundled spreadsheet engine.</li>
+        </ul>
+        <h3>0.6.0 (2026-07-11)</h3>
+        <ul>
+          <li>Added the read-only Org Review covering health, limits, setup changes, and login failures.</li>
+          <li>Added a per-org read-only lock and consistent risk confirmation for Apex, data mutation, and metadata deployment.</li>
+          <li>Fixed SheetD workspace files sharing the last active grid; values and formulas now stay isolated per file and org.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="more-title">
+        <h2 id="more-title">More</h2>
+        <ul>
+          <li><a href="jp/" hreflang="ja">日本語版のマニュアル</a></li>
+          <li><a href="../">Admin Toolkit for Salesforce overview</a></li>
+          <li><a href="../PRIVACY_POLICY.html">Privacy Policy</a></li>
+          <li><a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Chrome Web Store listing</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <script>
+    (function () {
+      var link = document.querySelector(".lang-toggle");
+      if (!link) return;
+      link.addEventListener("click", function () {
+        try { localStorage.setItem("dinalab-lang", "ja"); } catch (error) {}
+      });
+    })();
+  </script>
+</body>
+</html>

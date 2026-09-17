@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sheet for Salesforce | スプレッドシートワークスペース</title>
+  <meta name="description" content="Sheet for Salesforce 0.3.2 は、保存できる SOQL、Favorites、ダウンロード、レポート、確認付き更新、ロールバックに対応する Chrome スプレッドシートです。">
+  <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/jp/">
+  <link rel="alternate" hreflang="en" href="https://dina.jp/apps/dinasheet-for-salesforce/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../assets/dinalab.css">
+  <script src="../../../assets/site-theme.js"></script>
+</head>
+<body class="doc-page">
+  <main class="shell">
+    <nav class="nav" aria-label="ページナビゲーション">
+      <a class="brand" href="../../../"><img class="brand-mark" src="../../../assets/dinalab-mark.svg" alt="" width="36" height="36"><span>DinaLab</span></a>
+      <span class="nav-links">
+        <a href="../manual/jp/">ユーザーマニュアル</a>
+        <a href="../../../">ホームに戻る</a>
+        <a class="lang-toggle" href="../" hreflang="en" lang="en" aria-label="View in English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17"/><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"/></svg><span>EN</span></a>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="ダークテーマを切り替え" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      </span>
+    </nav>
+
+    <header class="hero wide-shot">
+      <div>
+        <span class="release-pill">Chrome ウェブストアで公開中 · 次期リリース 0.3.2</span>
+        <h1>Sheet for Salesforce</h1>
+        <p class="lead">Salesforce データに特化したスプレッドシートワークスペースです。SOQL ファイルをフォルダーに保存し、Query・リストビュー・レポートを Favorites に整理してダウンロードでき、更新前には正確な変更内容を確認できます。</p>
+        <p class="notice">Sheet for Salesforce は独立した製品であり、Salesforce との提携、Salesforce による承認または後援を受けていません。</p>
+        <div class="button-row">
+          <a class="button" href="https://chromewebstore.google.com/detail/dinasheet-for-salesforce/bclfoieebdchpaplhlgnobcmpjhepgal" target="_blank" rel="noopener">Chrome ウェブストアからインストール</a>
+          <a class="button secondary" href="../manual/jp/">ユーザーマニュアルを読む</a>
+          <a class="button secondary" href="../PRIVACY_POLICY.html">プライバシーポリシー（英語）</a>
+        </div>
+      </div>
+      <img class="hero-shot" src="../img/01-query-and-grid.png" width="1280" height="800" alt="SOQL クエリで取得した Salesforce の取引先レコードを表示する Sheet for Salesforce">
+    </header>
+
+    <div class="content">
+      <section aria-labelledby="features-title">
+        <h2 id="features-title">Salesforce 向けスプレッドシートワークフロー</h2>
+        <div class="feature-grid">
+          <article class="feature"><h3>組織を確認して起動</h3><p>現在の Salesforce タブと、ほかのログイン済み組織を確認してから、選択したセッションのシートを開きます。</p></article>
+          <article class="feature"><h3>保存できるクエリ</h3><p>組織ごとの Query フォルダーに SOQL ファイルを保存・編集し、ライブ Salesforce ビューとして再度開けます。</p></article>
+          <article class="feature"><h3>Favorites フォルダー</h3><p>Query ファイル、オブジェクトのリストビュー、レポートを組織ごとの Favorites に整理し、すぐに開けます。</p></article>
+          <article class="feature"><h3>柔軟なダウンロード</h3><p>1 件の Favorite を CSV または Excel で、Favorites フォルダー全体を ZIP または複数シートの Excel で保存できます。</p></article>
+          <article class="feature"><h3>オブジェクトとレポート</h3><p>Salesforce のリストビューとレポートを複数シートのグリッドで参照でき、大規模レポートのワークブック取得にも対応します。</p></article>
+          <article class="feature"><h3>ローカルファイルの読み込み</h3><p>CSV・Excel ファイルを開発者へアップロードせず、ブラウザー内でローカルに開きます。</p></article>
+          <article class="feature"><h3>型を考慮した編集</h3><p>Salesforce スキーマ情報に基づく検証を使って、対応するオブジェクト項目を直接編集します。</p></article>
+          <article class="feature"><h3>確認付き更新</h3><p>項目ごとの変更前・変更後の値を確認し、選択した行を明示的に確定してから更新します。</p></article>
+          <article class="feature"><h3>監査とロールバック</h3><p>組織ごとに上限付きで保存された更新記録を確認し、以前の値を別途確認するロールバック更新として準備します。</p></article>
+        </div>
+      </section>
+
+      <section aria-labelledby="workflow-title">
+        <h2 id="workflow-title">意図しない更新を防ぐフロー</h2>
+        <div class="step-grid">
+          <article class="step"><h3>読み込む</h3><p>保存済み Query、Favorite、リストビュー、レポート、またはローカルの CSV・Excel ファイルを開きます。</p></article>
+          <article class="step"><h3>確認する</h3><p>対応する行を編集し、変更項目カードですべての変更値を確認します。</p></article>
+          <article class="step"><h3>確定する</h3><p>Sheet for Salesforce が Salesforce に更新を送る前に、対象レコードと値を確定します。</p></article>
+        </div>
+      </section>
+
+      <section aria-labelledby="screenshots-title">
+        <h2 id="screenshots-title">Sheet for Salesforce の画面</h2>
+        <p class="notice">以下は合成デモデータを使った画面例です。起動ポップアップは日本語、ワークスペースは英語で表示しています。</p>
+        <div class="gallery">
+          <figure class="wide"><img src="../img/00-org-launcher-jp.png" width="1280" height="800" decoding="async" alt="現在の Salesforce タブとほかのログイン済み組織を表示する Sheet for Salesforce ポップアップ"><figcaption>現在のタブまたは検出済みの別組織を選んでから Sheet for Salesforce を開きます。</figcaption></figure>
+          <figure><img src="../img/02-safe-update-review.png" width="1280" height="800" decoding="async" alt="Salesforce レコード 1 件の変更項目カードと確認ダイアログ"><figcaption>最終確認まで、変更前・変更後の項目値を表示します。</figcaption></figure>
+          <figure><img src="../img/03-update-audit-rollback.png" width="1280" height="800" decoding="async" alt="ロールバック行を選択した更新監査ログ"><figcaption>成功した更新の記録から、以前の値をロールバック用に準備できます。</figcaption></figure>
+          <figure><img src="../img/04-csv-import-details.png" width="1280" height="800" decoding="async" alt="CSV データとインポート詳細を表示する Sheet for Salesforce"><figcaption>CSV・Excel ファイルはローカルで解析され、編集可能な静的セルとして開きます。</figcaption></figure>
+          <figure><img src="../img/05-report-data-only.png" width="1280" height="800" decoding="async" alt="Sheet for Salesforce に表示された Salesforce レポートデータ"><figcaption>レポートデータと、取得元・検索条件などの詳細を並べて確認できます。</figcaption></figure>
+        </div>
+        <div class="button-row"><a class="button secondary" href="../manual/jp/">スクリーンショット付きマニュアルを開く</a></div>
+      </section>
+
+      <section aria-labelledby="runtime-title">
+        <h2 id="runtime-title">ローカル処理を重視</h2>
+        <ul>
+          <li>Sheet for Salesforce は現在の Salesforce セッション Cookie をローカルで読み取り、選択した Salesforce 組織だけに HTTPS でアクセスします。</li>
+          <li>Salesforce セッション Cookie、Cookie ドメイン、認証ヘッダーが拡張機能の外へ送信されることはありません。</li>
+          <li>設定、組織ごとの Query 定義、上限付き Favorites メタデータ、上限付き更新記録は Chrome ストレージに保存されます。Salesforce の結果行、読み込んだファイル内容、ワークブックスナップショットは保存されません。</li>
+          <li>広告、分析、テレメトリー、外部ホストの実行可能コード、外部メッセージング、開発者運営のデータサーバーはありません。</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="permissions-title">
+        <h2 id="permissions-title">権限</h2>
+        <ul>
+          <li><code>cookies</code>：ユーザーが要求した API 呼び出しのため、既存の Salesforce セッション Cookie をローカルで読み取ります。</li>
+          <li><code>storage</code>：設定、組織ごとの Query ファイル・フォルダー定義、1 組織あたり最大 30 の Favorites フォルダーと 100 件のショートカット、監査・ロールバック用の上限付き更新記録を保存します。</li>
+          <li>Salesforce ホストアクセス：ログイン済み組織を検出し、スキーマ、SOQL、レポート、確認済みレコード更新のために API を呼び出します。</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="status-title">
+        <h2 id="status-title">リリース状況</h2>
+        <p>バージョン 0.3.2 は、Chrome ウェブストアへのアップロード待ちの検証済みリリース候補です。0.3.0 で追加した、永続化される Query フォルダーと SOQL ファイル、Query・リストビュー・レポート用の Favorites フォルダー、CSV・Excel・ZIP・複数シートワークブックのダウンロードをそのまま備え、Favorites の見直し中に見つかった 3 件の不具合を修正しました。日本語環境で <code>Default</code> という名前の Favorites フォルダーが次回読み込み時に破棄されなくなり、フォルダーの所属を保存してもお気に入りがドラッグ＆ドロップの位置を保つようになり、言語ピッカーのツールチップがキー名ではなく両言語のテキストで表示されるようになりました。あわせて製品名を DinaSheet から <strong>Sheet for Salesforce</strong> に変更しました。ストアの掲載情報、プライバシーポリシー、アートワーク、スクリーンショットは新しい名称を使用し、ソースの内部パスと互換性のための識別子はこれまでどおりです。現在 Chrome ウェブストアで公開されているのは以前のビルドで、0.3.2 を公開するまで DinaSheet という名称のままです。同じ製品の同じアイテムで、<a href="https://chromewebstore.google.com/detail/dinasheet-for-salesforce/bclfoieebdchpaplhlgnobcmpjhepgal" target="_blank" rel="noopener">Chrome ウェブストアからインストール</a>できます。</p>
+      </section>
+    </div>
+    <p class="page-footer">Salesforce および Chrome は、それぞれの所有者の商標です。</p>
+  </main>
+</body>
+</html>

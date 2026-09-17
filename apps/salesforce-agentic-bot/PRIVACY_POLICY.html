@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy for Agent for Salesforce</title>
+  <meta name="description" content="Privacy policy for the Agent for Salesforce Chrome extension and its AI-assisted Salesforce business workspaces.">
+  <link rel="canonical" href="https://dina.jp/apps/salesforce-agentic-bot/PRIVACY_POLICY.html">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/dinalab.css">
+  <script src="../../assets/site-theme.js"></script>
+</head>
+<body class="doc-page">
+  <main class="shell narrow">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="../../"><img class="brand-mark" src="../../assets/dinalab-mark.svg" alt="" width="36" height="36"><span>DinaLab</span></a>
+      <span class="nav-actions"><a href="./">Back to Dina Agent</a><button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"></path></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button></span>
+    </nav>
+
+    <article>
+      <h1>Privacy Policy for Agent for Salesforce</h1>
+      <p class="updated">Last updated: August 18, 2026</p>
+      <p>Agent for Salesforce is an independent Chrome extension in development for Salesforce administrators and developers. Version 0.5.0 combines an AI-assisted side panel with metadata, data, org review, permission, API, export, and monitoring workspaces.</p>
+      <p>Salesforce is a trademark of Salesforce, Inc. The extension is not affiliated with, endorsed by, or sponsored by Salesforce. The OpenAI name identifies the configured AI service; no affiliation with or endorsement by OpenAI is implied.</p>
+
+      <h2>Data the Extension Handles</h2>
+      <p>The extension may handle the following data to provide its user-facing features:</p>
+      <ul>
+        <li>Salesforce session cookies and session credentials for supported Salesforce domains, used inside the extension to connect to an org where the user is already signed in.</li>
+        <li>Salesforce org, user, object, schema, metadata, record, report, permission, REST API, Tooling API, Metadata API, monitoring, and audit information requested by the user.</li>
+        <li>Current Salesforce tab information, including the page title and URL, when available.</li>
+        <li>Chat messages, assistant responses, selected Salesforce context, selected visible workspace context, extension tool results, and previous response IDs.</li>
+        <li>Google identity information used to sign in to the Dina account, including the account email address.</li>
+        <li>Local workspace settings, query sheets, saved files, metadata, pending edits, UI preferences, chat history, and bounded operation receipts.</li>
+        <li>Aggregate Dina account usage counters, including Send, token, and estimated AI cost totals.</li>
+      </ul>
+      <p>The extension is not designed to collect health information, GPS location, nearby device location, full browser history, mouse tracking, scroll tracking, keystroke logging, creditworthiness, or lending information.</p>
+
+      <h2>How Salesforce Access Is Used</h2>
+      <p>Salesforce REST, Tooling, and Metadata API tools run inside the extension using the Salesforce session already present in the browser. Salesforce session IDs, access tokens, cookies, and authorization headers are not included in AI chat requests.</p>
+      <p>The extension uses Salesforce data only to provide the requested workspace, investigation, review, export, and assistant features. Consequential workflows retain their existing user review and confirmation steps.</p>
+
+      <h2>AI Requests and Google Cloud Processing</h2>
+      <p>AI requests are sent only after the user presses Send. A request may contain the user's message, selected Salesforce context, selected visible workspace context, current tab context, and extension tool results. Salesforce authentication credentials are excluded.</p>
+      <p>The extension sends the Dina account sign-in token to the configured service so the account can be verified, usage limits can be applied, and the user-requested AI response can be returned.</p>
+      <p>The AI panel is advisory. It cannot independently deploy metadata, update or delete Salesforce records, execute Apex, or call Salesforce APIs from the AI panel.</p>
+
+      <h2>Storage and Retention</h2>
+      <p>Chrome extension storage and browser local storage may hold UI settings, chat history, previous response IDs, query sheets, workspace state, retrieved schema and metadata, pending edits, and bounded operation receipts on the user's device.</p>
+      <p>The Dina account service may store account identity and aggregate Send, token, and estimated cost counters. It is not designed to store Salesforce sessions, Salesforce records, prompts, or transcripts.</p>
+      <p>Users can clear supported saved data from the extension UI, uninstall the extension, or clear the extension's Chrome-managed storage.</p>
+
+      <h2>Data Sharing and Transfers</h2>
+      <p>Agent for Salesforce does not sell user data and does not use user data for advertising, tracking, profiling, creditworthiness, or lending purposes.</p>
+      <ul>
+        <li>Salesforce data is requested from the selected Salesforce org for the signed-in Salesforce user.</li>
+        <li>Google identity data is sent to Google services for sign-in and to the configured Google Cloud backend for Dina account verification.</li>
+        <li>User-initiated AI input and selected bounded context are processed by the configured Google Cloud backend and OpenAI to return the requested response.</li>
+        <li>Salesforce session IDs, access tokens, cookies, and authorization headers are not sent to OpenAI.</li>
+      </ul>
+
+      <h2>Remote Code</h2>
+      <p>The extension does not load or execute remotely hosted extension code. Its executable JavaScript, HTML, CSS, and packaged third-party components are included with the extension. Salesforce and AI responses are treated as data, not executable code.</p>
+
+      <h2>Human Access</h2>
+      <p>The developer does not have access to data handled only inside the extension unless the user separately shares it for support. Data sent through the configured Google Cloud backend is processed to provide the requested account and AI functionality.</p>
+
+      <h2>Billing Status</h2>
+      <p>Version 0.5.0 is a development preview. Paid production billing is not publicly released and remains subject to separate live Stripe, Google Cloud, security, and release verification.</p>
+
+      <h2>Chrome Web Store Limited Use Disclosure</h2>
+      <p>The use of information received from Google APIs will adhere to the Chrome Web Store User Data Policy, including the Limited Use requirements.</p>
+
+      <h2>Contact</h2>
+      <p>For privacy questions or support, contact the publisher using the verified contact address shown on the Chrome Web Store listing.</p>
+      <p>Agent for Salesforce is free to use and nothing is sold, so there are no billing or subscription disclosures.</p>
+    </article>
+  </main>
+</body>
+</html>

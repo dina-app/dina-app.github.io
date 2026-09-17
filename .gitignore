@@ -1,0 +1,9 @@
+codex.md
+docs/
+.DS_Store
+__pycache__/
+tmp/
+ChatGPT Image *.png
+firebase-debug.log*
+.firebase/
+.firebase-public/

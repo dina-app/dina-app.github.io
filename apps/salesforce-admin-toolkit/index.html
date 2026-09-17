@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Toolkit for Salesforce | Compatible with Salesforce</title>
+  <meta name="description" content="Admin Toolkit for Salesforce 0.9.1 is an independent Chrome suite for metadata administration, Org Differences comparison, SheetD, permissions, schemas, APIs, Apex, exports, and monitoring.">
+  <link rel="canonical" href="https://dina.jp/apps/salesforce-admin-toolkit/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/dinalab.css">
+  <script src="../../assets/site-theme.js"></script>
+</head>
+<body class="doc-page">
+  <main class="shell">
+    <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="../../">
+        <img class="brand-mark" src="../../assets/dinalab-mark.svg" alt="" width="36" height="36">
+        <span>DinaLab</span>
+      </a>
+      <span class="nav-actions">
+        <a href="manual/">User Manual</a>
+        <a href="../../">Back to home</a>
+        <button type="button" id="siteLangToggle" class="lang-toggle" aria-label="日本語で表示"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg><span class="lang-label">日本語</span></button>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"></path></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
+      </span>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <span class="release-pill">Next release: 0.10.0</span>
+        <h1>Admin Toolkit for Salesforce</h1>
+        <p class="lead">
+          Admin Toolkit for Salesforce is an independent Chrome suite compatible with Salesforce. It uses the Salesforce sessions you are already signed in with for metadata administration and read-only org comparison, spreadsheet data work, permission analysis, object schema exploration, API tools, Apex execution, exports, and monitoring without a developer-operated metadata service.
+        </p>
+        <p class="notice">This extension is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+        <div class="button-row">
+          <a class="store-link" href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Install from Chrome Web Store</a>
+          <a class="button secondary" href="manual/">User Manual</a>
+        </div>
+      </div>
+      <img class="logo" src="logo.svg" alt="Admin Toolkit for Salesforce logo">
+    </header>
+
+    <div class="content">
+      <section aria-labelledby="apps-title">
+        <h2 id="apps-title">One Toolkit, Focused Workspaces</h2>
+        <p>The popup Apps tab is the main entry point for the toolkit's Salesforce workspaces.</p>
+        <div class="app-grid summary">
+          <article class="app-summary">
+            <h3>Metadata Admin for Salesforce</h3>
+            <p>Browse a compact source-style metadata tree, search the loaded workspace, inspect view-only source, build package.xml selections, retrieve source directly from an outbound change set, and compare metadata across signed-in Salesforce orgs.</p>
+          </article>
+          <article class="app-summary">
+            <h3>Org Differences</h3>
+            <p>Compare selected metadata types between two signed-in orgs, between a left-org outbound change set and a right org, or between one change set from each org, then read the differing source side by side.</p>
+          </article>
+          <article class="app-summary">
+            <h3>SheetD</h3>
+            <p>Browse Salesforce objects and reports in a multi-tab spreadsheet grid, inspect file details, and review exact changed fields before confirmed record updates.</p>
+          </article>
+          <article class="app-summary">
+            <h3>Org Review</h3>
+            <p>Run a composed read-only assessment across Apex, Health Check, certificates, login and session policy, OAuth exposure, sharing defaults, async operations, and an evidence-based permission sweep. The report carries 20 collapsible sections with scorecards, remediation guidance, a baseline that detects change between runs, an impact view, a cleanup workflow with Review and Verified states, and PDF, Markdown, summary JSON, or evidence JSON exports.</p>
+          </article>
+          <article class="app-summary">
+            <h3>Object Schema</h3>
+            <p>Explore parent and child relationships in an interactive map with packaged-namespace scope, search, zoom, layout controls, relationship details, and a spreadsheet Fields view with filters, search highlights, CSV export, and full screen.</p>
+          </article>
+          <article class="app-summary">
+            <h3>Winter &rsquo;27 Release Review</h3>
+            <p>Work through a catalogue of Salesforce Winter &rsquo;27 release notes and record your own decision on each one &mdash; status, whether it applies, and a comment &mdash; kept locally per org.</p>
+          </article>
+          <article class="app-summary">
+            <h3>Permission Explorer</h3>
+            <p>Explain why a user can access an object or field, identify overlapping grants, and trace each permission to the profile, permission set, or permission set group that grants it.</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="features-title">
+        <h2 id="features-title">Administrator and Developer Tools</h2>
+        <ul>
+          <li>Search Salesforce metadata by label, name, API name, object, developer name, and matching snippets.</li>
+          <li>Compare metadata from two signed-in Salesforce orgs, filter differing files, and inspect actual source changes side by side.</li>
+          <li>Retrieve source from an outbound change set discovered in Salesforce Setup, and classify each retrieved file against another signed-in org as Same, Different, Missing from target, or Unsupported.</li>
+          <li>Open supported metadata records directly in Salesforce Setup.</li>
+          <li>Send user-initiated Salesforce REST API requests and inspect JSON responses.</li>
+          <li>Execute anonymous Apex and review compile, execution, and debug output.</li>
+          <li>Export SOQL, SOSL, GraphQL, and report results as available CSV or JSON output.</li>
+          <li>Browse Salesforce document folders, preview supported files, and download selected folders and files as ZIP.</li>
+          <li>Trace object and field permissions to the profiles, permission sets, and permission set groups that grant them.</li>
+          <li>Inspect setup audit trail, API limits, login history, event log files, org summaries, and user summaries.</li>
+          <li>Review the Winter &rsquo;27 release notes against your own org and keep your decisions between visits.</li>
+          <li>Use the built-in English and Japanese manual for end-user guidance.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="runtime-title">
+        <h2 id="runtime-title">How It Works</h2>
+        <ul>
+          <li>The extension runs in Chrome and uses the active Salesforce session.</li>
+          <li>Salesforce user and organization identity fields are used to identify the active session and org.</li>
+          <li>Browser API requests containing Salesforce data, identity data, authentication information, and user-entered requests are sent only to the selected Salesforce org, not to developer-operated servers. The one exception is Org Review reading the public Salesforce Trust status for the org's instance from <code>api.status.salesforce.com</code>; that request carries no credentials and no org data, only the instance name.</li>
+          <li>Org comparison reads the current workspace and the selected comparison org over that org's existing signed-in Salesforce session. Its Pull and Deploy actions are read-only previews in this release.</li>
+          <li>The toolkit reads far more than it writes. It has exactly two write paths: SheetD record updates, and Org Review's cleanup workflow deleting one permission set assignment &mdash; and that one runs <strong>only in a sandbox org</strong>. It refuses in production, requires a preview less than five minutes old and a typed confirmation equal to the assignment Id, re-reads and compares the assignment immediately before sending, and journals the outcome locally first.</li>
+          <li>Workspace preferences, search data, pending edits, recent/favorite tools, sanitized operation history, and bounded SheetD update receipts may be stored locally in Chrome browser storage on the user's device. SheetD workbooks are not persisted. Org Review keeps a bounded per-org record &mdash; the last run's redacted summary, a change-detection baseline, cleanup tasks, and a sandbox action log holding record Ids, timestamps, and outcomes only. The rendered report is rebuilt on each run rather than stored.</li>
+          <li>Operation history is limited to the most recent 100 entries and excludes session tokens and authorization headers. Feature-specific saved data can be cleared where the extension offers that control, and removing the extension clears its Chrome-managed local storage.</li>
+          <li>The extension does not include analytics, telemetry, advertising, affiliate links, or remotely hosted JavaScript or WebAssembly.</li>
+          <li>Extension JavaScript, HTML, CSS, and third-party spreadsheet code are packaged with the extension. Salesforce responses are treated as data and are not executed as code.</li>
+        </ul>
+        <p><a href="PRIVACY_POLICY.html">Read the full Privacy Policy</a>.</p>
+      </section>
+
+      <section aria-labelledby="permissions-title">
+        <h2 id="permissions-title">Permissions</h2>
+        <ul>
+          <li><code>cookies</code>: reads Salesforce session cookies so the toolkit can connect to the org where the user is already signed in.</li>
+          <li><code>storage</code>: saves local workspace preferences, data, UI settings, and pending edits.</li>
+          <li>Salesforce host access: permits requests to Salesforce org, Setup, Experience Cloud, Visualforce, and Salesforce Sites domains used by the active org.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="install-title">
+        <h2 id="install-title">Install</h2>
+        <p><a href="https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc" target="_blank" rel="noopener">Install Admin Toolkit for Salesforce from the Chrome Web Store</a>. For local development:</p>
+        <ol>
+          <li>Open chrome://extensions.</li>
+          <li>Enable Developer mode.</li>
+          <li>Choose Load unpacked.</li>
+          <li>Select the extension source folder.</li>
+          <li>Open a Salesforce tab and launch the extension.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="release-title">
+        <h2 id="release-title">Next Release</h2>
+        <p>Version 0.10.0 is a validated release candidate awaiting Chrome Web Store upload. The minor version moves from 0.9.x because this release adds capability rather than only branding. <strong>Org Review</strong> grows from a single report into a composed review pipeline: new read-only collectors cover Apex, Health Check, certificates, login and session policy, OAuth and connected-app exposure, sharing defaults, async operations, and an evidence-based permission sweep, feeding a baseline, an impact view, and a cleanup workflow. A new <strong>Winter &rsquo;27 release review</strong> page catalogues the release notes with its own review UI. The product mark is now the Three Tone Fan identity in Admin Toolkit indigo.</p>
+        <p>This release also adds the extension&rsquo;s second write path, and it is deliberately narrow: Org Review&rsquo;s cleanup can delete one permission set assignment, only in a sandbox org, only after a recent preview and a typed confirmation matching the assignment Id. <strong>The permission set is unchanged</strong> &mdash; still <code>cookies</code> and <code>storage</code> with the same Salesforce host allowlist &mdash; and no telemetry, analytics, remote code, or developer-operated backend was introduced.</p>
+        <p>Version 0.9.1, which preceded it, added <strong>Org Differences</strong> as a standalone popup app and taught Metadata Admin&rsquo;s Outbound Change Sets panel to retrieve source directly from a change set discovered in Salesforce Setup and classify every retrieved file against another signed-in org.</p>
+      </section>
+
+      <section aria-labelledby="support-title">
+        <h2 id="support-title">Support</h2>
+        <p><a href="manual/">Read the user manual with screenshots</a>.</p>
+      </section>
+
+      <p class="notice">Salesforce is a trademark of Salesforce, Inc. Admin Toolkit for Salesforce is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
+    </div>
+  </main>
+  <script src="../../assets/site-language.js"></script>
+</body>
+</html>

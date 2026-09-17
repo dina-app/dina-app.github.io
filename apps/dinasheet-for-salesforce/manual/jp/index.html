@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ユーザーマニュアル | Sheet for Salesforce</title>
+  <meta name="description" content="保存できる Query、Favorites、ダウンロード、確認付き更新、ロールバック、ファイル読み込み、レポートを解説する Sheet for Salesforce 0.3.0 マニュアル。">
+  <link rel="canonical" href="https://dina.jp/apps/dinasheet-for-salesforce/manual/jp/">
+  <link rel="alternate" hreflang="en" href="https://dina.jp/apps/dinasheet-for-salesforce/manual/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../../../assets/dinalab.css">
+  <script src="../../../../assets/site-theme.js"></script>
+</head>
+<body class="doc-page manual-page">
+  <main class="shell">
+    <nav class="nav" aria-label="ページナビゲーション">
+      <a class="brand" href="../../../../"><img class="brand-mark" src="../../../../assets/dinalab-mark.svg" alt="" width="36" height="36"><span>DinaLab</span></a>
+      <span class="nav-links">
+        <a href="../../jp/">Sheet for Salesforce に戻る</a>
+        <a class="lang-toggle" href="../" hreflang="en" lang="en" aria-label="View in English"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17"/><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"/></svg><span>EN</span></a>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="ダークテーマを切り替え" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      </span>
+    </nav>
+
+    <header class="intro">
+      <span class="release-pill">Sheet for Salesforce 0.3.0 ユーザーマニュアル</span>
+      <h1>Sheet for Salesforce ユーザーマニュアル</h1>
+      <p class="lead">保存できる Query ファイル、Favorites フォルダー、Salesforce データのグリッド操作、確認付き更新、ロールバック、ダウンロード、ローカルファイル読み込みを説明する実践ガイドです。</p>
+      <p class="notice">6 枚のスクリーンショットは合成デモデータとサンプル ID を使用しています。顧客データや本番組織のデータは含まれていません。起動ポップアップは日本語、ワークスペースは英語で表示しています。</p>
+    </header>
+
+    <div class="content">
+      <section class="toc" aria-labelledby="toc-title">
+        <h2 id="toc-title">目次</h2>
+        <ol>
+          <li><a href="#getting-started">1. はじめに</a></li>
+          <li><a href="#queries">2. 保存 Query と Favorites</a></li>
+          <li><a href="#updates">3. レコードの確認と更新</a></li>
+          <li><a href="#rollback">4. 更新監査とロールバック</a></li>
+          <li><a href="#files">5. CSV・Excel ファイル</a></li>
+          <li><a href="#reports">6. Salesforce レポート</a></li>
+          <li><a href="#download-language">7. ダウンロードと言語</a></li>
+          <li><a href="#safety">8. 保存、プライバシー、安全性</a></li>
+        </ol>
+      </section>
+
+      <section id="getting-started" aria-labelledby="getting-started-title">
+        <h2 id="getting-started-title">1. はじめに</h2>
+        <ol>
+          <li><a href="https://chromewebstore.google.com/detail/dinasheet-for-salesforce/bclfoieebdchpaplhlgnobcmpjhepgal" target="_blank" rel="noopener">Chrome ウェブストアから Sheet for Salesforce をインストール</a>します。すぐに起動できるようにする場合は、Chrome の拡張機能メニューから固定します。</li>
+          <li>Chrome で Salesforce を開き、通常どおりログインします。Sheet for Salesforce はブラウザーのセッションを再利用するため、Salesforce パスワードを別途入力する必要はありません。</li>
+          <li>Sheet for Salesforce のツールバーアイコンをクリックします。現在の Salesforce 組織、または検出された別のログイン済み組織を選び、<strong>開く</strong>を選択します。</li>
+          <li>データの読み込みや更新を行う前に、Sheet for Salesforce 上部の組織表示を確認します。</li>
+        </ol>
+        <figure>
+          <img src="../../img/00-org-launcher-jp.png" width="1280" height="800" decoding="async" alt="現在の Salesforce タブとほかのログイン済み組織を表示する Sheet for Salesforce ポップアップ">
+          <figcaption>シートを開く前に、現在のタブと検出済みの別組織セッションを区別して確認できます。</figcaption>
+        </figure>
+        <div class="callout"><p><strong>組織が表示されない場合：</strong>Salesforce を開くかログインし、ツールバーポップアップに戻って検出済みセッションを更新してください。</p></div>
+      </section>
+
+      <section id="queries" aria-labelledby="queries-title">
+        <h2 id="queries-title">2. 保存 Query と Favorites</h2>
+        <ol>
+          <li>Salesforce Data サイドバーの <strong>Query</strong> を展開します。現在の Salesforce 組織に紐づくフォルダーと SOQL ファイルを作成できます。</li>
+          <li>Query ファイルを開くと SOQL が実行され、Salesforce の最新データが読み込まれます。取得レコードを更新する可能性がある場合は <code>Id</code> を含めます。</li>
+          <li>File details で SOQL を編集し、解決された Salesforce オブジェクトと更新可否を確認して、<strong>Run and update sheet</strong> を選びます。</li>
+          <li>Query ファイル、リストビュー、レポートのメニューから <strong>Add to Favorites…</strong> を選びます。常設の Default または新しく作成した Favorites フォルダーを指定できます。</li>
+          <li>Favorites からショートカットを再度開き、別フォルダーへの移動、所属フォルダーの編集、削除を行えます。定義は組織ごとに保存され、結果行は都度読み込まれます。</li>
+          <li>セル書式やグリッド操作にはスプレッドシートのツールバーを使います。セルを変更しても、Salesforce はすぐには更新されません。</li>
+        </ol>
+        <figure>
+          <img src="../../img/01-query-and-grid.png" width="1280" height="800" alt="Sheet for Salesforce のクエリパネルとスプレッドシートグリッドに表示された Salesforce 取引先データ">
+          <figcaption>SOQL クエリで取引先の項目を編集可能なシートへ読み込みます。接続中の組織はヘッダーで確認できます。</figcaption>
+        </figure>
+        <div class="callout"><p><strong>更新可能になる条件：</strong>シートに <code>Id</code> 列があり、レコードが 1 種類の Salesforce オブジェクトとして判定できる必要があります。Query 定義と Favorite ショートカットはローカルに保存されますが、Salesforce の結果行は保存されません。</p></div>
+      </section>
+
+      <section id="updates" aria-labelledby="updates-title">
+        <h2 id="updates-title">3. レコードの確認と更新</h2>
+        <ol>
+          <li>更新可能な <code>Id</code> 列を持つシートで、対応する項目を 1 つ以上編集します。</li>
+          <li>詳細パネルが閉じている場合は開きます。<strong>変更項目</strong>カードに、各レコードの変更前・変更後の値が正確に表示されます。</li>
+          <li>確認カードの<strong>更新</strong>を選択します。</li>
+          <li>確認ダイアログを読みます。さらに編集する場合は<strong>キャンセル</strong>、表示された値だけを Salesforce に送る場合は<strong>更新</strong>を選択します。</li>
+          <li>更新に成功すると、変更項目を含む上限付きの監査記録がローカルに保存されます。</li>
+        </ol>
+        <figure>
+          <img src="../../img/02-safe-update-review.png" width="1280" height="800" decoding="async" alt="変更項目の確認カードと Salesforce 更新の最終確認ダイアログ">
+          <figcaption>更新を実行する前に、確認カードとダイアログで同じレコードと項目値を確認できます。</figcaption>
+        </figure>
+        <div class="callout warning"><p><strong>Sheet for Salesforce にレコード削除機能はありません。</strong>対象となる更新を明示的に確定するまで、グリッドでの編集はローカルのままです。</p></div>
+      </section>
+
+      <section id="rollback" aria-labelledby="rollback-title">
+        <h2 id="rollback-title">4. 更新監査とロールバック</h2>
+        <ol>
+          <li>レールの <strong>LOG</strong> アイコンを選択して更新監査ログを開きます。</li>
+          <li>対象のオブジェクトと更新日時を探します。監査ログは新しい順に表示されます。</li>
+          <li>記録された以前の値へ戻したい各行の<strong>ロールバック</strong>セルを選択します。</li>
+          <li>表示された変更項目カードを確認します。ロールバックは通常の Salesforce 更新として準備され、自動では送信されません。</li>
+          <li>監査記録の作成後に別の編集が行われた可能性がある場合は、特に現在の Salesforce 値を確認してから、更新を確定またはキャンセルします。</li>
+        </ol>
+        <figure>
+          <img src="../../img/03-update-audit-rollback.png" width="1280" height="800" decoding="async" alt="以前の値と選択済みロールバック行を表示する Sheet for Salesforce 更新監査ログ">
+          <figcaption>監査ログの行を選ぶと、記録された以前の値が同じ確認付き更新フローに準備されます。</figcaption>
+        </figure>
+        <div class="callout warning"><p><strong>監査記録は過去時点のスナップショットです。</strong>レコードが変更されていないことを保証するものではありません。ロールバックを確定する前に現在の値を確認してください。</p></div>
+      </section>
+
+      <section id="files" aria-labelledby="files-title">
+        <h2 id="files-title">5. CSV・Excel ファイル</h2>
+        <ol>
+          <li><strong>インポート</strong>パネルを開き、<strong>アップロード</strong>を選択します。</li>
+          <li>ローカルの CSV または Excel ファイルを選び、現在のシートまたは新しいシートを出力先として指定します。</li>
+          <li><strong>実行</strong>を選択します。Sheet for Salesforce はブラウザー内でファイルをローカル解析し、ファイル名、行数、出力先、判定された Salesforce オブジェクトの詳細を表示します。</li>
+          <li>読み込んだ表に 1 種類のオブジェクトの有効なレコード ID が含まれる場合は、確認付き更新が利用可能になります。更新前に判定されたオブジェクトを確認してください。</li>
+        </ol>
+        <figure>
+          <img src="../../img/04-csv-import-details.png" width="1280" height="800" decoding="async" alt="インポート詳細と前回のインポート情報を表示する CSV レコード">
+          <figcaption>詳細パネルで、読み込み元と利用可能な Salesforce Id 列が検出されたかを確認できます。</figcaption>
+        </figure>
+        <div class="callout"><p>ファイルを開いても、DinaLab や開発者運営のサーバーへアップロードされることはありません。ワークブックファイルとシートスナップショットは Sheet for Salesforce に永続保存されません。</p></div>
+      </section>
+
+      <section id="reports" aria-labelledby="reports-title">
+        <h2 id="reports-title">6. Salesforce レポート</h2>
+        <ol>
+          <li><strong>レポート</strong>インポートモードを開くか、Salesforce データブラウザーからレポートを選びます。</li>
+          <li>レポート名で検索するかレポート ID を入力し、出力先シートを選んで<strong>実行</strong>を選択します。</li>
+          <li>グリッドの横で、レポート名、API 参照名、フォルダー、形式、説明、検索条件、取得元の詳細を確認します。</li>
+          <li>Salesforce の JSON レポート API が 2,000 行の上限に達した場合、Sheet for Salesforce は Salesforce から同じレポートの全件ワークブックエクスポート取得を試みます。</li>
+        </ol>
+        <figure>
+          <img src="../../img/05-report-data-only.png" width="1280" height="800" decoding="async" alt="Salesforce レポートの行とレポート・インポート詳細を表示する Sheet for Salesforce">
+          <figcaption>レポート結果はデータ行として開き、取得元の詳細と検索条件はサイドパネルで確認できます。</figcaption>
+        </figure>
+        <div class="callout"><p>グリッドの編集で Salesforce レポート定義が変更されることはありません。レポート行に 1 種類のオブジェクトの有効なレコード ID がある場合、利用可能な確認付き更新はレポートではなく Salesforce レコードを更新します。</p></div>
+      </section>
+
+      <section id="download-language" aria-labelledby="download-language-title">
+        <h2 id="download-language-title">7. ダウンロードと言語</h2>
+        <h3>シートと Favorites をダウンロードする</h3>
+        <ol>
+          <li>Query ファイルまたは Favorite のメニューから、1 件を CSV または Excel で直接ダウンロードします。</li>
+          <li>Favorites フォルダーの <strong>Download Folder…</strong> から、複数 CSV の ZIP または複数シートの Excel ワークブックを作成します。</li>
+          <li>フォルダーダウンロードでは進捗が表示され、項目の間でキャンセルでき、一部に失敗しても 1 件以上成功すれば処理を続行します。</li>
+          <li>現在のグリッドを出力する場合は、対象シートをアクティブにしてスプレッドシートのダウンロード操作を使います。</li>
+          <li>別のシステムで使用する前に、ダウンロードしたファイルを確認します。</li>
+        </ol>
+        <h3>画面表示の言語を変更する</h3>
+        <p>Sheet for Salesforce は、取得できる場合は最初に Salesforce ユーザーの言語に従います。ポップアップまたは Sheet for Salesforce ヘッダーの言語セレクターで <strong>EN — English</strong> と <strong>JP — 日本語</strong>を切り替えられます。言語を変更すると Sheet for Salesforce が再読み込みされます。</p>
+      </section>
+
+      <section id="safety" aria-labelledby="safety-title">
+        <h2 id="safety-title">8. 保存、プライバシー、安全性</h2>
+        <ul>
+          <li>クエリや更新を実行する前に、接続中の Salesforce 組織を必ず確認してください。</li>
+          <li>レコード更新には、行の選択、項目単位の確認、最終確定が必要です。</li>
+          <li>監査記録は変更項目だけを保存し、Salesforce 組織ごとに成功した最新 50 件の更新イベント、最大 2 MB に制限されます。</li>
+          <li>設定、Query フォルダー／ファイル名と SOQL、1 組織あたり最大 30 の Favorites フォルダーと 100 件の Favorite ショートカット、更新記録は端末の Chrome 拡張機能ストレージに保存されます。</li>
+          <li>Salesforce のクエリ／レポート結果行、読み込んだファイル内容、ワークブックのセルスナップショットは拡張機能ストレージに保存されません。</li>
+          <li>Query 定義は Sheet for Salesforce 内で削除できます。保存済み定義とショートカットをまとめて削除するには、拡張機能ストレージを消去するか Sheet for Salesforce をアンインストールします。</li>
+          <li>Salesforce セッション Cookie と認証ヘッダーは拡張機能内に保持されます。</li>
+          <li>Sheet for Salesforce には分析、テレメトリー、広告、外部メッセージング、開発者運営のデータバックエンドはありません。</li>
+        </ul>
+        <p style="margin-top:18px"><a href="../../PRIVACY_POLICY.html">Sheet for Salesforce のプライバシーポリシー全文（英語）を読む</a>。</p>
+      </section>
+    </div>
+
+    <p class="page-footer">Salesforce は Salesforce, Inc. の商標です。Sheet for Salesforce は独立した製品であり、Salesforce との提携、Salesforce による承認または後援を受けていません。</p>
+  </main>
+</body>
+</html>

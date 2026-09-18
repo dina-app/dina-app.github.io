@@ -24,10 +24,10 @@
     color-scheme: light;
     --ink: #1d252c;
     --muted: #66707a;
-    --gold: #006a60;
-    --gold-bright: #378c81;
-    --gold-soft: #fff5e8;
-    --line: #e8dfd1;
+    --brand: #006a60;
+    --brand-bright: #378c81;
+    --brand-soft: #e7f2f0;
+    --line: #d9e7e4;
     --surface: rgba(255, 255, 255, .94);
     font-family: Inter, "Hiragino Sans", "Yu Gothic", -apple-system,
       BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -43,9 +43,9 @@
     padding: 32px;
     color: var(--ink);
     background:
-      radial-gradient(circle at 18% 16%, rgba(228, 139, 59, .20), transparent 32rem),
-      radial-gradient(circle at 86% 82%, rgba(189, 104, 0, .12), transparent 30rem),
-      linear-gradient(145deg, #fbfaf6 0%, #f2ede3 100%);
+      radial-gradient(circle at 18% 16%, rgba(55, 140, 129, .20), transparent 32rem),
+      radial-gradient(circle at 86% 82%, rgba(0, 106, 96, .12), transparent 30rem),
+      linear-gradient(145deg, #f9fbfb 0%, #e9f1ef 100%);
     font-size: 15px;
     line-height: 1.55;
   }
@@ -55,7 +55,7 @@
     position: fixed;
     width: 28rem;
     height: 28rem;
-    border: 1px solid rgba(189, 104, 0, .10);
+    border: 1px solid rgba(0, 106, 96, .10);
     border-radius: 50%;
     pointer-events: none;
   }
@@ -66,10 +66,10 @@
     width: min(100%, 35rem);
     padding: 30px;
     overflow: hidden;
-    border: 1px solid rgba(199, 187, 169, .72);
+    border: 1px solid rgba(171, 198, 193, .72);
     border-radius: 26px;
     background: var(--surface);
-    box-shadow: 0 28px 70px rgba(61, 45, 24, .14), 0 2px 8px rgba(61, 45, 24, .06);
+    box-shadow: 0 28px 70px rgba(8, 70, 63, .14), 0 2px 8px rgba(8, 70, 63, .06);
     backdrop-filter: blur(18px);
   }
   main::before {
@@ -77,7 +77,7 @@
     position: absolute;
     inset: 0 0 auto;
     height: 4px;
-    background: linear-gradient(90deg, #08463f, var(--gold), var(--gold-bright));
+    background: linear-gradient(90deg, #08463f, var(--brand), var(--brand-bright));
   }
   .brand {
     display: flex;
@@ -89,7 +89,7 @@
     width: 46px;
     height: 46px;
     border-radius: 12px;
-    box-shadow: 0 8px 18px rgba(141, 77, 2, .20);
+    box-shadow: 0 8px 18px rgba(8, 70, 63, .22);
   }
   .brand-copy { display: grid; gap: 1px; }
   .brand-name { font-size: 15px; font-weight: 760; letter-spacing: -.01em; }
@@ -107,14 +107,14 @@
     place-items: center;
     margin-bottom: 22px;
     border-radius: 18px;
-    color: var(--gold);
-    background: var(--gold-soft);
+    color: var(--brand);
+    background: var(--brand-soft);
   }
   .spinner {
     width: 24px;
     height: 24px;
-    border: 2.5px solid rgba(189, 104, 0, .20);
-    border-top-color: var(--gold);
+    border: 2.5px solid rgba(0, 106, 96, .20);
+    border-top-color: var(--brand);
     border-radius: 50%;
     animation: spin .8s linear infinite;
   }
@@ -127,7 +127,7 @@
   main[data-state="error"] .error-symbol { display: block; }
   .kicker {
     margin: 0 0 7px;
-    color: var(--gold);
+    color: var(--brand);
     font-size: 12px;
     font-weight: 780;
     letter-spacing: .11em;
@@ -149,12 +149,12 @@
     padding: 15px 16px;
     border: 1px solid var(--line);
     border-radius: 16px;
-    background: #fbf9f4;
+    background: #f6faf9;
   }
   .permission-note svg {
     width: 22px;
     height: 22px;
-    color: var(--gold);
+    color: var(--brand);
     justify-self: center;
   }
   .permission-note strong,
@@ -181,11 +181,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 18px;
-    border: 1px solid rgba(189, 104, 0, .24);
+    border: 1px solid rgba(0, 106, 96, .24);
     border-radius: 14px;
     color: var(--ink);
-    background: rgba(255, 250, 242, .98);
-    box-shadow: 0 8px 28px rgba(61, 45, 24, .15);
+    background: rgba(247, 251, 250, .98);
+    box-shadow: 0 8px 28px rgba(8, 70, 63, .15);
   }
   body[data-picker-open="true"] .picker-context { display: flex; }
   .picker-context-copy { min-width: 0; }
@@ -214,7 +214,7 @@
     cursor: pointer;
   }
   button:hover { background: #343d44; }
-  button:focus-visible { outline: 3px solid rgba(189, 104, 0, .30); outline-offset: 2px; }
+  button:focus-visible { outline: 3px solid rgba(0, 106, 96, .30); outline-offset: 2px; }
   [hidden] { display: none !important; }
   @keyframes spin { to { transform: rotate(360deg); } }
   @media (max-width: 560px) {

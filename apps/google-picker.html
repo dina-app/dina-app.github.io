@@ -1,0 +1,464 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Google Picker — choose files for SheetConnect</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<!--
+  Published to https://dina.jp/apps/google-picker.html from the
+  dina-app/dina-app.github.io repository. It is not part of the extension archive.
+
+  Why a hosted page exists at all: under the drive.file scope the extension can only
+  touch files the user has handed it through the Google Picker, and the Picker ships
+  as remote code from apis.google.com. Manifest V3 forbids an extension from loading
+  remote code, so the Picker cannot run inside the side panel. It runs here instead,
+  and talks to the extension over externally_connectable.
+
+  The access token is never put in the URL. This page asks the extension for one
+  after it loads, so the token stays out of the address bar, out of history and out
+  of any referrer. The fragment carries a spreadsheet id and its name, both of which
+  the user is already looking at in their own tab, and a fragment is never sent to
+  the server — so neither reaches this site's request logs.
+-->
+<style>
+  :root {
+    color-scheme: light;
+    --ink: #1d252c;
+    --muted: #66707a;
+    --brand: #006a60;
+    --brand-bright: #378c81;
+    --brand-soft: #e7f2f0;
+    --line: #d9e7e4;
+    --surface: rgba(255, 255, 255, .94);
+    font-family: Inter, "Hiragino Sans", "Yu Gothic", -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { min-width: 320px; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding: 32px;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 18% 16%, rgba(55, 140, 129, .20), transparent 32rem),
+      radial-gradient(circle at 86% 82%, rgba(0, 106, 96, .12), transparent 30rem),
+      linear-gradient(145deg, #f9fbfb 0%, #e9f1ef 100%);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    width: 28rem;
+    height: 28rem;
+    border: 1px solid rgba(0, 106, 96, .10);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  body::before { top: -18rem; right: -11rem; }
+  body::after { bottom: -20rem; left: -8rem; }
+  main {
+    position: relative;
+    width: min(100%, 35rem);
+    padding: 30px;
+    overflow: hidden;
+    border: 1px solid rgba(171, 198, 193, .72);
+    border-radius: 26px;
+    background: var(--surface);
+    box-shadow: 0 28px 70px rgba(8, 70, 63, .14), 0 2px 8px rgba(8, 70, 63, .06);
+    backdrop-filter: blur(18px);
+  }
+  main::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, #08463f, var(--brand), var(--brand-bright));
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 34px;
+  }
+  .brand img {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(8, 70, 63, .22);
+  }
+  .brand-copy { display: grid; gap: 1px; }
+  .brand-name { font-size: 15px; font-weight: 760; letter-spacing: -.01em; }
+  .brand-meta {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .status-icon {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 22px;
+    border-radius: 18px;
+    color: var(--brand);
+    background: var(--brand-soft);
+  }
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border: 2.5px solid rgba(0, 106, 96, .20);
+    border-top-color: var(--brand);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  .state-symbol { display: none; width: 27px; height: 27px; }
+  main[data-state="done"] .status-icon { color: #177052; background: #eaf6f0; }
+  main[data-state="error"] .status-icon { color: #a8382f; background: #fbeae7; }
+  main[data-state="done"] .spinner,
+  main[data-state="error"] .spinner { display: none; }
+  main[data-state="done"] .success-symbol,
+  main[data-state="error"] .error-symbol { display: block; }
+  .kicker {
+    margin: 0 0 7px;
+    color: var(--brand);
+    font-size: 12px;
+    font-weight: 780;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+  }
+  h1 {
+    margin: 0 0 10px;
+    font-size: clamp(24px, 4vw, 31px);
+    line-height: 1.18;
+    letter-spacing: -.035em;
+  }
+  #detail { margin: 0; color: var(--muted); font-size: 15px; }
+  .permission-note {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-top: 26px;
+    padding: 15px 16px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: #f6faf9;
+  }
+  .permission-note svg {
+    width: 22px;
+    height: 22px;
+    color: var(--brand);
+    justify-self: center;
+  }
+  .permission-note strong,
+  .permission-note span { display: block; }
+  .permission-note strong { font-size: 13px; }
+  .permission-note span { margin-top: 2px; color: var(--muted); font-size: 12px; }
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 22px;
+    color: #7b817f;
+    font-size: 11px;
+  }
+  .picker-context {
+    position: fixed;
+    z-index: 2147483646;
+    inset: 12px 16px auto;
+    display: none;
+    width: min(calc(100% - 32px), 58rem);
+    margin: 0 auto;
+    padding: 11px 15px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border: 1px solid rgba(0, 106, 96, .24);
+    border-radius: 14px;
+    color: var(--ink);
+    background: rgba(247, 251, 250, .98);
+    box-shadow: 0 8px 28px rgba(8, 70, 63, .15);
+  }
+  body[data-picker-open="true"] .picker-context { display: flex; }
+  .picker-context-copy { min-width: 0; }
+  .picker-context strong { display: block; font-size: 13px; }
+  .picker-context span { display: block; margin-top: 1px; color: var(--muted); font-size: 12px; }
+  .picker-context a {
+    flex: 0 0 auto;
+    color: #1558b0;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .secure { display: inline-flex; align-items: center; gap: 6px; }
+  .secure svg { width: 14px; height: 14px; color: #177052; }
+  button {
+    appearance: none;
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 15px;
+    color: #fff;
+    background: var(--ink);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button:hover { background: #343d44; }
+  button:focus-visible { outline: 3px solid rgba(0, 106, 96, .30); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 560px) {
+    body { padding: 18px; }
+    main { padding: 24px; border-radius: 22px; }
+    .brand { margin-bottom: 28px; }
+    .footer { align-items: flex-start; flex-direction: column; }
+    .picker-context { align-items: flex-start; flex-direction: column; gap: 4px; padding: 9px 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1.8s; } }
+</style>
+<main id="status-card" data-state="loading" aria-live="polite">
+  <div class="brand">
+    <img src="./logo.svg" width="46" height="46" alt="">
+    <div class="brand-copy">
+      <span class="brand-name">SheetConnect for Salesforce</span>
+      <span class="brand-meta">DinaLab</span>
+    </div>
+  </div>
+  <div class="status-icon" aria-hidden="true">
+    <span class="spinner"></span>
+    <svg class="state-symbol success-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+    <svg class="state-symbol error-symbol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>
+  </div>
+  <p class="kicker">Google Sheets access</p>
+  <h1 id="heading">Preparing Google Picker…</h1>
+  <p id="detail">Choose the spreadsheet you want SheetConnect to work with. Access is granted one file at a time.</p>
+  <div class="permission-note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="11" x="5" y="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+    <div>
+      <strong>Only the file you select</strong>
+      <span>Other spreadsheets stay outside SheetConnect until you grant them separately.</span>
+    </div>
+  </div>
+  <div class="footer">
+    <span class="secure">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8Z"/><path d="m9 12 2 2 4-4"/></svg>
+      Secure access through Google Picker
+    </span>
+    <button id="retry" type="button" hidden>Try again</button>
+  </div>
+</main>
+<aside class="picker-context" aria-label="About this Google Picker dialog">
+  <div class="picker-context-copy">
+    <strong>This is Google’s official file picker</strong>
+    <span>SheetConnect can access only the spreadsheet you select here. Other files in your Google Drive remain inaccessible.</span>
+  </div>
+  <a href="https://developers.google.com/workspace/drive/api/guides/api-specific-auth#benefits_of_the_drive_file_scope" target="_blank" rel="noopener noreferrer">How Google limits access</a>
+</aside>
+<script src="https://apis.google.com/js/api.js" async defer onload="onApiLoad()" onerror="fail('Google’s Picker library could not be loaded. Check the network connection and reload.')"></script>
+<script>
+  // The Store build and release candidates loaded unpacked share this fixed id
+  // through manifest.key. Builds with any other id cannot talk to this page.
+  const EXTENSION_ID = "ndlelhglddfgjelpgfhledjnhppflibc";
+
+  // Picker API key (a developer key, not an OAuth client), created 2026-09-15 in
+  // sheetconnect-salesforce and restricted there to the Google Picker API and an
+  // HTTP referrer of https://dina.jp/*.
+  //
+  // It is public because it has to be: the Picker reads it from the page. Treat the
+  // restrictions as hygiene rather than as the security boundary — a Referer header
+  // can be forged. What actually protects the user is that this key on its own does
+  // nothing: every file the Picker returns was chosen by a signed-in person, against
+  // their own OAuth token, and drive.file grants only what they picked.
+  const PICKER_API_KEY = "AIzaSyC4W2PP7aRnJF_pFmd8Gg-UCQ5nirijRSQ";
+
+  // The Cloud project number — "the Id of the application needing to access the
+  // user's files via the Drive API", in the Picker's own words. This is what a
+  // drive.file grant attaches to, so it has to be the project that issued the
+  // access token: the same project as the extension's oauth2.client_id, whose
+  // leading digits are this number. Get it wrong and the user picks a file, the
+  // picker reports success, and every later read still returns 404.
+  const CLOUD_PROJECT_NUMBER = "472463652740";
+
+  const heading = document.getElementById("heading");
+  const detail = document.getElementById("detail");
+  const statusCard = document.getElementById("status-card");
+  const retry = document.getElementById("retry");
+
+  retry.addEventListener("click", () => location.reload());
+
+  function fail(message) {
+    delete document.body.dataset.pickerOpen;
+    statusCard.dataset.state = "error";
+    heading.textContent = "Could not open the picker";
+    detail.textContent = message;
+    retry.hidden = false;
+  }
+
+  function done(message) {
+    delete document.body.dataset.pickerOpen;
+    statusCard.dataset.state = "done";
+    heading.textContent = "Access granted";
+    detail.textContent = message;
+    retry.hidden = true;
+  }
+
+  // Two fragment shapes, because 0.7.0 is live on the Store and still sends the
+  // bare id: `#<fileId>` and `#id=<fileId>&q=<spreadsheet name>`.
+  //
+  // This page cannot be framed. setOrigin was added so an extension page could host
+  // it in an iframe, and the Picker refuses: it builds its own frame with this
+  // document's origin and checks that against setOrigin, so naming anything else
+  // gives "Incorrect origin value. Expected 'chrome-extension://…' but was
+  // 'https://dina.jp'". Its inner frame also reports a frame-ancestors policy of
+  // https://dina.jp, report-only for now.
+  function target() {
+    const raw = location.hash.replace(/^#/, "");
+    const isId = (value) => /^[A-Za-z0-9_-]{10,}$/.test(value);
+    if (raw.includes("=")) {
+      const params = new URLSearchParams(raw);
+      const id = (params.get("id") || "").trim();
+      return { id: isId(id) ? id : "", name: (params.get("q") || "").trim() };
+    }
+    const id = decodeURIComponent(raw).trim();
+    return { id: isId(id) ? id : "", name: "" };
+  }
+
+  function askExtension(message) {
+    return new Promise((resolve, reject) => {
+      if (!window.chrome?.runtime?.sendMessage) {
+        reject(new Error("Open this page from the SheetConnect side panel — it cannot grant access on its own."));
+        return;
+      }
+      chrome.runtime.sendMessage(EXTENSION_ID, message, (response) => {
+        const failure = chrome.runtime.lastError;
+        if (failure) {
+          reject(new Error("SheetConnect did not answer. Make sure the extension is installed and enabled, then try again."));
+          return;
+        }
+        if (!response?.ok) {
+          reject(new Error(response?.error || "SheetConnect could not start the picker."));
+          return;
+        }
+        resolve(response);
+      });
+    });
+  }
+
+  async function onApiLoad() {
+    // Catches a key that was cleared, half-pasted or replaced with a placeholder.
+    // Without it the Picker fails with a blank window and no explanation.
+    if (!/^AIza[\w-]{30,}$/.test(PICKER_API_KEY)) {
+      fail("This page has no usable Picker API key. Create one in Google Cloud Console under the same project as the OAuth client, restrict it to the Picker API and the dina.jp referrer, and publish it here.");
+      return;
+    }
+    let token;
+    try {
+      ({ token } = await askExtension({ type: "picker-token" }));
+    } catch (error) {
+      fail(error.message);
+      return;
+    }
+    gapi.load("picker", () => {
+      try {
+        showPicker(token);
+      } catch (error) {
+        fail(`The picker failed to open: ${error.message}`);
+      }
+    });
+  }
+
+  function showPicker(token) {
+    const { id: fileId, name } = target();
+
+    // One view: the file the extension asked about, by id.
+    //
+    // setFileIds works for a first grant. The extension only opens this page after
+    // the Sheets API answers 404, so a file that appears here has not been granted
+    // — which is the case the reference's wording leaves ambiguous. Two
+    // configuration faults hid it: the Drive API was disabled in the Cloud project,
+    // and the picker's API key was then restricted to the Picker API alone and
+    // blocked Drive.
+    //
+    // A browse-by-name view sat behind this one twice, and is gone for good. It was
+    // put back after a spreadsheet came up empty here — but that same file, same id,
+    // resolved to one row twenty minutes later with nothing changed in this code.
+    // The empty view was Google still settling after the key change, or a cached
+    // failed lookup; it was not a property of the file. Do not add the search back
+    // on a single empty view. Give it a few minutes and ask the Drive API directly
+    // first — both faults above said exactly what they were when asked.
+    //
+    // What the search costs is permanent. It lists every spreadsheet, names are not
+    // unique — one Drive here held three called "Untitled spreadsheet" — and a wrong
+    // pick cannot be undone, because Google records the grant and drive.file gives
+    // an app no way to hand a file back. The worker refusing it afterwards is too
+    // late to matter.
+    //
+    // The fallback below is only for a fragment carrying no usable id, where a
+    // picker built with no view at all is broken rather than merely unhelpful.
+    const view = fileId
+      ? new google.picker.DocsView(google.picker.ViewId.DOCS)
+          .setFileIds(fileId)
+          .setMode(google.picker.DocsViewMode.LIST)
+      : new google.picker.DocsView(google.picker.ViewId.SPREADSHEETS)
+          .setMode(google.picker.DocsViewMode.LIST);
+    if (!fileId && name) view.setQuery(name);
+
+    heading.textContent = name ? `Choose “${name}”` : "Choose this spreadsheet";
+    detail.textContent = name
+      ? `Google Picker is ready. It shows only “${name}”, the spreadsheet you have open. Select it and confirm access.`
+      : "Google Picker is ready. Select the spreadsheet you have open and confirm access.";
+
+    // The strip above Google's modal explains what the grant means, and the space it
+    // needs was a hardcoded 190px. It wraps to two rows on a narrow window, where it
+    // covered the top 18px of the modal at 420x740. Measure it instead, and when the
+    // window is too short for both, drop the strip: the explanation is supplementary,
+    // the picker is not. Google centres the modal, so the reserve counts twice.
+    document.body.dataset.pickerOpen = "true";
+    const reserve = document.querySelector(".picker-context").getBoundingClientRect().bottom + 12;
+    const pickerWidth = Math.min(840, Math.max(566, window.innerWidth - 48));
+    const pickerHeight = Math.min(560, Math.max(350, window.innerHeight - reserve * 2));
+    if ((window.innerHeight - pickerHeight) / 2 < reserve) delete document.body.dataset.pickerOpen;
+
+    const builder = new google.picker.PickerBuilder()
+      .setOAuthToken(token)
+      .setDeveloperKey(PICKER_API_KEY)
+      .setAppId(CLOUD_PROJECT_NUMBER)
+      .addView(view)
+      .setCallback(onPicked)
+      .setTitle("Grant SheetConnect access to this spreadsheet")
+      .setSize(pickerWidth, pickerHeight);
+    builder.build().setVisible(true);
+  }
+
+  async function onPicked(data) {
+    if (data.action === google.picker.Action.CANCEL) {
+      fail("No spreadsheet was granted. SheetConnect cannot read this file until you pick it here. If the picker showed nothing to pick, wait a moment and try again, or check that it is signed in to the Google account you connected.");
+      return;
+    }
+    if (data.action !== google.picker.Action.PICKED) return;
+    const picked = (data.docs || []).map((doc) => ({ id: doc.id, name: doc.name })).filter((doc) => doc.id);
+    if (!picked.length) {
+      fail("The picker returned no file.");
+      return;
+    }
+    try {
+      await askExtension({ type: "picker-granted", files: picked });
+      done(`SheetConnect can now use ${picked.map((doc) => doc.name || doc.id).join(", ")}. You can close this tab.`);
+      // The panel reopens on its own; closing is a convenience, and is silently
+      // refused when the tab was not opened by script.
+      setTimeout(() => window.close(), 1200);
+    } catch (error) {
+      fail(error.message);
+    }
+  }
+</script>

@@ -26,7 +26,7 @@
   <li><strong>Salesforce website and API content:</strong> object and field metadata, list view definitions and queries, report metadata and results, query results, record IDs and field values, and the results of user-confirmed record changes. This content may include personal data if the user's Salesforce organization stores such data and the user chooses to retrieve or update it.</li>
   <li><strong>Google spreadsheet data:</strong> the spreadsheet ID and title and the worksheet titles and IDs of the spreadsheet the user has open; and the cell values of the worksheet the user selects, read as the input table for update and conversion tools or replaced by an import.</li>
   <li><strong>User-provided content:</strong> SOQL query text, the selected object, list view or report, data and header ranges, and header-to-field mappings.</li>
-  <li><strong>Local preferences and saved work:</strong> the selected Salesforce organization, per-organization and per-worksheet source mappings, Apex the user chooses to save as a named template, and the titles and IDs of spreadsheets and worksheets already opened.</li>
+  <li><strong>Local preferences and saved work:</strong> the selected Salesforce organization, per-organization and per-worksheet source mappings, Apex the user chooses to save as a named template, the titles and IDs of spreadsheets and worksheets already opened, and Bulk API job records.</li>
   </ul>
   <p>The extension does not collect browsing history, advertising identifiers, analytics, telemetry, mouse movement, scrolling behavior, or keystroke logs. It contains no ads.</p>
 
@@ -43,7 +43,8 @@
   <li><strong>Source mappings</strong> — the selected object, list view, report, query text and grouping preference for a worksheet — are stored per organization and worksheet in Chrome extension storage on the user's device, keeping the 80 most recently updated.</li>
   <li><strong>Saved Apex templates</strong> hold the name the user gave them and the Apex body they wrote, with the time they were saved. They belong to the person rather than to one spreadsheet, and at most 50 are kept. Deleting a template removes it.</li>
   <li><strong>Spreadsheet shapes</strong> — a spreadsheet's ID, title and worksheet titles and IDs — are cached so the panel can be drawn before the live check returns, keeping the 30 most recently opened. They hold no cell values.</li>
-  <li><strong>Salesforce result rows and worksheet cell values are not persisted</strong> in extension storage; they are held only for the duration of the operation.</li>
+  <li><strong>Bulk API job records</strong> hold the Salesforce job ID, object, operation, state, record counts, and, when a status column was requested, the target column and source row numbers plus a SHA-256 hash of the source rows used to detect edits. They contain no record field values, and the 20 most recent are kept.</li>
+  <li><strong>Salesforce result rows, worksheet cell values and generated Bulk CSV uploads are not persisted</strong> in extension storage; they are held only for the duration of the operation.</li>
   <li>All of the above is removed when the user clears Chrome extension storage or uninstalls the extension.</li>
   </ul>
 

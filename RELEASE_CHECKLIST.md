@@ -92,7 +92,13 @@ Prepared: July 31, 2026. Last synced with `dina-app`: September 15, 2026.
 
 ## Required external actions before publishing
 
-- [ ] Deploy this site before saving the SheetConnect Chrome Web Store listing, so its privacy-policy URL resolves. The repository feeds two hosts. The Firebase Hosting mirror `dina-home.web.app` was deployed on September 12, 2026 (`node scripts/build-firebase-public.mjs && npx firebase-tools deploy --only hosting:homepage`) and serves the SheetConnect page, its privacy policy and all five screenshots. GitHub Pages on `dina.jp` — the host the listing URL points at — is still unpublished and 404s on both SheetConnect paths; publish it with `./git-push.sh "<message>"`.
+- [ ] Deploy this site before saving the SheetConnect Chrome Web Store listing, so its privacy-policy URL resolves. **`dina.jp` is served by Firebase Hosting (`dina-home.web.app`), not by GitHub Pages** — that changed on 2026-09-22, when the CNAME was removed from this repository. Pushing to GitHub stores the source and deploys nothing. Publish with:
+
+  ```sh
+  node scripts/build-firebase-public.mjs && npx firebase-tools deploy --only hosting:homepage
+  ```
+
+  `./git-push.sh "<message>"` commits and pushes the source; it does not reach the live site.
 - [x] Bind the SheetConnect Google OAuth client to the extension ID — done and verified in the Cloud Console on September 12, 2026.
 - [ ] Verify the Google Cloud project and start OAuth verification for the sensitive `spreadsheets` scope. The page promises no listing date because that review is the long pole.
 - [ ] Run the SheetConnect live end-to-end test, then submit the package, store icon, promotional tiles, and screenshots to the Chrome Web Store.

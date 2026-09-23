@@ -15,6 +15,7 @@ const publishedEntries = [
   "apps",
   "blog",
   "tools",
+  "support",
 ];
 
 rmSync(outputDirectory, { recursive: true, force: true });

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-title-en="Feedback inbox | DinaLab" data-title-ja="フィードバック一覧 | DinaLab">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback inbox | DinaLab</title>
+  <meta name="description" content="DinaLab team feedback inbox.">
+  <link rel="canonical" href="https://dina.jp/support/admin.html">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/dinalab.css">
+  <link rel="stylesheet" href="/support/support.css">
+  <script src="/assets/site-theme.js"></script>
+</head>
+<body class="doc-page">
+  <main class="shell narrow">
+    <nav class="nav" aria-label="Page navigation" data-aria-en="Page navigation" data-aria-ja="ページナビゲーション">
+      <a class="brand" href="/"><img class="brand-mark" src="/assets/dinalab-mark.svg" alt="" width="36" height="36"><span>DinaLab</span></a>
+      <span class="nav-links">
+        <a href="/" data-en="Back to home" data-ja="ホームへ戻る">Back to home</a>
+        <button type="button" class="lang-toggle" data-language-toggle aria-label="View in Japanese" data-aria-en="View in Japanese" data-aria-ja="英語で表示">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3.5 9h17M3.5 15h17"></path><path d="M12 3c2.5 2.7 3.8 5.8 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.8-3.8-9S9.5 5.7 12 3z"></path></svg>
+            <span class="lang-label">日本語</span>
+          </button>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark theme" aria-pressed="false"><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5Z"/></svg><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      </span>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <p class="eyebrow" data-en="Support" data-ja="サポート">Support</p>
+        <h1 data-en="Feedback inbox" data-ja="フィードバック一覧">Feedback inbox</h1>
+      </div>
+    </header>
+    <div class="content">
+      <section id="signed-out" class="support-gate" hidden>
+        <p data-en="Sign in with the DinaLab team account." data-ja="DinaLab チームのアカウントでサインインしてください。">Sign in with the DinaLab team account.</p>
+        <button type="button" id="sign-in" class="button" data-en="Sign in with Google" data-ja="Google でサインイン">Sign in with Google</button>
+        <p id="sign-in-error" class="support-error" role="alert" hidden></p>
+      </section>
+      <section id="signed-in" hidden>
+        <div class="support-bar">
+          <label class="support-app"><span data-en="App" data-ja="アプリ">App</span><select id="filter-app"><option value="" data-en="All" data-ja="すべて">All</option><option value="general" data-en="DinaLab in general" data-ja="DinaLab 全般">DinaLab in general</option></select></label>
+          <label class="support-app"><span data-en="Status" data-ja="状態">Status</span><select id="filter-status"><option value="" data-en="All" data-ja="すべて">All</option></select></label>
+          <span class="support-user"><span id="user-email"></span>
+            <a href="/support/" data-en="Chat" data-ja="チャット">Chat</a>
+            <button type="button" id="sign-out" class="text-button" data-en="Sign out" data-ja="サインアウト">Sign out</button></span>
+        </div>
+        <p id="summary" role="status"></p>
+        <ol id="inbox" class="support-inbox"></ol>
+        <p id="chat-error" class="support-error" role="alert" hidden></p>
+      </section>
+    </div>
+
+  </main>
+  <script src="/assets/page-language.js"></script>
+  <script type="module" src="/support/admin.js"></script>
+</body>
+</html>

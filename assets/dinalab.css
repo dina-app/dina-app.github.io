@@ -2431,13 +2431,245 @@ button.support-google svg {
   line-height: 1.5;
 }
 
-.support-chat {
+/* The signed-in body: one view at a time (home, topics, answer, the forms,
+   chat), drawn by /support/support-panel.js. */
+.support-body {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 10px;
+  min-block-size: 0;
+}
+
+.support-view {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
   min-block-size: 0;
   padding: 14px 18px 16px;
+  overflow-y: auto;
+}
+
+.support-view > :is(h3, h4, p) {
+  margin: 0;
+}
+
+.support-view h3 {
+  font-size: 17px;
+}
+
+/* Chat scrolls its log, not the whole view, so the composer stays in reach. */
+.support-view[data-view="chat"] {
+  overflow: hidden;
+}
+
+button.support-back {
+  align-self: flex-start;
+  block-size: auto;
+  padding: 2px 0;
+  background: none;
+  color: var(--secondary);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.support-hello {
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+.support-options {
+  display: grid;
+  gap: 8px;
+}
+
+button.support-option {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  block-size: auto;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+  color: var(--ink);
+  text-align: left;
+  font-weight: 400;
+}
+
+button.support-option:hover {
+  border-color: var(--primary);
+  background: var(--app-tint);
+}
+
+.support-option-icon {
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  border-radius: 50%;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+}
+
+.support-option-icon svg {
+  inline-size: 22px;
+  block-size: 22px;
+}
+
+.support-option-text {
+  display: grid;
+  line-height: 1.35;
+}
+
+.support-option-text strong {
+  font-size: 15px;
+}
+
+.support-option-text span {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+.support-filter,
+.support-form :is(input, textarea, select) {
+  inline-size: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--outline);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--fs-sm);
+}
+
+.support-form textarea {
+  resize: vertical;
+}
+
+.support-topic-group h4 {
+  margin: 4px 0 6px;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.support-topic-group ul {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.support-topic-group li {
+  margin: 0;
+}
+
+button.support-topic {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  padding: 7px 10px;
+  border-radius: var(--r-sm);
+  background: none;
+  color: var(--ink);
+  text-align: left;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+button.support-topic:hover {
+  background: var(--app-tint);
+}
+
+.support-answer {
+  line-height: 1.65;
+}
+
+.support-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: var(--fs-sm);
+}
+
+.support-actions,
+.support-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.support-form {
+  display: grid;
+  gap: 12px;
+}
+
+.support-field {
+  display: grid;
+  gap: 4px;
+}
+
+.support-field-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.support-field label {
+  color: var(--ink-soft);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.support-count {
+  color: var(--muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.support-note,
+.support-meta,
+.support-empty {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+.support-form button[type="submit"] {
+  justify-self: start;
+}
+
+.support-sent {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+.support-limit p {
+  margin: 0 0 8px;
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+button.support-chip {
+  block-size: auto;
+  padding: 5px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: var(--card);
+  color: var(--ink-soft);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+button.support-chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .support-panel .field {

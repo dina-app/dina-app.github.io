@@ -1,0 +1,486 @@
+{
+  "schema": 1,
+  "slug": "salesforce-admin-toolkit",
+  "name": "Admin Toolkit for Salesforce",
+  "status": {
+    "en": "Next release · 0.10.0",
+    "ja": "次期リリース · 0.10.0"
+  },
+  "versions": [
+    "0.10.0",
+    "0.9.1"
+  ],
+  "links": {
+    "page": "/apps/salesforce-admin-toolkit/",
+    "privacy": "/apps/salesforce-admin-toolkit/PRIVACY_POLICY.html",
+    "manual": "/apps/salesforce-admin-toolkit/manual/",
+    "store": "https://chromewebstore.google.com/detail/admin-toolkit-for-salesfo/hcbaijonjdkbdhbaknaipikhobphjnjc"
+  },
+  "summary": {
+    "en": "An independent Chrome suite compatible with Salesforce that works through the Salesforce sessions you are already signed in with. It covers metadata administration and read-only org comparison, spreadsheet data work, permission analysis, object schema exploration, API tools, Apex execution, exports and monitoring, without a developer-operated metadata service.",
+    "ja": "Salesforce に対応した独立系の Chrome 拡張機能スイートで、すでにサインインしている Salesforce のセッションを使って動作します。メタデータ管理と読み取り専用の組織比較、スプレッドシートでのデータ作業、権限の分析、オブジェクトスキーマの探索、API ツール、Apex 実行、エクスポート、モニタリングを、開発者が運営するメタデータサービスなしで提供します。"
+  },
+  "entries": [
+    {
+      "id": "getting-started",
+      "type": "howto",
+      "title": {
+        "en": "Get started with the popup",
+        "ja": "はじめに・ポップアップ"
+      },
+      "answer": {
+        "en": "Install it from the Chrome Web Store, open any Salesforce tab and sign in as usual, with no separate login. Click the extension icon for the popup: Apps launches the workspaces, Tools lists single-purpose pages, Org summarizes the connected org and user, and search finds metadata across the org by API name, label or text, with type-ahead suggestions.",
+        "ja": "Chrome ウェブストアからインストールし、任意の Salesforce タブを開いていつもどおりサインインします。別途ログインは不要です。拡張機能のアイコンをクリックするとポップアップが開きます。アプリタブはワークスペースを起動し、ツールタブには単機能ページが並び、組織タブは接続中の組織とユーザーの概要を表示します。API 参照名・ラベル・テキストで組織全体のメタデータを検索でき、入力中に候補も表示されます。"
+      },
+      "keywords": [
+        "install",
+        "get started",
+        "popup",
+        "apps tab",
+        "tools tab",
+        "org tab",
+        "login",
+        "インストール",
+        "はじめに",
+        "ポップアップ",
+        "アプリタブ",
+        "ログイン"
+      ]
+    },
+    {
+      "id": "metadata-admin",
+      "type": "howto",
+      "title": {
+        "en": "Metadata Admin: browse and search metadata",
+        "ja": "Metadata Admin: メタデータの参照と検索"
+      },
+      "answer": {
+        "en": "Metadata Admin shows the org's metadata as a compact source-style tree starting at folders such as objects, classes and flows, with a docked details column. Search matches names, labels and content snippets, the namespace menu scopes the workspace to unmanaged or managed namespaces, and tree selections build a package.xml. You can open supported metadata records directly in Salesforce Setup.",
+        "ja": "Metadata Admin は、組織のメタデータを objects、classes、flows などのメタデータフォルダーから始まるコンパクトなソース形式ツリーで表示し、ドッキングされた詳細列でフォルダーやファイルを確認できます。検索は名前・ラベル・内容スニペットにマッチし、名前空間メニューで未管理／管理名前空間に絞り込めます。ツリーの選択から package.xml を組み立てられ、対応するメタデータレコードは Salesforce の設定で直接開けます。"
+      },
+      "keywords": [
+        "metadata",
+        "metadata admin",
+        "tree",
+        "search",
+        "namespace",
+        "package.xml",
+        "source",
+        "setup",
+        "メタデータ",
+        "検索",
+        "名前空間",
+        "ツリー"
+      ]
+    },
+    {
+      "id": "org-differences",
+      "type": "howto",
+      "title": {
+        "en": "Compare metadata between orgs",
+        "ja": "メタデータ組織比較"
+      },
+      "answer": {
+        "en": "Org Differences compares selected metadata types between two signed-in orgs, an outbound change set and an org, or one change set from each org, and shows differing source side by side. Metadata Admin's Compare with checks the workspace against another signed-in org, filtered by Different, Only here or Only in the compared org. Pull and Deploy are read-only previews.",
+        "ja": "Org Differences では、選んだメタデータ種別を、ログイン済みの 2 つの組織の間、送信変更セットと組織の間、または各組織の変更セット同士で比較し、差分のあるソースを左右に並べて確認できます。Metadata Admin の Compare with では、ワークスペースをログイン済みの別組織と比較し、Different、Only here、Only in the compared org で絞り込めます。Pull と Deploy は読み取り専用のプレビューで、どちらの組織にも書き込みません。"
+      },
+      "keywords": [
+        "compare",
+        "org comparison",
+        "diff",
+        "difference",
+        "org differences",
+        "compare with",
+        "side by side",
+        "deploy",
+        "組織比較",
+        "比較",
+        "差分",
+        "メタデータ組織比較"
+      ]
+    },
+    {
+      "id": "change-set-retrieve",
+      "type": "howto",
+      "title": {
+        "en": "Retrieve and check an outbound change set",
+        "ja": "送信変更セットの取得と分類"
+      },
+      "answer": {
+        "en": "Metadata Admin's Outbound Change Sets panel retrieves source directly from an outbound change set discovered in Salesforce Setup. It then classifies every retrieved file against another signed-in org as Same, Different, Missing from target, or Unsupported. This was added in 0.9.1, and Org Differences can also compare change sets.",
+        "ja": "Metadata Admin の Outbound Change Sets パネルでは、Salesforce の設定で見つかった送信変更セットからソースを直接取得できます。取得したファイルはすべて、ログイン済みの別組織と比べて Same、Different、Missing from target、Unsupported のいずれかに分類されます。0.9.1 で追加された機能で、Org Differences でも変更セットを比較できます。"
+      },
+      "keywords": [
+        "change set",
+        "outbound change set",
+        "retrieve",
+        "compare",
+        "missing from target",
+        "unsupported",
+        "変更セット",
+        "送信変更セット",
+        "取得",
+        "比較"
+      ]
+    },
+    {
+      "id": "sheetd",
+      "type": "howto",
+      "title": {
+        "en": "SheetD: Salesforce data in a spreadsheet",
+        "ja": "SheetD: スプレッドシートでデータを扱う"
+      },
+      "answer": {
+        "en": "SheetD is a multi-tab spreadsheet for Salesforce data. Open objects, list views and reports, run SOQL with field suggestions, or import CSV and XLSX files. Edit supported object records, review the exact changed fields, then confirm the update. Local update receipts let you choose recorded prior values and submit a reviewed rollback update. Workbooks themselves are not saved.",
+        "ja": "SheetD は Salesforce データのためのマルチタブ・スプレッドシートです。オブジェクト、リストビュー、レポートを開いたり、項目の候補を見ながら SOQL を実行したり、CSV / XLSX ファイルを取り込んだりできます。対応オブジェクトのレコードを編集し、変更される項目を確認してから更新を確定します。ローカルに残る更新レシートから以前の値を選び、確認のうえロールバック更新を送信することもできます。ワークブック自体は保存されません。"
+      },
+      "keywords": [
+        "sheetd",
+        "spreadsheet",
+        "edit records",
+        "update",
+        "soql",
+        "report",
+        "xlsx",
+        "rollback",
+        "スプレッドシート",
+        "レコード編集",
+        "更新",
+        "ロールバック"
+      ]
+    },
+    {
+      "id": "org-review",
+      "type": "howto",
+      "title": {
+        "en": "Org Review: read-only org health report",
+        "ja": "Org Review（組織レビュー）"
+      },
+      "answer": {
+        "en": "Org Review is a read-only assessment that runs automatically when opened. Each section carries evidence and remediation guidance, and the report exports as PDF, Markdown, summary JSON or evidence JSON. From 0.10.0 it covers Apex, Health Check, certificates, login and session policy, OAuth exposure, sharing defaults, async operations and a permission sweep, plus a baseline, impact view and cleanup workflow.",
+        "ja": "Org Review（組織レビュー）は、ページを開くと自動で実行される読み取り専用の組織健全性アセスメントです。各セクションに根拠と改善ガイダンスが付き、PDF・Markdown・サマリー JSON・エビデンス JSON でエクスポートできます。0.10.0 からは Apex、Health Check、証明書、ログイン・セッションポリシー、OAuth の露出、共有のデフォルト設定、非同期処理、権限の横断チェックを対象とし、ベースライン、影響ビュー、クリーンアップのワークフローも加わります。"
+      },
+      "keywords": [
+        "org review",
+        "health",
+        "health check",
+        "security",
+        "assessment",
+        "audit",
+        "export pdf",
+        "scorecard",
+        "組織レビュー",
+        "健全性",
+        "セキュリティ",
+        "スコアカード"
+      ]
+    },
+    {
+      "id": "object-schema",
+      "type": "howto",
+      "title": {
+        "en": "Object Schema: relationship map and fields",
+        "ja": "Object Schema（オブジェクトスキーマ）"
+      },
+      "answer": {
+        "en": "Open Object Schema from the popup Apps tab and pick an object; Object Name suggests API names and labels. It builds an interactive relationship map with search, zoom, layouts and relationship details, scoped to the packaged namespaces you choose per org. The Fields sheet lists the fields of every selectable object with filters, search highlights, CSV export and full screen.",
+        "ja": "ポップアップのアプリタブから Object Schema を開き、オブジェクトを選びます。Object Name は API 参照名とラベルを提案します。インタラクティブなリレーションマップが作成され、検索、ズーム、レイアウト、リレーション詳細を使えます。パッケージ名前空間は組織ごとに絞り込めます。Fields シートでは、選択可能な全オブジェクトの項目をフィルター、検索ハイライト、CSV エクスポート、全画面で確認できます。"
+      },
+      "keywords": [
+        "object schema",
+        "schema",
+        "relationship",
+        "map",
+        "erd",
+        "fields",
+        "parent",
+        "child",
+        "オブジェクトスキーマ",
+        "リレーション",
+        "項目",
+        "スキーマ"
+      ]
+    },
+    {
+      "id": "permission-explorer",
+      "type": "howto",
+      "title": {
+        "en": "Permission Explorer: why a user has access",
+        "ja": "Permission Explorer（権限エクスプローラー）"
+      },
+      "answer": {
+        "en": "Permission Explorer explains why a user can access an object or field. It traces effective object and field access to the assigned profile, permission sets and permission set groups that grant it, and identifies overlapping grants. You can also compare two users across the returned access metadata.",
+        "ja": "Permission Explorer（権限エクスプローラー）は、ユーザーがオブジェクトや項目にアクセスできる理由を説明します。有効なオブジェクト・項目アクセスを、付与元のプロファイル、権限セット、権限セットグループまで追跡し、重複している付与も特定します。返されたアクセスメタデータで 2 ユーザーを比較することもできます。"
+      },
+      "keywords": [
+        "permission",
+        "access",
+        "profile",
+        "permission set",
+        "permission set group",
+        "field access",
+        "compare users",
+        "権限",
+        "プロファイル",
+        "権限セット",
+        "権限セットグループ",
+        "アクセス"
+      ]
+    },
+    {
+      "id": "winter-27-review",
+      "type": "howto",
+      "title": {
+        "en": "Winter '27 Release Review",
+        "ja": "Winter '27 リリースレビュー"
+      },
+      "answer": {
+        "en": "Work through a catalogue of Salesforce Winter '27 release notes and record your own decision on each: its status, whether it applies, and a comment of up to 10,000 characters. Decisions are kept locally per org and persist between visits, and no Salesforce data is stored by that page. It comes with 0.10.0.",
+        "ja": "Salesforce Winter '27 のリリースノート一覧を順に確認し、それぞれにステータス、該当するかどうか、コメント（最大 10,000 文字）を記録できます。判断は組織ごとにローカルに保存されて次回も残り、このページが Salesforce のデータを保存することはありません。0.10.0 で追加されます。"
+      },
+      "keywords": [
+        "winter '27",
+        "winter 27",
+        "release notes",
+        "release review",
+        "new features",
+        "status",
+        "comment",
+        "リリースノート",
+        "リリースレビュー",
+        "新機能",
+        "コメント"
+      ]
+    },
+    {
+      "id": "rest-explorer-apex",
+      "type": "howto",
+      "title": {
+        "en": "REST Explorer and Run Apex",
+        "ja": "REST Explorer と Apex 実行"
+      },
+      "answer": {
+        "en": "REST Explorer builds Salesforce REST API requests from endpoint templates and sends them to the connected org; requests run only when you send them, and you inspect the JSON response. Run Apex executes anonymous Apex and shows the compile result, execution status and debug output.",
+        "ja": "REST Explorer では、エンドポイントテンプレートで Salesforce REST API リクエストを組み立てて接続中の組織に送信し、JSON レスポンスを確認します。リクエストは送信したときだけ実行されます。Apex 実行では匿名 Apex を実行し、コンパイル結果・実行ステータス・デバッグ出力を確認できます。"
+      },
+      "keywords": [
+        "rest api",
+        "rest explorer",
+        "request",
+        "json",
+        "endpoint",
+        "apex",
+        "anonymous apex",
+        "debug",
+        "リクエスト",
+        "匿名 Apex",
+        "Apex 実行",
+        "デバッグ"
+      ]
+    },
+    {
+      "id": "data-export-documents",
+      "type": "howto",
+      "title": {
+        "en": "Export data and download files",
+        "ja": "データエクスポートとファイルのダウンロード"
+      },
+      "answer": {
+        "en": "Data Export runs SOQL, SOSL or GraphQL queries or report exports, previews the result as a CSV grid or JSON, and downloads it. Document Folders browses libraries and folders, previews supported files, and downloads selections as a ZIP that keeps folder paths. Folder selection is recursive, and downloads are limited to 500 files and 250 MB and can be canceled.",
+        "ja": "データエクスポートでは、SOQL・SOSL・GraphQL クエリやレポートエクスポートを実行し、CSV グリッドまたは JSON でプレビューしてダウンロードできます。ドキュメントフォルダーでは、Salesforce のライブラリとフォルダーを参照し、対応ファイルをプレビューし、フォルダーパスを保持した ZIP として選択内容をダウンロードできます。フォルダー選択は再帰的で、500 ファイル・250 MB まで、実行中のキャンセルも可能です。"
+      },
+      "keywords": [
+        "export",
+        "data export",
+        "csv",
+        "json",
+        "download",
+        "graphql",
+        "zip",
+        "document folders",
+        "エクスポート",
+        "ダウンロード",
+        "データエクスポート",
+        "ドキュメントフォルダー"
+      ]
+    },
+    {
+      "id": "monitoring",
+      "type": "howto",
+      "title": {
+        "en": "Limits and monitoring",
+        "ja": "制限値とモニタリング"
+      },
+      "answer": {
+        "en": "Read-only monitoring pages show API limits with live usage bars, recent setup changes in the setup audit trail, recent login attempts in login history, and available event log files. You can also inspect org and user summaries, and the popup's Org tab summarizes the connected org and user.",
+        "ja": "読み取り専用のモニタリングページで、使用量バー付きの API 制限、設定変更履歴にある最近の設定変更、ログイン履歴にある最近のログイン試行、利用可能なイベントログファイルを確認できます。組織とユーザーの概要も確認でき、ポップアップの組織タブには接続中の組織とユーザーの概要が表示されます。"
+      },
+      "keywords": [
+        "limits",
+        "api limits",
+        "monitoring",
+        "setup audit trail",
+        "login history",
+        "event log",
+        "usage",
+        "制限値",
+        "モニタリング",
+        "設定変更履歴",
+        "ログイン履歴",
+        "イベントログファイル"
+      ]
+    },
+    {
+      "id": "versions",
+      "type": "faq",
+      "title": {
+        "en": "Which version is current?",
+        "ja": "最新のバージョンは？"
+      },
+      "answer": {
+        "en": "The next release is 0.10.0, a validated release candidate awaiting Chrome Web Store upload. It adds Org Review's composed review pipeline with a sandbox-only cleanup, and the Winter '27 release review page. The preceding 0.9.1 added the Org Differences app and change set retrieval. The user manual covers 0.9.0; the product page shows the latest status.",
+        "ja": "次期リリースは 0.10.0 で、検証済みのリリース候補として Chrome ウェブストアへのアップロードを待っています。Org Review の構成型レビューパイプライン（Sandbox 限定のクリーンアップ付き）と、Winter '27 リリースレビューのページが加わります。その前の 0.9.1 では、Org Differences アプリと変更セットからの取得が追加されました。ユーザーマニュアルは 0.9.0 対応です。最新の状況は製品ページをご覧ください。"
+      },
+      "keywords": [
+        "version",
+        "release",
+        "latest",
+        "update",
+        "0.10.0",
+        "0.9.1",
+        "release notes",
+        "changelog",
+        "バージョン",
+        "リリース",
+        "最新",
+        "リリースノート"
+      ]
+    },
+    {
+      "id": "price",
+      "type": "faq",
+      "title": {
+        "en": "Does it cost anything?",
+        "ja": "料金はかかりますか？"
+      },
+      "answer": {
+        "en": "No. Admin Toolkit for Salesforce is free to install and use. Every DinaLab product is free, with no paid plans, subscriptions or checkout.",
+        "ja": "かかりません。Admin Toolkit for Salesforce は無料でインストール・利用できます。DinaLab の製品はすべて無料で、有料プランやサブスクリプション、支払いはありません。"
+      },
+      "keywords": [
+        "price",
+        "cost",
+        "free",
+        "pay",
+        "subscription",
+        "plan",
+        "料金",
+        "無料",
+        "有料",
+        "価格"
+      ]
+    },
+    {
+      "id": "what-it-writes",
+      "type": "faq",
+      "title": {
+        "en": "Does it change anything in my org?",
+        "ja": "組織のデータを変更しますか？"
+      },
+      "answer": {
+        "en": "The toolkit reads far more than it writes. Apart from requests you send yourself in the REST and Apex tools, it writes in two places: SheetD record updates you review and confirm, and, from 0.10.0, Org Review's cleanup, which deletes one permission set assignment only in a sandbox, after a recent preview and a typed confirmation.",
+        "ja": "読み取りが中心です。REST や Apex のツールで自分で送る要求を除くと、書き込みは 2 か所です。確認して確定する SheetD のレコード更新と、0.10.0 からの Org Review のクリーンアップ（Sandbox でのみ、直近のプレビューと ID の入力確認のあとで権限セット割り当てを 1 件削除）です。"
+      },
+      "keywords": [
+        "write",
+        "read-only",
+        "change data",
+        "delete",
+        "update",
+        "sandbox",
+        "production",
+        "safe",
+        "permission set assignment",
+        "書き込み",
+        "読み取り専用",
+        "削除"
+      ]
+    },
+    {
+      "id": "data-sharing",
+      "type": "privacy",
+      "title": {
+        "en": "Where does my Salesforce data go?",
+        "ja": "Salesforce のデータはどこに送られますか？"
+      },
+      "answer": {
+        "en": "Salesforce data, identity data, authentication information and requests you enter are sent only to the Salesforce org you selected, never to developer-operated servers. The one exception is Org Review reading the public Salesforce Trust status from api.status.salesforce.com, carrying no credentials or org data, only the instance name. There is no analytics, telemetry or advertising.",
+        "ja": "Salesforce のデータ、ID 情報、認証情報、入力したリクエストは、選択した Salesforce 組織にだけ送られ、開発者が運営するサーバーには送られません。唯一の例外は、Org Review が api.status.salesforce.com から公開の Salesforce Trust ステータスを読み取る通信です。この通信には認証情報も組織のデータも含まれず、インスタンス名だけが送られます。分析・テレメトリ・広告もありません。"
+      },
+      "keywords": [
+        "privacy",
+        "data",
+        "server",
+        "telemetry",
+        "analytics",
+        "api.status.salesforce.com",
+        "trust status",
+        "security",
+        "プライバシー",
+        "データ",
+        "送信",
+        "セキュリティ"
+      ]
+    },
+    {
+      "id": "stored-data",
+      "type": "privacy",
+      "title": {
+        "en": "What is stored on my device?",
+        "ja": "端末に保存されるデータは？"
+      },
+      "answer": {
+        "en": "Chrome storage may keep workspace preferences, search data, pending edits, recent and favorite tools, operation history (latest 100, without session tokens), SheetD update receipts (newest 50 events, 2 MB per org), Org Review's redacted summary, baseline and cleanup tasks, and your Winter '27 decisions. SheetD workbooks and the rendered Org Review report are not kept. Removing the extension clears it.",
+        "ja": "Chrome のストレージには、ワークスペースの設定、検索データ、保留中の編集、最近使った／お気に入りのツール、操作履歴（最新 100 件、セッショントークンは含まない）、SheetD の更新レシート（組織ごとに最新 50 件・2 MB まで）、Org Review の機密情報を伏せた要約・ベースライン・クリーンアップタスク、Winter '27 の判断が保存されることがあります。SheetD のワークブックと Org Review のレポート本体は保存しません。拡張機能を削除すると消去されます。"
+      },
+      "keywords": [
+        "storage",
+        "stored",
+        "local",
+        "data",
+        "device",
+        "history",
+        "receipts",
+        "retention",
+        "保存",
+        "ストレージ",
+        "ローカル",
+        "履歴"
+      ]
+    },
+    {
+      "id": "permissions",
+      "type": "privacy",
+      "title": {
+        "en": "Why these permissions?",
+        "ja": "権限が必要な理由"
+      },
+      "answer": {
+        "en": "cookies reads Salesforce session cookies so the toolkit can connect to the org you are already signed in to. storage saves local workspace preferences, data, UI settings and pending edits. Salesforce host access permits requests to Salesforce org, Setup, Experience Cloud, Visualforce and Salesforce Sites domains used by the active org. 0.10.0 keeps the same permissions.",
+        "ja": "cookies は、すでにサインインしている組織に接続するために Salesforce のセッション Cookie を読み取ります。storage はワークスペースの設定、データ、UI 設定、保留中の編集をローカルに保存します。Salesforce のホストへのアクセスは、使用中の組織が使う Salesforce 組織、設定、Experience Cloud、Visualforce、Salesforce Sites の各ドメインへのリクエストのためです。0.10.0 でも権限は変わりません。"
+      },
+      "keywords": [
+        "permissions",
+        "cookies",
+        "storage",
+        "host",
+        "host permissions",
+        "session",
+        "権限",
+        "許可",
+        "Cookie",
+        "ホスト"
+      ]
+    }
+  ]
+}

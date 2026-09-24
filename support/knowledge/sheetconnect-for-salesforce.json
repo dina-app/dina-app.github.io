@@ -1,0 +1,208 @@
+{
+  "schema": 1,
+  "slug": "sheetconnect-for-salesforce",
+  "name": "SheetConnect for Salesforce",
+  "status": { "en": "Published · 0.9.0", "ja": "公開中 · 0.9.0" },
+  "versions": ["0.10.0", "0.9.0"],
+  "links": {
+    "page": "/apps/sheetconnect-for-salesforce/",
+    "privacy": "/apps/sheetconnect-for-salesforce/PRIVACY_POLICY.html",
+    "store": "https://chromewebstore.google.com/detail/sheetconnect-for-salesfor/ndlelhglddfgjelpgfhledjnhppflibc"
+  },
+  "summary": {
+    "en": "A Chrome side panel for the Google Sheets spreadsheet you have open, connected to the Salesforce org you are signed in to. It imports objects, list views, SOQL and reports into a worksheet and sends confirmed record changes back.",
+    "ja": "開いている Google スプレッドシートの横に表示される Chrome サイドパネルです。サインイン中の Salesforce 組織につながり、オブジェクト、リストビュー、SOQL、レポートをワークシートにインポートし、確認したレコードの変更を Salesforce に書き戻します。"
+  },
+  "entries": [
+    {
+      "id": "import-objects",
+      "type": "howto",
+      "title": { "en": "Import an object, list view or SOQL", "ja": "オブジェクト・リストビュー・SOQL のインポート" },
+      "answer": {
+        "en": "Pick a Salesforce object and import from one of its list views, or write your own SOQL. Field suggestions include relationship paths. Object imports follow every result page, so a large query is not cut off after its first batch.",
+        "ja": "Salesforce のオブジェクトを選んでリストビューからインポートするか、SOQL を自分で書きます。項目の候補には参照関係のパスも出ます。オブジェクトのインポートは結果の全ページをたどるので、大きなクエリも最初のバッチで打ち切られません。"
+      },
+      "keywords": ["import", "object", "list view", "soql", "query", "field", "relationship", "インポート", "オブジェクト", "リストビュー", "クエリ", "項目"]
+    },
+    {
+      "id": "import-reports",
+      "type": "howto",
+      "title": { "en": "Import a report", "ja": "レポートのインポート" },
+      "answer": {
+        "en": "Search every report by ID, name, developer name or folder, then import it. Grouped reports keep their groupings, aggregates, subtotals and grand totals, and you can add detail rows for that run without changing the report in Salesforce.",
+        "ja": "レポートを ID、名前、API 参照名、フォルダーで検索してインポートします。グループ化されたレポートはグループ、集計、小計、総計をそのまま保ちます。Salesforce 側のレポートを変えずに、その実行だけ詳細行を加えることもできます。"
+      },
+      "keywords": ["report", "grouped", "subtotal", "grand total", "aggregate", "detail rows", "folder", "レポート", "グループ", "小計", "総計", "集計"]
+    },
+    {
+      "id": "write-back",
+      "type": "howto",
+      "title": { "en": "Write changes back to Salesforce", "ja": "Salesforce への書き戻し" },
+      "answer": {
+        "en": "The worksheet is the input table for insert, update, upsert or delete. An optional data range limits the run to the rows and columns you pick. Headers map to field API names or unambiguous labels, and permissions, required fields, types, duplicate headers and ID prefixes are checked before anything runs.",
+        "ja": "ワークシートを入力表として、新規作成・更新・アップサート・削除を行います。データ範囲を指定すると、選んだ行と列だけが対象になります。見出しは項目の API 参照名か一意な表示ラベルに対応付けられ、実行前に権限、必須項目、データ型、見出しの重複、ID の接頭辞を確認します。"
+      },
+      "keywords": ["write back", "update", "insert", "upsert", "delete", "data range", "header", "mapping", "validate data", "書き戻し", "更新", "新規", "削除", "見出し", "データ範囲"]
+    },
+    {
+      "id": "confirm-before-run",
+      "type": "howto",
+      "title": { "en": "What happens before a run", "ja": "実行前の確認" },
+      "answer": {
+        "en": "Every import, write-back and fx run names the org, object, worksheet, operation and record count, and waits for you to confirm. Apex is the one exception: one press runs your code in Salesforce and writes what it returns, and the button says so.",
+        "ja": "インポート、書き戻し、fx は、実行前に組織・オブジェクト・ワークシート・操作・レコード件数を示し、確認を待ちます。例外は Apex だけで、ボタンを押すとすぐに Salesforce でコードを実行して結果を書き込みます。その旨はボタン自体に表示されます。"
+      },
+      "keywords": ["confirm", "confirmation", "safe", "before run", "review", "確認", "実行前"]
+    },
+    {
+      "id": "batch-bulk",
+      "type": "howto",
+      "title": { "en": "Batch or Bulk API for large data", "ja": "バッチと Bulk API" },
+      "answer": {
+        "en": "Send the worksheet in requests of 1 to 200 rows, and choose whether one failed row rolls back its whole request. For large data, send everything as one Bulk API job, which keeps going after the panel closes.",
+        "ja": "ワークシートを 1〜200 行ずつのリクエストで送り、1 行の失敗でそのリクエスト全体を取り消すかどうかを選べます。大量データは 1 つの Bulk API ジョブとして送れ、パネルを閉じても処理が続きます。"
+      },
+      "keywords": ["batch", "bulk", "bulk api", "rows per request", "200", "large", "rollback", "all or none", "バッチ", "一括", "大量"]
+    },
+    {
+      "id": "backup-undelete",
+      "type": "howto",
+      "title": { "en": "Backup and Undelete", "ja": "バックアップと復元" },
+      "answer": {
+        "en": "Before a write-back, the Salesforce values it is about to change are copied to a new backup worksheet with the steps to undo it, unless you turn that off. Undelete brings deleted records back from the Recycle Bin. Both come with 0.10.0.",
+        "ja": "書き戻しの前に、変更される Salesforce の値を新しいバックアップ用ワークシートに、元に戻す手順とともに保存します（オフにもできます）。Undelete（復元）は削除したレコードをごみ箱から戻します。どちらも 0.10.0 からです。"
+      },
+      "keywords": ["backup", "undo", "undelete", "restore", "recycle bin", "revert", "バックアップ", "元に戻す", "復元", "ごみ箱"]
+    },
+    {
+      "id": "validate-rules",
+      "type": "howto",
+      "title": { "en": "Validate: Salesforce rules in the sheet", "ja": "入力規則: Salesforce のルールをシートに" },
+      "answer": {
+        "en": "Validate adds the rules you choose to the selected worksheet: picklist dropdowns, checkboxes, text length limits, highlights, a header filter, and an edit warning on the Id column. It changes no cell value, and applying it again replaces its own earlier rules.",
+        "ja": "入力規則は、選んだルールをワークシートに追加します。選択リストのプルダウン、チェックボックス、文字数制限、強調表示、見出しのフィルタ、Id 列の編集前の警告です。セルの値は変えず、再度適用すると以前の自分のルールを置き換えます。"
+      },
+      "keywords": ["validate", "validation", "picklist", "dropdown", "checkbox", "length", "data validation", "filter", "id column", "入力規則", "選択リスト", "プルダウン", "チェックボックス"]
+    },
+    {
+      "id": "fx-vlookup",
+      "type": "howto",
+      "title": { "en": "fx: VLOOKUP against Salesforce", "ja": "fx: Salesforce への VLOOKUP" },
+      "answer": {
+        "en": "VLOOKUP looks a column up in Salesforce and writes what it finds beside it, one column per field you name. Your column is left alone. Rows that match nothing say so, and a row matching several records gets the newest plus a note listing the rest.",
+        "ja": "VLOOKUP は列の値を Salesforce で検索し、見つかった値を横に書き込みます。指定した項目ごとに 1 列です。元の列は変更しません。該当なしの行はその旨を、複数該当の行は最新のレコードと残りの一覧を記録します。"
+      },
+      "keywords": ["fx", "vlookup", "lookup", "convert", "find", "match", "formula", "検索", "変換", "関数"]
+    },
+    {
+      "id": "fx-rollup",
+      "type": "howto",
+      "title": { "en": "fx: ROLLUP over child records", "ja": "fx: 子レコードの ROLLUP" },
+      "answer": {
+        "en": "ROLLUP counts or totals the child records behind each row, with one aggregate query per column rather than one per row, and an optional condition so the total answers the exact question you asked.",
+        "ja": "ROLLUP は各行に対応する子レコードを件数または合計で集計します。行ごとではなく列ごとに集計クエリを 1 回実行し、条件も指定できます。"
+      },
+      "keywords": ["rollup", "count", "sum", "total", "child", "aggregate", "集計", "件数", "合計", "子レコード"]
+    },
+    {
+      "id": "fx-label-value",
+      "type": "howto",
+      "title": { "en": "fx: LABEL and VALUE for picklists", "ja": "fx: 選択リストの LABEL と VALUE" },
+      "answer": {
+        "en": "LABEL turns a picklist's stored value into the label people read, and VALUE turns a label back into the stored value. Both read the picklist from the org and need no query. They come with 0.10.0.",
+        "ja": "LABEL は選択リストの保存値を表示ラベルに、VALUE は表示ラベルを保存値に変換します。どちらも組織の選択リスト定義を使い、クエリは不要です。0.10.0 からです。"
+      },
+      "keywords": ["label", "value", "picklist", "translate", "api value", "選択リスト", "ラベル", "値"]
+    },
+    {
+      "id": "apex",
+      "type": "howto",
+      "title": { "en": "Run your own Apex", "ja": "Apex の実行" },
+      "answer": {
+        "en": "When the other tools are not enough, run anonymous Apex over the selected range: it arrives as input, and whatever you put in output is written back. There are 27 templates, each compiled against a real org, and completion comes from your org's objects, fields and classes.",
+        "ja": "他のツールで足りないときは、選択範囲に対して匿名 Apex を実行します。範囲が input として渡され、output に入れた内容がシートに書き込まれます。実際の組織でコンパイル確認済みのテンプレートが 27 個あり、補完は組織のオブジェクト・項目・クラスから行われます。"
+      },
+      "keywords": ["apex", "anonymous apex", "template", "code", "script", "Apex 開発", "テンプレート", "コード"]
+    },
+    {
+      "id": "connect-google",
+      "type": "howto",
+      "title": { "en": "Connect Google and pick a spreadsheet", "ja": "Google 接続とスプレッドシートの選択" },
+      "answer": {
+        "en": "Google access is asked for only when you choose Connect Google. The only scope is drive.file: SheetConnect reaches only the spreadsheets you hand over through Google's own file picker, and the token stays in Chrome's own token cache.",
+        "ja": "Google へのアクセスは「Google に接続」を選んだときだけ求めます。スコープは drive.file のみで、Google 純正のファイル選択画面で渡したスプレッドシートにしかアクセスしません。トークンは Chrome のトークンキャッシュに残ります。"
+      },
+      "keywords": ["google", "connect", "sign in", "picker", "drive.file", "scope", "spreadsheet", "permission", "接続", "サインイン", "スコープ", "ファイル選択"]
+    },
+    {
+      "id": "language",
+      "type": "howto",
+      "title": { "en": "English and Japanese", "ja": "英語と日本語" },
+      "answer": {
+        "en": "The whole panel is available in English and Japanese, using Salesforce's own Japanese terms. A Japanese browser opens it in Japanese, and the language selector in the panel overrides that either way.",
+        "ja": "パネル全体が英語と日本語に対応し、日本語は Salesforce 公式の用語を使います。日本語のブラウザーでは日本語で開き、パネルの言語選択でどちらにも切り替えられます。"
+      },
+      "keywords": ["language", "japanese", "english", "translation", "言語", "日本語", "英語"]
+    },
+    {
+      "id": "unverified-screen",
+      "type": "faq",
+      "title": { "en": "Why does Google show an unverified-app screen?", "ja": "Google に「未確認のアプリ」と表示されるのはなぜ？" },
+      "answer": {
+        "en": "Google's verification of the requested scope is still open. Until it completes, Google shows its unverified-app screen when you connect, and the number of accounts that can authorize is capped. The consent screen is in production, which is a publishing status, not verification.",
+        "ja": "要求しているスコープの Google による審査がまだ完了していないためです。完了までは、接続時に未確認アプリの画面が表示され、承認できるアカウント数にも上限があります。同意画面は「本番環境」ですが、これは公開状態であり、審査済みという意味ではありません。"
+      },
+      "keywords": ["unverified", "verification", "warning", "consent screen", "google", "未確認", "審査", "警告"]
+    },
+    {
+      "id": "versions",
+      "type": "faq",
+      "title": { "en": "Which version is current?", "ja": "最新のバージョンは？" },
+      "answer": {
+        "en": "Version 0.9.0 is published on the Chrome Web Store. 0.10.0 adds LABEL and VALUE, write-back requests of 1 to 200 rows beside the Bulk API, a backup worksheet before each run, and Undelete; the product page shows its latest status.",
+        "ja": "Chrome ウェブストアで公開中なのは 0.9.0 です。0.10.0 では LABEL と VALUE、1〜200 行単位の書き戻し（Bulk API と併用）、実行前のバックアップ用ワークシート、Undelete（復元）が加わります。最新の状況は製品ページをご覧ください。"
+      },
+      "keywords": ["version", "release", "latest", "update", "0.9.0", "0.10.0", "changelog", "バージョン", "リリース", "最新"]
+    },
+    {
+      "id": "price",
+      "type": "faq",
+      "title": { "en": "Does it cost anything?", "ja": "料金はかかりますか？" },
+      "answer": {
+        "en": "No. SheetConnect is free to install and use. Every DinaLab product is free, with no paid plans, subscriptions or checkout.",
+        "ja": "かかりません。SheetConnect は無料でインストール・利用できます。DinaLab の製品はすべて無料で、有料プランやサブスクリプション、支払いはありません。"
+      },
+      "keywords": ["price", "cost", "free", "pay", "subscription", "plan", "料金", "無料", "有料", "価格"]
+    },
+    {
+      "id": "credentials",
+      "type": "privacy",
+      "title": { "en": "Where do my credentials go?", "ja": "認証情報はどこに送られますか？" },
+      "answer": {
+        "en": "The Salesforce session cookie is read locally, sent only to that same org, never copied into extension storage, and never passed to the side panel. There is no developer-operated server, and no ads, analytics or telemetry.",
+        "ja": "Salesforce のセッション Cookie はローカルで読み取られ、同じ組織にだけ送られます。拡張機能のストレージにはコピーされず、サイドパネルにも渡されません。開発者が運営するサーバーはなく、広告・分析・テレメトリもありません。"
+      },
+      "keywords": ["credentials", "session", "cookie", "sid", "security", "server", "privacy", "telemetry", "認証", "セッション", "セキュリティ", "プライバシー"]
+    },
+    {
+      "id": "stored-data",
+      "type": "privacy",
+      "title": { "en": "What is stored on my device?", "ja": "端末に保存されるデータは？" },
+      "answer": {
+        "en": "Chrome storage keeps the selected org, per-worksheet source mappings (80 most recent), Apex you save as templates (at most 50), titles of spreadsheets you opened (30, no cell values), and fingerprints of sessions you hid. Salesforce rows and cell values are not kept.",
+        "ja": "Chrome のストレージには、選択した組織、ワークシートごとのソース設定（最新 80 件）、テンプレートとして保存した Apex（最大 50 件）、開いたスプレッドシートの名前（30 件、セルの値は含まない）、非表示にしたセッションの指紋が保存されます。Salesforce の行データやセルの値は保存しません。"
+      },
+      "keywords": ["storage", "stored", "local", "data", "device", "retention", "保存", "ストレージ", "ローカル", "データ"]
+    },
+    {
+      "id": "permissions",
+      "type": "privacy",
+      "title": { "en": "Why these permissions?", "ja": "権限が必要な理由" },
+      "answer": {
+        "en": "cookies finds the orgs you are signed in to; identity gets the Google token after Connect Google; sidePanel shows the panel; storage keeps your settings; tabs enables the button only on Google Sheets. Google host access is optional and asked for only when you connect.",
+        "ja": "cookies はサインイン中の組織を見つけるため、identity は「Google に接続」後に Google トークンを得るため、sidePanel はパネル表示、storage は設定の保存、tabs は Google スプレッドシートのタブだけでボタンを有効にするためです。Google へのアクセスは任意で、接続時にだけ求めます。"
+      },
+      "keywords": ["permissions", "cookies", "identity", "sidepanel", "storage", "tabs", "host", "権限", "許可"]
+    }
+  ]
+}

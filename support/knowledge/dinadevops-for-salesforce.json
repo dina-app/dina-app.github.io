@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "slug": "dinadevops-for-salesforce",
+  "name": "DevOps for Salesforce",
+  "status": { "en": "Beta · 0.1.0", "ja": "ベータ · 0.1.0" },
+  "versions": ["0.1.0"],
+  "links": { "page": "/#workshop" },
+  "summary": {
+    "en": "Governed metadata retrieval through a branch and pull request.",
+    "ja": "ブランチとプルリクエストを通した、管理されたメタデータの取得です。"
+  },
+  "entries": [
+    {
+      "id": "what-is-devops",
+      "type": "faq",
+      "title": { "en": "What is DevOps for Salesforce?", "ja": "DevOps for Salesforce とは？" },
+      "answer": {
+        "en": "DevOps retrieves Salesforce metadata in a governed way, through a branch and a pull request. It is a beta, 0.1.0, and has no product page yet, so there is little more documentation to answer from.",
+        "ja": "DevOps は、ブランチとプルリクエストを通して Salesforce のメタデータを管理された形で取得するツールです。ベータ（0.1.0）で、製品ページはまだないため、詳しい資料はほとんどありません。"
+      },
+      "keywords": ["devops", "metadata", "branch", "pull request", "git", "retrieve", "メタデータ", "ブランチ", "プルリクエスト"]
+    },
+    {
+      "id": "status",
+      "type": "faq",
+      "title": { "en": "Can I use it now?", "ja": "今使えますか？" },
+      "answer": {
+        "en": "It is labelled beta. That label describes the development stage, not public availability; the home page lists it under experiments in the workshop.",
+        "ja": "表示は「ベータ」です。これは開発段階を表すもので、一般公開を意味するものではありません。ホームページでは開発中の取り組みとして掲載しています。"
+      },
+      "keywords": ["beta", "available", "install", "download", "status", "ベータ", "インストール", "公開"]
+    }
+  ]
+}

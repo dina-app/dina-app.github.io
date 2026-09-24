@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "slug": "general",
+  "name": "DinaLab",
+  "status": { "en": "Independent product studio", "ja": "独立系プロダクトスタジオ" },
+  "versions": [],
+  "links": { "page": "/" },
+  "summary": {
+    "en": "DinaLab is an independent product studio that turns real Salesforce administration, data, release and AI problems into focused tools, reliable workflows and practical notes.",
+    "ja": "DinaLab は、Salesforce の管理、データ、リリース、AI に関する実務上の課題を、目的を絞ったツール、信頼できるワークフロー、実践ノートに変える独立系プロダクトスタジオです。"
+  },
+  "entries": [
+    {
+      "id": "products",
+      "type": "faq",
+      "title": { "en": "Which products does DinaLab make?", "ja": "DinaLab の製品は？" },
+      "answer": {
+        "en": "Four core products: SheetConnect (Salesforce data in Google Sheets), Sheet for Salesforce (reviewable Salesforce data work), Admin Toolkit (org evidence and administration) and Agent (context-aware Salesforce workspaces). DevOps, Dock, Prompter and Voice are earlier-stage experiments.",
+        "ja": "中核製品は 4 つです。SheetConnect（Google スプレッドシート上の Salesforce データ）、Sheet for Salesforce（確認しながら行う Salesforce データ作業）、Admin Toolkit（組織の証跡と管理）、Agent（コンテキスト対応の Salesforce ワークスペース）。DevOps、Dock、Prompter、Voice は開発初期の取り組みです。"
+      },
+      "keywords": ["products", "apps", "extensions", "which", "list", "tools", "製品", "アプリ", "拡張機能", "一覧"]
+    },
+    {
+      "id": "which-app",
+      "type": "faq",
+      "title": { "en": "Which app should I use?", "ja": "どのアプリを使えばよい？" },
+      "answer": {
+        "en": "Work in a Google Sheet you already have: SheetConnect. A spreadsheet workspace with saved queries and reviewed updates: Sheet for Salesforce. Metadata, org comparison, permissions and org review: Admin Toolkit. An AI assistant beside Salesforce: Agent, in a closed pilot.",
+        "ja": "手元の Google スプレッドシートで作業するなら SheetConnect、保存したクエリと確認付き更新のスプレッドシート作業なら Sheet for Salesforce、メタデータ・組織比較・権限・組織レビューなら Admin Toolkit、Salesforce の横で使う AI アシスタントなら Agent（限定パイロット中）です。"
+      },
+      "keywords": ["which", "choose", "difference", "compare", "recommend", "どれ", "違い", "選び方", "おすすめ"]
+    },
+    {
+      "id": "price",
+      "type": "faq",
+      "title": { "en": "Is it free?", "ja": "無料ですか？" },
+      "answer": {
+        "en": "Yes. Every DinaLab product is free to use: no paid plans, no subscriptions, no trials that expire and no checkout. Some are intended to be open-sourced once they run smoothly in real use; that is a direction, not a promised date.",
+        "ja": "はい。DinaLab の製品はすべて無料で、有料プラン、サブスクリプション、期限付きの試用、支払いはありません。一部は実運用で安定したらオープンソース化する予定ですが、方向性であって時期の約束ではありません。"
+      },
+      "keywords": ["free", "price", "cost", "pay", "subscription", "open source", "無料", "料金", "有料", "オープンソース"]
+    },
+    {
+      "id": "affiliation",
+      "type": "faq",
+      "title": { "en": "Are you part of Salesforce or Google?", "ja": "Salesforce や Google の製品ですか？" },
+      "answer": {
+        "en": "No. DinaLab is an independent studio. Its products are not affiliated with, endorsed by, or sponsored by Salesforce or Google.",
+        "ja": "いいえ。DinaLab は独立したスタジオで、製品は Salesforce や Google と提携しておらず、承認や後援も受けていません。"
+      },
+      "keywords": ["salesforce", "google", "official", "affiliated", "partner", "公式", "提携"]
+    },
+    {
+      "id": "support-chat-data",
+      "type": "privacy",
+      "title": { "en": "What happens to this chat?", "ja": "このチャットの内容はどうなりますか？" },
+      "answer": {
+        "en": "Your messages go to OpenAI to write the answer; OpenAI keeps the conversation for 30 days so it can continue it. DinaLab keeps a short record of each conversation for 30 days, and feedback you send is kept with your name and email so we can reply.",
+        "ja": "メッセージは回答作成のため OpenAI に送られ、会話を続けるため OpenAI 側で 30 日間保存されます。DinaLab も各会話の短い記録を 30 日間保管し、送信したフィードバックは返信のためにお名前とメールアドレスとともに保管します。"
+      },
+      "keywords": ["chat", "privacy", "data", "openai", "stored", "delete", "チャット", "プライバシー", "保存", "削除"]
+    },
+    {
+      "id": "contact",
+      "type": "faq",
+      "title": { "en": "How do I reach the team?", "ja": "チームへの連絡方法は？" },
+      "answer": {
+        "en": "Use the Report a bug or Suggest a feature forms in this panel; they go straight to the team. For each extension, the verified contact address is on its Chrome Web Store listing.",
+        "ja": "このパネルの「不具合を報告」や「機能を提案」のフォームをお使いください。チームに直接届きます。各拡張機能の確認済み連絡先は、Chrome ウェブストアの掲載ページにあります。"
+      },
+      "keywords": ["contact", "email", "team", "support", "reach", "連絡", "問い合わせ", "サポート", "メール"]
+    }
+  ]
+}

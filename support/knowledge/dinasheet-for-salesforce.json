@@ -1,0 +1,425 @@
+{
+  "schema": 1,
+  "slug": "dinasheet-for-salesforce",
+  "name": "Sheet for Salesforce",
+  "status": {
+    "en": "Published · next release 0.3.2",
+    "ja": "公開中 · 次期リリース 0.3.2"
+  },
+  "versions": [
+    "0.3.2",
+    "0.3.0"
+  ],
+  "links": {
+    "page": "/apps/dinasheet-for-salesforce/",
+    "privacy": "/apps/dinasheet-for-salesforce/PRIVACY_POLICY.html",
+    "manual": "/apps/dinasheet-for-salesforce/manual/",
+    "store": "https://chromewebstore.google.com/detail/dinasheet-for-salesforce/bclfoieebdchpaplhlgnobcmpjhepgal"
+  },
+  "summary": {
+    "en": "A Chrome spreadsheet workspace for data in the Salesforce org you are already signed in to. It saves SOQL files in folders, organizes query, list-view and report shortcuts in Favorites, downloads results, opens local CSV or Excel files, and shows exact changes for review before a confirmed update.",
+    "ja": "ログイン済みの Salesforce 組織のデータを扱う Chrome のスプレッドシートワークスペースです。SOQL ファイルのフォルダー保存、Query・リストビュー・レポートの Favorites への整理とダウンロード、ローカルの CSV・Excel ファイルの読み込みに対応し、正確な変更内容を確認してから更新を確定します。"
+  },
+  "entries": [
+    {
+      "id": "open-sheet",
+      "type": "howto",
+      "title": {
+        "en": "Open a sheet for your org",
+        "ja": "組織を選んでシートを開く"
+      },
+      "answer": {
+        "en": "Sign in to Salesforce in Chrome; Sheet for Salesforce reuses that session, with no separate password. Click its toolbar icon, pick the current org or another detected signed-in org, and choose Open, then check the org indicator at the top. No org shown? Sign in, return to the popup and refresh the detected sessions.",
+        "ja": "Chrome で Salesforce に通常どおりログインします。Sheet for Salesforce はそのセッションを再利用するため、パスワードを別途入力する必要はありません。ツールバーアイコンをクリックし、現在の組織または検出された別のログイン済み組織を選んで「開く」を選択したら、上部の組織表示を確認します。組織が表示されない場合は、Salesforce にログインしてからポップアップに戻り、検出済みセッションを更新してください。"
+      },
+      "keywords": [
+        "open",
+        "launch",
+        "sign in",
+        "login",
+        "org",
+        "no org",
+        "not detected",
+        "popup",
+        "session",
+        "起動",
+        "ログイン",
+        "組織"
+      ]
+    },
+    {
+      "id": "saved-queries",
+      "type": "howto",
+      "title": {
+        "en": "Save and run SOQL queries",
+        "ja": "SOQL クエリの保存と実行"
+      },
+      "answer": {
+        "en": "Expand Query in the Salesforce Data sidebar and create folders and SOQL files for the current org. Opening a Query file runs its SOQL and loads current data; include Id if you may update the records. In File details you can edit the SOQL, see the resolved object and update availability, then choose Run and update sheet.",
+        "ja": "Salesforce Data サイドバーの Query を展開し、現在の組織用のフォルダーと SOQL ファイルを作成します。Query ファイルを開くと SOQL が実行され、Salesforce の最新データが読み込まれます。レコードを更新する可能性があれば Id を含めてください。File details では SOQL の編集、解決されたオブジェクトと更新可否の確認ができ、最後に「Run and update sheet」を選びます。"
+      },
+      "keywords": [
+        "query",
+        "soql",
+        "save query",
+        "saved query",
+        "folder",
+        "file details",
+        "run",
+        "クエリ",
+        "保存",
+        "フォルダー",
+        "実行"
+      ]
+    },
+    {
+      "id": "favorites",
+      "type": "howto",
+      "title": {
+        "en": "Organize Favorites",
+        "ja": "Favorites の整理"
+      },
+      "answer": {
+        "en": "From a Query file, list view or report menu, choose Add to Favorites… and pick the permanent Default folder or create another. From Favorites you can reopen a shortcut, move it, edit its folder memberships or remove it. Favorites are per org, up to 30 folders and 100 shortcuts, and results load live each time.",
+        "ja": "Query ファイル、リストビュー、レポートのメニューから「Add to Favorites…」を選び、常設の Default フォルダーか新しく作成したフォルダーを指定します。Favorites ではショートカットを再度開く、別フォルダーへ移動する、所属フォルダーを編集する、削除することができます。Favorites は組織ごとに最大 30 フォルダー・100 件のショートカットまで保存でき、結果行は開くたびに読み込まれます。"
+      },
+      "keywords": [
+        "favorites",
+        "favorite",
+        "shortcut",
+        "bookmark",
+        "folder",
+        "default folder",
+        "list view",
+        "report",
+        "お気に入り",
+        "ショートカット",
+        "フォルダー",
+        "リストビュー"
+      ]
+    },
+    {
+      "id": "update-records",
+      "type": "howto",
+      "title": {
+        "en": "Review and update records",
+        "ja": "レコードの確認と更新"
+      },
+      "answer": {
+        "en": "Edit supported fields in a sheet with an eligible Id column. The Changed fields card lists each record with its exact before-and-after values. Select Update, read the confirmation dialog, then choose Update to send only the displayed values, or Cancel to keep editing. Grid edits stay local until you confirm, and each successful update saves a local receipt.",
+        "ja": "更新可能な Id 列を持つシートで、対応する項目を編集します。変更項目カードには、各レコードの変更前・変更後の値が正確に表示されます。「更新」を選んで確認ダイアログを読み、表示された値だけを Salesforce に送る場合は「更新」、さらに編集する場合は「キャンセル」を選択します。確定するまでグリッドでの編集はローカルのままで、更新に成功すると監査記録がローカルに保存されます。"
+      },
+      "keywords": [
+        "update",
+        "edit",
+        "save changes",
+        "changed fields",
+        "confirm",
+        "review",
+        "before after",
+        "更新",
+        "編集",
+        "変更項目",
+        "確認",
+        "確定"
+      ]
+    },
+    {
+      "id": "rollback",
+      "type": "howto",
+      "title": {
+        "en": "Roll back an update",
+        "ja": "更新のロールバック"
+      },
+      "answer": {
+        "en": "Select the LOG rail icon to open the Update Audit Log, newest first. Select the Rollback cell on each row whose recorded prior values you want back. The rollback is prepared as a normal update in the Changed fields card and is not sent automatically. Receipts are historical snapshots, so check current Salesforce values before you confirm.",
+        "ja": "レールの LOG アイコンを選んで更新監査ログを開きます（新しい順に表示）。以前の値に戻したい行ごとに「ロールバック」セルを選択します。ロールバックは通常の Salesforce 更新として変更項目カードに準備され、自動では送信されません。監査記録は過去時点のスナップショットなので、確定する前に Salesforce の現在の値を確認してください。"
+      },
+      "keywords": [
+        "rollback",
+        "undo",
+        "revert",
+        "restore",
+        "audit",
+        "audit log",
+        "log",
+        "history",
+        "ロールバック",
+        "元に戻す",
+        "監査ログ",
+        "履歴"
+      ]
+    },
+    {
+      "id": "import-files",
+      "type": "howto",
+      "title": {
+        "en": "Open a CSV or Excel file",
+        "ja": "CSV・Excel ファイルを開く"
+      },
+      "answer": {
+        "en": "Open the Import panel, select Upload, choose a local CSV or Excel file, pick the current sheet or a new sheet as the target, and select Run. The file is parsed locally in the browser and is not uploaded to the developer. If it holds valid record IDs for one object, the reviewed update flow can become available.",
+        "ja": "インポートパネルを開いて「アップロード」を選び、ローカルの CSV または Excel ファイルと、出力先（現在のシートまたは新しいシート）を指定して「実行」を選択します。ファイルはブラウザー内でローカルに解析され、開発者へアップロードされることはありません。1 種類のオブジェクトの有効なレコード ID が含まれていれば、確認付き更新が利用可能になります。"
+      },
+      "keywords": [
+        "csv",
+        "excel",
+        "xlsx",
+        "import",
+        "upload",
+        "file",
+        "local file",
+        "open file",
+        "インポート",
+        "アップロード",
+        "ファイル",
+        "読み込み"
+      ]
+    },
+    {
+      "id": "reports",
+      "type": "howto",
+      "title": {
+        "en": "Open a Salesforce report",
+        "ja": "Salesforce レポートを開く"
+      },
+      "answer": {
+        "en": "Open the Report import mode, or choose a report from the Salesforce data browser. Search by report name or enter a report ID, choose the target sheet and select Run. Details such as API name, folder, format and filters show beside the grid. If the JSON report API hits its 2,000-row cap, the full workbook export is attempted instead.",
+        "ja": "「レポート」インポートモードを開くか、Salesforce データブラウザーからレポートを選びます。レポート名で検索するかレポート ID を入力し、出力先シートを選んで「実行」を選択します。API 参照名、フォルダー、形式、検索条件などの詳細はグリッドの横に表示されます。Salesforce の JSON レポート API が 2,000 行の上限に達した場合は、同じレポートの全件ワークブックエクスポートの取得を試みます。"
+      },
+      "keywords": [
+        "report",
+        "reports",
+        "report id",
+        "run report",
+        "2000 rows",
+        "row limit",
+        "large report",
+        "workbook export",
+        "レポート",
+        "レポート ID",
+        "上限",
+        "2,000 行"
+      ]
+    },
+    {
+      "id": "download",
+      "type": "howto",
+      "title": {
+        "en": "Download results",
+        "ja": "結果のダウンロード"
+      },
+      "answer": {
+        "en": "From a Query file or Favorite menu, download one item as CSV or Excel. Download Folder… on a Favorites folder makes a ZIP of CSVs or one multi-sheet Excel workbook; you can cancel between items, and it continues past failures if at least one succeeds. For the current grid, activate its sheet and use the spreadsheet download action.",
+        "ja": "Query ファイルまたは Favorite のメニューから、1 件を CSV または Excel で直接ダウンロードできます。Favorites フォルダーの「Download Folder…」では、複数 CSV の ZIP か、複数シートの Excel ワークブックを作成します。項目の間でキャンセルでき、1 件以上成功すれば一部が失敗しても続行します。現在のグリッドを出力するときは、そのシートをアクティブにしてスプレッドシートのダウンロード操作を使います。"
+      },
+      "keywords": [
+        "download",
+        "export",
+        "csv",
+        "excel",
+        "zip",
+        "workbook",
+        "download folder",
+        "ダウンロード",
+        "エクスポート",
+        "出力",
+        "ワークブック"
+      ]
+    },
+    {
+      "id": "language",
+      "type": "howto",
+      "title": {
+        "en": "English and Japanese",
+        "ja": "英語と日本語"
+      },
+      "answer": {
+        "en": "Sheet for Salesforce first follows your Salesforce user language when it is available. Use the language selector in the popup or the Sheet for Salesforce header to switch between EN (English) and JP (Japanese). Changing the language reloads Sheet for Salesforce.",
+        "ja": "Sheet for Salesforce は、取得できる場合は最初に Salesforce ユーザーの言語に従います。ポップアップまたはヘッダーの言語セレクターで EN（English）と JP（日本語）を切り替えられます。言語を変更すると Sheet for Salesforce が再読み込みされます。"
+      },
+      "keywords": [
+        "language",
+        "japanese",
+        "english",
+        "switch language",
+        "translation",
+        "言語",
+        "日本語",
+        "英語",
+        "切り替え"
+      ]
+    },
+    {
+      "id": "update-eligibility",
+      "type": "faq",
+      "title": {
+        "en": "Which records can I update?",
+        "ja": "どのレコードを更新できますか？"
+      },
+      "answer": {
+        "en": "A sheet needs an Id column whose records resolve to one Salesforce object, so include Id in your SOQL. Imported files and report rows can qualify when they hold valid record IDs for one object; the update then acts on those records, never the report definition.",
+        "ja": "シートに Id 列があり、レコードが 1 種類の Salesforce オブジェクトとして判定できる必要があるため、SOQL には Id を含めてください。読み込んだファイルやレポートの行も、1 種類のオブジェクトの有効なレコード ID があれば対象になり得ます。その場合に更新されるのはレポート定義ではなく、そのレコードです。"
+      },
+      "keywords": [
+        "update",
+        "id column",
+        "eligible",
+        "cannot update",
+        "update disabled",
+        "更新できない",
+        "Id 列",
+        "対象"
+      ]
+    },
+    {
+      "id": "versions",
+      "type": "faq",
+      "title": {
+        "en": "Which version is current?",
+        "ja": "最新のバージョンは？"
+      },
+      "answer": {
+        "en": "The Chrome Web Store has the earlier build, still listed as DinaSheet. Version 0.3.2 is a validated release candidate awaiting upload: it keeps the Query folders, SOQL files, Favorites and downloads added in 0.3.0, fixes three defects found in the Favorites work, and adopts the new name. The user manual covers 0.3.0.",
+        "ja": "現在 Chrome ウェブストアで公開されているのは以前のビルドで、名称は DinaSheet のままです。バージョン 0.3.2 はアップロード待ちの検証済みリリース候補で、0.3.0 で追加された Query フォルダー、SOQL ファイル、Favorites、ダウンロードをそのまま備え、Favorites の見直し中に見つかった 3 件の不具合を修正し、新しい名称を採用しています。ユーザーマニュアルは 0.3.0 に対応しています。"
+      },
+      "keywords": [
+        "version",
+        "release",
+        "latest",
+        "update",
+        "0.3.2",
+        "0.3.0",
+        "release candidate",
+        "バージョン",
+        "リリース",
+        "最新"
+      ]
+    },
+    {
+      "id": "rename",
+      "type": "faq",
+      "title": {
+        "en": "Is DinaSheet the same product?",
+        "ja": "DinaSheet と同じ製品ですか？"
+      },
+      "answer": {
+        "en": "Yes. Version 0.3.2 renames the product from DinaSheet to Sheet for Salesforce. The Store listing, privacy policy, artwork and screenshots use the new name, while internal source paths and compatibility identifiers stay as they were. Until 0.3.2 uploads, the Chrome Web Store item is still listed as DinaSheet; it is the same product and the same item.",
+        "ja": "はい。バージョン 0.3.2 で製品名を DinaSheet から Sheet for Salesforce に変更しました。ストアの掲載情報、プライバシーポリシー、アートワーク、スクリーンショットは新しい名称を使い、ソースの内部パスと互換性のための識別子はこれまでどおりです。0.3.2 を公開するまで Chrome ウェブストアのアイテムは DinaSheet という名称のままですが、同じ製品の同じアイテムです。"
+      },
+      "keywords": [
+        "dinasheet",
+        "dina sheet",
+        "rename",
+        "renamed",
+        "new name",
+        "old name",
+        "name change",
+        "same product",
+        "名称変更",
+        "名前",
+        "旧名",
+        "製品名"
+      ]
+    },
+    {
+      "id": "price",
+      "type": "faq",
+      "title": {
+        "en": "Does it cost anything?",
+        "ja": "料金はかかりますか？"
+      },
+      "answer": {
+        "en": "No. Sheet for Salesforce is free to install and use. Every DinaLab product is free, with no paid plans, subscriptions or checkout.",
+        "ja": "かかりません。Sheet for Salesforce は無料でインストール・利用できます。DinaLab の製品はすべて無料で、有料プランやサブスクリプション、支払いはありません。"
+      },
+      "keywords": [
+        "price",
+        "cost",
+        "free",
+        "pay",
+        "subscription",
+        "plan",
+        "料金",
+        "無料",
+        "有料",
+        "価格"
+      ]
+    },
+    {
+      "id": "credentials",
+      "type": "privacy",
+      "title": {
+        "en": "Where does my Salesforce session go?",
+        "ja": "Salesforce のセッションはどこに送られますか？"
+      },
+      "answer": {
+        "en": "The Salesforce sid session cookie is read locally and used only for requests to the org you selected, over HTTPS. The cookie, its domain and the authorization header never leave the extension, and the cookie is not copied into persistent storage. There are no developer-operated servers, and no ads, analytics or telemetry.",
+        "ja": "Salesforce の sid セッション Cookie はローカルで読み取られ、選択した組織へのリクエストにだけ HTTPS で使われます。セッション Cookie、Cookie ドメイン、認証ヘッダーが拡張機能の外へ送信されることはなく、Cookie が永続的なストレージにコピーされることもありません。開発者運営のサーバーはなく、広告、分析、テレメトリーもありません。"
+      },
+      "keywords": [
+        "credentials",
+        "session",
+        "cookie",
+        "sid",
+        "password",
+        "security",
+        "privacy",
+        "telemetry",
+        "認証",
+        "セッション",
+        "セキュリティ",
+        "プライバシー"
+      ]
+    },
+    {
+      "id": "stored-data",
+      "type": "privacy",
+      "title": {
+        "en": "What is stored on my device?",
+        "ja": "端末に保存されるデータは？"
+      },
+      "answer": {
+        "en": "Chrome extension storage keeps preferences, per-org Query folders and SOQL files, up to 30 Favorites folders and 100 shortcuts per org, and update receipts with changed fields only, capped at the newest 50 successful updates and 2 MB per org. Result rows, imported file contents and workbook snapshots are not kept. Clearing extension storage or uninstalling removes local data.",
+        "ja": "Chrome 拡張機能ストレージには、設定、組織ごとの Query フォルダー／ファイル名と SOQL、1 組織あたり最大 30 の Favorites フォルダーと 100 件のショートカット、更新記録が保存されます。更新記録は変更項目だけを含み、組織ごとに成功した最新 50 件の更新イベント、最大 2 MB までです。結果行、読み込んだファイル内容、ワークブックのスナップショットは保存されません。拡張機能ストレージの消去またはアンインストールでローカルデータを削除できます。"
+      },
+      "keywords": [
+        "storage",
+        "stored",
+        "local",
+        "data",
+        "device",
+        "retention",
+        "delete data",
+        "保存",
+        "ストレージ",
+        "ローカル",
+        "データ",
+        "削除"
+      ]
+    },
+    {
+      "id": "permissions",
+      "type": "privacy",
+      "title": {
+        "en": "Why these permissions?",
+        "ja": "権限が必要な理由"
+      },
+      "answer": {
+        "en": "cookies reads the existing Salesforce session cookie locally for API calls you request. storage keeps preferences, Query files and folders, Favorites and bounded update receipts. Salesforce host access discovers signed-in orgs and calls their APIs for schema, SOQL, reports and confirmed record updates.",
+        "ja": "cookies は、ユーザーが要求した API 呼び出しのため、既存の Salesforce セッション Cookie をローカルで読み取ります。storage は、設定、Query ファイル・フォルダー定義、Favorites、上限付き更新記録を保存します。Salesforce ホストアクセスは、ログイン済み組織を検出し、スキーマ、SOQL、レポート、確認済みレコード更新のために API を呼び出します。"
+      },
+      "keywords": [
+        "permissions",
+        "cookies",
+        "storage",
+        "host access",
+        "host permission",
+        "why permission",
+        "権限",
+        "許可",
+        "ホストアクセス"
+      ]
+    }
+  ]
+}

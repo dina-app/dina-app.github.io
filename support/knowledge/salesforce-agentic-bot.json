@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "slug": "salesforce-agentic-bot",
+  "name": "Agent for Salesforce",
+  "status": { "en": "Coming soon · Closed pilot", "ja": "近日提供予定 · クローズドパイロット" },
+  "versions": ["0.5.0"],
+  "links": {
+    "page": "/apps/salesforce-agentic-bot/",
+    "privacy": "/apps/salesforce-agentic-bot/PRIVACY_POLICY.html"
+  },
+  "summary": {
+    "en": "An independent Chrome side-panel assistant for Salesforce administrators, developers and consultants. Chat with AI, read the org context you choose, and run Salesforce tools only with your permission.",
+    "ja": "Salesforce の管理者、開発者、コンサルタント向けの独立した Chrome サイドパネルアシスタントです。AI とチャットし、選択した組織コンテキストを読み取り、ユーザーが許可した場合にのみ Salesforce ツールを実行します。"
+  },
+  "entries": [
+    {
+      "id": "ai-chat",
+      "type": "howto",
+      "title": { "en": "Chat with AI beside Salesforce", "ja": "Salesforce のそばで AI チャット" },
+      "answer": {
+        "en": "Agent for Salesforce stays in the Chrome side panel while you work in Salesforce. Ask questions, investigate an issue and get explanations without leaving the Salesforce workflow. It is an independent extension for Salesforce administrators, developers and consultants, not affiliated with or endorsed by Salesforce.",
+        "ja": "Agent for Salesforce は、Salesforce での作業中に Chrome サイドパネルに表示されます。Salesforce の作業画面を離れずに、質問、課題調査、説明の取得ができます。Salesforce の管理者、開発者、コンサルタント向けの独立した拡張機能で、Salesforce との提携や Salesforce による承認は受けていません。"
+      },
+      "keywords": ["ai chat", "chat", "ask", "question", "side panel", "assistant", "what is", "AI チャット", "チャット", "質問", "サイドパネル", "アシスタント"]
+    },
+    {
+      "id": "selected-org-context",
+      "type": "howto",
+      "title": { "en": "Use the org context you choose", "ja": "選択した組織コンテキストの利用" },
+      "answer": {
+        "en": "Use the active Salesforce page and the org, object, schema or metadata context you choose, for more relevant assistance. It helps you understand the current org and ask informed questions about it.",
+        "ja": "アクティブな Salesforce ページと、選択した組織、オブジェクト、スキーマ、メタデータのコンテキストを使って、より適切な支援を受けられます。現在の組織を理解し、状況に沿った質問を行うのに役立ちます。"
+      },
+      "keywords": ["context", "org", "object", "schema", "metadata", "current page", "コンテキスト", "組織", "オブジェクト", "スキーマ", "メタデータ"]
+    },
+    {
+      "id": "user-permitted-tools",
+      "type": "howto",
+      "title": { "en": "Tools run only with your permission", "ja": "ユーザーが許可したツールだけを実行" },
+      "answer": {
+        "en": "Supported Salesforce tools run only after you allow the requested action, and existing review and confirmation steps stay in control. The AI panel is advisory: it cannot independently deploy metadata, update or delete records, execute Apex, or call Salesforce APIs.",
+        "ja": "ユーザーが要求された操作を許可した後にのみ、対応する Salesforce ツールを実行します。既存のレビューと確認手順が引き続き最終判断となります。AI パネルは助言のためのもので、メタデータのデプロイ、レコードの更新・削除、Apex の実行、Salesforce API の呼び出しを単独で行うことはできません。"
+      },
+      "keywords": ["tools", "permission", "allow", "approve", "confirm", "autonomous", "deploy", "ツール", "許可", "承認", "確認", "実行"]
+    },
+    {
+      "id": "professional-workflows",
+      "type": "howto",
+      "title": { "en": "Professional workflows", "ja": "プロフェッショナル向けワークフロー" },
+      "answer": {
+        "en": "It supports investigation and review work across metadata, data, org configuration, permissions, APIs, exports and monitoring. Consequential Salesforce actions remain subject to your review and permission.",
+        "ja": "メタデータ、データ、組織設定、権限、API、エクスポート、監視に関する調査とレビューを支援します。重要な Salesforce 操作には、引き続きユーザーのレビューと許可が必要です。"
+      },
+      "keywords": ["workflow", "investigation", "review", "permissions", "api", "export", "monitoring", "ワークフロー", "調査", "レビュー", "エクスポート", "監視"]
+    },
+    {
+      "id": "pilot-access",
+      "type": "faq",
+      "title": { "en": "Pilot access", "ja": "パイロットへの参加" },
+      "answer": {
+        "en": "Agent for Salesforce is coming soon. It is in a closed pilot, limited to invited participants as a matter of readiness, not payment; version 0.5.0 is a development preview. For questions about pilot access or how the assistant handles your org, contact the publisher through the verified contact address shown on the Chrome Web Store listing.",
+        "ja": "Agent for Salesforce は近日提供予定です。現在はクローズドパイロット中で、招待されたパイロット参加者のみが利用できます。これは提供準備の問題であり、料金によるものではありません。バージョン 0.5.0 は開発プレビューです。パイロット参加や、アシスタントによる組織データの取り扱いに関するお問い合わせは、Chrome ウェブストアの掲載情報に記載された確認済みの連絡先までご連絡ください。"
+      },
+      "keywords": ["pilot", "invite", "join", "coming soon", "contact", "version", "0.5.0", "パイロット", "招待", "参加", "問い合わせ", "バージョン"]
+    },
+    {
+      "id": "price",
+      "type": "faq",
+      "title": { "en": "Does it cost anything?", "ja": "料金はかかりますか？" },
+      "answer": {
+        "en": "No. Agent for Salesforce is free to use, with no plans, no subscription and nothing to buy. Every DinaLab product is free, with no paid plans, trials that expire or checkout. No payment details are collected, because there is nothing to pay for.",
+        "ja": "かかりません。Agent for Salesforce は無料で利用でき、プランもサブスクリプションもなく、購入するものはありません。DinaLab の製品はすべて無料で、有料プラン、期限付きトライアル、購入手続きはありません。支払うものがないため、支払い情報も収集しません。"
+      },
+      "keywords": ["price", "cost", "free", "pay", "subscription", "plan", "buy", "料金", "無料", "有料", "価格", "購入"]
+    },
+    {
+      "id": "open-source",
+      "type": "faq",
+      "title": { "en": "Will it be open source?", "ja": "オープンソース化の予定は？" },
+      "answer": {
+        "en": "Some DinaLab products are intended to be open-sourced once they run smoothly in real use, so that anyone can read, run and adapt them. That is a direction, not a commitment, and no date is promised; the product page will say so plainly when any of it changes.",
+        "ja": "DinaLab の製品のいくつかは、実務で安定して動作するようになった段階でオープンソース化し、誰でも読み、実行し、改変できるようにする考えです。これは方向性であり、確約ではありません。時期もお約束できませんが、状況が変われば製品ページで率直にお知らせします。"
+      },
+      "keywords": ["open source", "open-source", "source code", "github", "license", "オープンソース", "ソースコード", "公開"]
+    },
+    {
+      "id": "credentials",
+      "type": "privacy",
+      "title": { "en": "Where do my Salesforce credentials go?", "ja": "Salesforce の認証情報はどこに送られますか？" },
+      "answer": {
+        "en": "Salesforce REST, Tooling and Metadata API tools run inside the extension, using the Salesforce session already present in your browser. Salesforce session IDs, access tokens, cookies and authorization headers are not included in AI chat requests.",
+        "ja": "Salesforce の REST、Tooling、Metadata API ツールは、ブラウザーにすでにある Salesforce セッションを使って拡張機能の中で実行されます。Salesforce のセッション ID、アクセストークン、Cookie、認証ヘッダーは AI チャットリクエストに含まれません。"
+      },
+      "keywords": ["credentials", "session", "cookie", "access token", "security", "password", "認証", "認証情報", "セッション", "セキュリティ", "トークン"]
+    },
+    {
+      "id": "ai-requests",
+      "type": "privacy",
+      "title": { "en": "What an AI request contains", "ja": "AI リクエストに含まれる内容" },
+      "answer": {
+        "en": "AI requests are sent only after you press Send. A request may contain your message, selected Salesforce context, selected visible workspace context, current tab context and extension tool results. Salesforce authentication credentials are excluded.",
+        "ja": "AI へのリクエストは、Send（送信）を押した後にだけ送られます。リクエストには、メッセージ、選択した Salesforce コンテキスト、選択した表示中のワークスペースコンテキスト、現在のタブのコンテキスト、拡張機能のツール結果が含まれることがあります。Salesforce の認証情報は含まれません。"
+      },
+      "keywords": ["ai request", "send", "what is sent", "message", "prompt", "tab", "data sent", "送信", "リクエスト", "メッセージ", "プロンプト"]
+    },
+    {
+      "id": "openai-google-cloud",
+      "type": "privacy",
+      "title": { "en": "Who processes my AI requests?", "ja": "AI リクエストを処理するのは？" },
+      "answer": {
+        "en": "Your AI input and the bounded context you select are processed by the configured Google Cloud backend and OpenAI to return the requested response. Salesforce session IDs, access tokens, cookies and authorization headers are not sent to OpenAI. Your data is not sold or used for advertising, tracking, profiling, creditworthiness or lending.",
+        "ja": "AI への入力と、選択した限定的なコンテキストは、設定された Google Cloud バックエンドと OpenAI で処理され、要求した回答が返されます。Salesforce のセッション ID、アクセストークン、Cookie、認証ヘッダーは OpenAI に送られません。ユーザーデータを販売したり、広告、トラッキング、プロファイリング、信用力の評価、融資の目的に使ったりすることはありません。"
+      },
+      "keywords": ["openai", "google cloud", "backend", "third party", "sell", "advertising", "privacy", "サーバー", "第三者", "販売", "広告", "プライバシー"]
+    },
+    {
+      "id": "google-sign-in",
+      "type": "privacy",
+      "title": { "en": "Google sign-in and your account", "ja": "Google サインインとアカウント" },
+      "answer": {
+        "en": "Signing in uses your Google identity, including your email address, for your Dina account. It goes to Google services for sign-in and to the configured Google Cloud backend for verification. The account service may store account identity and aggregate Send, token and estimated cost counters; it is not designed to store Salesforce sessions, records, prompts or transcripts.",
+        "ja": "サインインには、メールアドレスを含む Google の ID 情報を Dina アカウントに使います。この情報はサインインのために Google のサービスへ、確認のために設定された Google Cloud バックエンドへ送られます。アカウントサービスはアカウント情報と、Send 回数・トークン数・推定コストの集計カウンターを保存することがありますが、Salesforce のセッション、レコード、プロンプト、会話記録を保存する設計ではありません。"
+      },
+      "keywords": ["google", "sign in", "login", "account", "email", "dina account", "usage", "サインイン", "ログイン", "アカウント", "メール"]
+    },
+    {
+      "id": "stored-data",
+      "type": "privacy",
+      "title": { "en": "What is stored on my device?", "ja": "端末に保存されるデータは？" },
+      "answer": {
+        "en": "Chrome extension storage and browser local storage on your device may hold UI settings, chat history, previous response IDs, query sheets, workspace state, retrieved schema and metadata, pending edits and bounded operation receipts. Clear supported saved data in the extension, or uninstall it. The developer has no access to it unless you share it for support.",
+        "ja": "端末の Chrome 拡張機能ストレージとブラウザーのローカルストレージには、UI 設定、チャット履歴、過去の応答 ID、クエリシート、ワークスペースの状態、取得したスキーマとメタデータ、保留中の編集、上限付きの操作記録が保存されることがあります。対応するデータは拡張機能の画面から消去でき、アンインストールすることもできます。サポートのために共有しない限り、開発者はこれらのデータにアクセスできません。"
+      },
+      "keywords": ["storage", "stored", "local", "chat history", "delete", "clear", "uninstall", "保存", "ストレージ", "履歴", "削除", "アンインストール"]
+    }
+  ]
+}

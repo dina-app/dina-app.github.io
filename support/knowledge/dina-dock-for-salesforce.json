@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "slug": "dina-dock-for-salesforce",
+  "name": "Dock for Salesforce",
+  "status": { "en": "Free local beta · 0.1.0", "ja": "無料ローカルベータ · 0.1.0" },
+  "versions": ["0.1.0"],
+  "links": { "page": "/#workshop" },
+  "summary": {
+    "en": "One Chrome popup for signed-in and device-protected Salesforce orgs.",
+    "ja": "サインイン中の組織と、端末で保護された Salesforce 組織をまとめて扱う Chrome ポップアップです。"
+  },
+  "entries": [
+    {
+      "id": "what-is-dock",
+      "type": "faq",
+      "title": { "en": "What is Dock for Salesforce?", "ja": "Dock for Salesforce とは？" },
+      "answer": {
+        "en": "Dock is one Chrome popup for your signed-in and device-protected Salesforce orgs. It is a free local beta, 0.1.0, and has no product page yet, so there is little more documentation to answer from.",
+        "ja": "Dock は、サインイン中の組織と端末で保護された Salesforce 組織を 1 つの Chrome ポップアップで扱うツールです。無料のローカルベータ（0.1.0）で、製品ページはまだないため、詳しい資料はほとんどありません。"
+      },
+      "keywords": ["dock", "popup", "orgs", "launcher", "switch", "ポップアップ", "組織", "切り替え"]
+    },
+    {
+      "id": "status",
+      "type": "faq",
+      "title": { "en": "Can I use it now?", "ja": "今使えますか？" },
+      "answer": {
+        "en": "It is labelled a free local beta. That label describes the development stage, not public availability; the home page lists it under experiments in the workshop.",
+        "ja": "表示は「無料ローカルベータ」です。これは開発段階を表すもので、一般公開を意味するものではありません。ホームページでは開発中の取り組みとして掲載しています。"
+      },
+      "keywords": ["beta", "available", "install", "download", "status", "ベータ", "インストール", "公開"]
+    }
+  ]
+}

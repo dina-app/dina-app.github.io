@@ -2301,6 +2301,13 @@ button.support-google svg {
   height: 18px;
 }
 
+/* What happens to what is written, said once, under the button that starts it. */
+.support-notice {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+}
+
 .support-chat {
   display: flex;
   flex: 1;

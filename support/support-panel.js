@@ -5,8 +5,10 @@
 //   How to use     topics from the app's JSON, answered straight from it: no AI
 //   Report a bug   a form that goes to the inbox: no AI
 //   Suggest a feature  the same
-//   Ask anything   AI chat, which searches the same JSON (search_docs)
+//   Ask anything   AI chat, which searches the same JSON (search_docs) and can
+//                  open one of its screenshots beside the panel (show_image)
 //
+// Only the apps the server marks available get these; the others say so.
 // The limits are the server's (GET /api/support/apps returns them); the page
 // only shows them, and a request past one is refused there, not here.
 import { api, bi, showError, watchSignIn, renderGoogleButton } from "./support-common.js";
@@ -20,9 +22,10 @@ export async function mountPanel(ctx) {
   const view = part("support-view");
   const knowledgeCache = new Map();
   let apps = [{ slug: "general", name: "DinaLab" }];
-  let limits = { messageChars: 400, turnsPerConversation: 10, conversationsPerDay: 10 };
+  let limits = { messageChars: 600, turnsPerConversation: 10 };
   let currentApp = "general";
-  let conversationsLeft = null;
+  // The user's two AI usage windows (5 hours, 1 week), as the server last said.
+  let usage = null;
   let signedIn = false;
   let googleButton = null;
 
@@ -51,6 +54,44 @@ export async function mountPanel(ctx) {
     return knowledgeCache.get(slug);
   }
   const appName = () => (currentApp === "general" ? "DinaLab" : apps.find(entry => entry.slug === currentApp)?.name || "DinaLab");
+  const available = () => apps.find(entry => entry.slug === currentApp)?.available === true;
+  const percent = window => Math.min(100, Math.round((window.used / window.limit) * 100));
+  const limitHit = () => usage?.find(window => window.used >= window.limit) || null;
+  const resetTime = (window, locale) => new Date(window.resetsAt).toLocaleString(locale,
+    window.name === "week" ? { weekday: "short", hour: "numeric", minute: "2-digit" } : { hour: "numeric", minute: "2-digit" });
+
+  // --------------------------------------------------------- screenshot popup
+  // A screenshot the assistant opened, over the page to the left of the panel
+  // (over the panel itself on a phone). Esc, its close button, closing the
+  // panel or switching app puts it away.
+  let shot = null;
+  function closeShot() {
+    if (shot) shot.hidden = true;
+  }
+  function openShot(image) {
+    if (!shot) {
+      const close = el("button", { type: "button", className: "circle transparent small support-shot-close", innerHTML: ICON.close });
+      close.setAttribute("aria-label", say("Close the screenshot", "スクリーンショットを閉じる"));
+      close.addEventListener("click", closeShot);
+      shot = el("figure", { className: "support-shot", hidden: true }, close,
+        el("a", { target: "_blank", rel: "noopener" }, el("img", { decoding: "async" })), el("figcaption"));
+      shot.setAttribute("role", "dialog");
+      document.body.append(shot);
+      // Captured before the panel's own Esc, which would close the whole panel.
+      document.addEventListener("keydown", event => {
+        if (event.key !== "Escape" || shot.hidden) return;
+        event.preventDefault();
+        event.stopPropagation();
+        closeShot();
+      }, true);
+      panel.addEventListener("close", closeShot);
+    }
+    shot.setAttribute("aria-label", image.alt);
+    shot.querySelector("a").href = image.src;
+    Object.assign(shot.querySelector("img"), { src: image.src, alt: image.alt });
+    shot.querySelector("figcaption").textContent = image.alt;
+    shot.hidden = false;
+  }
 
   function back(target = "home") {
     const button = tr("button", "‹ Back", "‹ 戻る", { type: "button", className: "support-back" });
@@ -105,8 +146,8 @@ export async function mountPanel(ctx) {
           option("bug", ICON.bug, "Report a bug", "不具合を報告", "Goes straight to the team", "チームに直接届きます"),
           option("idea", ICON.idea, "Suggest a feature", "機能を提案", "Tell us what would help", "欲しい機能を教えてください"),
           option("chat", ICON.chat, "Ask anything", "自由に質問",
-            conversationsLeft == null ? "AI answers from the docs" : `AI answers from the docs · ${conversationsLeft}/${limits.conversationsPerDay} conversations left today`,
-            conversationsLeft == null ? "AI が資料から回答" : `AI が資料から回答 · 本日の会話 残り ${conversationsLeft}/${limits.conversationsPerDay}`))
+            limitHit() ? `AI limit reached · resets ${resetTime(limitHit(), "en-US")}` : "AI answers from the docs",
+            limitHit() ? `AI の上限に達しました · ${resetTime(limitHit(), "ja-JP")} にリセット` : "AI が資料から回答"))
       ];
     },
 
@@ -197,11 +238,26 @@ export async function mountPanel(ctx) {
         tr("p", `Reference: ${id}. We read every report.`, `参照番号: ${id}。すべて確認しています。`)), home];
     },
 
+    unavailable() {
+      const choices = apps.filter(entry => entry.available).map(entry => {
+        const button = el("button", { type: "button", className: "support-option" },
+          el("img", { className: "support-option-logo", src: logoFor(entry.slug), alt: "", width: 40, height: 40 }),
+          el("span", { className: "support-option-text" }, el("strong", { textContent: entry.name })));
+        button.addEventListener("click", () => { showApp(entry.slug); show("home"); });
+        return button;
+      });
+      return [el("div", { className: "support-sent" },
+        tr("h3", `Support for ${appName()} is not available yet`, `${appName()} のサポートはまだご利用いただけません`),
+        tr("p", "For now, questions, bug reports and ideas are open for these apps:", "現在、質問・不具合の報告・機能の提案は次のアプリで受け付けています。")),
+      el("div", { className: "support-options" }, choices)];
+    },
+
     chat({ draft = "" } = {}) {
       const state = chatFor(currentApp);
       const log = el("ol", { className: "support-log" });
       log.setAttribute("aria-live", "polite");
       const meta = el("p", { className: "support-meta" });
+      const usageBox = el("div", { className: "support-usage" });
       const error = el("p", { className: "support-error", hidden: true });
       error.setAttribute("role", "alert");
       const message = el("textarea", { rows: 3, maxLength: limits.messageChars, value: draft });
@@ -217,30 +273,49 @@ export async function mountPanel(ctx) {
       toBug.addEventListener("click", () => show("bug"));
       let sending = false;
 
-      const bubble = (role, text) => {
-        const item = el("li", { className: role, textContent: text });
+      const bubble = (role, text, images = []) => {
+        const item = el("li", { className: role }, text);
+        if (images.length) {
+          item.append(el("span", { className: "support-thumbs" }, images.map(image => {
+            const button = el("button", { type: "button", className: "support-thumb", title: image.alt }, el("img", { src: image.src, alt: image.alt, loading: "lazy" }));
+            button.addEventListener("click", () => openShot(image));
+            return button;
+          })));
+        }
         log.append(item);
         log.scrollTop = log.scrollHeight;
         return item;
       };
+      // One bar per window: how much is used, and when it starts over.
+      const drawUsage = () => usageBox.replaceChildren(...(usage || []).map(window => {
+        const used = percent(window);
+        const [en, ja] = window.name === "session" ? ["5-hour limit", "5 時間の上限"] : ["Weekly limit", "週の上限"];
+        const bar = el("span", { className: "support-usage-bar" }, el("span", { style: `inline-size: ${used}%` }));
+        bar.setAttribute("role", "progressbar");
+        bar.setAttribute("aria-label", say(en, ja));
+        bar.setAttribute("aria-valuenow", String(used));
+        return el("div", { className: `support-usage-row${used >= 100 ? " full" : ""}` }, tr("span", en, ja),
+          tr("span", `${used}% used${window.resetsAt ? ` · resets ${resetTime(window, "en-US")}` : ""}`,
+            `${used}% 使用${window.resetsAt ? ` · ${resetTime(window, "ja-JP")} にリセット` : ""}`), bar);
+      }));
       const drawMeta = () => {
         const s = chatFor(currentApp);
         const turnsLeft = s.conversationId ? s.turnsLeft : limits.turnsPerConversation;
-        bi(meta, `${turnsLeft}/${limits.turnsPerConversation} messages left in this conversation`
-          + (conversationsLeft == null ? "" : ` · ${conversationsLeft}/${limits.conversationsPerDay} conversations left today`),
-          `この会話の残り ${turnsLeft}/${limits.turnsPerConversation} 件` + (conversationsLeft == null ? "" : ` · 本日の会話 残り ${conversationsLeft}/${limits.conversationsPerDay}`));
+        bi(meta, `${turnsLeft}/${limits.turnsPerConversation} messages left in this conversation`, `この会話の残り ${turnsLeft}/${limits.turnsPerConversation} 件`);
+        drawUsage();
         const full = Boolean(s.conversationId) && s.turnsLeft <= 0;
-        const noneLeft = !s.conversationId && conversationsLeft === 0;
-        composer.hidden = full || noneLeft;
+        const hit = limitHit();
+        composer.hidden = full || Boolean(hit);
         count.hidden = composer.hidden;
-        limitReached.hidden = !(full || noneLeft);
-        if (full || noneLeft) {
+        limitReached.hidden = !(full || hit);
+        if (full || hit) {
           const again = tr("button", "Start a new conversation", "新しい会話を始める", { type: "button", className: "button border small" });
           again.addEventListener("click", () => { saveChat(currentApp, { conversationId: "", transcript: [], turnsLeft: limits.turnsPerConversation }); show("chat"); });
           limitReached.replaceChildren(
-            full ? tr("p", `This conversation reached ${limits.turnsPerConversation} messages.`, `この会話は ${limits.turnsPerConversation} 件に達しました。`)
-              : tr("p", "You have used today's conversations. Try again tomorrow, or use the forms.", "本日の会話回数を使い切りました。明日もう一度お試しいただくか、フォームをご利用ください。"),
-            full && conversationsLeft !== 0 ? again : null);
+            hit ? tr("p", `You have used your ${hit.name === "session" ? "5-hour" : "weekly"} AI limit. It resets ${hit.name === "session" ? "at" : "on"} ${resetTime(hit, "en-US")}. How to use and the forms still work.`,
+              `AI の${hit.name === "session" ? " 5 時間" : "週"}の上限に達しました。${resetTime(hit, "ja-JP")} にリセットされます。「使い方を見る」とフォームは引き続き使えます。`)
+              : tr("p", `This conversation reached ${limits.turnsPerConversation} messages.`, `この会話は ${limits.turnsPerConversation} 件に達しました。`),
+            ...(hit ? [] : [again]));
         }
         toTeam.hidden = !s.transcript.some(turn => turn.role === "user");
         count.textContent = `${message.value.length}/${limits.messageChars}`;
@@ -248,7 +323,7 @@ export async function mountPanel(ctx) {
 
       log.append(tr("li", `Ask me anything about ${appName()}. I answer from its documentation.`,
         `${appName()} について何でも質問してください。資料をもとに回答します。`, { className: "assistant" }));
-      for (const turn of state.transcript) bubble(turn.role, turn.content);
+      for (const turn of state.transcript) bubble(turn.role, turn.content, turn.images);
 
       message.addEventListener("input", () => { count.textContent = `${message.value.length}/${limits.messageChars}`; });
       // Enter sends; Shift+Enter is a new line. Not while an IME is composing Japanese.
@@ -271,16 +346,20 @@ export async function mountPanel(ctx) {
         try {
           const result = await api("/chat", { method: "POST", body: { app: currentApp, lang: lang(), message: content, conversationId: before.conversationId || undefined } });
           pending.remove();
-          bubble("assistant", result.reply);
-          if (!before.conversationId && conversationsLeft != null) conversationsLeft = Math.max(0, conversationsLeft - 1);
+          const images = result.images || [];
+          bubble("assistant", result.reply, images);
+          if (images.length) openShot(images[0]);
+          usage = result.usage || usage;
           saveChat(currentApp, { conversationId: result.conversationId, turnsLeft: result.turnsLeft,
-            transcript: [...before.transcript, { role: "user", content }, { role: "assistant", content: result.reply }] });
+            transcript: [...before.transcript, { role: "user", content }, { role: "assistant", content: result.reply, ...(images.length ? { images } : {}) }] });
         } catch (failure) {
           pending.remove();
           // Not answered, so it goes back in the box to send again.
           log.lastChild?.remove();
           message.value = content;
           showError(error, failure.message);
+          // A refusal may be a limit: fetch where the windows stand.
+          usage = (await api("/me").catch(() => null))?.usage || usage;
         } finally {
           sending = false;
           sendButton.disabled = false;
@@ -296,14 +375,15 @@ export async function mountPanel(ctx) {
       });
       drawMeta();
       queueMicrotask(() => message.focus());
-      return [back(), meta, log, composer, count, limitReached, el("div", { className: "support-chips" }, toTeam, toBug), error];
+      return [back(), meta, usageBox, log, composer, count, limitReached, el("div", { className: "support-chips" }, toTeam, toBug), error];
     }
   };
 
   let current = "home";
   async function show(name, args = {}) {
+    if (!available()) name = "unavailable";
     current = name;
-    writeState({ ...readState(), view: name === "sent" || name === "answer" ? "home" : name });
+    writeState({ ...readState(), view: ["sent", "answer", "unavailable"].includes(name) ? "home" : name });
     view.dataset.view = name;
     try {
       const nodes = await VIEWS[name](args);
@@ -319,10 +399,11 @@ export async function mountPanel(ctx) {
   // ------------------------------------------------------------ app switcher
   function showApp(slug) {
     const entry = apps.find(item => item.slug === slug) || apps[0];
+    closeShot();
     currentApp = entry.slug;
     panel.dataset.app = entry.slug;
     part("support-app-logo").src = logoFor(entry.slug);
-    part("support-app-name").textContent = entry.slug === "general" ? "DinaLab" : entry.name;
+    part("support-app-name").textContent = entry.name;
     for (const option of appList.children) option.setAttribute("aria-selected", String(option.dataset.slug === entry.slug));
     writeState({ ...readState(), app: entry.slug });
   }
@@ -348,11 +429,11 @@ export async function mountPanel(ctx) {
 
   const listing = await api("/apps");
   limits = { ...limits, ...listing.limits };
-  apps = [{ slug: "general", name: "DinaLab" }, ...listing.apps];
+  apps = listing.apps;
   appList.replaceChildren(...apps.map(entry => {
     const option = el("li", { id: `support-app-${entry.slug}` },
       el("img", { src: logoFor(entry.slug), alt: "", width: 28, height: 28 }),
-      entry.slug === "general" ? tr("span", "DinaLab in general", "DinaLab 全般") : el("span", { textContent: entry.name }),
+      el("span", {}, entry.name, entry.available ? null : tr("span", "Not available yet", "未対応", { className: "support-app-soon" })),
       el("span", { className: "support-app-check", innerHTML: ICON.check }));
     option.dataset.slug = entry.slug;
     option.setAttribute("role", "option");
@@ -376,8 +457,10 @@ export async function mountPanel(ctx) {
   document.addEventListener("click", event => {
     if (!appList.hidden && !event.target.closest?.(".support-app-picker")) toggleApps(false);
   });
+  // A product page opens on its product, even one that is not available yet, so
+  // it can say so; anywhere else, on the first app that is.
   const wanted = pageApp() || readState().app || "";
-  showApp(apps.some(entry => entry.slug === wanted) ? wanted : "general");
+  showApp(apps.some(entry => entry.slug === wanted) ? wanted : (apps.find(entry => entry.available) || apps[0]).slug);
 
   // A new conversation for this app: the header's pencil.
   part("support-new").addEventListener("click", () => {
@@ -404,7 +487,7 @@ export async function mountPanel(ctx) {
     try {
       const me = await api("/me");
       part("support-admin").hidden = !me.admin;
-      conversationsLeft = me.conversationsLeft;
+      usage = me.usage;
     } catch (error) {
       console.error(error);
     }

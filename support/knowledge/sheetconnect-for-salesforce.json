@@ -13,10 +13,23 @@
     "en": "A Chrome side panel for the Google Sheets spreadsheet you have open, connected to the Salesforce org you are signed in to. It imports objects, list views, SOQL and reports into a worksheet and sends confirmed record changes back.",
     "ja": "開いている Google スプレッドシートの横に表示される Chrome サイドパネルです。サインイン中の Salesforce 組織につながり、オブジェクト、リストビュー、SOQL、レポートをワークシートにインポートし、確認したレコードの変更を Salesforce に書き戻します。"
   },
+  "images": [
+    { "id": "choose-org", "src": { "en": "/apps/sheetconnect-for-salesforce/img/01-choose-salesforce-org.png" }, "alt": { "en": "The SheetConnect panel in English and Japanese, each listing a production org and a sandbox found from existing browser sessions", "ja": "英語と日本語の SheetConnect パネル。どちらもブラウザーのセッションから見つかった本番組織と Sandbox を表示" } },
+    { "id": "import-object", "src": { "en": "/apps/sheetconnect-for-salesforce/img/02-import-object-or-list-view.png" }, "alt": { "en": "Object, list view, and SOQL import controls in the SheetConnect panel", "ja": "SheetConnect パネルのオブジェクト・リストビュー・SOQL のインポート操作" } },
+    { "id": "import-report", "src": { "en": "/apps/sheetconnect-for-salesforce/img/03-search-and-import-reports.png" }, "alt": { "en": "Report search results in the SheetConnect panel with folder and developer name", "ja": "フォルダーと API 参照名つきのレポート検索結果" } },
+    { "id": "write-back-mapping", "src": { "en": "/apps/sheetconnect-for-salesforce/img/04-validate-before-writing-back.png" }, "alt": { "en": "Header-to-field mapping and a record, error, and request count in the Salesforce CRUD tab", "ja": "Salesforce CRUD タブのヘッダーと項目の対応付け、レコード数・エラー数・リクエスト数" } },
+    { "id": "vlookup", "src": { "en": "/apps/sheetconnect-for-salesforce/img/05-look-up-salesforce-from-a-formula.png" }, "alt": { "en": "The fx tab running VLOOKUP against Account, with the formula, the input range and the output cell filled in", "ja": "取引先に VLOOKUP を実行する fx タブ（数式、入力範囲、出力セルを入力済み）" } },
+    { "id": "vlookup-fields", "src": { "en": "/apps/sheetconnect-for-salesforce/img/06-bring-back-several-fields.png" }, "alt": { "en": "The fx tab with three return fields listed as chips, each labelled with the column it will be written to", "ja": "3 つの戻り値項目をチップで表示し、それぞれ書き込み先の列を示した fx タブ" } },
+    { "id": "rollup", "src": { "en": "/apps/sheetconnect-for-salesforce/img/07-roll-up-child-records.png" }, "alt": { "en": "The fx tab running ROLLUP over Opportunity and Case, the Opportunity column filtered to closed-won", "ja": "商談とケースに ROLLUP を実行する fx タブ（商談の列は成立に絞り込み）" } },
+    { "id": "apex-editor", "src": { "en": "/apps/sheetconnect-for-salesforce/img/08-write-your-own-apex.png" }, "alt": { "en": "The Apex tab with a template loaded in the editor and the input and output range controls above it", "ja": "エディターにテンプレートを読み込み、上に入力・出力範囲の操作がある Apex タブ" } },
+    { "id": "apex-templates", "src": { "en": "/apps/sheetconnect-for-salesforce/img/09-start-from-a-template.png" }, "alt": { "en": "The Apex template picker listing templates grouped by what they do", "ja": "用途別にグループ化された Apex テンプレートの一覧" } },
+    { "id": "confirm-dialog", "src": { "en": "/apps/sheetconnect-for-salesforce/img/10-nothing-is-written-until-you-say-so.png" }, "alt": { "en": "A confirmation dialog naming the object, the worksheet, the operation and the record count before a run", "ja": "実行前にオブジェクト、ワークシート、操作、レコード数を示す確認ダイアログ" } }
+  ],
   "entries": [
     {
       "id": "import-objects",
       "type": "howto",
+      "images": ["import-object"],
       "title": { "en": "Import an object, list view or SOQL", "ja": "オブジェクト・リストビュー・SOQL のインポート" },
       "answer": {
         "en": "Pick a Salesforce object and import from one of its list views, or write your own SOQL. Field suggestions include relationship paths. Object imports follow every result page, so a large query is not cut off after its first batch.",
@@ -27,6 +40,7 @@
     {
       "id": "import-reports",
       "type": "howto",
+      "images": ["import-report"],
       "title": { "en": "Import a report", "ja": "レポートのインポート" },
       "answer": {
         "en": "Search every report by ID, name, developer name or folder, then import it. Grouped reports keep their groupings, aggregates, subtotals and grand totals, and you can add detail rows for that run without changing the report in Salesforce.",
@@ -37,6 +51,7 @@
     {
       "id": "write-back",
       "type": "howto",
+      "images": ["write-back-mapping"],
       "title": { "en": "Write changes back to Salesforce", "ja": "Salesforce への書き戻し" },
       "answer": {
         "en": "The worksheet is the input table for insert, update, upsert or delete. An optional data range limits the run to the rows and columns you pick. Headers map to field API names or unambiguous labels, and permissions, required fields, types, duplicate headers and ID prefixes are checked before anything runs.",
@@ -47,6 +62,7 @@
     {
       "id": "confirm-before-run",
       "type": "howto",
+      "images": ["confirm-dialog"],
       "title": { "en": "What happens before a run", "ja": "実行前の確認" },
       "answer": {
         "en": "Every import, write-back and fx run names the org, object, worksheet, operation and record count, and waits for you to confirm. Apex is the one exception: one press runs your code in Salesforce and writes what it returns, and the button says so.",
@@ -87,6 +103,7 @@
     {
       "id": "fx-vlookup",
       "type": "howto",
+      "images": ["vlookup", "vlookup-fields"],
       "title": { "en": "fx: VLOOKUP against Salesforce", "ja": "fx: Salesforce への VLOOKUP" },
       "answer": {
         "en": "VLOOKUP looks a column up in Salesforce and writes what it finds beside it, one column per field you name. Your column is left alone. Rows that match nothing say so, and a row matching several records gets the newest plus a note listing the rest.",
@@ -97,6 +114,7 @@
     {
       "id": "fx-rollup",
       "type": "howto",
+      "images": ["rollup"],
       "title": { "en": "fx: ROLLUP over child records", "ja": "fx: 子レコードの ROLLUP" },
       "answer": {
         "en": "ROLLUP counts or totals the child records behind each row, with one aggregate query per column rather than one per row, and an optional condition so the total answers the exact question you asked.",
@@ -117,6 +135,7 @@
     {
       "id": "apex",
       "type": "howto",
+      "images": ["apex-editor", "apex-templates"],
       "title": { "en": "Run your own Apex", "ja": "Apex の実行" },
       "answer": {
         "en": "When the other tools are not enough, run anonymous Apex over the selected range: it arrives as input, and whatever you put in output is written back. There are 27 templates, each compiled against a real org, and completion comes from your org's objects, fields and classes.",
@@ -137,6 +156,7 @@
     {
       "id": "language",
       "type": "howto",
+      "images": ["choose-org"],
       "title": { "en": "English and Japanese", "ja": "英語と日本語" },
       "answer": {
         "en": "The whole panel is available in English and Japanese, using Salesforce's own Japanese terms. A Japanese browser opens it in Japanese, and the language selector in the panel overrides that either way.",

@@ -20,10 +20,29 @@
     "en": "An independent Chrome suite compatible with Salesforce that works through the Salesforce sessions you are already signed in with. It covers metadata administration and read-only org comparison, spreadsheet data work, permission analysis, object schema exploration, API tools, Apex execution, exports and monitoring, without a developer-operated metadata service.",
     "ja": "Salesforce に対応した独立系の Chrome 拡張機能スイートで、すでにサインインしている Salesforce のセッションを使って動作します。メタデータ管理と読み取り専用の組織比較、スプレッドシートでのデータ作業、権限の分析、オブジェクトスキーマの探索、API ツール、Apex 実行、エクスポート、モニタリングを、開発者が運営するメタデータサービスなしで提供します。"
   },
+  "images": [
+    { "id": "popup-apps", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/popup-apps.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/popup-apps.png" }, "alt": { "en": "Popup Apps tab", "ja": "ポップアップのアプリタブ" } },
+    { "id": "popup-search", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/popup-search.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/popup-search.png" }, "alt": { "en": "Popup metadata search", "ja": "ポップアップのメタデータ検索" } },
+    { "id": "metadata-tree", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/metadata-tree.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/metadata-tree.png" }, "alt": { "en": "Metadata workspace tree", "ja": "メタデータのワークスペースツリー" } },
+    { "id": "package-xml", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/metadata-package-xml.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/metadata-package-xml.png" }, "alt": { "en": "package.xml builder", "ja": "package.xml ビルダー" } },
+    { "id": "sheetd-results", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/force-sheet-query-results.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/force-sheet-query-results.png" }, "alt": { "en": "SheetD SOQL results grid", "ja": "SheetD の SOQL 結果グリッド" } },
+    { "id": "sheetd-upload", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/force-sheet-upload-tab.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/force-sheet-upload-tab.png" }, "alt": { "en": "SheetD upload tab", "ja": "SheetD のアップロードタブ" } },
+    { "id": "org-review-summary", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/org-review-summary.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/org-review-summary.png" }, "alt": { "en": "Org Review executive summary", "ja": "Org Review のエグゼクティブサマリー" } },
+    { "id": "org-review-login-policy", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/org-review-login-policy.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/org-review-login-policy.png" }, "alt": { "en": "Org Review login and session policy section", "ja": "Org Review のログイン・セッションポリシー" } },
+    { "id": "object-schema-map", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/object-schema-map-fields.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/object-schema-map-fields.png" }, "alt": { "en": "Object Schema map with the Fields sheet", "ja": "Object Schema のマップと Fields シート" } },
+    { "id": "object-schema-relationships", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/object-schema-relationship-table.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/object-schema-relationship-table.png" }, "alt": { "en": "Object Schema relationship table", "ja": "Object Schema のリレーション表" } },
+    { "id": "rest-explorer", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/rest-api.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/rest-api.png" }, "alt": { "en": "REST request builder", "ja": "REST リクエストビルダー" } },
+    { "id": "run-apex", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/run-apex.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/run-apex.png" }, "alt": { "en": "Run Apex editor", "ja": "Apex 実行エディター" } },
+    { "id": "data-export-results", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/data-export-results.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/data-export-results.png" }, "alt": { "en": "Data Export results grid", "ja": "データエクスポートの結果グリッド" } },
+    { "id": "document-folders", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/document-folders-tree.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/document-folders-tree.png" }, "alt": { "en": "Document folders tree", "ja": "ドキュメントフォルダーツリー" } },
+    { "id": "org-limits", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/limits.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/limits.png" }, "alt": { "en": "Org limits", "ja": "組織の制限値" } },
+    { "id": "login-history", "src": { "en": "/apps/salesforce-admin-toolkit/manual/img/en/login-history.png", "ja": "/apps/salesforce-admin-toolkit/manual/img/jp/login-history.png" }, "alt": { "en": "Login history", "ja": "ログイン履歴" } }
+  ],
   "entries": [
     {
       "id": "getting-started",
       "type": "howto",
+      "images": ["popup-apps", "popup-search"],
       "title": {
         "en": "Get started with the popup",
         "ja": "はじめに・ポップアップ"
@@ -50,6 +69,7 @@
     {
       "id": "metadata-admin",
       "type": "howto",
+      "images": ["metadata-tree", "package-xml"],
       "title": {
         "en": "Metadata Admin: browse and search metadata",
         "ja": "Metadata Admin: メタデータの参照と検索"
@@ -126,6 +146,7 @@
     {
       "id": "sheetd",
       "type": "howto",
+      "images": ["sheetd-results", "sheetd-upload"],
       "title": {
         "en": "SheetD: Salesforce data in a spreadsheet",
         "ja": "SheetD: スプレッドシートでデータを扱う"
@@ -152,6 +173,7 @@
     {
       "id": "org-review",
       "type": "howto",
+      "images": ["org-review-summary", "org-review-login-policy"],
       "title": {
         "en": "Org Review: read-only org health report",
         "ja": "Org Review（組織レビュー）"
@@ -178,6 +200,7 @@
     {
       "id": "object-schema",
       "type": "howto",
+      "images": ["object-schema-map", "object-schema-relationships"],
       "title": {
         "en": "Object Schema: relationship map and fields",
         "ja": "Object Schema（オブジェクトスキーマ）"
@@ -255,6 +278,7 @@
     {
       "id": "rest-explorer-apex",
       "type": "howto",
+      "images": ["rest-explorer", "run-apex"],
       "title": {
         "en": "REST Explorer and Run Apex",
         "ja": "REST Explorer と Apex 実行"
@@ -281,6 +305,7 @@
     {
       "id": "data-export-documents",
       "type": "howto",
+      "images": ["data-export-results", "document-folders"],
       "title": {
         "en": "Export data and download files",
         "ja": "データエクスポートとファイルのダウンロード"
@@ -307,6 +332,7 @@
     {
       "id": "monitoring",
       "type": "howto",
+      "images": ["org-limits", "login-history"],
       "title": {
         "en": "Limits and monitoring",
         "ja": "制限値とモニタリング"

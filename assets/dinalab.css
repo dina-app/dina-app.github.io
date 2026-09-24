@@ -2090,7 +2090,10 @@ footer.footer,
 
 /* ================================================= support button and panel */
 /* assets/support-widget.js draws both. The button is BeerCSS's .circle.extra
-   (a 56px FAB) and the panel its right-side sheet, dialog.right. */
+   (a 56px FAB). The panel is BeerCSS's right sheet, dialog.right, docked like a
+   browser extension's side panel: full height, square, and the page narrows
+   beside it (html.support-open) instead of sliding under it. Its width is
+   --support-width, set by the script and dragged from the left edge. */
 
 .support-fab {
   position: fixed;
@@ -2105,17 +2108,35 @@ footer.footer,
   height: 26px;
 }
 
+@media (min-width: 721px) {
+  html.support-open body {
+    margin-right: var(--support-width, 400px);
+    transition: margin-right var(--speed3, 0.3s);
+  }
+}
+
+html.support-resizing,
+html.support-resizing * {
+  cursor: col-resize !important;
+  user-select: none !important;
+  transition: none !important;
+}
+
 dialog.support-panel {
   z-index: 100;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  inline-size: min(420px, 100vw);
-  padding-inline: 20px;
+  inset: 0 0 0 auto;
+  inline-size: var(--support-width, 400px);
+  max-inline-size: 100vw;
+  block-size: 100dvh;
+  padding: 0;
+  border: 0;
   border-inline-start: 1px solid var(--line);
+  border-radius: 0;
   background: var(--card);
   color: var(--ink);
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
   font-size: 15px;
   line-height: 1.55;
 }
@@ -2124,45 +2145,149 @@ dialog.support-panel:not([open]) {
   pointer-events: none;
 }
 
+/* The drag handle: the panel's left edge, a little wider than it looks. */
+.support-resize {
+  position: absolute;
+  inset: 0 auto 0 -4px;
+  z-index: 2;
+  inline-size: 8px;
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.support-resize::after {
+  content: "";
+  position: absolute;
+  inset: 0 3px;
+  background: transparent;
+  transition: background var(--speed2, 0.2s);
+}
+
+.support-resize:is(:hover, :focus-visible)::after,
+html.support-resizing .support-resize::after {
+  background: var(--primary);
+}
+
 .support-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
   min-block-size: 0;
-  padding: 0;
+  padding: 10px 10px 10px 18px;
+  border-bottom: 1px solid var(--line);
 }
 
 .support-head h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.support-close svg,
+.support-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+}
+
+.support-head-actions svg,
 .support-send svg,
 .support-panel .field i svg {
   width: 22px;
   height: 22px;
 }
 
-.support-intro {
-  margin: 0;
-  color: var(--ink-soft);
+.support-account {
+  position: relative;
+}
+
+.support-avatar {
+  padding: 0;
+  overflow: hidden;
+}
+
+.support-avatar img {
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 50%;
+}
+
+.support-avatar span {
+  display: grid;
+  place-items: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: 50%;
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  font-weight: 800;
+}
+
+.support-account-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 3;
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+  min-inline-size: 240px;
+  max-inline-size: 300px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+  box-shadow: var(--shadow-lg);
   font-size: var(--fs-sm);
+}
+
+.support-account-email {
+  max-inline-size: 100%;
+  overflow: hidden;
+  color: var(--muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.support-account-menu [data-sign-out] {
+  margin-top: 8px;
 }
 
 .support-gate {
   display: grid;
-  gap: 12px;
+  gap: 14px;
+  align-content: start;
   justify-items: start;
+  padding: 18px;
+  overflow-y: auto;
 }
 
 .support-gate p {
   margin: 0;
 }
 
-/* Google's own button shape, not the brand orange: the button says whose
-   account it asks for, and Google's sign-in guidance asks for exactly this. */
+.support-intro {
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+.support-google-slot:empty {
+  display: none;
+}
+
+/* Laid out but unseen while Google decides: its button needs a real box to draw
+   into, and a refused one leaves a dead placeholder that must not show. */
+.support-google-slot.pending {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The fallback when Google's own button cannot load: Google's sign-in shape,
+   not the brand orange, since it says whose account it asks for. */
 button.support-google {
   gap: 10px;
   border: 1px solid var(--line-strong);
@@ -2182,36 +2307,11 @@ button.support-google svg {
   flex-direction: column;
   gap: 10px;
   min-block-size: 0;
-}
-
-.support-chat[hidden],
-.support-gate[hidden] {
-  display: none;
+  padding: 14px 18px 16px;
 }
 
 .support-panel .field {
   margin: 0;
-}
-
-.support-user {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 2px 14px;
-  margin: 0;
-  color: var(--muted);
-  font-size: var(--fs-xs);
-}
-
-button.support-link {
-  block-size: auto;
-  padding: 0;
-  background: none;
-  color: var(--secondary);
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 .support-log {
@@ -2285,38 +2385,25 @@ button.support-link {
   font-size: var(--fs-sm);
 }
 
-.support-error[hidden] {
-  display: none;
-}
+/* A phone has no room to share: the panel covers the page and cannot be resized. */
+@media (max-width: 720px) {
+  dialog.support-panel {
+    inline-size: 100vw;
+    border-inline-start: 0;
+  }
 
-.support-privacy {
-  color: var(--muted);
-  font-size: var(--fs-xs);
-}
-
-.support-privacy summary {
-  color: var(--ink-soft);
-  font-weight: 700;
-}
-
-/* BeerCSS drops the disclosure triangle; without it this reads as a label. */
-.support-privacy summary::before {
-  content: "▸";
-  display: inline-block;
-  margin-right: 6px;
-}
-
-.support-privacy[open] summary::before {
-  content: "▾";
-}
-
-.support-privacy p {
-  margin: 6px 0 0;
+  .support-resize {
+    display: none;
+  }
 }
 
 @media print {
   .support-fab,
   .support-panel {
     display: none !important;
+  }
+
+  html.support-open body {
+    margin-right: 0;
   }
 }

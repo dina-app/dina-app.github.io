@@ -85,3 +85,39 @@
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
+
+.support-user {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 14px;
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+button.support-link {
+  block-size: auto;
+  padding: 0;
+  background: none;
+  color: var(--secondary);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.support-error {
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  background: var(--error-container);
+  color: var(--on-error-container);
+  font-size: var(--fs-sm);
+}
+
+.support-gate {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}

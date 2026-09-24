@@ -27,43 +27,46 @@
 :root {
   color-scheme: light;
 
-  /* BeerCSS color roles, in DinaLab's warm-paper palette. */
-  --primary: #a94b2c;
+  /* BeerCSS color roles, all from one seed: the DinaLab mark's gold (#d7a200),
+     generated with Material's tonal palettes so every role, and even the
+     neutrals, share its hue. Solar gold since 2026-09-24; before it the site
+     mixed brick orange, blue and green. */
+  --primary: #785900;
   --on-primary: #ffffff;
-  --primary-container: #f8ece6;
-  --on-primary-container: #8e3d22;
-  --secondary: #1c5b86;
+  --primary-container: #ffe5b4;
+  --on-primary-container: #4d3800;
+  --secondary: #614700;
   --on-secondary: #ffffff;
-  --secondary-container: #e8f2f9;
-  --on-secondary-container: #164a6d;
-  --tertiary: #1c6a52;
+  --secondary-container: #fce6bb;
+  --on-secondary-container: #3c2f11;
+  --tertiary: #6e5620;
   --on-tertiary: #ffffff;
-  --tertiary-container: #e6f3ec;
-  --on-tertiary-container: #145441;
+  --tertiary-container: #ffdf9e;
+  --on-tertiary-container: #3f2e00;
   --error: #a8382f;
   --on-error: #ffffff;
   --error-container: #fbeae7;
   --on-error-container: #8a2c24;
-  --background: #f7f5ef;
-  --on-background: #171d23;
-  --surface: #f7f5ef;
-  --on-surface: #171d23;
-  --surface-variant: #efece3;
-  --on-surface-variant: #3b454e;
-  --outline: #7d776b;
-  --outline-variant: #e2ddd2;
+  --background: #fcf5ee;
+  --on-background: #1e1b17;
+  --surface: #fcf5ee;
+  --on-surface: #1e1b17;
+  --surface-variant: #f0e7db;
+  --on-surface-variant: #474139;
+  --outline: #7d766c;
+  --outline-variant: #e5dcd0;
   --shadow: #000000;
   --scrim: #000000;
-  --inverse-surface: #1b2229;
-  --inverse-on-surface: #f7f5ef;
-  --inverse-primary: #e79068;
-  --surface-dim: #efece3;
+  --inverse-surface: #282521;
+  --inverse-on-surface: #f9f2ec;
+  --inverse-primary: #f7be2d;
+  --surface-dim: #eee7e0;
   --surface-bright: #ffffff;
   --surface-container-lowest: #ffffff;
   --surface-container-low: #ffffff;
-  --surface-container: #faf8f3;
-  --surface-container-high: #f2efe7;
-  --surface-container-highest: #efece3;
+  --surface-container: #fff8f2;
+  --surface-container-high: #f6f0e9;
+  --surface-container-highest: #eee7e0;
 
   /* DinaLab names, kept for the compositions below, each resolved to a role. */
   --bg: var(--surface);
@@ -73,9 +76,9 @@
   --card-inset: var(--surface-container-high);
   --ink: var(--on-surface);
   --ink-soft: var(--on-surface-variant);
-  --muted: #66707a;
+  --muted: #706a60;
   --line: var(--outline-variant);
-  --line-strong: #c7c0b1;
+  --line-strong: #c8c0b4;
   --accent: var(--primary);
   --accent-ink: var(--on-primary-container);
   --accent-soft: var(--primary-container);
@@ -87,13 +90,13 @@
   --green-soft: var(--tertiary-container);
   --danger: var(--error);
   --danger-soft: var(--error-container);
-  --invert-bg: var(--inverse-surface);
-  --invert-ink: #f7f5ef;
+  --invert-bg: #26231f;
+  --invert-ink: #f9f2ec;
   --invert-muted: rgba(247, 245, 239, 0.72);
-  --code-bg: #f0ede4;
-  --code-ink: #2c3a2f;
-  --pre-bg: #12181d;
-  --pre-ink: #e9f0ef;
+  --code-bg: #f6ede0;
+  --code-ink: #39342c;
+  --pre-bg: #1e1b17;
+  --pre-ink: #eee7e0;
 
   --r-sm: 8px;
   --r-md: 12px;
@@ -103,7 +106,13 @@
   --shadow-sm: 0 1px 2px rgba(23, 29, 35, 0.05), 0 6px 16px rgba(23, 29, 35, 0.05);
   --shadow-md: 0 2px 4px rgba(23, 29, 35, 0.05), 0 14px 32px rgba(23, 29, 35, 0.08);
   --shadow-lg: 0 4px 8px rgba(23, 29, 35, 0.06), 0 26px 60px rgba(23, 29, 35, 0.12);
-  --ring: 0 0 0 3px rgba(28, 91, 134, 0.32);
+  --ring: 0 0 0 3px rgba(120, 89, 0, 0.35);
+  /* The mark's own gold, for the few places that should look like the logo. */
+  --brand-gold: #fac700;
+  /* Filled buttons wear the bright gold in both themes, with dark ink on it
+     (7.7:1). The light theme's --primary is the deep gold that text needs. */
+  --fill: #f7be2d;
+  --on-fill: #3f2e00;
 
   --gap: 18px;
   --band: clamp(56px, 7vw, 92px);
@@ -127,56 +136,57 @@
 /* Warm charcoal rather than blue-grey, so both themes read as one brand. */
 :root[data-theme="dark"] {
   color-scheme: dark;
+  --invert-bg: #13110d;
 
-  --primary: #e79068;
-  --on-primary: #3a1608;
-  --primary-container: #35211a;
-  --on-primary-container: #f0a687;
-  --secondary: #7fb9e0;
-  --on-secondary: #06263b;
-  --secondary-container: #16293a;
-  --on-secondary-container: #9ccbeb;
-  --tertiary: #74c9a3;
-  --on-tertiary: #04281a;
-  --tertiary-container: #14291f;
-  --on-tertiary-container: #92d8b7;
+  --primary: #f7be2d;
+  --on-primary: #3f2e00;
+  --primary-container: #4d3800;
+  --on-primary-container: #ffdf9e;
+  --secondary: #f0b826;
+  --on-secondary: #3f2e00;
+  --secondary-container: #473a1b;
+  --on-secondary-container: #f7e0b6;
+  --tertiary: #e2c382;
+  --on-tertiary: #3f2e00;
+  --tertiary-container: #4c3803;
+  --on-tertiary-container: #ffdf9e;
   --error: #e88a80;
   --on-error: #3d0a06;
   --error-container: #351d1b;
   --on-error-container: #f4b1a9;
-  --background: #1a1917;
-  --on-background: #f3f0e9;
-  --surface: #1a1917;
-  --on-surface: #f3f0e9;
-  --surface-variant: #322f2a;
-  --on-surface-variant: #d4cfc4;
-  --outline: #8f887c;
-  --outline-variant: #38352f;
-  --inverse-surface: #131211;
-  --inverse-on-surface: #f3f0e9;
-  --inverse-primary: #a94b2c;
-  --surface-dim: #131211;
-  --surface-bright: #322f2a;
-  --surface-container-lowest: #24221f;
-  --surface-container-low: #24221f;
-  --surface-container: #2b2925;
-  --surface-container-high: #322f2a;
-  --surface-container-highest: #38352f;
+  --background: #1a1714;
+  --on-background: #eee7e0;
+  --surface: #1a1714;
+  --on-surface: #eee7e0;
+  --surface-variant: #403b32;
+  --on-surface-variant: #d3cbbf;
+  --outline: #979085;
+  --outline-variant: #3d3930;
+  --inverse-surface: #13110d;
+  --inverse-on-surface: #eee7e0;
+  --inverse-primary: #785900;
+  --surface-dim: #15130f;
+  --surface-bright: #373430;
+  --surface-container-lowest: #221f1b;
+  --surface-container-low: #221f1b;
+  --surface-container: #282521;
+  --surface-container-high: #2e2c27;
+  --surface-container-highest: #373430;
 
-  --muted: #a09a8e;
-  --line-strong: #524d45;
-  --invert-ink: #f3f0e9;
+  --muted: #a49d92;
+  --line-strong: #575249;
+  --invert-ink: #eee7e0;
   --invert-muted: rgba(243, 240, 233, 0.68);
-  --code-bg: #322f2a;
-  --code-ink: #e0dbd0;
-  --pre-bg: #100f0e;
-  --pre-ink: #e6e2d9;
+  --code-bg: #302c24;
+  --code-ink: #dfd6ca;
+  --pre-bg: #100e0a;
+  --pre-ink: #e8e1db;
 
   /* Dark surfaces read as elevated through contrast, not drop shadow. */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.45);
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.55);
-  --ring: 0 0 0 3px rgba(127, 185, 224, 0.4);
+  --ring: 0 0 0 3px rgba(247, 190, 45, 0.4);
 }
 
 /* ------------------------------------------------- BeerCSS reset, adjusted */
@@ -486,6 +496,12 @@ figure {
   text-decoration: none !important;
 }
 
+/* BeerCSS fills a button with --primary; this site fills it with the logo gold. */
+:is(.button, button):not(.border, .transparent, .chip, .support-google, .support-link) {
+  background-color: var(--fill);
+  color: var(--on-fill);
+}
+
 .button > svg,
 .chip > svg {
   width: 18px;
@@ -762,7 +778,7 @@ footer.footer,
 }
 
 .app-card {
-  --app-accent: #f5a524;
+  --app-accent: var(--primary);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -772,26 +788,23 @@ footer.footer,
   box-shadow: inset 0 3px 0 var(--app-accent), var(--shadow-sm);
 }
 
-/* Accents follow the card order on the homepage, each taken from its own mark's
-   palette: Admin Toolkit indigo, Sheet for Salesforce's dimensional green mark,
-   SheetConnect emerald, then Agent violet. */
+/* One tone since 2026-09-24: every card takes the palette's gold, and the marks
+   inside them carry each product's own color. A different accent per card was
+   what made the page read as several brands. */
 .app-card:nth-child(1) {
-  --app-accent: #2540c8;
+  --app-accent: var(--primary);
 }
 
 .app-card:nth-child(2) {
-  --app-accent: #12c974;
+  --app-accent: var(--primary);
 }
 
-/* SheetConnect. Gold since 2026-09-15, when Google refused the green mark in OAuth
-   verification for reading as Google Sheets. The card accent has to move with it —
-   the logo beside it is the same file the reviewer sees. */
 .app-card:nth-child(3) {
-  --app-accent: #bd6800;
+  --app-accent: var(--primary);
 }
 
 .app-card:nth-child(4) {
-  --app-accent: #7040c5;
+  --app-accent: var(--primary);
 }
 
 .app-media {
@@ -873,7 +886,7 @@ footer.footer,
 }
 
 .lab-card {
-  --lab-accent: var(--blue);
+  --lab-accent: var(--primary);
   display: grid;
   grid-template-columns: 52px minmax(0, 1fr);
   gap: 16px;
@@ -889,31 +902,29 @@ footer.footer,
   box-shadow: inset 0 3px 0 var(--lab-accent), var(--shadow-sm);
 }
 
-/* Same rule in the workshop band: DevOps slate teal, Dock sky, Prompter magenta,
-   Voice coral, each the mid-tone of its brand mark. */
 .lab-card:nth-child(1) {
-  --lab-accent: #287675;
+  --lab-accent: var(--primary);
 }
 
 .lab-card:nth-child(2) {
-  --lab-accent: #087fc1;
+  --lab-accent: var(--primary);
 }
 
 .lab-card:nth-child(3) {
-  --lab-accent: #ad239a;
+  --lab-accent: var(--primary);
 }
 
 .lab-card:nth-child(4) {
-  --lab-accent: #cf314c;
+  --lab-accent: var(--primary);
 }
 
 .lab-card:nth-child(5),
 .lab-card:nth-child(6) {
-  --lab-accent: #7c3aed;
+  --lab-accent: var(--primary);
 }
 
 .lab-card:nth-child(7) {
-  --lab-accent: #12c974;
+  --lab-accent: var(--primary);
 }
 
 .lab-logo,
@@ -1044,16 +1055,12 @@ footer.footer,
   justify-content: center;
   min-height: 44px;
   padding: 0 20px;
-  border: 1px solid var(--green);
+  border: 1px solid var(--fill);
   border-radius: var(--r-sm);
-  background: var(--green);
-  color: #ffffff;
+  background: var(--fill);
+  color: var(--on-fill);
   font-weight: 700;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-:root[data-theme="dark"] .store-link {
-  color: #12181d;
 }
 
 .store-link:hover {
@@ -1244,13 +1251,9 @@ footer.footer,
   place-items: center;
   border-radius: 50%;
   background: var(--green);
-  color: #ffffff;
+  color: var(--on-tertiary);
   font-weight: 800;
   font-size: var(--fs-sm);
-}
-
-:root[data-theme="dark"] .step::before {
-  color: #12181d;
 }
 
 .step p {
@@ -1697,8 +1700,8 @@ footer.footer,
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #73d49d;
-  box-shadow: 0 0 0 5px rgba(115, 212, 157, 0.13);
+  background: var(--brand-gold);
+  box-shadow: 0 0 0 5px rgba(250, 199, 0, 0.16);
 }
 
 .workboard-item {
@@ -1722,7 +1725,8 @@ footer.footer,
 }
 
 .workboard-index {
-  color: var(--accent);
+  /* On the dark panel the deep gold falls to 2.5:1; the bright gold reads. */
+  color: var(--fill);
   font-family: var(--mono);
   font-size: 12px;
   font-weight: 800;
@@ -1966,7 +1970,8 @@ footer.footer,
 }
 
 .studio-home .studio-closing .eyebrow {
-  color: var(--accent);
+  /* On the dark panel the deep gold falls to 2.5:1; the bright gold reads. */
+  color: var(--fill);
 }
 
 .studio-home .studio-closing .button {

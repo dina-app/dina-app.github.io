@@ -1,80 +1,114 @@
 /*
- * DinaLab design system
- * ---------------------
- * One stylesheet for every public page: homepage, product pages, privacy
- * policies, and manuals. Pages opt into a composition with a body class:
+ * DinaLab design system, on BeerCSS
+ * ---------------------------------
+ * BeerCSS 5.0.3 (assets/vendor/beercss/beer.min.css, loaded first) is the base:
+ * its buttons, chips, fields, dialogs and color roles. This file sets DinaLab's
+ * palette into those roles and holds the page compositions BeerCSS has no
+ * opinion about. Pages opt into a composition with a body class:
  *
  *   body.home        full-bleed marketing bands (homepage only)
  *   body.doc-page    centred column of card sections (product + policy pages)
  *   body.manual-page doc-page plus manual extras (TOC, figures, callouts)
  *
  * Theme: assets/site-theme.js stamps data-theme="light|dark" on <html> before
- * first paint, so only one dark token block is needed below.
+ * first paint. BeerCSS keys its dark roles off body.dark; this file keys them off
+ * that attribute instead, so the one switch drives both.
+ *
+ * Naming: BeerCSS's --surface is the page ground. The white of a card is
+ * --card here, so a composition never has to guess which one it means.
  */
+
+/* BeerCSS sits in its own layer, below everything in this file: a rule written
+   here wins over a BeerCSS rule whatever either selector's specificity. */
+@import url("vendor/beercss/beer.min.css") layer(beer);
 
 /* ---------------------------------------------------------------- tokens */
 
 :root {
   color-scheme: light;
 
-  /* Surfaces: warm paper, not grey. */
-  --bg: #f7f5ef;
-  --bg-sunken: #efece3;
-  --surface: #ffffff;
-  --surface-soft: #faf8f3;
-  --surface-inset: #f2efe7;
+  /* BeerCSS color roles, in DinaLab's warm-paper palette. */
+  --primary: #a94b2c;
+  --on-primary: #ffffff;
+  --primary-container: #f8ece6;
+  --on-primary-container: #8e3d22;
+  --secondary: #1c5b86;
+  --on-secondary: #ffffff;
+  --secondary-container: #e8f2f9;
+  --on-secondary-container: #164a6d;
+  --tertiary: #1c6a52;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #e6f3ec;
+  --on-tertiary-container: #145441;
+  --error: #a8382f;
+  --on-error: #ffffff;
+  --error-container: #fbeae7;
+  --on-error-container: #8a2c24;
+  --background: #f7f5ef;
+  --on-background: #171d23;
+  --surface: #f7f5ef;
+  --on-surface: #171d23;
+  --surface-variant: #efece3;
+  --on-surface-variant: #3b454e;
+  --outline: #7d776b;
+  --outline-variant: #e2ddd2;
+  --shadow: #000000;
+  --scrim: #000000;
+  --inverse-surface: #1b2229;
+  --inverse-on-surface: #f7f5ef;
+  --inverse-primary: #e79068;
+  --surface-dim: #efece3;
+  --surface-bright: #ffffff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #ffffff;
+  --surface-container: #faf8f3;
+  --surface-container-high: #f2efe7;
+  --surface-container-highest: #efece3;
 
-  /* Ink */
-  --ink: #171d23;
-  --ink-soft: #3b454e;
+  /* DinaLab names, kept for the compositions below, each resolved to a role. */
+  --bg: var(--surface);
+  --bg-sunken: var(--surface-container-highest);
+  --card: var(--surface-container-lowest);
+  --card-soft: var(--surface-container);
+  --card-inset: var(--surface-container-high);
+  --ink: var(--on-surface);
+  --ink-soft: var(--on-surface-variant);
   --muted: #66707a;
-
-  /* Lines */
-  --line: #e2ddd2;
+  --line: var(--outline-variant);
   --line-strong: #c7c0b1;
-
-  /* Accents */
-  --accent: #a94b2c;
-  --accent-ink: #8e3d22;
-  --accent-soft: #f8ece6;
-  --blue: #1c5b86;
-  --blue-ink: #164a6d;
-  --blue-soft: #e8f2f9;
-  --green: #1c6a52;
-  --green-ink: #145441;
-  --green-soft: #e6f3ec;
-  --danger: #a8382f;
-  --danger-soft: #fbeae7;
-
-  /* Inverted block (footer, feature panel) */
-  --invert-bg: #1b2229;
-  --invert-ink: #f4f1ea;
-  --invert-muted: rgba(244, 241, 234, 0.72);
-
-  /* Code */
+  --accent: var(--primary);
+  --accent-ink: var(--on-primary-container);
+  --accent-soft: var(--primary-container);
+  --blue: var(--secondary);
+  --blue-ink: var(--on-secondary-container);
+  --blue-soft: var(--secondary-container);
+  --green: var(--tertiary);
+  --green-ink: var(--on-tertiary-container);
+  --green-soft: var(--tertiary-container);
+  --danger: var(--error);
+  --danger-soft: var(--error-container);
+  --invert-bg: var(--inverse-surface);
+  --invert-ink: #f7f5ef;
+  --invert-muted: rgba(247, 245, 239, 0.72);
   --code-bg: #f0ede4;
   --code-ink: #2c3a2f;
   --pre-bg: #12181d;
   --pre-ink: #e9f0ef;
 
-  /* Radii */
   --r-sm: 8px;
   --r-md: 12px;
   --r-lg: 18px;
   --r-pill: 999px;
 
-  /* Elevation */
   --shadow-sm: 0 1px 2px rgba(23, 29, 35, 0.05), 0 6px 16px rgba(23, 29, 35, 0.05);
   --shadow-md: 0 2px 4px rgba(23, 29, 35, 0.05), 0 14px 32px rgba(23, 29, 35, 0.08);
   --shadow-lg: 0 4px 8px rgba(23, 29, 35, 0.06), 0 26px 60px rgba(23, 29, 35, 0.12);
   --ring: 0 0 0 3px rgba(28, 91, 134, 0.32);
 
-  /* Rhythm */
   --gap: 18px;
   --band: clamp(56px, 7vw, 92px);
   --measure: 68ch;
 
-  /* Type */
   --fs-display: clamp(42px, 7.2vw, 84px);
   --fs-h1: clamp(34px, 5.4vw, 58px);
   --fs-h2: clamp(26px, 3.4vw, 40px);
@@ -86,43 +120,53 @@
   --sans: Inter, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo,
     ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --mono: "SFMono-Regular", ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
-
-  font-family: var(--sans);
+  /* BeerCSS reads its type from --font. */
+  --font: var(--sans);
 }
 
+/* Warm charcoal rather than blue-grey, so both themes read as one brand. */
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  /* Warm charcoal rather than blue-grey, so both themes read as one brand. */
-  --bg: #1a1917;
-  --bg-sunken: #131211;
-  --surface: #24221f;
-  --surface-soft: #2b2925;
-  --surface-inset: #322f2a;
+  --primary: #e79068;
+  --on-primary: #3a1608;
+  --primary-container: #35211a;
+  --on-primary-container: #f0a687;
+  --secondary: #7fb9e0;
+  --on-secondary: #06263b;
+  --secondary-container: #16293a;
+  --on-secondary-container: #9ccbeb;
+  --tertiary: #74c9a3;
+  --on-tertiary: #04281a;
+  --tertiary-container: #14291f;
+  --on-tertiary-container: #92d8b7;
+  --error: #e88a80;
+  --on-error: #3d0a06;
+  --error-container: #351d1b;
+  --on-error-container: #f4b1a9;
+  --background: #1a1917;
+  --on-background: #f3f0e9;
+  --surface: #1a1917;
+  --on-surface: #f3f0e9;
+  --surface-variant: #322f2a;
+  --on-surface-variant: #d4cfc4;
+  --outline: #8f887c;
+  --outline-variant: #38352f;
+  --inverse-surface: #131211;
+  --inverse-on-surface: #f3f0e9;
+  --inverse-primary: #a94b2c;
+  --surface-dim: #131211;
+  --surface-bright: #322f2a;
+  --surface-container-lowest: #24221f;
+  --surface-container-low: #24221f;
+  --surface-container: #2b2925;
+  --surface-container-high: #322f2a;
+  --surface-container-highest: #38352f;
 
-  --ink: #f3f0e9;
-  --ink-soft: #d4cfc4;
   --muted: #a09a8e;
-
-  --line: #38352f;
   --line-strong: #524d45;
-
-  --accent: #e79068;
-  --accent-ink: #f0a687;
-  --accent-soft: #35211a;
-  --blue: #7fb9e0;
-  --blue-ink: #9ccbeb;
-  --blue-soft: #16293a;
-  --green: #74c9a3;
-  --green-ink: #92d8b7;
-  --green-soft: #14291f;
-  --danger: #e88a80;
-  --danger-soft: #351d1b;
-
-  --invert-bg: #131211;
   --invert-ink: #f3f0e9;
   --invert-muted: rgba(243, 240, 233, 0.68);
-
   --code-bg: #322f2a;
   --code-ink: #e0dbd0;
   --pre-bg: #100f0e;
@@ -135,11 +179,29 @@
   --ring: 0 0 0 3px rgba(127, 185, 224, 0.4);
 }
 
-/* ------------------------------------------------------------ base reset */
-
-* {
-  box-sizing: border-box;
+/* ------------------------------------------------- BeerCSS reset, adjusted */
+/* BeerCSS puts a 1rem top margin on any block that follows another. This site
+   spaces blocks with bottom margins and grid gaps, so that margin only pushed
+   every card after the first one down. Zero specificity: any rule below wins. */
+:where(*) + :where(address, article, blockquote, code, fieldset, form, h1, h2, h3,
+  h4, h5, h6, nav, ol, p, pre, section, aside, table, ul) {
+  margin-block-start: 0;
 }
+
+/* Its reset also zeroes every margin; a list after a paragraph had 1em above it. */
+:where(ul, ol) {
+  margin-block: 1em 0;
+}
+
+/* BeerCSS gives links, chips and buttons a display of their own, which would
+   otherwise beat the hidden attribute: the panel's admin-only link showed to
+   everyone. Hidden means hidden. */
+[hidden] {
+  display: none !important;
+}
+
+/* ------------------------------------------------------ reading defaults */
+/* BeerCSS is sized for app chrome (14px body). A reading site wants more. */
 
 html {
   scroll-behavior: smooth;
@@ -147,18 +209,14 @@ html {
 }
 
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--sans);
   font-size: 16px;
   line-height: 1.65;
+  letter-spacing: normal;
   -webkit-font-smoothing: antialiased;
 }
 
 img,
 svg {
-  display: block;
   max-width: 100%;
 }
 
@@ -166,29 +224,20 @@ img {
   height: auto;
 }
 
-a {
-  color: var(--blue);
+:where(a:not(.button, .chip)) {
+  color: var(--secondary);
   font-weight: 700;
   text-decoration: none;
 }
 
-a:hover {
+:where(a:not(.button, .chip)):hover {
   text-decoration: underline;
 }
 
 :where(a, button, input, select, textarea, summary):focus-visible {
   outline: 2px solid transparent;
-  border-radius: var(--r-sm);
   box-shadow: var(--ring);
   outline-offset: 2px;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-  color: inherit;
 }
 
 hr {
@@ -203,20 +252,11 @@ hr {
   color: var(--accent-ink);
 }
 
-/* ------------------------------------------------------------ typography */
-
-h1,
-h2,
-h3,
-h4,
-p {
-  margin-top: 0;
-}
-
 h1,
 h2,
 h3,
 h4 {
+  margin-top: 0;
   color: var(--ink);
   font-weight: 800;
   letter-spacing: -0.015em;
@@ -242,6 +282,11 @@ h3 {
   letter-spacing: -0.005em;
 }
 
+h4 {
+  margin-bottom: 8px;
+  font-size: 17px;
+}
+
 /* Japanese has no descender-light lowercase, so tight display leading
    collapses. Give CJK a little more room at every display size. */
 :lang(ja) h1,
@@ -251,51 +296,15 @@ h3 {
 }
 
 p {
-  margin-bottom: 16px;
+  margin: 0 0 16px;
 }
 
 p:last-child {
   margin-bottom: 0;
 }
 
-.eyebrow {
-  margin: 0 0 14px;
-  color: var(--accent);
-  font-size: var(--fs-xs);
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.lead {
-  max-width: var(--measure);
-  color: var(--ink-soft);
-  font-size: var(--fs-lead);
-  line-height: 1.55;
-}
-
-.notice,
-.updated {
-  color: var(--muted);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-}
-
-.text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--blue);
-  font-weight: 700;
-}
-
-.text-link + .text-link {
-  margin-left: 16px;
-}
-
 ul,
 ol {
-  margin-bottom: 0;
   padding-left: 22px;
 }
 
@@ -333,6 +342,52 @@ pre code {
   font-size: inherit;
 }
 
+figure {
+  margin: 0;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lead {
+  max-width: var(--measure);
+  color: var(--ink-soft);
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+}
+
+.notice,
+.updated {
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.text-link + .text-link {
+  margin-left: 16px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* ---------------------------------------------------------------- layout */
 
 .shell {
@@ -345,6 +400,11 @@ pre code {
   width: min(880px, calc(100% - 48px));
 }
 
+.content {
+  display: grid;
+  gap: var(--gap);
+}
+
 /* --------------------------------------------------------- navigation */
 
 .nav {
@@ -354,6 +414,7 @@ pre code {
   gap: 16px;
   min-height: 48px;
   margin-bottom: 44px;
+  padding: 0;
 }
 
 /* The brand claims the free space so every other child — whether grouped in a
@@ -366,48 +427,31 @@ pre code {
   display: inline-flex;
   align-items: center;
   gap: 11px;
-  color: var(--ink);
+  color: var(--ink) !important;
   font-weight: 800;
   font-size: 17px;
   letter-spacing: -0.01em;
 }
 
 .brand:hover {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
-.brand-mark {
-  display: grid;
-  width: 36px;
-  height: 36px;
-  flex: none;
-  place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--accent);
-  font-weight: 900;
-  box-shadow: var(--shadow-sm);
-}
-
-/* The light mark is the default source; dark mode swaps to the prismatic mark.
-   Both carry transparent corners, so the shadow follows their alpha instead of
-   drawing a square around the image canvas. */
 /* The house mark is the Solar tile: one solid drawing that carries its own
    ground, so it needs no per-theme variant and no plate behind it. It is the only
    light tile in the family, which is the point — brightness is what marks the
    parent — so the glow under it is warm rather than tinted to a product hue. */
-img.brand-mark {
+.brand-mark {
   display: block;
-  background: none;
+  width: 36px;
+  height: 36px;
+  flex: none;
   object-fit: contain;
-  border: 0;
   border-radius: 10px;
-  box-shadow: none;
   filter: drop-shadow(0 2px 5px rgba(150, 106, 0, 0.3));
 }
 
-:root[data-theme="dark"] img.brand-mark {
+:root[data-theme="dark"] .brand-mark {
   filter: drop-shadow(0 2px 8px rgba(250, 199, 0, 0.34));
 }
 
@@ -417,61 +461,36 @@ img.brand-mark {
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: 16px;
+  gap: 8px 16px;
 }
 
-.nav-links > a:not(.lang-toggle):not(.button),
-.nav-actions > a:not(.lang-toggle):not(.button) {
+.nav-links > a:not(.button, .chip),
+.nav-actions > a:not(.button, .chip) {
   color: var(--ink-soft);
   font-size: var(--fs-sm);
   font-weight: 700;
 }
 
-.nav-links > a:not(.lang-toggle):not(.button):hover,
-.nav-actions > a:not(.lang-toggle):not(.button):hover {
+.nav-links > a:not(.button, .chip):hover,
+.nav-actions > a:not(.button, .chip):hover {
   color: var(--accent);
   text-decoration: none;
 }
 
 /* ------------------------------------------------------------- controls */
+/* Buttons, chips and fields are BeerCSS's own: .button (filled, primary),
+   .button.border (outlined), .chip, .field. Only the site's sizes differ. */
 
 .button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 0 20px;
-  border: 1px solid var(--ink);
-  border-radius: var(--r-sm);
-  background: var(--ink);
-  color: var(--bg);
   font-weight: 700;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  text-decoration: none !important;
 }
 
-.button:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-  text-decoration: none;
-}
-
-.button:active {
-  transform: translateY(0);
-}
-
-.button.secondary {
-  border-color: var(--line-strong);
-  background: var(--surface);
-  color: var(--ink);
-}
-
-.button.accent {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: #ffffff;
+.button > svg,
+.chip > svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
 }
 
 .button-row,
@@ -482,45 +501,24 @@ img.brand-mark {
   margin-top: 24px;
 }
 
-/* Toggles share one shape so the nav reads as a single control group. */
-.lang-toggle,
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
+/* The two nav toggles are BeerCSS chips and a circle button; the language chip
+   names the language it switches TO, and the theme button shows the icon of
+   the theme it switches TO. */
+.lang-toggle {
   gap: 6px;
-  min-height: 36px;
-  padding: 0 12px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r-pill);
-  background: var(--surface);
-  color: var(--ink);
   font-size: var(--fs-xs);
   font-weight: 700;
-  cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease;
-}
-
-.lang-toggle:hover,
-.theme-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  text-decoration: none;
+  color: var(--ink) !important;
 }
 
 .lang-toggle svg,
 .theme-toggle svg {
+  fill: none;
   width: 16px;
   height: 16px;
   flex: none;
 }
 
-.theme-toggle {
-  width: 36px;
-  padding: 0;
-  justify-content: center;
-}
-
-/* Each toggle shows the state it switches TO. */
 .theme-toggle .icon-sun {
   display: none;
 }
@@ -534,40 +532,18 @@ img.brand-mark {
 }
 
 /* ------------------------------------------------------------ indicators */
+/* Status chips: BeerCSS .chip with a container role —
+   tertiary = released, primary = draft or next, secondary = information. */
 
-.pill,
-.release-pill {
-  display: inline-flex;
-  align-items: center;
-  min-height: 26px;
-  padding: 0 11px;
-  border-radius: var(--r-pill);
-  background: var(--surface-inset);
-  color: var(--ink-soft);
+.chip.release-pill {
+  margin-bottom: 16px;
+}
+
+.chip:is(.tertiary-container, .primary-container, .secondary-container) {
+  border: 0;
   font-size: var(--fs-xs);
   font-weight: 800;
   white-space: nowrap;
-}
-
-.release-pill {
-  margin-bottom: 16px;
-  background: var(--green-soft);
-  color: var(--green-ink);
-}
-
-.pill.release {
-  background: var(--green-soft);
-  color: var(--green-ink);
-}
-
-.pill.draft {
-  background: var(--accent-soft);
-  color: var(--accent-ink);
-}
-
-.pill.info {
-  background: var(--blue-soft);
-  color: var(--blue-ink);
 }
 
 .meta-list {
@@ -584,7 +560,7 @@ img.brand-mark {
   padding: 6px 11px;
   border: 1px solid var(--line);
   border-radius: var(--r-pill);
-  background: var(--surface-soft);
+  background: var(--card-soft);
   color: var(--ink-soft);
   font-size: var(--fs-xs);
   font-weight: 700;
@@ -599,24 +575,16 @@ img.brand-mark {
   padding: clamp(20px, 3vw, 30px);
   border: 1px solid var(--line);
   border-radius: var(--r-md);
-  background: var(--surface);
+  background: var(--card);
+  color: var(--ink);
   box-shadow: var(--shadow-sm);
-}
-
-.content {
-  display: grid;
-  gap: var(--gap);
-}
-
-figure {
-  margin: 0;
 }
 
 figure img {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--r-md);
-  background: var(--surface);
+  background: var(--card);
   box-shadow: var(--shadow-md);
 }
 
@@ -634,7 +602,10 @@ figcaption {
   font-weight: 600;
 }
 
+footer.footer,
 .footer {
+  display: block;
+  min-block-size: 0;
   padding: 32px 24px;
   background: var(--invert-bg);
   color: var(--invert-muted);
@@ -643,7 +614,7 @@ figcaption {
 }
 
 .footer a {
-  color: var(--invert-ink);
+  color: var(--invert-ink) !important;
 }
 
 /* ================================================== homepage composition */
@@ -662,7 +633,7 @@ figcaption {
 .home .band {
   padding: var(--band) 0;
   border-bottom: 1px solid var(--line);
-  background: var(--surface);
+  background: var(--card);
 }
 
 .home .band.sunken {
@@ -733,7 +704,7 @@ figcaption {
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: var(--r-md);
-  background: var(--surface);
+  background: var(--card);
   box-shadow: var(--shadow-sm);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -797,7 +768,7 @@ figcaption {
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--app-accent) 24%, var(--line));
   border-radius: var(--r-md);
-  background: var(--surface);
+  background: var(--card);
   box-shadow: inset 0 3px 0 var(--app-accent), var(--shadow-sm);
 }
 
@@ -834,8 +805,8 @@ figcaption {
   background:
     linear-gradient(
       135deg,
-      color-mix(in srgb, var(--app-accent) 12%, var(--surface)) 0%,
-      color-mix(in srgb, var(--app-accent) 5%, var(--surface)) 100%
+      color-mix(in srgb, var(--app-accent) 12%, var(--card)) 0%,
+      color-mix(in srgb, var(--app-accent) 5%, var(--card)) 100%
     );
 }
 
@@ -847,7 +818,7 @@ figcaption {
   align-self: center;
   border: 1px solid var(--line);
   border-radius: var(--r-md);
-  background: color-mix(in srgb, var(--app-accent) 9%, var(--surface));
+  background: color-mix(in srgb, var(--app-accent) 9%, var(--card));
   box-shadow: 0 8px 20px color-mix(in srgb, var(--app-accent) 16%, transparent);
   overflow: hidden;
 }
@@ -912,8 +883,8 @@ figcaption {
   background:
     linear-gradient(
       135deg,
-      color-mix(in srgb, var(--lab-accent) 10%, var(--surface)) 0%,
-      var(--surface) 68%
+      color-mix(in srgb, var(--lab-accent) 10%, var(--card)) 0%,
+      var(--card) 68%
     );
   box-shadow: inset 0 3px 0 var(--lab-accent), var(--shadow-sm);
 }
@@ -951,14 +922,14 @@ figcaption {
   height: 52px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: var(--surface-soft);
+  background: var(--card-soft);
 }
 
 .lab-logo {
   display: grid;
   padding: 3px;
   border-color: color-mix(in srgb, var(--lab-accent) 26%, var(--line));
-  background: color-mix(in srgb, var(--lab-accent) 9%, var(--surface));
+  background: color-mix(in srgb, var(--lab-accent) 9%, var(--card));
   filter: drop-shadow(
     0 4px 7px color-mix(in srgb, var(--lab-accent) 24%, transparent)
   );
@@ -1011,7 +982,7 @@ figcaption {
   font-size: var(--fs-sm);
 }
 
-.lab-card .pill {
+.lab-card .chip {
   align-self: flex-start;
   min-height: 22px;
   margin-top: auto;
@@ -1063,7 +1034,7 @@ figcaption {
   width: 100%;
   border: 1px solid var(--line);
   border-radius: var(--r-md);
-  background: var(--surface);
+  background: var(--card);
   box-shadow: var(--shadow-md);
 }
 
@@ -1102,7 +1073,7 @@ figcaption {
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: var(--r-sm);
-  background: var(--surface-soft);
+  background: var(--card-soft);
 }
 
 .app-summary p {
@@ -1127,7 +1098,7 @@ figcaption {
   padding: 10px 14px;
   border-radius: var(--r-sm);
   background: var(--ink);
-  color: var(--surface);
+  color: var(--card);
   transform: translateY(-160%);
 }
 
@@ -1146,7 +1117,7 @@ figcaption {
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: var(--r-pill);
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  background: color-mix(in srgb, var(--card) 92%, transparent);
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(14px);
 }
@@ -1162,7 +1133,7 @@ figcaption {
 
 .product-section-nav a:hover,
 .product-section-nav a:focus-visible {
-  background: var(--surface-soft);
+  background: var(--card-soft);
   color: var(--ink);
   text-decoration: none;
 }
@@ -1196,7 +1167,7 @@ figcaption {
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: var(--r-sm);
-  background: var(--surface-soft);
+  background: var(--card-soft);
   color: var(--ink);
 }
 
@@ -1240,7 +1211,7 @@ figcaption {
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: var(--r-sm);
-  background: var(--surface-soft);
+  background: var(--card-soft);
 }
 
 .feature p {
@@ -1535,7 +1506,7 @@ figcaption {
   padding: 26px;
   border: 1px solid var(--line);
   border-radius: var(--r-md);
-  background: var(--surface);
+  background: var(--card);
   box-shadow: var(--shadow-sm);
 }
 
@@ -1604,7 +1575,7 @@ figcaption {
   padding: 22px 24px;
   border-left: 4px solid var(--accent);
   border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  background: var(--surface-inset);
+  background: var(--card-inset);
 }
 
 .article-checklist {
@@ -1773,7 +1744,7 @@ figcaption {
   line-height: 1.4;
 }
 
-.workboard-item i {
+.workboard-status {
   padding: 4px 8px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--r-pill);
@@ -1792,13 +1763,15 @@ figcaption {
   padding: 0;
   border: 1px solid var(--line);
   border-radius: var(--r-md);
-  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  background: color-mix(in srgb, var(--card) 94%, transparent);
   box-shadow: var(--shadow-sm);
   list-style: none;
   overflow: hidden;
 }
 
 .work-strip li {
+  margin: 0;
+  border-radius: 0;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 11px;
@@ -1837,7 +1810,7 @@ figcaption {
   padding: clamp(24px, 3vw, 32px);
   border: 1px solid var(--line);
   border-radius: var(--r-md);
-  background: var(--surface);
+  background: var(--card);
   box-shadow: var(--shadow-sm);
 }
 
@@ -2002,7 +1975,7 @@ figcaption {
   color: var(--invert-bg);
 }
 
-.studio-home .studio-closing .button.secondary {
+.studio-home .studio-closing .button.border {
   border-color: rgba(255, 255, 255, 0.28);
   background: transparent;
   color: var(--invert-ink);
@@ -2081,7 +2054,7 @@ figcaption {
     grid-template-columns: 26px minmax(0, 1fr);
   }
 
-  .workboard-item i {
+  .workboard-status {
     grid-column: 2;
     justify-self: start;
   }
@@ -2112,5 +2085,238 @@ figcaption {
   .principle-list li > span {
     width: 38px;
     height: 38px;
+  }
+}
+
+/* ================================================= support button and panel */
+/* assets/support-widget.js draws both. The button is BeerCSS's .circle.extra
+   (a 56px FAB) and the panel its right-side sheet, dialog.right. */
+
+.support-fab {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 90;
+  box-shadow: var(--shadow-lg);
+}
+
+.support-fab svg {
+  width: 26px;
+  height: 26px;
+}
+
+dialog.support-panel {
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  inline-size: min(420px, 100vw);
+  padding-inline: 20px;
+  border-inline-start: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: var(--shadow-lg);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+dialog.support-panel:not([open]) {
+  pointer-events: none;
+}
+
+.support-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-block-size: 0;
+  padding: 0;
+}
+
+.support-head h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.support-close svg,
+.support-send svg,
+.support-panel .field i svg {
+  width: 22px;
+  height: 22px;
+}
+
+.support-intro {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+.support-gate {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+.support-gate p {
+  margin: 0;
+}
+
+/* Google's own button shape, not the brand orange: the button says whose
+   account it asks for, and Google's sign-in guidance asks for exactly this. */
+button.support-google {
+  gap: 10px;
+  border: 1px solid var(--line-strong);
+  background: #ffffff;
+  color: #1f1f1f;
+  font-weight: 600;
+}
+
+button.support-google svg {
+  width: 18px;
+  height: 18px;
+}
+
+.support-chat {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-block-size: 0;
+}
+
+.support-chat[hidden],
+.support-gate[hidden] {
+  display: none;
+}
+
+.support-panel .field {
+  margin: 0;
+}
+
+.support-user {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 14px;
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+button.support-link {
+  block-size: auto;
+  padding: 0;
+  background: none;
+  color: var(--secondary);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.support-log {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-block-size: 120px;
+  margin: 0;
+  padding: 4px 2px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.support-log li {
+  max-inline-size: 90%;
+  margin: 0;
+  padding: 9px 13px;
+  border-radius: 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.support-log .user {
+  align-self: flex-end;
+  border-end-end-radius: 4px;
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+}
+
+.support-log .assistant {
+  align-self: flex-start;
+  border-end-start-radius: 4px;
+  background: var(--card-inset);
+  color: var(--ink);
+}
+
+.support-log .sent {
+  align-self: flex-start;
+  background: var(--tertiary-container);
+  color: var(--on-tertiary-container);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+
+.support-log .pending {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.support-composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.support-composer .field {
+  flex: 1;
+}
+
+.support-composer textarea {
+  min-block-size: 64px;
+}
+
+.support-error {
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  background: var(--error-container);
+  color: var(--on-error-container);
+  font-size: var(--fs-sm);
+}
+
+.support-error[hidden] {
+  display: none;
+}
+
+.support-privacy {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+.support-privacy summary {
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+/* BeerCSS drops the disclosure triangle; without it this reads as a label. */
+.support-privacy summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.support-privacy[open] summary::before {
+  content: "▾";
+}
+
+.support-privacy p {
+  margin: 6px 0 0;
+}
+
+@media print {
+  .support-fab,
+  .support-panel {
+    display: none !important;
   }
 }

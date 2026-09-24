@@ -1,38 +1,87 @@
-/* Support chat and feedback inbox. Built on the tokens in assets/dinalab.css. */
-/* The display rules below would otherwise beat the hidden attribute. */
-main [hidden] { display: none !important; }
-.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.support-gate { display: grid; gap: 14px; justify-items: start; }
-.google-button { display: inline-flex; align-items: center; gap: 10px; }
-.support-error { margin: 0; padding: 10px 14px; border-radius: var(--r-sm); background: var(--danger-soft); color: var(--danger); }
-.support-bar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
-.support-app { display: grid; gap: 4px; font-size: var(--fs-sm); color: var(--muted); }
-.support-app select, .support-inbox select, .support-composer textarea {
-  padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface); color: var(--ink);
+/* The feedback inbox (support/admin.html). The chat panel's styles live in
+   assets/dinalab.css, since the panel is on every page. */
+
+.inbox-head {
+  margin-bottom: 20px;
 }
-.support-app select { min-width: min(280px, 70vw); }
-.support-user { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; font-size: var(--fs-sm); color: var(--muted); }
-.support-user a { color: var(--blue); }
-.text-button { padding: 0; border: 0; background: none; color: var(--blue); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
-.support-log { display: grid; gap: 12px; margin: 0 0 16px; padding: 0; list-style: none; max-height: min(60vh, 560px); overflow-y: auto; }
-.support-log:empty { display: none; }
-.support-log li { max-width: 88%; padding: 10px 14px; border-radius: var(--r-md); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
-.support-log .user { justify-self: end; background: var(--blue-soft); color: var(--ink); }
-.support-log .assistant { justify-self: start; background: var(--surface-inset); color: var(--ink); }
-.support-log .sent { justify-self: start; background: var(--green-soft); color: var(--green-ink); font-size: var(--fs-sm); }
-.support-log .pending { color: var(--muted); font-style: italic; }
-.support-composer { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; }
-.support-composer textarea { width: 100%; min-height: 72px; resize: vertical; line-height: 1.5; }
-.support-privacy p { margin-bottom: 0; color: var(--ink-soft); font-size: var(--fs-sm); }
-.support-inbox { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
-.support-inbox > li { padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-soft); }
-.support-inbox .meta { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; font-size: var(--fs-xs); color: var(--muted); }
-.support-inbox .kind { padding: 2px 8px; border-radius: var(--r-pill); background: var(--accent-soft); color: var(--accent-ink); font-weight: 600; }
-.support-inbox h3 { margin: 8px 0 4px; font-size: 17px; }
-.support-inbox .details { margin: 0 0 8px; white-space: pre-wrap; overflow-wrap: anywhere; }
-.support-inbox details { font-size: var(--fs-sm); }
-.support-inbox details p { margin: 6px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
-@media (max-width: 560px) {
-  .support-composer { grid-template-columns: 1fr; }
-  .support-log li { max-width: 100%; }
+
+.inbox-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.inbox-bar .field {
+  min-inline-size: 200px;
+  margin: 0;
+}
+
+.inbox-bar .field i svg {
+  width: 22px;
+  height: 22px;
+}
+
+.support-inbox {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.support-inbox > li {
+  margin: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+
+.support-inbox .meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+}
+
+.support-inbox .kind {
+  block-size: 1.5rem;
+  border: 0;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+}
+
+.support-inbox select.status {
+  margin-left: auto;
+  padding: 4px 8px;
+  border: 1px solid var(--outline);
+  border-radius: var(--r-sm);
+  background: var(--card);
+  color: var(--ink);
+}
+
+.support-inbox h3 {
+  margin: 10px 0 4px;
+  font-size: 17px;
+}
+
+.support-inbox .details {
+  margin: 0 0 8px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.support-inbox details {
+  font-size: var(--fs-sm);
+}
+
+.support-inbox details p {
+  margin: 6px 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }

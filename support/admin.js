@@ -17,7 +17,8 @@ function card(item) {
   const meta = document.createElement("div");
   meta.className = "meta";
   const kind = bi(document.createElement("span"), ...(KINDS[item.kind] || KINDS.other));
-  kind.className = "kind";
+  // Bugs in the error container, ideas in the primary one: the kind is the first thing scanned for.
+  kind.className = `chip kind ${item.kind === "bug" ? "error-container" : item.kind === "idea" ? "primary-container" : "secondary-container"}`;
   const when = document.createElement("span");
   when.textContent = item.createdAt ? new Date(item.createdAt).toLocaleString() : "";
   const who = document.createElement("span");
@@ -25,13 +26,14 @@ function card(item) {
   const app = document.createElement("span");
   app.textContent = appNames[item.app] || item.app;
   const status = document.createElement("select");
+  status.className = "status";
   status.setAttribute("aria-label", "Status");
   for (const [value, en, ja] of STATUSES) status.add(bi(new Option(en, value), en, ja));
   status.value = item.status;
   status.addEventListener("change", async () => {
     status.disabled = true;
     try { await api(`/admin/feedback/${encodeURIComponent(item.id)}`, { method: "PATCH", body: { status: status.value } }); }
-    catch (error) { status.value = item.status; showError(el("chat-error"), error.message); }
+    catch (error) { status.value = item.status; showError(el("inbox-error"), error.message); }
     finally { status.disabled = false; }
   });
   meta.append(kind, app, who, when, status);
@@ -52,7 +54,7 @@ function card(item) {
 }
 
 async function load() {
-  showError(el("chat-error"), "");
+  showError(el("inbox-error"), "");
   const query = new URLSearchParams();
   if (el("filter-app").value) query.set("app", el("filter-app").value);
   if (el("filter-status").value) query.set("status", el("filter-status").value);
@@ -63,11 +65,11 @@ async function load() {
   } catch (error) {
     el("inbox").replaceChildren();
     el("summary").textContent = "";
-    showError(el("chat-error"), error.message);
+    showError(el("inbox-error"), error.message);
   }
 }
 
 el("filter-app").addEventListener("change", load);
 el("filter-status").addEventListener("change", load);
 const appsLoaded = loadApps().catch(() => {});
-watchSignIn(user => { if (user) appsLoaded.then(load); });
+watchSignIn(document.querySelector("main"), user => { if (user) appsLoaded.then(load); });

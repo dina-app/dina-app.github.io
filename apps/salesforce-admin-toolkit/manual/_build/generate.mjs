@@ -101,13 +101,13 @@ function buildPage(lang) {
       </a>
       <span class="nav-links">
         <a href="${overviewHref}">${t("Back to Admin Toolkit for Salesforce", "Admin Toolkit for Salesforce に戻る")}</a>
-        <a class="lang-toggle" href="${otherHref}" hreflang="${otherLangCode}" lang="${otherLangCode}" aria-label="${otherLangAria}" title="${otherLangAria}">${GLOBE}<span>${otherLangLabel}</span></a>
-        <button type="button" class="theme-toggle" data-theme-toggle aria-label="${t("Toggle dark theme", "ダークテーマを切り替え")}" aria-pressed="false">${MOON}${SUN}</button>
+        <a class="chip lang-toggle" href="${otherHref}" hreflang="${otherLangCode}" lang="${otherLangCode}" aria-label="${otherLangAria}" title="${otherLangAria}">${GLOBE}<span>${otherLangLabel}</span></a>
+        <button type="button" class="circle border small theme-toggle" data-theme-toggle aria-label="${t("Toggle dark theme", "ダークテーマを切り替え")}" aria-pressed="false">${MOON}${SUN}</button>
       </span>
     </nav>
 
     <header class="intro">
-      <span class="release-pill">${t("Manual for release 0.9.0", "リリース 0.9.0 対応マニュアル")}</span>
+      <span class="chip tertiary-container release-pill">${t("Manual for release 0.9.0", "リリース 0.9.0 対応マニュアル")}</span>
       <h1>${t("Admin Toolkit for Salesforce — User Manual", "Admin Toolkit for Salesforce ユーザーマニュアル")}</h1>
       <p class="lead">${t("How to install the toolkit, launch its apps from the popup, and use each workspace and tool — with " + total + " screenshots.", "インストールから、ポップアップでのアプリ起動、各ワークスペース・ツールの使い方まで、" + total + " 枚のスクリーンショットで解説します。")}</p>
       <p class="notice">${t("Screenshots were taken against a Salesforce Developer Edition org; org-identifying values (host, org and user names, IDs, addresses) are replaced with sample values. Salesforce is a trademark of Salesforce, Inc. This extension is not affiliated with, endorsed by, or sponsored by Salesforce.", "スクリーンショットは Salesforce Developer Edition 組織で撮影し、組織を特定できる情報（ホスト名、組織名・ユーザー名、ID、アドレス）はサンプル値に置き換えています。Salesforce は Salesforce, Inc. の商標です。本拡張機能は Salesforce の提携・承認・後援を受けていません。")}</p>
@@ -137,6 +137,7 @@ ${moreHtml}
       });
     })();
   </script>
+  <script type="module" src="${assetHref}support-widget.js"></script>
 </body>
 </html>
 `;

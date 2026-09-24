@@ -4,6 +4,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 // Public web config: these values identify the project, they grant nothing.
+// authDomain can become "dina.jp" (so the Google window names dina.jp) only once
+// https://dina.jp/__/auth/handler is an authorized redirect URI on the OAuth
+// client; until then Google answers redirect_uri_mismatch and nobody can sign in.
 const app = initializeApp({
   apiKey: "AIzaSyDO2r_ogyrHlJIOe8PEzpB0AoViWBY9zqs",
   authDomain: "gen-lang-client-0492217856.firebaseapp.com",
@@ -37,10 +40,13 @@ export async function api(path, { method = "GET", body } = {}) {
   return data;
 }
 
-// Wires the sign-in and sign-out buttons and calls back with the user or null.
-export function watchSignIn(onChange) {
-  const signInError = document.getElementById("sign-in-error");
-  document.getElementById("sign-in").addEventListener("click", async () => {
+// Wires the sign-in and sign-out buttons inside `root` and calls back with the
+// user or null. The panel and the inbox mark their parts with data attributes,
+// so each can have its own copy on one page without clashing ids.
+export function watchSignIn(root, onChange) {
+  const part = name => root.querySelector(`[data-${name}]`);
+  const signInError = part("sign-in-error");
+  part("sign-in").addEventListener("click", async () => {
     showError(signInError, "");
     try {
       await signInWithPopup(auth, new GoogleAuthProvider());
@@ -51,11 +57,11 @@ export function watchSignIn(onChange) {
         : error.message);
     }
   });
-  document.getElementById("sign-out").addEventListener("click", () => signOut(auth));
+  part("sign-out").addEventListener("click", () => signOut(auth));
   onAuthStateChanged(auth, user => {
-    document.getElementById("signed-out").hidden = Boolean(user);
-    document.getElementById("signed-in").hidden = !user;
-    document.getElementById("user-email").textContent = user?.email || "";
+    part("signed-out").hidden = Boolean(user);
+    part("signed-in").hidden = !user;
+    part("user-email").textContent = user?.email || "";
     onChange(user);
   });
 }

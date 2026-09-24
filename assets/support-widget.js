@@ -26,8 +26,22 @@ const ICON = {
   close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>',
   send: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-4 16-4.5-6.5z" fill="currentColor"/></svg>',
   arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z" fill="currentColor"/></svg>',
+  check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
   compose: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/><path d="M13.5 6.5l4 4" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>'
 };
+
+// Each app's own mark, shown with its name at the top of the panel. The panel's
+// colours follow the same app (assets/dinalab.css, generated from these marks).
+const LOGOS = {
+  "general": "/assets/dinalab-mark.svg",
+  "sheetconnect-for-salesforce": "/apps/sheetconnect-for-salesforce/logo.svg",
+  "dinasheet-for-salesforce": "/apps/dinasheet-for-salesforce/logo.png",
+  "salesforce-admin-toolkit": "/apps/salesforce-admin-toolkit/logo.svg",
+  "salesforce-agentic-bot": "/apps/salesforce-agentic-bot/logo.svg",
+  "dina-dock-for-salesforce": "/apps/dina-dock-for-salesforce/logo.svg",
+  "dinadevops-for-salesforce": "/apps/dinadevops-for-salesforce/logo.svg"
+};
+const logoFor = slug => LOGOS[slug] || LOGOS.general;
 
 const lang = () => (document.documentElement.lang === "ja" ? "ja" : "en");
 const say = (en, ja) => (lang() === "ja" ? ja : en);
@@ -93,10 +107,23 @@ function buildPanel() {
   panel = document.createElement("dialog");
   panel.id = "support-panel";
   panel.className = "right support-panel";
-  panel.setAttribute("aria-labelledby", "support-panel-title");
+  panel.dataset.app = "general";
+  panel.setAttribute("aria-labelledby", "support-app-name support-panel-title");
   panel.innerHTML = `
     <header class="support-head">
-      <h2 id="support-panel-title" ${both("Questions and feedback", "質問とフィードバック")}>${say("Questions and feedback", "質問とフィードバック")}</h2>
+      <div class="support-app-picker">
+        <button type="button" class="support-app-button" data-support-app-button aria-haspopup="listbox" aria-expanded="false"
+          aria-controls="support-app-list" disabled>
+          <img class="support-app-logo" data-support-app-logo src="${LOGOS.general}" alt="" width="32" height="32">
+          <span class="support-app-text">
+            <strong id="support-app-name" data-support-app-name>DinaLab</strong>
+            <span id="support-panel-title" ${both("Questions and feedback", "質問とフィードバック")}>${say("Questions and feedback", "質問とフィードバック")}</span>
+          </span>
+          ${ICON.arrow}
+        </button>
+        <ul id="support-app-list" class="support-app-list" role="listbox" tabindex="-1" data-support-app-list hidden
+          ${label("Choose an app", "アプリを選択")}></ul>
+      </div>
       <div class="support-head-actions">
         <button type="button" class="circle transparent small" data-support-new data-signed-in-only hidden
           title="${say("New conversation", "新しい会話")}" ${label("New conversation", "新しい会話")}>${ICON.compose}</button>
@@ -130,13 +157,6 @@ function buildPanel() {
     </section>
 
     <section class="support-chat" data-signed-in hidden>
-      <div class="field label suffix border small">
-        <select data-support-app>
-          <option value="general" ${both("DinaLab in general", "DinaLab 全般")}>${say("DinaLab in general", "DinaLab 全般")}</option>
-        </select>
-        <label ${both("App", "アプリ")}>${say("App", "アプリ")}</label>
-        <i>${ICON.arrow}</i>
-      </div>
       <ol class="support-log" aria-live="polite" data-support-log></ol>
       <form class="support-composer" data-support-form>
         <div class="field textarea border">
@@ -207,7 +227,10 @@ function wireResize() {
 async function start() {
   const { api, bi, showError, watchSignIn, renderGoogleButton } = await import("/support/support-common.js");
   const part = name => panel.querySelector(`[data-${name}]`);
-  const appSelect = part("support-app");
+  const appButton = part("support-app-button");
+  const appList = part("support-app-list");
+  let apps = [{ slug: "general", name: say("DinaLab in general", "DinaLab 全般") }];
+  let currentApp = "general";
   const log = part("support-log");
   const message = part("support-message");
   const chatError = part("support-error");
@@ -216,7 +239,39 @@ async function start() {
   let sending = false;
   let googleButton = null;
 
-  const save = () => writeState({ ...readState(), app: appSelect.value, messages });
+  const save = () => writeState({ ...readState(), app: currentApp, messages });
+
+  // The app shown at the top: its mark, its name, and the panel's colours.
+  function showApp(slug) {
+    const entry = apps.find(item => item.slug === slug) || apps[0];
+    currentApp = entry.slug;
+    panel.dataset.app = entry.slug;
+    part("support-app-logo").src = logoFor(entry.slug);
+    part("support-app-name").textContent = entry.slug === "general" ? "DinaLab" : entry.name;
+    for (const option of appList.children) option.setAttribute("aria-selected", String(option.dataset.slug === entry.slug));
+  }
+
+  function toggleApps(show) {
+    appList.hidden = !show;
+    appButton.setAttribute("aria-expanded", String(show));
+    if (!show) return;
+    const selected = appList.querySelector('[aria-selected="true"]') || appList.firstElementChild;
+    activate(selected);
+    appList.focus();
+  }
+  function activate(option) {
+    for (const item of appList.children) item.classList.toggle("active", item === option);
+    appList.setAttribute("aria-activedescendant", option.id);
+    option.scrollIntoView({ block: "nearest" });
+  }
+  function choose(slug) {
+    toggleApps(false);
+    appButton.focus();
+    if (slug === currentApp) return;
+    showApp(slug);
+    // A different app is a different conversation: the answers so far were about the old one.
+    reset();
+  }
 
   function bubble(role, text) {
     const item = document.createElement("li");
@@ -242,10 +297,41 @@ async function start() {
     message.focus();
   }
 
-  const { apps } = await api("/apps");
-  for (const entry of apps) appSelect.add(new Option(entry.name, entry.slug));
+  apps = [apps[0], ...(await api("/apps")).apps];
+  appList.replaceChildren(...apps.map(entry => {
+    const option = document.createElement("li");
+    option.id = `support-app-${entry.slug}`;
+    option.dataset.slug = entry.slug;
+    option.setAttribute("role", "option");
+    const logo = Object.assign(document.createElement("img"), { src: logoFor(entry.slug), alt: "", width: 28, height: 28 });
+    const name = document.createElement("span");
+    if (entry.slug === "general") bi(name, "DinaLab in general", "DinaLab 全般"); else name.textContent = entry.name;
+    const tick = document.createElement("span");
+    tick.className = "support-app-check";
+    tick.innerHTML = ICON.check;
+    option.append(logo, name, tick);
+    option.addEventListener("click", () => choose(entry.slug));
+    return option;
+  }));
+  appButton.disabled = false;
+  appButton.addEventListener("click", () => toggleApps(appList.hidden));
+  appButton.addEventListener("keydown", event => {
+    if (["ArrowDown", "ArrowUp"].includes(event.key)) { event.preventDefault(); toggleApps(true); }
+  });
+  appList.addEventListener("keydown", event => {
+    const options = [...appList.children];
+    const at = options.findIndex(option => option.classList.contains("active"));
+    const move = { ArrowDown: 1, ArrowUp: -1 }[event.key];
+    if (move) { event.preventDefault(); activate(options[(at + move + options.length) % options.length]); }
+    else if (event.key === "Home" || event.key === "End") { event.preventDefault(); activate(options[event.key === "Home" ? 0 : options.length - 1]); }
+    else if (event.key === "Enter" || event.key === " ") { event.preventDefault(); choose(options[at].dataset.slug); }
+    else if (event.key === "Escape" || event.key === "Tab") { event.stopPropagation(); if (event.key === "Escape") event.preventDefault(); toggleApps(false); appButton.focus(); }
+  });
+  document.addEventListener("click", event => {
+    if (!appList.hidden && !event.target.closest?.(".support-app-picker")) toggleApps(false);
+  });
   const wanted = pageApp() || state.app || "";
-  if ([...appSelect.options].some(option => option.value === wanted)) appSelect.value = wanted;
+  showApp(apps.some(entry => entry.slug === wanted) ? wanted : "general");
   // A conversation carried over from another page is shown as it was left.
   greet();
   for (const turn of messages) bubble(turn.role, turn.content);
@@ -265,7 +351,7 @@ async function start() {
     log.scrollTop = log.scrollHeight;
     const history = [...messages, { role: "user", content }];
     try {
-      const result = await api("/chat", { method: "POST", body: { app: appSelect.value, lang: lang(), messages: history } });
+      const result = await api("/chat", { method: "POST", body: { app: currentApp, lang: lang(), messages: history } });
       pending.remove();
       messages = [...history, { role: "assistant", content: result.reply }];
       bubble("assistant", result.reply);
@@ -296,8 +382,6 @@ async function start() {
     }
   });
   part("support-new").addEventListener("click", reset);
-  // A different app is a different conversation: the answers so far were about the old one.
-  appSelect.addEventListener("change", reset);
 
   watchSignIn(panel, async user => {
     for (const node of panel.querySelectorAll("[data-signed-in-only]")) node.hidden = !user;

@@ -496,8 +496,10 @@ figure {
   text-decoration: none !important;
 }
 
-/* BeerCSS fills a button with --primary; this site fills it with the logo gold. */
-:is(.button, button):not(.border, .transparent, .chip, .support-google, .support-link) {
+/* BeerCSS fills a button with --primary; this site fills it with the logo gold.
+   Zero specificity: a component that styles its own buttons (the Tools page's
+   tabs) wins, while BeerCSS, in its layer below, still loses. */
+:where(.button, button):where(:not(.border, .transparent, .chip, .support-google, .support-link)) {
   background-color: var(--fill);
   color: var(--on-fill);
 }

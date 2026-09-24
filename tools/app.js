@@ -50,8 +50,10 @@ function el(tag, attrs = {}, ...children) {
   return node;
 }
 
+// The variant is prefixed (btn-primary, not primary): the page loads BeerCSS,
+// whose bare .primary is an !important colour helper that no page rule can beat.
 function button(label, onClick, variant = '') {
-  return el('button', { type: 'button', className: `btn ${variant}`.trim(), onClick }, label);
+  return el('button', { type: 'button', className: variant ? `btn btn-${variant}` : 'btn', onClick }, label);
 }
 
 function field(label, input) {

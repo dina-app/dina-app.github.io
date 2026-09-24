@@ -3,17 +3,23 @@
  * Tokens, base type, and the shared nav controls come from
  * assets/dinalab.css, which every page links before this file. Only the
  * app-shell layout and tool-specific widgets live here.
+ *
+ * dinalab.css brings BeerCSS in a layer below this file. Its --surface is the
+ * page ground, so a white panel here is --card; and it styles bare <button>,
+ * <main> and <aside>, which the rules marked "BeerCSS" below take back.
  */
 
 :root {
   /* Workbench-only surfaces, derived so both themes stay in step. */
-  --rail: color-mix(in srgb, var(--bg) 70%, var(--surface));
-  --field: var(--surface);
-  --table-head: var(--surface-inset);
-  --line-add: color-mix(in srgb, var(--green) 16%, var(--surface));
-  --line-remove: color-mix(in srgb, var(--danger) 16%, var(--surface));
-  --line-equal: var(--surface-soft);
-  --highlight: color-mix(in srgb, #f7c948 45%, var(--surface));
+  --rail: color-mix(in srgb, var(--bg) 70%, var(--card));
+  --field: var(--card);
+  --table-head: var(--card-inset);
+  /* Diff colours are data, not brand: added stays green and removed red, whatever
+     the site's palette. */
+  --line-add: color-mix(in srgb, #1c6a52 16%, var(--card));
+  --line-remove: color-mix(in srgb, var(--danger) 16%, var(--card));
+  --line-equal: var(--card-soft);
+  --highlight: color-mix(in srgb, #f7c948 45%, var(--card));
 }
 
 * {
@@ -92,7 +98,7 @@ pre {
   align-items: center;
   padding: 18px 24px;
   border-bottom: 1px solid var(--line);
-  background: var(--surface);
+  background: var(--card);
 }
 
 .brand {
@@ -102,16 +108,6 @@ pre {
   font-weight: 800;
 }
 
-.brand-mark {
-  display: grid;
-  width: 36px;
-  height: 36px;
-  place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface-soft);
-  color: var(--accent);
-}
 
 .topbar-title h1,
 .topbar-title p,
@@ -153,6 +149,7 @@ pre {
 }
 
 .lang-toggle {
+  block-size: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -165,7 +162,7 @@ pre {
   font-weight: 800;
 }
 
-.lang-toggle:hover { border-color: var(--blue); color: var(--blue); }
+.lang-toggle:hover { border-color: var(--primary); color: var(--primary); }
 .lang-toggle svg { width: 16px; height: 16px; }
 
 /* Match the taller workbench control height. */
@@ -178,7 +175,16 @@ pre {
 .workspace {
   display: grid;
   grid-template-columns: 292px minmax(0, 1fr);
+  /* BeerCSS makes anything holding a <main> its app grid, with named areas that
+     put the tool below the sidebar instead of beside it. */
+  grid-template-rows: none;
+  grid-template-areas: none;
   min-height: calc(100vh - 77px);
+}
+
+.workspace > .sidebar,
+.workspace > .tool-area {
+  grid-area: auto;
 }
 
 .sidebar {
@@ -216,6 +222,9 @@ pre {
 }
 
 .tool-tab {
+  /* BeerCSS: a bare <button> is a fixed-height centred pill; a tab is a block. */
+  display: block;
+  block-size: auto;
   width: 100%;
   min-height: 46px;
   padding: 9px 10px;
@@ -294,7 +303,7 @@ pre {
 .pane {
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--surface);
+  background: var(--card);
   box-shadow: var(--shadow-md);
 }
 
@@ -354,6 +363,12 @@ pre {
   gap: 7px;
 }
 
+/* BeerCSS sizes every <label> for its own field captions (0.75rem); these labels
+   wrap whole inputs, which would inherit it. */
+.tool-area label {
+  font-size: inherit;
+}
+
 .check-row {
   display: inline-flex;
   align-items: center;
@@ -368,6 +383,7 @@ pre {
 }
 
 .btn {
+  block-size: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -381,13 +397,13 @@ pre {
   white-space: nowrap;
 }
 
-.btn.primary {
-  border-color: var(--green);
-  background: var(--green);
-  color: var(--bg);
+.btn-primary {
+  border-color: var(--fill);
+  background: var(--fill);
+  color: var(--on-fill);
 }
 
-.btn.warn {
+.btn-warn {
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -410,7 +426,7 @@ pre {
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--surface-soft);
+  background: var(--card-soft);
 }
 
 .status-line {
@@ -508,7 +524,7 @@ pre {
   padding: 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--surface-soft);
+  background: var(--card-soft);
 }
 
 .checklist input[type="checkbox"] {
@@ -524,7 +540,7 @@ pre {
   height: 10px;
   overflow: hidden;
   border-radius: 999px;
-  background: var(--surface-inset);
+  background: var(--card-inset);
 }
 
 .progress span {

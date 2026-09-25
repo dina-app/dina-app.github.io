@@ -46,7 +46,7 @@
 
   <p>The Agent is a chat in the side panel. It is off by default. To turn it on, the user reads the Agent terms, ticks that they agree, and connects it, which gives the Agent an email-only Google token; the publisher's server records which version of the terms the user accepted. The user can disconnect the Agent at any time from its account panel.</p>
 
-  <p><strong>What the Agent is for.</strong> The Agent reads the org and the spreadsheet with a small set of tools and prepares imports, formulas, Write back, Validate and Apex as cards in the chat. It never runs anything itself: every card runs only when the user presses its button, after the same preview and confirmation the extension's own tabs use, and that run goes directly from the browser to Salesforce and Google, not through the publisher's server. The Agent's step-by-step wizards and slash commands use no AI and send nothing to the publisher's server.</p>
+  <p><strong>What the Agent is for.</strong> The Agent reads the org and the spreadsheet with a small set of tools and prepares imports, formulas, Write back, Validate and Apex as cards in the chat. It never runs anything itself: every card runs only when the user presses its button, after the same preview and confirmation the extension's own tabs use, and that run goes directly from the browser to Salesforce and Google, not through the publisher's server. Its skills (slash commands such as /import) are messages like any other: they name a playbook the publisher's server keeps for that task, and send the same data as any message.</p>
 
   <p><strong>What is sent, and to whom.</strong> When the user sends the Agent a message, the extension sends to the publisher's server, which passes it to OpenAI to produce the reply:</p>
 
@@ -73,7 +73,7 @@
 
   <p><strong>OpenAI</strong> processes the messages and tool results as the publisher's service provider to produce the Agent's replies, under OpenAI's API terms. OpenAI keeps each conversation for 30 days so the chat can continue and does not use API data to train its models (see <a href="https://platform.openai.com/docs/guides/your-data" target="_blank" rel="noopener">OpenAI's API data controls</a>). OpenAI processes data in the United States.</p>
 
-  <p><strong>Allowance.</strong> The Agent has a free usage allowance that renews over 5 hours and 30 days; wizards, commands and running cards do not use it. The allowance may change or stop.</p>
+  <p><strong>Allowance.</strong> The Agent has a free usage allowance that renews over 5 hours and 30 days; each message uses it, skills included, and running a card does not. The allowance may change or stop.</p>
 
   <h2>Data sharing and transfers</h2>
 

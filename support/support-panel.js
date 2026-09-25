@@ -9,6 +9,8 @@
 //                  open one of its screenshots beside the panel (show_image)
 //
 // Only the apps the server marks available get these; the others say so.
+// Ask anything is for the DinaLab team only for now (the server enforces it):
+// everyone else gets the other three.
 // The limits are the server's (GET /api/support/apps returns them); the page
 // only shows them, and a request past one is refused there, not here.
 import { api, bi, showError, watchSignIn, renderGoogleButton } from "./support-common.js";
@@ -26,6 +28,8 @@ export async function mountPanel(ctx) {
   let currentApp = "general";
   // The user's two AI usage windows (5 hours, 1 week), as the server last said.
   let usage = null;
+  // Whether this user may use the AI chat: the team only, for now.
+  let aiChat = false;
   let signedIn = false;
   let googleButton = null;
 
@@ -145,9 +149,9 @@ export async function mountPanel(ctx) {
           option("topics", ICON.book, "How to use it", "使い方を見る", "Answers from the docs, instantly", "資料からすぐに回答"),
           option("bug", ICON.bug, "Report a bug", "不具合を報告", "Goes straight to the team", "チームに直接届きます"),
           option("idea", ICON.idea, "Suggest a feature", "機能を提案", "Tell us what would help", "欲しい機能を教えてください"),
-          option("chat", ICON.chat, "Ask anything", "自由に質問",
+          aiChat ? option("chat", ICON.chat, "Ask anything", "自由に質問",
             limitHit() ? `AI limit reached · resets ${resetTime(limitHit(), "en-US")}` : "AI answers from the docs",
-            limitHit() ? `AI の上限に達しました · ${resetTime(limitHit(), "ja-JP")} にリセット` : "AI が資料から回答"))
+            limitHit() ? `AI の上限に達しました · ${resetTime(limitHit(), "ja-JP")} にリセット` : "AI が資料から回答") : null)
       ];
     },
 
@@ -170,7 +174,10 @@ export async function mountPanel(ctx) {
               return el("li", {}, button);
             })));
         }).filter(Boolean));
-        if (!groups.children.length) groups.append(tr("p", "Nothing matches. Try Ask anything.", "該当するトピックがありません。「自由に質問」をお試しください。", { className: "support-empty" }));
+        if (!groups.children.length) {
+          groups.append(aiChat ? tr("p", "Nothing matches. Try Ask anything.", "該当するトピックがありません。「自由に質問」をお試しください。", { className: "support-empty" })
+            : tr("p", "Nothing matches. Try other words.", "該当するトピックがありません。別の言葉でお試しください。", { className: "support-empty" }));
+        }
       };
       filter.addEventListener("input", draw);
       draw();
@@ -188,7 +195,7 @@ export async function mountPanel(ctx) {
       report.addEventListener("click", () => show("bug"));
       return [back("topics"), kt("h3", entry.title), kt("p", entry.answer, { className: "support-answer" }),
         links.length ? el("p", { className: "support-links" }, links) : null,
-        el("div", { className: "support-actions" }, ask, report)];
+        el("div", { className: "support-actions" }, aiChat ? ask : null, report)];
     },
 
     async bug() {
@@ -382,6 +389,7 @@ export async function mountPanel(ctx) {
   let current = "home";
   async function show(name, args = {}) {
     if (!available()) name = "unavailable";
+    else if (name === "chat" && !aiChat) name = "home";
     current = name;
     writeState({ ...readState(), view: ["sent", "answer", "unavailable"].includes(name) ? "home" : name });
     view.dataset.view = name;
@@ -487,6 +495,8 @@ export async function mountPanel(ctx) {
     try {
       const me = await api("/me");
       part("support-admin").hidden = !me.admin;
+      aiChat = me.admin === true;
+      part("support-new").hidden = !aiChat;
       usage = me.usage;
     } catch (error) {
       console.error(error);

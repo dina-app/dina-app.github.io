@@ -27,6 +27,17 @@
   ],
   "entries": [
     {
+      "id": "install",
+      "type": "howto",
+      "images": ["choose-org"],
+      "title": { "en": "Install and open SheetConnect", "ja": "SheetConnect のインストールと起動" },
+      "answer": {
+        "en": "Install it free from the Chrome Web Store; there is no Apps Script to add. Sign in to Salesforce in the same browser, open a Google Sheets spreadsheet, and click the SheetConnect toolbar button to open the side panel. Then pick one of the orgs it found from your browser sessions.",
+        "ja": "Chrome ウェブストアから無料でインストールします。Apps Script の追加は不要です。同じブラウザーで Salesforce にサインインし、Google スプレッドシートを開いて SheetConnect のツールバーボタンを押すとサイドパネルが開きます。ブラウザーのセッションから見つかった組織を選んでください。"
+      },
+      "keywords": ["install", "setup", "get started", "chrome web store", "open", "side panel", "toolbar", "インストール", "導入", "始め方", "サイドパネル"]
+    },
+    {
       "id": "import-objects",
       "type": "howto",
       "images": ["import-object"],
@@ -35,7 +46,7 @@
         "en": "Pick a Salesforce object and import from one of its list views, or write your own SOQL. Field suggestions include relationship paths. Object imports follow every result page, so a large query is not cut off after its first batch.",
         "ja": "Salesforce のオブジェクトを選んでリストビューからインポートするか、SOQL を自分で書きます。項目の候補には参照関係のパスも出ます。オブジェクトのインポートは結果の全ページをたどるので、大きなクエリも最初のバッチで打ち切られません。"
       },
-      "keywords": ["import", "object", "list view", "soql", "query", "field", "relationship", "インポート", "オブジェクト", "リストビュー", "クエリ", "項目"]
+      "keywords": ["import", "get data", "pull", "load", "object", "list view", "soql", "query", "field", "relationship", "インポート", "データ取得", "オブジェクト", "リストビュー", "クエリ", "項目"]
     },
     {
       "id": "import-reports",

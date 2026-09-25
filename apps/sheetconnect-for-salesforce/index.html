@@ -88,7 +88,7 @@
         <ul>
           <li>The Salesforce session cookie is read locally, sent only to that same organization, never copied into extension storage, and never passed to the side panel.</li>
           <li>Google access is requested only when you choose Connect Google, and the token stays in Chrome's own token cache.</li>
-          <li>There is no developer-operated server. Requests go to the Salesforce org you selected and to the Google Sheets API for the spreadsheet you have open.</li>
+          <li>Requests go to the Salesforce org you selected and to the Google Sheets API for the spreadsheet you have open. From version 0.11.0 there is one exception, the optional Agent: it is off until you turn it on, and then what you write to it and the small results of its read tools go through DinaLab's server to OpenAI, as the <a href="PRIVACY_POLICY.html">privacy policy</a> sets out. Your Salesforce session and your Google Sheets access still never leave the browser.</li>
           <li>No ads, no analytics, no telemetry, and no remotely hosted executable code.</li>
         </ul>
       </section>

@@ -84,7 +84,8 @@
   <p>On the user's device:</p>
 
   <ul>
-  <li>The <strong>Google access token</strong> and the Agent's email-only token stay in Chrome's own token cache. They are never written to extension storage and never passed to the side panel.</li>
+  <li>The <strong>Google access token</strong> stays in Chrome's own token cache. It is never written to extension storage and never passed to the side panel.</li>
+  <li>The <strong>Agent's email-only token</strong> also stays in Chrome's token cache and is never written to extension storage. The side panel receives it only to sign its own requests to the Agent's server.</li>
   <li>The <strong>Salesforce <code>sid</code> cookie</strong> stays managed by Salesforce and Chrome. It is never copied into extension storage and never returned to the side panel. When a user hides an unusable session, the extension records a SHA-256 fingerprint of that <code>sid</code> so it can stay hidden, keeping at most 50 fingerprints. Hiding a session does not delete the Salesforce cookie or sign the browser out.</li>
   <li><strong>Source mappings</strong> — the selected object, list view, report, query text and grouping preference for a worksheet — are stored per organization and worksheet in Chrome extension storage on the user's device, keeping the 80 most recently updated.</li>
   <li><strong>Saved Apex templates</strong> hold the name the user gave them and the Apex body they wrote, with the time they were saved. They belong to the person rather than to one spreadsheet, and at most 50 are kept. Deleting a template removes it.</li>
@@ -103,7 +104,7 @@
 
   <h2>Security</h2>
 
-  <p>The extension uses HTTPS for all network requests and packages its executable JavaScript, HTML and CSS with the extension. A separate static page on <code>dina.jp</code> loads Google's official Picker library to let the user grant one spreadsheet at a time. The Google token stays out of URLs and storage, and the extension accepts Picker messages only from the exact <code>https://dina.jp</code> origin. The side panel never receives credentials. The Agent's server accepts browser requests only from this extension's origin, answers only requests that carry a valid email-only token for SheetConnect's OAuth client, and refuses a token that carries Drive or Sheets access.</p>
+  <p>The extension uses HTTPS for all network requests and packages its executable JavaScript, HTML and CSS with the extension. A separate static page on <code>dina.jp</code> loads Google's official Picker library to let the user grant one spreadsheet at a time. The Google token stays out of URLs and storage, and the extension accepts Picker messages only from the exact <code>https://dina.jp</code> origin. The side panel never receives the Salesforce session or the Google Sheets token; the only credential it holds is the Agent's email-only token, for its requests to the Agent's server. The Agent's server accepts browser requests only from this extension's origin, answers only requests that carry a valid email-only token for SheetConnect's OAuth client, and refuses a token that carries Drive or Sheets access.</p>
 
   <h2>Limited Use disclosure</h2>
 
@@ -115,7 +116,7 @@
 
   <h2>Independent product</h2>
 
-  <p>SheetConnect for Salesforce is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce, Google or OpenAI. Salesforce, Google Sheets, Chrome and OpenAI are trademarks of their respective owners.</p>
+  <p>SheetConnect for Salesforce is an independent product and is not affiliated with, endorsed by, or sponsored by Salesforce or Google. Nor is it affiliated with, endorsed by, or sponsored by OpenAI, which the Agent uses as a service provider. Salesforce, Google Sheets, Chrome and OpenAI are trademarks of their respective owners.</p>
 
   <h2>Contact</h2>
 

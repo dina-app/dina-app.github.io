@@ -16,7 +16,7 @@
     <article>
   <h1>Privacy Policy for SheetConnect for Salesforce</h1>
 
-  <p class="updated">Effective date: September 26, 2026</p>
+  <p class="updated">Effective date: September 28, 2026</p>
 
   <p>SheetConnect for Salesforce is a Chrome extension that adds a side panel to a Google Sheets spreadsheet the user has open. From that panel the user can import Salesforce object, list view, query and report data into a chosen worksheet, send user-confirmed record changes from a worksheet back to Salesforce, convert values in a worksheet using Salesforce lookups, and add Salesforce's rules to a worksheet's columns. It works only with the Salesforce organization the user is already signed in to and the spreadsheet the user has open.</p>
 
@@ -53,7 +53,8 @@
   <ul>
   <li>the message the user wrote, and, when it uses a skill the user wrote, that skill's instructions;</li>
   <li>the names of the Salesforce organization, the spreadsheet and its worksheets, the header row of the open worksheet and how many rows it has;</li>
-  <li>the results of the tools the model asks for, run in the user's browser: object, field, list view and report names, and, when the model asks for them, their descriptions, help text and active picklist values; the record count and at most 5 rows of a query the model checks; each worksheet's size and header row; at most 20 by 20 cells of the spreadsheet for each message; the cells that contain a text the model searches for, with their values (at most 50); column statistics and validation reports, which give counts and cell addresses but not cell values; and the checks of the cards it prepares (row counts, header-to-field mappings and error messages);</li>
+  <li>the results of the tools the model asks for, run in the user's browser: object, field, list view and report names and labels, and, when the model needs them, field descriptions, help text and active picklist values; how many records a query or an object has, and when an object last changed; each worksheet's size and header row; column statistics and validation reports, which give counts and cell addresses but not cell values; and the checks of the cards it prepares (row counts, header-to-field mappings and error messages). The Agent never receives the value of a record or of a cell;</li>
+  <li>until a chat has its main object, the Salesforce objects the user opened in the last 90 days, read from the user's Recently Viewed list without adding to it: their API names, labels, how many of their records the user opened and when last, so the Agent can tell which object a request is about;</li>
   <li>a line for each card the user ran since the last message, and, when a card fails, its error and what the card was set to do (for example its query or formula), so the Agent can say why;</li>
   <li>when a chat fills up and the user continues in a new one, a short summary of the earlier chat written in the browser (its last questions, last answer and cards).</li>
   </ul>
@@ -64,9 +65,9 @@
 
   <ul>
   <li>for each user: the Google account ID and email address, which version of the Agent terms they accepted and when, and how much they used, counted in money over a 5-hour and a 30-day window; if an administrator resets a user's allowance, the time and the administrator's email;</li>
-  <li>for each chat: counts of messages, tool calls and tokens, the ID of OpenAI's last response and of the tool calls it is waiting on — never the messages or tool results themselves. These records are deleted automatically 30 days after the chat was last used;</li>
+  <li>for each chat: counts of messages, tool calls and tokens, the ID of OpenAI's last response and of the tool calls it is waiting on, and the API name and label of the object the chat is about — never the messages or tool results themselves. These records are deleted automatically 30 days after the chat was last used;</li>
   <li>feedback, when a chat fills up and the user chooses to give it: the rating (good, bad or a bug), an optional note the user writes, the chat's message and token counts, the user's email, and the chat's ID only if the user ticks to include it so the publisher can look at it;</li>
-  <li>operational logs of errors, kept by Google Cloud for its standard retention period.</li>
+  <li>operational logs of errors, and counts of how many words of the Agent's field searches found no field (numbers only, no words, user or organization), kept by Google Cloud for its standard retention period.</li>
   </ul>
 
   <p>User records and feedback are kept while the user uses the Agent and are deleted on request.</p>
@@ -92,6 +93,7 @@
   <li><strong>Spreadsheet shapes</strong> — a spreadsheet's ID, title and worksheet titles and IDs — are cached so the panel can be drawn before the live check returns, keeping the 30 most recently opened. They hold no cell values.</li>
   <li><strong>Bulk API job records</strong> hold the Salesforce job ID, object, operation, state, record counts, and, when a status column was requested, the target column and source row numbers plus a SHA-256 hash of the source rows used to detect edits. They contain no record field values, and the 20 most recent are kept.</li>
   <li><strong>Agent skills the user writes</strong> — a name, what it is for, and instructions — are kept in extension storage, at most 20, until the user deletes them.</li>
+  <li>The <strong>Agent's cache</strong> — the organization's object list, the fields that cards the user ran used on each object, and short-lived counts (the objects the user opened recently, the records of look-alike objects, field descriptions) — is kept in the browser's IndexedDB for each organization and user. It holds no record or cell values; entries unused for 30 days are removed, and all of it when the Agent is disconnected.</li>
   <li><strong>Agent chats</strong> — the messages, replies, cards and their results — are kept in Chrome's session storage, at most six chats per organization and spreadsheet, and are gone when the browser closes or the Agent is disconnected. Whether the Agent is turned on, and which version of its terms was accepted, is kept in extension storage until the Agent is disconnected.</li>
   <li><strong>Salesforce result rows, worksheet cell values and generated Bulk CSV uploads are not persisted</strong> in extension storage; they are held only for the duration of the operation.</li>
   <li>All of the above is removed when the user clears Chrome extension storage or uninstalls the extension.</li>

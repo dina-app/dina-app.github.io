@@ -38,6 +38,27 @@
     </header>
 
     <div class="content">
+      <section id="agent" aria-labelledby="agent-title">
+        <span class="chip tertiary-container release-pill">Coming in version 0.11.0</span>
+        <h2 id="agent-title">Ask the Agent, in your own words</h2>
+        <p>An optional chat beside the tools, off until you turn it on. Ask for what you need, such as &ldquo;import open opportunities closing this quarter&rdquo; or &ldquo;put each account's Id next to its name&rdquo;, and the Agent finds the objects and fields, checks the query or formula against your sheet, and prepares the work as a card in the chat. Nothing runs until you press Run, and a write to Salesforce still waits for your confirmation.</p>
+        <div class="feature-grid">
+          <article class="feature"><h3>It starts from the right object</h3><p>Each chat begins from its main object: one you opened lately, or one found by name. When two could be meant, the Agent asks with buttons instead of guessing, and you can change it later.</p></article>
+          <article class="feature"><h3>Cards, never actions</h3><p>Imports, lookups and roll-ups, write-backs, validation rules and Apex come back as cards, each checked against your sheet first. You run them; the Agent never does.</p></article>
+          <article class="feature"><h3>Skills for everyday jobs</h3><p><code>/import</code>, <code>/lookup</code>, <code>/update</code> and <code>/check</code> guide the common tasks, and you can write skills of your own.</p></article>
+          <article class="feature"><h3>Metadata only</h3><p>It reads names, labels and counts. No record's or cell's value is sent, and your Salesforce session and Google access stay in the browser.</p></article>
+          <article class="feature"><h3>Free to start</h3><p>Free within an allowance that renews every 5 hours and every 30 days; the allowance may change.</p></article>
+          <article class="feature"><h3>In your language</h3><p>Ask in English, Japanese or another language and it answers in the one you wrote in, reading your org's own labels as it goes.</p></article>
+        </div>
+        <div class="gallery">
+          <figure class="wide"><img src="img/12-ask-the-agent.png" width="1280" height="800" decoding="async" alt="The Agent chat after a /import request, with the query it checked and an import card waiting for Run"><figcaption>Ask in your own words, or start from a skill such as /import: the Agent finds the object and fields, counts the query and leaves an import card.</figcaption></figure>
+          <figure><img src="img/13-the-agent-asks-which-object.png" width="1280" height="800" decoding="async" alt="The Agent asking which object a question is about, with a button for each candidate"><figcaption>When two objects could fit, it asks with buttons instead of guessing.</figcaption></figure>
+          <figure><img src="img/14-lookups-as-a-card.png" width="1280" height="800" decoding="async" alt="An fx card with a VLOOKUP formula and its check: rows found, not found, and cells to write"><figcaption>Lookups and roll-ups come as an fx card, checked against the sheet before anything is written.</figcaption></figure>
+          <figure><img src="img/15-write-back-waits-for-you.png" width="1280" height="800" decoding="async" alt="A write-back card from /update showing its mapping and asking to confirm the update of 24 records"><figcaption>/update checks every row, makes a backup worksheet, and waits for your confirmation.</figcaption></figure>
+          <figure><img src="img/16-skills-and-a-free-allowance.png" width="1280" height="800" decoding="async" alt="The Agent's skills menu open over an empty chat, with the free allowance bars below the message box"><figcaption>Skills for the everyday jobs, and a free allowance shown under the message box.</figcaption></figure>
+        </div>
+      </section>
+
       <section aria-labelledby="features-title">
         <h2 id="features-title">Move Salesforce data in and out of a worksheet</h2>
         <div class="feature-grid">

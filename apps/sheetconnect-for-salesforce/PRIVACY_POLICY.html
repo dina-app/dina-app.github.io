@@ -16,7 +16,7 @@
     <article>
   <h1>Privacy Policy for SheetConnect for Salesforce</h1>
 
-  <p class="updated">Effective date: September 28, 2026</p>
+  <p class="updated">Effective date: September 30, 2026</p>
 
   <p>SheetConnect for Salesforce is a Chrome extension that adds a side panel to a Google Sheets spreadsheet the user has open. From that panel the user can import Salesforce object, list view, query and report data into a chosen worksheet, send user-confirmed record changes from a worksheet back to Salesforce, convert values in a worksheet using Salesforce lookups, and add Salesforce's rules to a worksheet's columns. It works only with the Salesforce organization the user is already signed in to and the spreadsheet the user has open.</p>
 
@@ -107,7 +107,7 @@
 
   <h2>Security</h2>
 
-  <p>The extension uses HTTPS for all network requests and packages its executable JavaScript, HTML and CSS with the extension. A separate static page on <code>dina.jp</code> loads Google's official Picker library to let the user grant one spreadsheet at a time. The Google token stays out of URLs and storage, and the extension accepts Picker messages only from the exact <code>https://dina.jp</code> origin. The side panel never receives the Salesforce session or the Google Sheets token; the only credential it holds is the Agent's email-only token, for its requests to the Agent's server. The Agent's server accepts browser requests only from this extension's origin, answers only requests that carry a valid email-only token for SheetConnect's OAuth client, and refuses a token that carries Drive or Sheets access.</p>
+  <p>The extension uses HTTPS for all network requests and packages its executable JavaScript, HTML and CSS with the extension. A separate static page on <code>google-picker.dina-app.com</code>, a site that serves nothing else, loads Google's official Picker library to let the user grant one spreadsheet at a time (versions up to 0.11.0 use the same page on <code>dina.jp</code>). The Google token stays out of URLs and storage, and the extension accepts Picker messages only from that exact page. The side panel never receives the Salesforce session or the Google Sheets token; the only credential it holds is the Agent's email-only token, for its requests to the Agent's server. The Agent's server accepts browser requests only from this extension's origin, answers only requests that carry a valid email-only token for SheetConnect's OAuth client, and refuses a token that carries Drive or Sheets access.</p>
 
   <h2>Limited Use disclosure</h2>
 

@@ -20,7 +20,7 @@
 
     <article>
       <h1>Privacy Policy for Admin Toolkit for Salesforce</h1>
-      <p class="updated">Last updated: September 11, 2026</p>
+      <p class="updated">Last updated: October 5, 2026</p>
       <p>Admin Toolkit for Salesforce is an independent Chrome extension for Salesforce metadata administration. It is not affiliated with, endorsed by, or sponsored by Salesforce.</p>
       <h2>Data the Extension Handles</h2>
       <p>The extension may handle:</p>
@@ -45,6 +45,7 @@
         <li>Open Salesforce list views, reports, and CSV/XLSX imports in a spreadsheet grid and — only for rows that carry a record Id resolving to one Salesforce object, and only after review and confirmation — update those Salesforce records.</li>
         <li>Store bounded, organization-specific SheetD update receipts locally so users can select recorded prior values and submit an explicitly reviewed rollback update.</li>
         <li>Record the user's own review decisions for Winter '27 release notes locally so they persist between visits.</li>
+        <li>In Transaction Timeline, on the user's request, send one REST call or anonymous Apex the user entered under a temporary trace flag, then download the debug logs it produced and draw them in the page. To do this the extension creates a debug level and a 15-minute trace flag on the signed-in user (or, when the user already has one, borrows that trace flag and puts its settings back afterwards) and removes them when the run ends. By default the request is a dry run: a REST call is sent inside a Composite request that fails on purpose at its last step, and anonymous Apex ends with a failing assertion, so Salesforce rolls every change back. A run for real, which saves changes, is offered only in a sandbox, scratch org or Developer Edition, after confirmation; Apex REST endpoints and sObject Tree calls cannot be rolled back and run only that way. The logs and the drawing stay in the page's memory and are discarded when the tab closes; the operation history records only the time, Salesforce host, request kind, mode, outcome and number of logs.</li>
         <li>In Org Review's cleanup workflow, and only in a Salesforce sandbox org, delete one permission set assignment the user has previewed and confirmed by typing its record Id. The extension refuses this action in a production org, re-checks the assignment immediately before sending, and records the outcome locally. No other Org Review action writes to Salesforce.</li>
       </ul>
       <h2>Data Sharing and Transfers</h2>
